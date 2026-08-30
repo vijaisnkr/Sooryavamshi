@@ -10,10 +10,10 @@
  */
 
 const SOORYAVAMSHI_SUPABASE_CONFIG = (function() {
-  // Default project credentials (Replace with your live Supabase credentials)
+  // Default project credentials
   const DEFAULT_CONFIG = {
-    url: window.__SOORYAVAMSHI_SUPABASE_URL__ || "",
-    anonKey: window.__SOORYAVAMSHI_SUPABASE_ANON_KEY__ || "",
+    url: window.__SOORYAVAMSHI_SUPABASE_URL__ || "https://dtbruomlpuxwgpvdosoz.supabase.co",
+    anonKey: window.__SOORYAVAMSHI_SUPABASE_ANON_KEY__ || "sb_publishable_mxMYpObR0l_Sl5UKK2a8IA_FSSHCFXu",
     tableName: "site_assessment_requests",
     notificationEmail: "suryavamshisolarprojects@gmail.com"
   };
