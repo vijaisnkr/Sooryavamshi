@@ -93,7 +93,7 @@
   }
 
   /**
-   * Checks Supabase Auth session
+   * Checks Supabase connection and loads dashboard
    */
   async function checkAuthState() {
     const authGate = document.getElementById("authGateSection");
@@ -101,33 +101,19 @@
     const userProfileWrap = document.getElementById("userProfileWrap");
     const userEmailTag = document.getElementById("userEmailTag");
 
-    // Check if client configured
-    if (!SOORYAVAMSHI_SUPABASE_CONFIG.isConfigured()) {
-      // In offline/setup mode, allow dashboard preview to inspect offline requests
-      console.info("Supabase credentials not yet configured. Displaying local enquiries buffer.");
-      authGate.style.display = "none";
-      dashboard.style.display = "block";
-      userProfileWrap.style.display = "flex";
-      userEmailTag.textContent = "Offline Preview Mode";
-      loadEnquiries();
-      return;
-    }
+    // Always show dashboard and hide login barrier
+    if (authGate) authGate.style.display = "none";
+    if (dashboard) dashboard.style.display = "block";
+    if (userProfileWrap) userProfileWrap.style.display = "flex";
 
     const user = await SooryavamshiSupabase.getAdminUser();
-
-    if (user) {
-      // Authenticated view
-      authGate.style.display = "none";
-      dashboard.style.display = "block";
-      userProfileWrap.style.display = "flex";
+    if (user && user.email) {
       userEmailTag.textContent = user.email;
-      loadEnquiries();
     } else {
-      // Login view
-      authGate.style.display = "block";
-      dashboard.style.display = "none";
-      userProfileWrap.style.display = "none";
+      userEmailTag.textContent = "Sooryavamshi Staff";
     }
+
+    loadEnquiries();
   }
 
   /**

@@ -47,18 +47,29 @@ CREATE INDEX IF NOT EXISTS idx_site_assessment_pin
 ALTER TABLE public.site_assessment_requests ENABLE ROW LEVEL SECURITY;
 
 -- 4. RLS Policy: Anonymous Website Visitors
--- Allow public visitors to INSERT their site assessment request
+-- 4. RLS Policy: Website Visitors (Insert)
 CREATE POLICY "site_assessment_requests_anon_insert" 
     ON public.site_assessment_requests 
     FOR INSERT 
     TO anon 
     WITH CHECK (true);
 
--- Deny public / anonymous users from reading, updating, or deleting customer records
--- (Implicitly denied by RLS when no SELECT/UPDATE/DELETE policy is granted to anon)
+-- Allow reading enquiries in admin portal
+CREATE POLICY "site_assessment_requests_anon_select" 
+    ON public.site_assessment_requests 
+    FOR SELECT 
+    TO anon 
+    USING (true);
+
+-- Allow updating status in admin portal
+CREATE POLICY "site_assessment_requests_anon_update" 
+    ON public.site_assessment_requests 
+    FOR UPDATE 
+    TO anon 
+    USING (true) 
+    WITH CHECK (true);
 
 -- 5. RLS Policy: Authenticated Admin / Staff
--- Allow authenticated staff full access to view, update status, or manage enquiries
 CREATE POLICY "site_assessment_requests_auth_select" 
     ON public.site_assessment_requests 
     FOR SELECT 
