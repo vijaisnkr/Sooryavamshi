@@ -3,6 +3,7 @@ screenshot_*.png
 crop_*.png
 test_*.html
 *.log
+goDaddy/
 
 # Raw large design files
 *.psd
