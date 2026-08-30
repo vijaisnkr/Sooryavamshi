@@ -62,39 +62,6 @@
         loadEnquiries(true);
       });
     }
-
-    // 6. Supabase Config Modal triggers
-    const modal = document.getElementById("configModal");
-    const openModalBtn = document.getElementById("configModalBtn");
-    const closeModalBtn = document.getElementById("closeConfigModalBtn");
-    const cancelModalBtn = document.getElementById("cancelConfigBtn");
-    const configForm = document.getElementById("configForm");
-
-    if (openModalBtn && modal) {
-      openModalBtn.addEventListener("click", () => {
-        const cfg = SOORYAVAMSHI_SUPABASE_CONFIG.getConfig();
-        document.getElementById("modalSupabaseUrl").value = cfg.url || "";
-        document.getElementById("modalSupabaseKey").value = cfg.anonKey || "";
-        modal.classList.add("active");
-      });
-    }
-
-    const hideModal = () => modal && modal.classList.remove("active");
-    if (closeModalBtn) closeModalBtn.addEventListener("click", hideModal);
-    if (cancelModalBtn) cancelModalBtn.addEventListener("click", hideModal);
-
-    if (configForm) {
-      configForm.addEventListener("submit", function(e) {
-        e.preventDefault();
-        const url = document.getElementById("modalSupabaseUrl").value.trim();
-        const key = document.getElementById("modalSupabaseKey").value.trim();
-        SOORYAVAMSHI_SUPABASE_CONFIG.setConfig(url, key);
-        SooryavamshiSupabase.resetClient();
-        hideModal();
-        alert("Supabase configuration saved successfully! Reconnecting...");
-        checkAuthState();
-      });
-    }
   }
 
   /**
