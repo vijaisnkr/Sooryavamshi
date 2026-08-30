@@ -21,7 +21,6 @@ const SolarCalculator = (function() {
       tabUnits: document.getElementById('tabUnitsMode'),
       tabBill: document.getElementById('tabBillMode'),
       presetPills: document.querySelectorAll('.preset-pill'),
-      calcBtn: document.getElementById('calcSubmitBtn'),
       formulaToggle: document.getElementById('calcFormulaToggle'),
       formulaContent: document.getElementById('calcFormulaContent'),
       assessmentBtn: document.getElementById('calcAssessmentBtn'),
@@ -52,7 +51,71 @@ const SolarCalculator = (function() {
 
     populateStates();
     bindEvents();
+    updateSliderProgress();
     renderCalculations();
+  }
+
+  function updateSliderProgress() {
+    if (!elements.slider) return;
+    const min = parseFloat(elements.slider.min) || 50;
+    const max = parseFloat(elements.slider.max) || 1500;
+    const val = parseFloat(elements.slider.value) || 400;
+    const percent = Math.max(0, Math.min(100, ((val - min) / (max - min)) * 100));
+    elements.slider.style.setProperty('--slider-percent', `${percent}%`);
+  }
+
+  function setupMobileTouchSupport(slider) {
+    if (!slider) return;
+    let isDragging = false;
+
+    function handleTouch(e) {
+      const touch = e.touches && e.touches.length > 0 ? e.touches[0] : (e.changedTouches ? e.changedTouches[0] : null);
+      if (!touch) return;
+      
+      const rect = slider.getBoundingClientRect();
+      if (rect.width <= 0) return;
+      
+      const touchX = touch.clientX;
+      const offsetX = Math.max(0, Math.min(rect.width, touchX - rect.left));
+      const ratio = offsetX / rect.width;
+      const min = parseFloat(slider.min) || 50;
+      const max = parseFloat(slider.max) || 1500;
+      const step = parseFloat(slider.step) || 10;
+      
+      const rawVal = min + ratio * (max - min);
+      const snapped = Math.max(min, Math.min(max, Math.round(rawVal / step) * step));
+      
+      if (parseInt(slider.value, 10) !== snapped) {
+        slider.value = snapped;
+        updateInputValue(snapped);
+        renderCalculations();
+      }
+    }
+
+    slider.addEventListener('touchstart', function(e) {
+      if (e.touches && e.touches.length === 1) {
+        isDragging = true;
+        handleTouch(e);
+      }
+    }, { passive: true });
+
+    slider.addEventListener('touchmove', function(e) {
+      if (isDragging && e.touches && e.touches.length === 1) {
+        // Prevent viewport vertical scroll from canceling horizontal slider drag
+        if (e.cancelable) e.preventDefault();
+        handleTouch(e);
+      }
+    }, { passive: false });
+
+    const stopDragging = function(e) {
+      if (isDragging) {
+        isDragging = false;
+        if (e && e.changedTouches) handleTouch(e);
+      }
+    };
+
+    slider.addEventListener('touchend', stopDragging, { passive: true });
+    slider.addEventListener('touchcancel', stopDragging, { passive: true });
   }
 
   function populateStates() {
@@ -68,12 +131,16 @@ const SolarCalculator = (function() {
   }
 
   function bindEvents() {
-    // Slider input change
-    elements.slider.addEventListener('input', function(e) {
+    // Slider input and change events with live reactive rendering
+    const onSliderUpdate = function(e) {
       const val = parseInt(e.target.value, 10);
       updateInputValue(val);
       renderCalculations();
-    });
+    };
+
+    elements.slider.addEventListener('input', onSliderUpdate);
+    elements.slider.addEventListener('change', onSliderUpdate);
+    setupMobileTouchSupport(elements.slider);
 
     // Number input manual typing
     elements.numberInput.addEventListener('input', function(e) {
@@ -89,6 +156,7 @@ const SolarCalculator = (function() {
         currentUnits = val;
       }
       elements.slider.value = currentUnits;
+      updateSliderProgress();
       renderCalculations();
     });
 
@@ -118,20 +186,6 @@ const SolarCalculator = (function() {
         renderCalculations();
       });
     });
-
-    // Recalculate CTA button
-    if (elements.calcBtn) {
-      elements.calcBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        renderCalculations(true);
-        // Pulse animation on hero card
-        const heroBadge = document.querySelector('.calc-hero-badge-wrap');
-        if (heroBadge) {
-          heroBadge.style.transform = 'scale(1.02)';
-          setTimeout(() => heroBadge.style.transform = 'scale(1)', 300);
-        }
-      });
-    }
 
     // Formula Breakdown toggle
     if (elements.formulaToggle && elements.formulaContent) {
@@ -174,6 +228,7 @@ const SolarCalculator = (function() {
   function updateInputValue(units) {
     currentUnits = units;
     elements.slider.value = units;
+    updateSliderProgress();
     const tariff = getSelectedState().defaultTariff;
     if (isBillMode) {
       elements.numberInput.value = Math.round(units * tariff);
