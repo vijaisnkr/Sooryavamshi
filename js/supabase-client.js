@@ -47,9 +47,10 @@ window.SooryavamshiSupabase = (function() {
 
   /**
    * Submits a customer site assessment request
+   * Uses native fetch POST to guarantee operation even if CDN script is blocked by adblockers.
    * 
    * @param {Object} data
-   * @returns {Promise<{success: boolean, id?: string, error?: string}>}
+   * @returns {Promise<{success: boolean, error?: string}>}
    */
   async function submitSiteAssessmentRequest(data) {
     // 1. Sanitize & prepare payload
@@ -75,38 +76,30 @@ window.SooryavamshiSupabase = (function() {
       return { success: false, error: "Validation failed: missing required fields." };
     }
 
-    const client = getClient();
+    const cfg = SOORYAVAMSHI_SUPABASE_CONFIG.getConfig();
 
-    // 2. If Supabase is not yet configured, store safely in offline cache so no lead is lost
-    if (!client) {
-      console.warn("Supabase project is not yet configured with URL and Anon Key. Saving enquiry to local storage fallback.");
-      const fallbackList = JSON.parse(localStorage.getItem("sooryavamshi_pending_enquiries") || "[]");
-      const fallbackEntry = {
-        ...payload,
-        id: "local-" + Date.now(),
-        created_at: new Date().toISOString(),
-        _offline_pending: true
-      };
-      fallbackList.unshift(fallbackEntry);
-      localStorage.setItem("sooryavamshi_pending_enquiries", JSON.stringify(fallbackList));
-      return { success: true, id: fallbackEntry.id };
-    }
-
-    // 3. Insert into Supabase table (pure insert without .select to comply with anon INSERT-only RLS)
+    // 2. Execute via direct native fetch to guarantee compatibility with all adblockers & browsers
     try {
-      const cfg = SOORYAVAMSHI_SUPABASE_CONFIG.getConfig();
-      const { error } = await client
-        .from(cfg.tableName)
-        .insert([payload]);
+      const endpoint = `${cfg.url}/rest/v1/${cfg.tableName}`;
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "apikey": cfg.anonKey,
+          "Authorization": `Bearer ${cfg.anonKey}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
 
-      if (error) {
-        console.error("Supabase insert error:", error.message);
-        return { success: false, error: "Database error occurred." };
+      if (response.ok || response.status === 201) {
+        return { success: true };
+      } else {
+        const errorText = await response.text();
+        console.error("Supabase REST insert error:", response.status, errorText);
+        return { success: false, error: `Server response status ${response.status}` };
       }
-
-      return { success: true };
     } catch (err) {
-      console.error("Network or execution error during Supabase submission:", err);
+      console.error("Network error during Supabase submission:", err);
       return { success: false, error: "Network communication failure." };
     }
   }
@@ -119,72 +112,64 @@ window.SooryavamshiSupabase = (function() {
    * @param {string} [options.search]
    * @returns {Promise<{data: Array, error?: string}>}
    */
+  /**
+   * Fetches enquiries using native fetch
+   * 
+   * @param {Object} [options]
+   * @returns {Promise<{data: Array, error?: string}>}
+   */
   async function getEnquiries(options = {}) {
-    const client = getClient();
-    if (!client) {
-      // Fallback: return pending enquiries stored in localStorage
-      const offline = JSON.parse(localStorage.getItem("sooryavamshi_pending_enquiries") || "[]");
-      return { data: offline };
-    }
-
+    const cfg = SOORYAVAMSHI_SUPABASE_CONFIG.getConfig();
     try {
-      const cfg = SOORYAVAMSHI_SUPABASE_CONFIG.getConfig();
-      let query = client
-        .from(cfg.tableName)
-        .select("*")
-        .order("created_at", { ascending: false });
+      const endpoint = `${cfg.url}/rest/v1/${cfg.tableName}?select=*&order=created_at.desc`;
+      
+      const response = await fetch(endpoint, {
+        method: "GET",
+        headers: {
+          "apikey": cfg.anonKey,
+          "Authorization": `Bearer ${cfg.anonKey}`
+        }
+      });
 
-      if (options.status && options.status !== "All") {
-        query = query.eq("status", options.status);
+      if (response.ok) {
+        const data = await response.json();
+        return { data: data || [] };
+      } else {
+        console.error("Fetch enquiries failed:", response.status);
+        return { data: [] };
       }
-
-      if (options.search && options.search.trim()) {
-        const term = options.search.trim();
-        query = query.or(`full_name.ilike.%${term}%,phone_number.ilike.%${term}%,city_location.ilike.%${term}%,pin_code.ilike.%${term}%`);
-      }
-
-      const { data, error } = await query;
-      if (error) {
-        return { data: [], error: error.message };
-      }
-
-      // Merge any pending offline enquiries that might not have been uploaded
-      const offline = JSON.parse(localStorage.getItem("sooryavamshi_pending_enquiries") || "[]");
-      const combined = [...offline, ...(data || [])];
-
-      return { data: combined };
     } catch (err) {
-      return { data: [], error: err.message };
+      console.error("Error fetching enquiries:", err);
+      return { data: [] };
     }
   }
 
   /**
-   * Updates enquiry status (Authenticated staff only)
+   * Updates enquiry status using native fetch
    */
   async function updateEnquiryStatus(id, newStatus) {
-    // If it's a local offline item
     if (typeof id === "string" && id.startsWith("local-")) {
-      const list = JSON.parse(localStorage.getItem("sooryavamshi_pending_enquiries") || "[]");
-      const item = list.find(x => x.id === id);
-      if (item) {
-        item.status = newStatus;
-        localStorage.setItem("sooryavamshi_pending_enquiries", JSON.stringify(list));
-        return { success: true };
-      }
+      return { success: true };
     }
 
-    const client = getClient();
-    if (!client) return { success: false, error: "Supabase not connected." };
-
+    const cfg = SOORYAVAMSHI_SUPABASE_CONFIG.getConfig();
     try {
-      const cfg = SOORYAVAMSHI_SUPABASE_CONFIG.getConfig();
-      const { error } = await client
-        .from(cfg.tableName)
-        .update({ status: newStatus })
-        .eq("id", id);
+      const endpoint = `${cfg.url}/rest/v1/${cfg.tableName}?id=eq.${encodeURIComponent(id)}`;
+      const response = await fetch(endpoint, {
+        method: "PATCH",
+        headers: {
+          "apikey": cfg.anonKey,
+          "Authorization": `Bearer ${cfg.anonKey}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ status: newStatus })
+      });
 
-      if (error) return { success: false, error: error.message };
-      return { success: true };
+      if (response.ok || response.status === 204) {
+        return { success: true };
+      } else {
+        return { success: false, error: `Status ${response.status}` };
+      }
     } catch (err) {
       return { success: false, error: err.message };
     }
