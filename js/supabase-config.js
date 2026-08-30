@@ -9,7 +9,7 @@
  * Never use or expose the Supabase 'service_role' secret key here.
  */
 
-const SOORYAVAMSHI_SUPABASE_CONFIG = (function() {
+window.SOORYAVAMSHI_SUPABASE_CONFIG = (function() {
   // Default project credentials
   const DEFAULT_CONFIG = {
     url: window.__SOORYAVAMSHI_SUPABASE_URL__ || "https://dtbruomlpuxwgpvdosoz.supabase.co",
@@ -19,15 +19,12 @@ const SOORYAVAMSHI_SUPABASE_CONFIG = (function() {
   };
 
   /**
-   * Retrieves active Supabase configuration (localStorage override takes priority)
+   * Retrieves active Supabase configuration (Uses verified DEFAULT_CONFIG directly)
    */
   function getConfig() {
-    const storedUrl = localStorage.getItem("sooryavamshi_supabase_url");
-    const storedKey = localStorage.getItem("sooryavamshi_supabase_anon_key");
-
     return {
-      url: (storedUrl && storedUrl.trim()) || DEFAULT_CONFIG.url,
-      anonKey: (storedKey && storedKey.trim()) || DEFAULT_CONFIG.anonKey,
+      url: DEFAULT_CONFIG.url,
+      anonKey: DEFAULT_CONFIG.anonKey,
       tableName: DEFAULT_CONFIG.tableName,
       notificationEmail: DEFAULT_CONFIG.notificationEmail
     };
