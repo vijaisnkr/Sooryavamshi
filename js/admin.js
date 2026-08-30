@@ -22,10 +22,15 @@
       loginForm.addEventListener("submit", handleLogin);
     }
 
-    // 2. Sign Out Button
+    // 2. Sign Out & Login Page Buttons
     const signOutBtn = document.getElementById("signOutBtn");
     if (signOutBtn) {
       signOutBtn.addEventListener("click", handleSignOut);
+    }
+
+    const loginRedirectBtn = document.getElementById("loginRedirectBtn");
+    if (loginRedirectBtn) {
+      loginRedirectBtn.addEventListener("click", handleSignOut);
     }
 
     // 3. Search input (debounced)
