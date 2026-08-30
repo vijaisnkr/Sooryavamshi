@@ -14,7 +14,12 @@ const SOORYAVAMSHI_CONFIG = {
     displayPhone: "+91 9061626868",
     email: "suryavamshisolarprojects@gmail.com",
     website: "https://suryavamshi.com",
-    address: "Cherthala, Alappuzha, Kerala",
+    address: "Door No.414, Chithira, Muttathiparamb P.O, Cherthala, 688527, Kerala",
+    social: {
+      instagram: "https://www.instagram.com/suryavamshi_solarprojects?utm_source=qr&igsi=MThoNGNvNDd2d2s2cw==",
+      facebook: "https://www.facebook.com/share/1YduBSschB/",
+      whatsapp: "https://wa.me/919061626868"
+    },
     operatingHours: "Monday – Saturday: 9:00 AM – 7:30 PM",
     establishedYear: 2018,
     gstin: "32AALFS1234F1Z5 (Kerala Registered LLP)",
@@ -403,6 +408,7 @@ const SOORYAVAMSHI_CONFIG = {
       "682301": { city: "Piravom, Ernakulam", state: "Kerala", discom: "KSEBL" },
 
       // Alappuzha District Hubs
+      "688527": { city: "Muttathiparamb, Cherthala, Alappuzha", state: "Kerala", discom: "KSEBL" },
       "688524": { city: "Cherthala, Alappuzha", state: "Kerala", discom: "KSEBL" },
       "688001": { city: "Alappuzha Town, Alappuzha", state: "Kerala", discom: "KSEBL" },
       "688502": { city: "Kayamkulam, Alappuzha", state: "Kerala", discom: "KSEBL" },
