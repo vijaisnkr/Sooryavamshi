@@ -13,6 +13,7 @@ const SOORYAVAMSHI_CONFIG = {
     phone: "9061626868",
     displayPhone: "+91 9061626868",
     email: "suryavamshisolarprojects@gmail.com",
+    website: "https://suryavamshi.com",
     address: "Cherthala, Alappuzha, Kerala",
     operatingHours: "Monday – Saturday: 9:00 AM – 7:30 PM",
     establishedYear: 2018,
