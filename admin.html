@@ -428,11 +428,6 @@
     </a>
 
     <div class="admin-user-nav">
-      <button type="button" class="admin-btn admin-btn-light" id="configModalBtn" title="Configure Supabase Connection">
-        <span class="material-symbols-outlined" style="font-size: 18px;">settings</span>
-        <span>Supabase Setup</span>
-      </button>
-
       <div id="userProfileWrap" style="display: none; align-items: center; gap: 10px;">
         <span id="userEmailTag" style="font-size: 0.85rem; color: #E2E8F0;"></span>
         <button type="button" class="admin-btn admin-btn-light" id="loginRedirectBtn" title="Go to Login Page">
@@ -551,40 +546,9 @@
     </div>
   </main>
 
-  <!-- Supabase Credentials Setup Modal -->
-  <div class="config-modal-backdrop" id="configModal">
-    <div class="config-modal-card">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-        <h3 style="margin: 0; font-family: var(--font-heading); color: #073B6B; font-size: 1.25rem;">Supabase Connection Setup</h3>
-        <button type="button" id="closeConfigModalBtn" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #64748B;">&times;</button>
-      </div>
-
-      <p style="font-size: 0.88rem; color: #475569; line-height: 1.5; margin-bottom: 20px;">
-        Enter your Supabase Project URL and Anon Key. These are stored locally in your browser's secure storage so your credentials are never pushed to public code repositories.
-      </p>
-
-      <form id="configForm">
-        <div class="auth-form-group">
-          <label class="auth-form-label">Supabase Project URL</label>
-          <input type="url" id="modalSupabaseUrl" class="auth-form-input" placeholder="https://xyzcompany.supabase.co" required>
-        </div>
-
-        <div class="auth-form-group">
-          <label class="auth-form-label">Supabase Anon (Public) Key</label>
-          <input type="text" id="modalSupabaseKey" class="auth-form-input" placeholder="eyJhbGciOiJIUzI1NiIsIn..." required>
-        </div>
-
-        <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 24px;">
-          <button type="button" class="admin-btn admin-btn-light" id="cancelConfigBtn" style="color: #475569; border-color: #CBD5E1;">Cancel</button>
-          <button type="submit" class="admin-btn admin-btn-primary">Save &amp; Connect</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
   <!-- Scripts with Cache-Busting -->
-  <script src="js/supabase-config.js?v=2.1"></script>
-  <script src="js/supabase-client.js?v=2.1"></script>
-  <script src="js/admin.js?v=2.1"></script>
+  <script src="js/supabase-config.js?v=3.0"></script>
+  <script src="js/supabase-client.js?v=3.0"></script>
+  <script src="js/admin.js?v=3.0"></script>
 </body>
 </html>
