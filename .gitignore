@@ -1,0 +1,23 @@
+# Temporary screenshots and cropped verification images
+screenshot_*.png
+crop_*.png
+test_*.html
+*.log
+
+# Raw large design files
+*.psd
+Gemini_Generated_Image_*.png
+Suryavamshi_Offline_Landing_Page.png
+
+# Operating system files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+
+# Editor & IDE directories
+.vscode/
+.idea/
+*.suo
+*.user

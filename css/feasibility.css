@@ -1,0 +1,535 @@
+/* ==========================================================================
+   SOORYAVAMSHI SOLAR PROJECTS LLP - KSEB GRID FEASIBILITY GUIDE STYLES
+   Clean, modern, high-converting instructions and official portal gateway.
+   ========================================================================== */
+
+.feasibility-section {
+  position: relative;
+  background: linear-gradient(180deg, #FFFFFF 0%, #F4F8FC 50%, #EBF3FA 100%);
+  padding: 85px 0;
+  overflow: hidden;
+}
+
+/* Engineering blueprint grid subtle background */
+.feasibility-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 15% 20%, rgba(7, 59, 107, 0.05) 0%, transparent 45%),
+    radial-gradient(circle at 85% 80%, rgba(245, 130, 32, 0.06) 0%, transparent 50%),
+    linear-gradient(to right, rgba(7, 59, 107, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(7, 59, 107, 0.025) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.feasibility-container-wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Master Guide Card */
+.feasibility-guide-card {
+  background: var(--color-bg-white);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border-medium);
+  box-shadow: 0 20px 40px -15px rgba(7, 59, 107, 0.08), 0 0 1px 1px rgba(7, 59, 107, 0.04);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Dual Column Layout */
+.feasibility-guide-layout {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  min-height: 600px;
+}
+
+@media (max-width: 992px) {
+  .feasibility-guide-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   LEFT COLUMN: STEP-BY-STEP INSTRUCTIONS
+   ========================================================================== */
+.feasibility-steps-pane {
+  padding: 36px 40px;
+  border-right: 1px solid var(--color-border-light);
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  .feasibility-steps-pane {
+    padding: 24px 20px;
+    border-right: none;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+}
+
+.feasibility-pane-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--grad-solar-soft);
+  color: var(--color-secondary);
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: var(--radius-full);
+  margin-bottom: 12px;
+  align-self: flex-start;
+}
+
+.feasibility-pane-title {
+  font-family: var(--font-heading);
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--color-primary-dark);
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+
+.feasibility-pane-sub {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+/* Steps Timeline */
+.kseb-steps-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+}
+
+.kseb-step-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px 18px;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: var(--radius-md);
+  transition: transform var(--trans-fast), box-shadow var(--trans-fast), border-color var(--trans-fast);
+}
+
+.kseb-step-item:hover {
+  transform: translateY(-2px);
+  background: #FFFFFF;
+  border-color: #CBD5E1;
+  box-shadow: var(--shadow-sm);
+}
+
+.kseb-step-num {
+  width: 36px;
+  height: 36px;
+  background: var(--color-primary);
+  color: #FFFFFF;
+  font-family: var(--font-heading);
+  font-size: 0.92rem;
+  font-weight: 800;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(7, 59, 107, 0.2);
+}
+
+.kseb-step-num.accent {
+  background: var(--grad-solar);
+  box-shadow: 0 4px 12px rgba(245, 130, 32, 0.35);
+}
+
+.kseb-step-body {
+  flex: 1;
+}
+
+.kseb-step-title {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  margin-bottom: 4px;
+  line-height: 1.35;
+}
+
+.kseb-step-text {
+  font-size: 0.86rem;
+  color: var(--color-text-body);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.kseb-step-text strong {
+  color: var(--color-primary-dark);
+}
+
+.kseb-step-text code {
+  background: #E2E8F0;
+  color: var(--color-primary-dark);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+/* Step 5: Highlighted "On Our Site" Card */
+.kseb-step-item.highlight-step {
+  background: linear-gradient(135deg, #FFFDF8 0%, #FFF7ED 100%);
+  border: 1.5px solid rgba(245, 130, 32, 0.4);
+  box-shadow: 0 4px 16px rgba(245, 130, 32, 0.08);
+}
+
+.step-tag-pill {
+  display: inline-block;
+  background: #F58220;
+  color: #FFFFFF;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 2px 10px;
+  border-radius: var(--radius-full);
+  margin-bottom: 6px;
+}
+
+.kseb-site-action-list {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.kseb-site-action-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: var(--color-text-body);
+  line-height: 1.45;
+}
+
+.action-icon {
+  font-size: 1.15rem;
+  flex-shrink: 0;
+  line-height: 1.2;
+}
+
+.kseb-inline-link {
+  color: var(--color-secondary);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color var(--trans-fast);
+}
+
+.kseb-inline-link:hover {
+  color: var(--color-secondary-dark);
+}
+
+/* ==========================================================================
+   RIGHT COLUMN: OFFICIAL PORTAL GATEWAY & ASSISTANCE PANE
+   ========================================================================= */
+.feasibility-action-pane {
+  background: linear-gradient(180deg, #092B4C 0%, #061B30 100%);
+  color: #FFFFFF;
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+  .feasibility-action-pane {
+    padding: 28px 20px;
+    gap: 20px;
+  }
+}
+
+/* 1. Official Gateway Card */
+.kseb-gateway-card {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius-lg);
+  padding: 24px 22px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+.kseb-gateway-card::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 140px;
+  height: 140px;
+  background: radial-gradient(circle, rgba(245, 130, 32, 0.25) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.kseb-gateway-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.kseb-emblem-badge {
+  width: 44px;
+  height: 44px;
+  background: var(--grad-solar);
+  color: #FFFFFF;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 6px 16px rgba(245, 130, 32, 0.4);
+}
+
+.kseb-gateway-badge-text {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.kseb-gateway-title {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  line-height: 1.25;
+}
+
+.kseb-gateway-desc {
+  font-size: 0.85rem;
+  color: #CBD5E1;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.kseb-url-display {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  font-family: monospace;
+  font-size: 0.78rem;
+  color: #93C5FD;
+  margin-bottom: 18px;
+  word-break: break-all;
+}
+
+/* Primary Call to Action Button to KSEB Portal */
+.btn-kseb-portal-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #F58220 0%, #FF9E40 50%, #F58220 100%);
+  background-size: 200% auto;
+  color: #FFFFFF;
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 800;
+  padding: 14px 20px;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(245, 130, 32, 0.45);
+  transition: all var(--trans-base);
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-kseb-portal-cta:hover {
+  background-position: right center;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(245, 130, 32, 0.6);
+  color: #FFFFFF;
+}
+
+.kseb-redirect-notice {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 0.74rem;
+  color: #94A3B8;
+}
+
+/* 2. Bill Sample Reference Box */
+.kseb-bill-guide-box {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px dashed rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius-md);
+  padding: 16px;
+}
+
+.bill-guide-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.bill-icon {
+  font-size: 1.3rem;
+}
+
+.bill-guide-title {
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.bill-guide-sub {
+  font-size: 0.72rem;
+  color: #94A3B8;
+}
+
+.kseb-bill-mini-mockup {
+  background: #FFFFFF;
+  color: #1E293B;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.76rem;
+  margin-bottom: 8px;
+  box-shadow: var(--shadow-sm);
+}
+
+.bill-mockup-top {
+  font-weight: 800;
+  color: var(--color-primary);
+  border-bottom: 1px dashed #CBD5E1;
+  padding-bottom: 4px;
+  margin-bottom: 6px;
+  font-size: 0.72rem;
+}
+
+.bill-mockup-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 3px;
+}
+
+.bill-mockup-label {
+  color: #64748B;
+  font-weight: 600;
+}
+
+.bill-mockup-val {
+  font-weight: 700;
+  color: #0F172A;
+}
+
+.bill-mockup-val.highlight {
+  color: #B45309;
+  background: #FEF3C7;
+  padding: 0 4px;
+  border-radius: 2px;
+}
+
+.bill-guide-tip {
+  font-size: 0.76rem;
+  color: #CBD5E1;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* 3. Assistance / Low Headroom Card */
+.kseb-help-card {
+  background: rgba(2, 132, 199, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: var(--radius-md);
+  padding: 16px;
+}
+
+.help-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.help-icon {
+  font-size: 1.25rem;
+  line-height: 1.2;
+}
+
+.help-card-title {
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #38BDF8;
+  margin: 0 0 2px 0;
+}
+
+.help-card-desc {
+  font-size: 0.78rem;
+  color: #E2E8F0;
+  margin: 0;
+}
+
+.help-solutions-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 14px 0;
+  font-size: 0.76rem;
+  color: #CBD5E1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.help-card-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.kseb-help-card .btn-outline {
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.08);
+  transition: all var(--trans-fast);
+}
+
+.kseb-help-card .btn-outline:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #FFFFFF;
+  color: #FFFFFF;
+}
+
+@media (max-width: 480px) {
+  .help-card-actions {
+    flex-direction: column;
+  }
+}

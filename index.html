@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sooryavamshi Solar Projects LLP | Premium Residential Solar Installation in India</title>
+  <meta name="description" content="Sooryavamshi Solar Projects LLP provides engineering-grade residential rooftop solar solutions, Tier-1 panels, inverters, and dedicated lightning protection across India. Calculate your solar requirement today.">
+  <meta name="keywords" content="solar rooftop installation India, residential solar, solar calculator India, Sooryavamshi Solar Projects LLP, Adani Solar, Waaree Solar, PM Surya Ghar Muft Bijli Yojana, solar inverter, solar panel requirement calculator">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/logo.svg">
+
+  <!-- Design System & Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/calculator.css">
+  <link rel="stylesheet" href="css/feasibility.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- =========================================================================
+       1. STICKY NAVIGATION BAR
+       ========================================================================= -->
+  <header class="header-nav" id="mainHeader">
+    <div class="container nav-container">
+      <!-- Brand Logo -->
+      <a href="#home" class="brand-logo-link" aria-label="Sooryavamshi Solar Projects Home">
+        <img src="assets/images/sooryavamshi-logo-clean.png" alt="Sooryavamshi Solar Projects LLP Logo" class="brand-logo-img" width="128" height="52">
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav aria-label="Primary Navigation" class="nav-center-wrapper">
+        <ul class="nav-links-desktop">
+          <li><a href="#home" class="nav-item-link active">Home</a></li>
+          <li><a href="#calculator" class="nav-item-link">Solar Calculator</a></li>
+          <li><a href="#feasibility" class="nav-item-link">Check Feasibility</a></li>
+          <li><a href="#equipment" class="nav-item-link">Products &amp; Equipment</a></li>
+          <li><a href="#projects" class="nav-item-link">Our Projects</a></li>
+          <li><a href="#about" class="nav-item-link">About Us</a></li>
+          <li><a href="#contact" class="nav-item-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- Desktop CTA Action -->
+      <div class="nav-actions">
+        <a href="#calculator" class="btn btn-primary" id="navCtaBtn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          <span>Calculate Solar Requirement</span>
+        </a>
+
+        <!-- Mobile Hamburger Button -->
+        <button class="mobile-nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Drawer & Backdrop -->
+  <div class="mobile-nav-backdrop"></div>
+  <aside class="mobile-nav-drawer" aria-label="Mobile Navigation Menu">
+    <div style="margin-bottom: 24px;">
+      <img src="assets/images/sooryavamshi-logo-clean.png" alt="Sooryavamshi Solar" style="height: 50px; width: auto; display: block;">
+    </div>
+    <ul class="mobile-nav-list">
+      <li><a href="#home" class="mobile-nav-link">Home <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></a></li>
+      <li><a href="#calculator" class="mobile-nav-link">Solar Calculator <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></a></li>
+      <li><a href="#feasibility" class="mobile-nav-link">Check Feasibility <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></a></li>
+      <li><a href="#equipment" class="mobile-nav-link">Products &amp; Equipment <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></a></li>
+      <li><a href="#process" class="mobile-nav-link">Installation Process <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></a></li>
+      <li><a href="#projects" class="mobile-nav-link">Our Projects <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></a></li>
+      <li><a href="#about" class="mobile-nav-link">About Us <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></a></li>
+      <li><a href="#contact" class="mobile-nav-link">Contact &amp; Site Visit <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></a></li>
+    </ul>
+
+    <div style="margin-bottom: 24px;">
+      <a href="#calculator" class="btn btn-primary" style="width: 100%;">
+        ⚡ Calculate Solar Requirement
+      </a>
+    </div>
+
+    <div class="mobile-contact-info">
+      <div style="font-size: 0.8rem; color: var(--color-text-muted); margin-bottom: 4px;">Direct Helpline</div>
+      <a href="tel:9061626868" style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; color: var(--color-primary);">+91 9061626868</a>
+      <div style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 8px;">suryavamshisolarprojects@gmail.com</div>
+    </div>
+  </aside>
+
+  <main>
+    <!-- =========================================================================
+         2. HERO SECTION
+         ========================================================================= -->
+    <section class="hero-section" id="home">
+      <div class="container">
+        <div class="hero-grid">
+          <!-- Text Content -->
+          <div class="hero-content">
+            <div class="section-tag">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+              ENGINEERED RESIDENTIAL SOLAR FOR INDIA
+            </div>
+
+            <h1 class="hero-headline">
+              Power Your Home With <span class="highlight">Solar Energy</span>
+            </h1>
+
+            <p class="hero-subtitle">
+              Sooryavamshi Solar Projects LLP provides complete residential solar solutions—from initial technical consultation and Tier-1 equipment selection to certified installation, net metering, and 30-year performance assurance.
+            </p>
+
+            <div class="hero-cta-group">
+              <a href="#calculator" class="btn btn-primary btn-lg" id="heroPrimaryCta">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                <span>Calculate My Solar Requirement</span>
+              </a>
+              <a href="#projects" class="btn btn-outline btn-lg" id="heroSecondaryCta">
+                <span>View Our Projects</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </a>
+            </div>
+
+            <!-- Trust Indicators -->
+            <div class="trust-indicators-grid">
+              <div class="trust-item">
+                <div class="trust-icon-box">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                </div>
+                <div>
+                  <div class="trust-text-title">End-to-End Service</div>
+                  <div class="trust-text-desc">Consultation to Net Metering</div>
+                </div>
+              </div>
+
+              <div class="trust-item">
+                <div class="trust-icon-box">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+                </div>
+                <div>
+                  <div class="trust-text-title">Quality Assurance</div>
+                  <div class="trust-text-desc">Tier-1 BIS &amp; IEC Certified</div>
+                </div>
+              </div>
+
+              <div class="trust-item">
+                <div class="trust-icon-box">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                </div>
+                <div>
+                  <div class="trust-text-title">Advanced Technology</div>
+                  <div class="trust-text-desc">Bifacial &amp; IoT Monitoring</div>
+                </div>
+              </div>
+
+              <div class="trust-item">
+                <div class="trust-icon-box">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                </div>
+                <div>
+                  <div class="trust-text-title">30 Years Warranty</div>
+                  <div class="trust-text-desc">Linear Output Guarantee</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Visual -->
+          <div class="hero-visual-col">
+            <div class="hero-image-wrapper">
+              <img src="assets/images/hero.jpg" alt="Residential Rooftop Solar Installation by Sooryavamshi Solar Projects" width="800" height="500">
+              
+              <!-- Floating Engineering Guarantee Badge -->
+              <div class="hero-floating-card">
+                <div class="card-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                </div>
+                <div>
+                  <div class="card-title">Govt. PM Surya Ghar Eligible</div>
+                  <div class="card-desc">Save up to ₹78,000 via central subsidy + net metering</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         3. MAIN FEATURE — SOLAR REQUIREMENT CALCULATOR
+         ========================================================================= -->
+    <section class="calculator-section" id="calculator">
+      <div class="container">
+        <!-- Section Header -->
+        <div class="section-header">
+          <div class="section-tag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="16" y1="14" x2="16" y2="18"></line><path d="M16 10h.01"></path><path d="M12 10h.01"></path><path d="M8 10h.01"></path><path d="M12 14h.01"></path><path d="M8 14h.01"></path><path d="M12 18h.01"></path><path d="M8 18h.01"></path></svg>
+            INTERACTIVE SOLAR SIZING ENGINE
+          </div>
+          <h2 class="section-title">How Much Solar Power Does Your Home Need?</h2>
+          <p class="section-subtitle">
+            Enter your average monthly electricity consumption and find the recommended solar system size for your home.
+          </p>
+        </div>
+
+        <div class="calc-container-wrap">
+          <div class="calc-master-card">
+            <div class="calc-grid-layout">
+              
+              <!-- Left Column: Inputs -->
+              <div class="calc-input-pane">
+                <h3 class="calc-pane-title">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                  Your Home Energy Profile
+                </h3>
+                <p class="calc-pane-sub">Adjust consumption units or monthly bill amount to compute your custom rooftop sizing.</p>
+
+                <!-- Input Mode Tabs -->
+                <div class="calc-input-tabs" role="tablist">
+                  <button type="button" class="calc-tab-btn active" id="tabUnitsMode" role="tab" aria-selected="true">Monthly Units (kWh)</button>
+                  <button type="button" class="calc-tab-btn" id="tabBillMode" role="tab" aria-selected="false">Monthly Bill (₹)</button>
+                </div>
+
+                <!-- Presets -->
+                <div class="preset-pills-label">Quick Household Presets</div>
+                <div class="preset-pills-row">
+                  <button type="button" class="preset-pill" data-units="150">150 Units (1-2 BHK)</button>
+                  <button type="button" class="preset-pill" data-units="300">300 Units (2-3 BHK)</button>
+                  <button type="button" class="preset-pill active" data-units="400">400 Units (Standard)</button>
+                  <button type="button" class="preset-pill" data-units="600">600 Units (3+ ACs)</button>
+                  <button type="button" class="preset-pill" data-units="1000">1000 Units (Villa)</button>
+                </div>
+
+                <!-- Consumption Slider & Input Sync -->
+                <div class="calc-field-group">
+                  <div class="calc-field-head">
+                    <label for="calcUnitsInput" class="calc-field-label">Monthly Electricity Consumption</label>
+                    <div class="calc-field-display">
+                      <input type="number" id="calcUnitsInput" value="400" min="50" max="2500" step="10" aria-label="Monthly consumption value">
+                      <span class="unit-tag" id="calcUnitLabel">Units</span>
+                    </div>
+                  </div>
+
+                  <div class="calc-slider-wrap">
+                    <input type="range" id="calcUnitsSlider" class="calc-range-slider" min="50" max="1500" value="400" step="10" aria-label="Consumption slider">
+                    <div class="slider-ticks-row">
+                      <span>50 Units</span>
+                      <span>500 Units</span>
+                      <span>1000 Units</span>
+                      <span>1500+ Units</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- State / Location Selection -->
+                <div class="location-select-wrap">
+                  <label for="calcStateSelect" class="form-label" style="font-size: 0.92rem;">
+                    Installation State / Region (Solar Insolation)
+                  </label>
+                  <select id="calcStateSelect" class="form-control" aria-label="Select state for solar insolation">
+                    <!-- Populated via config.js -->
+                  </select>
+                </div>
+
+                <!-- Calculate CTA Button -->
+                <button type="button" class="btn btn-primary calc-submit-btn" id="calcSubmitBtn">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+                  <span>Calculate My Requirement</span>
+                </button>
+              </div>
+
+              <!-- Right Column: Live Results -->
+              <div class="calc-results-pane">
+                
+                <!-- Hero Capacity Badge with Circular Gauge -->
+                <div class="calc-hero-badge-wrap">
+                  <div class="calc-gauge-circle">
+                    <svg class="calc-gauge-svg" viewBox="0 0 100 100">
+                      <defs>
+                        <linearGradient id="solarGradientGauge" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stop-color="#FDBA2D"/>
+                          <stop offset="100%" stop-color="#F58220"/>
+                        </linearGradient>
+                      </defs>
+                      <circle class="calc-gauge-bg" cx="50" cy="50" r="42"></circle>
+                      <circle class="calc-gauge-fill" id="resultGaugeFill" cx="50" cy="50" r="42"></circle>
+                    </svg>
+                    <div class="calc-gauge-icon">
+                      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    </div>
+                  </div>
+
+                  <div class="calc-hero-info">
+                    <div class="calc-hero-tag">Recommended System Capacity</div>
+                    <div class="calc-hero-val" id="resultHeroKw">4.0 kW</div>
+                    <div class="calc-hero-sub" id="resultHeroSub">Powers 100% of ~400 units/month requirement</div>
+                  </div>
+                </div>
+
+                <!-- Comprehensive 6-Card Metrics Grid -->
+                <div class="calc-metrics-grid">
+                  <div class="calc-metric-box">
+                    <div class="calc-metric-icon">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+                    </div>
+                    <div class="calc-metric-label">Estimated Daily Consumption</div>
+                    <div class="calc-metric-val" id="resultDailyUnits">13.3 kWh/day</div>
+                  </div>
+
+                  <div class="calc-metric-box">
+                    <div class="calc-metric-icon">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+                    </div>
+                    <div class="calc-metric-label">Estimated Annual Generation</div>
+                    <div class="calc-metric-val" id="resultAnnualGen">5,840 kWh</div>
+                  </div>
+
+                  <div class="calc-metric-box">
+                    <div class="calc-metric-icon">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                    </div>
+                    <div class="calc-metric-label">Approximate Panels Needed</div>
+                    <div class="calc-metric-val" id="resultPanelCount">8 Panels</div>
+                  </div>
+
+                  <div class="calc-metric-box">
+                    <div class="calc-metric-icon">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+                    </div>
+                    <div class="calc-metric-label">Estimated Roof Space Needed</div>
+                    <div class="calc-metric-val" id="resultRoofSpace">340 sq.ft (32 m²)</div>
+                  </div>
+
+                  <div class="calc-metric-box">
+                    <div class="calc-metric-icon">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line></svg>
+                    </div>
+                    <div class="calc-metric-label">Recommended Inverter</div>
+                    <div class="calc-metric-val" id="resultInverterCap" style="font-size: 0.95rem;">5.0 kW Single/Three-Phase</div>
+                  </div>
+
+                  <div class="calc-metric-box">
+                    <div class="calc-metric-icon">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                    </div>
+                    <div class="calc-metric-label">Estimated Annual Savings</div>
+                    <div class="calc-metric-val green-text" id="resultAnnualSavings">₹45,550/yr</div>
+                  </div>
+                </div>
+
+                <!-- Dynamic Solar Panel Array Visualizer -->
+                <div class="calc-panel-visualizer-box">
+                  <div class="visualizer-head">
+                    <div class="visualizer-title">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="3" y1="15" x2="21" y2="15"></line><line x1="9" y1="3" x2="9" y2="21"></line><line x1="15" y1="3" x2="15" y2="21"></line></svg>
+                      Modules
+                    </div>
+                    <span class="visualizer-count-tag" id="resultPanelCountTag">8 x 550W Modules</span>
+                  </div>
+                  <div class="solar-panel-icons-grid" id="resultPanelGrid">
+                    <!-- Populated dynamically via calculator.js -->
+                  </div>
+                </div>
+
+                <!-- Technical Calculation Explanation Accordion -->
+                <div class="calc-formula-accordion">
+                  <button type="button" class="calc-formula-toggle" id="calcFormulaToggle" aria-expanded="false">
+                    <span>View Engineering Calculation Formula</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                  </button>
+                  <div class="calc-formula-content" id="calcFormulaContent">
+                    <div class="formula-step-row">
+                      <span>Daily Energy Need:</span>
+                      <strong id="formulaDaily">13.3 kWh/day</strong>
+                    </div>
+                    <div class="formula-step-row">
+                      <span>Peak Sun Hours (Insolation):</span>
+                      <strong id="formulaSunHours">4.3 hrs/day</strong>
+                    </div>
+                    <div class="formula-step-row">
+                      <span>System Derating &amp; Thermal Loss Factor:</span>
+                      <strong id="formulaDerate">82%</strong>
+                    </div>
+                    <div class="formula-step-row">
+                      <span>Formula: Daily kWh ÷ (Sun Hours × 0.82 Performance Ratio):</span>
+                      <strong style="color: var(--color-primary);" id="formulaResult">4.0 kWp</strong>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Disclaimer -->
+                <div class="calc-disclaimer-box">
+                  <p>
+                    <strong>Disclaimer:</strong> This is an indicative calculation. Final system capacity may vary based on roof orientation, shading, location, equipment efficiency and actual site conditions.
+                  </p>
+                </div>
+
+                <!-- Action CTA -->
+                <div class="calc-action-row">
+                  <a href="#feasibility" class="btn btn-primary btn-lg" id="calcFeasibilityNextBtn" style="flex: 1.2;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                    <span>Check KSEB Grid Feasibility</span>
+                  </a>
+                  <a href="#contact" class="btn btn-outline" style="padding: 16px 18px;" id="calcAssessmentBtn" title="Request Site Assessment Directly">
+                    <span>Direct Quote</span>
+                  </a>
+                  <a href="tel:9061626868" class="btn btn-outline" style="padding: 16px 18px;" title="Call an Engineer Directly">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                  </a>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         OFFICIAL KSEB GRID FEASIBILITY & RECAP PORTAL DIRECTORY
+         ========================================================================= -->
+    <section class="feasibility-section" id="feasibility">
+      <div class="container">
+        <!-- Section Header -->
+        <div class="section-header">
+          <div class="section-tag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            OFFICIAL KSEB GRID FEASIBILITY
+          </div>
+          <h2 class="section-title">Check Transformer Solar Headroom on the Official KSEB Portal</h2>
+          <p class="section-subtitle">
+            Under Kerala State Electricity Regulatory Commission (KSERC) regulations, rooftop solar injection is permitted up to 90% of your distribution transformer (DTR) rating. Follow the guide below to check real-time transformer headroom on KSEB's official portal.
+          </p>
+        </div>
+
+        <div class="feasibility-container-wrap">
+          <div class="feasibility-guide-card">
+            
+            <!-- Grid Layout: Left = Step-by-Step Instructions, Right = Official Portal Gateway & Our Site Actions -->
+            <div class="feasibility-guide-layout">
+
+              <!-- Left Column: Step-by-Step Instructions -->
+              <div class="feasibility-steps-pane">
+                <div class="feasibility-pane-badge">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                  Step-by-Step Instructions
+                </div>
+                <h3 class="feasibility-pane-title">How to Verify Feasibility &amp; What to Do on Our Site</h3>
+                <p class="feasibility-pane-sub">
+                  Before applying, ensure your local KSEB Distribution Transformer (DTR) has sufficient renewable energy headroom. Here is the exact process:
+                </p>
+
+                <!-- Steps Timeline -->
+                <div class="kseb-steps-timeline">
+                  
+                  <!-- Step 1 -->
+                  <div class="kseb-step-item">
+                    <div class="kseb-step-num">01</div>
+                    <div class="kseb-step-body">
+                      <h4 class="kseb-step-title">Find Your Consumer Number &amp; Section on Your Bill</h4>
+                      <p class="kseb-step-text">
+                        Keep a copy of your recent KSEB electricity bill ready. Note down your <strong>13-digit Consumer Number</strong> (e.g., <code>1155482091234</code>) and your <strong>Electrical Section</strong> name (e.g., <em>1155 - Cherthala South</em>), printed on the top-left section of the bill.
+                      </p>
+                    </div>
+                  </div>
+
+                  <!-- Step 2 -->
+                  <div class="kseb-step-item">
+                    <div class="kseb-step-num">02</div>
+                    <div class="kseb-step-body">
+                      <h4 class="kseb-step-title">Open the Official KSEB reCap Portal</h4>
+                      <p class="kseb-step-text">
+                        Click the <strong>Open KSEB Feasibility Portal (reCap)</strong> button on the right to open Kerala State Electricity Board Ltd's official self-service capacity tracker (<a href="https://wss.kseb.in/selfservices/reCap" target="_blank" rel="noopener noreferrer" class="kseb-inline-link">wss.kseb.in/selfservices/reCap</a>).
+                      </p>
+                    </div>
+                  </div>
+
+                  <!-- Step 3 -->
+                  <div class="kseb-step-item">
+                    <div class="kseb-step-num">03</div>
+                    <div class="kseb-step-body">
+                      <h4 class="kseb-step-title">Select Your Section &amp; Distribution Transformer (DTR)</h4>
+                      <p class="kseb-step-text">
+                        On the KSEB portal, select your <strong>Electrical Circle</strong>, <strong>Division</strong>, and <strong>Section Office</strong> (or input your Consumer Number / Transformer ID). This will display the list of all distribution transformers under your section.
+                      </p>
+                    </div>
+                  </div>
+
+                  <!-- Step 4 -->
+                  <div class="kseb-step-item">
+                    <div class="kseb-step-num">04</div>
+                    <div class="kseb-step-body">
+                      <h4 class="kseb-step-title">Check the Available Renewable Energy Headroom</h4>
+                      <p class="kseb-step-text">
+                        Review your transformer's <strong>Rated Capacity (kVA)</strong>, <strong>Already Energized Solar (kW)</strong>, and most importantly, the <strong>Balance Feasible Capacity (kW)</strong> available under the KSERC 90% injection cap.
+                      </p>
+                    </div>
+                  </div>
+
+                  <!-- Step 5 (What to do on our site) -->
+                  <div class="kseb-step-item highlight-step">
+                    <div class="kseb-step-num accent">05</div>
+                    <div class="kseb-step-body">
+                      <div class="step-tag-pill">What to Do Next on Our Site</div>
+                      <h4 class="kseb-step-title">Return to Sooryavamshi to Size &amp; Register Your Project</h4>
+                      <p class="kseb-step-text">
+                        Once you verify capacity on KSEB's portal, come right back to our site:
+                      </p>
+                      <ul class="kseb-site-action-list">
+                        <li>
+                          <span class="action-icon">🧮</span>
+                          <div><strong>Calculate Exact System Size:</strong> Use our <a href="#calculator" class="kseb-inline-link">Solar Calculator</a> to determine your ideal capacity (e.g. 3 kW – 10 kW), roof area requirement, and PM Surya Ghar central subsidy.</div>
+                        </li>
+                        <li>
+                          <span class="action-icon">📋</span>
+                          <div><strong>Hand Over the Paperwork to Us:</strong> Fill out our <a href="#contact" class="kseb-inline-link">Enquiry Form</a> with your Consumer Number. Sooryavamshi's authorized engineers handle the formal KSEB Soura registration, onsite shadow audit, electrical inspection, and net-metering sync!</div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- Right Column: Portal Gateway & Assistance Card -->
+              <div class="feasibility-action-pane">
+                
+                <!-- 1. Official Gateway Box -->
+                <div class="kseb-gateway-card">
+                  <div class="kseb-gateway-header">
+                    <div class="kseb-emblem-badge">
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                    </div>
+                    <div>
+                      <div class="kseb-gateway-badge-text">Official Government Gateway</div>
+                      <div class="kseb-gateway-title">KSEB Renewable Energy Capacity Portal</div>
+                    </div>
+                  </div>
+
+                  <p class="kseb-gateway-desc">
+                    Direct access to the live distribution transformer (DTR) solar capacity database managed by Kerala State Electricity Board Ltd.
+                  </p>
+
+                  <div class="kseb-url-display">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                    <span>https://wss.kseb.in/selfservices/reCap</span>
+                  </div>
+
+                  <a href="https://wss.kseb.in/selfservices/reCap" target="_blank" rel="noopener noreferrer" class="btn-kseb-portal-cta" id="btnOpenKsebPortal">
+                    <span>Open KSEB Feasibility Portal (reCap)</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                  </a>
+
+                  <div class="kseb-redirect-notice">
+                    <span>🔒 Safe external redirect to official KSEBL Self-Services portal</span>
+                  </div>
+                </div>
+
+                <!-- 2. Bill Sample Reference Box -->
+                <div class="kseb-bill-guide-box">
+                  <div class="bill-guide-header">
+                    <span class="bill-icon">📄</span>
+                    <div>
+                      <h5 class="bill-guide-title">How to Locate Details on Your Bill</h5>
+                      <span class="bill-guide-sub">Printed KSEB Low Tension (LT) Bill</span>
+                    </div>
+                  </div>
+                  <div class="kseb-bill-mini-mockup">
+                    <div class="bill-mockup-top">KERALA STATE ELECTRICITY BOARD LTD.</div>
+                    <div class="bill-mockup-row">
+                      <span class="bill-mockup-label">CONSUMER NO:</span>
+                      <span class="bill-mockup-val highlight">1155 4820 9123 4</span>
+                    </div>
+                    <div class="bill-mockup-row">
+                      <span class="bill-mockup-label">ELECTRICAL SECTION:</span>
+                      <span class="bill-mockup-val">1155 - CHERTHALA SOUTH</span>
+                    </div>
+                  </div>
+                  <p class="bill-guide-tip">
+                    <strong>Tip:</strong> The first 4 digits of your Consumer Number represent your Electrical Section code.
+                  </p>
+                </div>
+
+                <!-- 3. What to do if capacity is low or needing help -->
+                <div class="kseb-help-card">
+                  <div class="help-card-header">
+                    <span class="help-icon">💡</span>
+                    <div>
+                      <h5 class="help-card-title">Transformer Showing Low or Zero Headroom?</h5>
+                      <p class="help-card-desc">Don't worry! Sooryavamshi has solutions to get your solar installed:</p>
+                    </div>
+                  </div>
+                  <ul class="help-solutions-list">
+                    <li>✓ <strong>DTR Augmentation:</strong> We petition KSEB for transformer capacity upgrades.</li>
+                    <li>✓ <strong>Zero-Export Limitation:</strong> Install solar for 100% self-consumption without grid injection limits.</li>
+                    <li>✓ <strong>Feeder Transfer:</strong> Shift connection to an adjacent feeder with surplus capacity.</li>
+                  </ul>
+                  <div class="help-card-actions">
+                    <a href="#calculator" class="btn btn-outline btn-sm" style="flex: 1; text-align: center;">
+                      <span>Calculate Plant Size</span>
+                    </a>
+                    <a href="#contact" class="btn btn-primary btn-sm" style="flex: 1; text-align: center;">
+                      <span>Get Free Assistance</span>
+                    </a>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         4. PRODUCTS & EQUIPMENT SECTION
+         ========================================================================= -->
+    <section class="section section-light" id="equipment">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+            PREMIUM ENGINEERING SPECIFICATIONS
+          </div>
+          <h2 class="section-title">Quality Equipment. Reliable Solar Performance.</h2>
+          <p class="section-subtitle">
+            We partner exclusively with India’s leading Tier-1 manufacturers and adhere to rigorous electrical safety codes to deliver 30+ years of uncompromised generation.
+          </p>
+        </div>
+
+        <div class="equipment-grid">
+          
+          <!-- 1. Solar Panels -->
+          <article class="equipment-card">
+            <div class="eq-icon-wrap">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="3" y1="15" x2="21" y2="15"></line><line x1="9" y1="3" x2="9" y2="21"></line><line x1="15" y1="3" x2="15" y2="21"></line></svg>
+            </div>
+            <div class="eq-category">Photovoltaic Modules</div>
+            <h3 class="eq-title">Tier-1 Solar Panels</h3>
+            <p class="eq-desc">High-density Mono PERC &amp; N-Type TOPCon bifacial glass-to-glass modules delivering peak yield in hot Indian climates.</p>
+            
+            <div class="eq-brands-chips">
+              <span class="eq-chip">Adani Solar</span>
+              <span class="eq-chip">Rayzon Solar</span>
+              <span class="eq-chip">Waaree</span>
+              <span class="eq-chip">Vikram Solar</span>
+            </div>
+
+            <ul class="eq-specs-list">
+              <li class="eq-spec-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span><strong>Wattage:</strong> 550 Wp – 590 Wp High Power Output</span>
+              </li>
+              <li class="eq-spec-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span><strong>Efficiency:</strong> Up to 22.8% Cell Conversion</span>
+              </li>
+              <li class="eq-spec-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span><strong>Warranty:</strong> 12-15 Yrs Product | 30 Yrs Linear Power</span>
+              </li>
+            </ul>
+
+            <div class="eq-expandable-content" id="panelSpecsContent">
+              <div style="font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.5; padding: 12px; background: var(--color-bg-light); border-radius: var(--radius-sm);">
+                <strong>Key Engineering Benefits:</strong>
+                <ul style="margin-left: 18px; margin-top: 6px;">
+                  <li>Bifacial gain captures up to 20% rear reflected sunlight</li>
+                  <li>Anti-reflective PID-free glass minimizes soiling degradation</li>
+                  <li>Certified wind load up to 2400 Pa and snow load up to 5400 Pa</li>
+                  <li>100% EL flash tested to guarantee zero internal cell micro-cracks</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="eq-card-footer">
+              <button type="button" class="eq-expand-btn" data-target="panelSpecsContent" aria-expanded="false">
+                <span>View Technical Details</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </button>
+            </div>
+          </article>
+
+          <!-- 2. Solar Inverters -->
+          <article class="equipment-card">
+            <div class="eq-icon-wrap">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line></svg>
+            </div>
+            <div class="eq-category">Power Conversion</div>
+            <h3 class="eq-title">Solar Inverters</h3>
+            <p class="eq-desc">Intelligent string and hybrid inverters with dual MPPT tracking and cloud monitoring for real-time generation insights.</p>
+            
+            <div class="eq-brands-chips">
+              <span class="eq-chip">Solis</span>
+              <span class="eq-chip">Growatt</span>
+              <span class="eq-chip">Sungrow</span>
+              <span class="eq-chip">Enphase Microinverters</span>
+            </div>
+
+            <ul class="eq-specs-list">
+              <li class="eq-spec-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span><strong>Capacity:</strong> 3 kW to 25 kW (Single &amp; 3-Phase)</span>
+              </li>
+              <li class="eq-spec-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span><strong>Efficiency:</strong> 98.4% Peak Conversion Efficiency</span>
+              </li>
+              <li class="eq-spec-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span><strong>Monitoring:</strong> Built-in Wi-Fi / 4G Real-Time Mobile App</span>
+              </li>
+            </ul>
+
+            <div class="eq-expandable-content" id="inverterSpecsContent">
+              <div style="font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.5; padding: 12px; background: var(--color-bg-light); border-radius: var(--radius-sm);">
+                <strong>Key Engineering Benefits:</strong>
+                <ul style="margin-left: 18px; margin-top: 6px;">
+                  <li>Dual MPPT tracks disparate roof orientations independently</li>
+                  <li>IP65 outdoor rated enclosure with natural convection cooling</li>
+                  <li>Fully compliant with CEA grid standards &amp; zero-export controls</li>
+                  <li>5–10 years manufacturer replacement warranty</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="eq-card-footer">
+              <button type="button" class="eq-expand-btn" data-target="inverterSpecsContent" aria-expanded="false">
+                <span>View Technical Details</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </button>
+            </div>
+          </article>
+
+          <!-- 3. Dedicated Card: Lightning & Surge Protection -->
+          <article class="equipment-card featured-protection">
+            <div class="eq-icon-wrap" style="background: var(--grad-solar); color: #FFFFFF;">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            </div>
+            <div class="eq-category" style="color: var(--color-secondary);">Dedicated Protection</div>
+            <h3 class="eq-title">Lightning &amp; Surge Protection</h3>
+            <p class="eq-desc">
+              Essential engineered defense: Rooftop solar systems naturally attract atmospheric electrical charge. We implement multi-stage suppression to safeguard your home.
+            </p>
+
+            <ul class="eq-specs-list">
+              <li class="eq-spec-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span><strong>Arrester:</strong> Early Streamer Emission (ESE) / Franklin Rod</span>
+              </li>
+              <li class="eq-spec-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span><strong>Surge Devices:</strong> Class B+C / Type 1+2 SPDs</span>
+              </li>
+              <li class="eq-spec-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span><strong>Grounding:</strong> 3-Pit Dedicated Chemical Earthing (&lt; 5Ω)</span>
+              </li>
+            </ul>
+
+            <div class="eq-expandable-content" id="protectionSpecsContent">
+              <div style="font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.5; padding: 12px; background: #FFF9F2; border-radius: var(--radius-sm); border: 1px solid rgba(245,130,32,0.2);">
+                <strong>Role in Household Electrical Safety:</strong>
+                <p style="margin: 6px 0 0; font-size: 0.82rem;">
+                  A single direct strike or nearby utility grid surge can instantly destroy unprotected inverters, smart TVs, refrigerators, and home wiring. Sooryavamshi installs dedicated earthing pits for:
+                </p>
+                <ul style="margin-left: 18px; margin-top: 4px;">
+                  <li>Pit 1: Lightning Arrester down-conductor</li>
+                  <li>Pit 2: Inverter AC/DC electronics chassis</li>
+                  <li>Pit 3: Solar PV module aluminum frame array</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="eq-card-footer">
+              <button type="button" class="eq-expand-btn" data-target="protectionSpecsContent" aria-expanded="false" style="color: var(--color-secondary);">
+                <span>View Protection Blueprint</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </button>
+            </div>
+          </article>
+
+          <!-- 4. Mounting Structure -->
+          <article class="equipment-card">
+            <div class="eq-icon-wrap">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+            </div>
+            <div class="eq-category">Mechanical Foundation</div>
+            <h3 class="eq-title">Mounting Structures</h3>
+            <p class="eq-desc">Structural durability designed for high wind resistance and zero water seepage on flat RCC terraces or sloped roofs.</p>
+
+            <ul class="eq-specs-list">
+              <li class="eq-spec-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span><strong>Material:</strong> Hot-Dip Galvanized Iron (HDGI &gt; 80μ) &amp; Aluminum</span>
+              </li>
+              <li class="eq-spec-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span><strong>Wind Rating:</strong> Certified to 150+ km/h cyclone resistance</span>
+              </li>
+              <li class="eq-spec-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span><strong>Roof Options:</strong> Flat RCC, Slanted Tile, Elevated Pergola</span>
+              </li>
+            </ul>
+
+            <div class="eq-expandable-content" id="structureSpecsContent">
+              <div style="font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.5; padding: 12px; background: var(--color-bg-light); border-radius: var(--radius-sm);">
+                <strong>Key Engineering Benefits:</strong>
+                <ul style="margin-left: 18px; margin-top: 6px;">
+                  <li>Pre-galvanized modular design eliminates onsite welding &amp; rusting</li>
+                  <li>EPDM chemical gasket waterproof anchoring prevents terrace seepage</li>
+                  <li>Elevated pergola designs preserve usable rooftop terrace space</li>
+                  <li>Stainless Steel SS304/SS316 anti-corrosive fasteners</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="eq-card-footer">
+              <button type="button" class="eq-expand-btn" data-target="structureSpecsContent" aria-expanded="false">
+                <span>View Technical Details</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </button>
+            </div>
+          </article>
+
+          <!-- 5. DC/AC Protection Units -->
+          <article class="equipment-card">
+            <div class="eq-icon-wrap">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><circle cx="15.5" cy="8.5" r="1.5"></circle><polyline points="7 14 10 17 17 10"></polyline></svg>
+            </div>
+            <div class="eq-category">Electrical Distribution</div>
+            <h3 class="eq-title">DCDB &amp; ACDB Switchgear</h3>
+            <p class="eq-desc">Industrial-grade distribution panels equipped with isolation switches, fuses, and miniature circuit breakers.</p>
+
+            <ul class="eq-specs-list">
+              <li class="eq-spec-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span><strong>Enclosure:</strong> IP65 Weatherproof UV-stabilized Polycarbonate</span>
+              </li>
+              <li class="eq-spec-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span><strong>Components:</strong> 1000V DC Fuses, DC Isolator, AC MCB/MCCB</span>
+              </li>
+              <li class="eq-spec-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span><strong>Switchgear:</strong> Schneider Electric / Havells certified</span>
+              </li>
+            </ul>
+
+            <div class="eq-expandable-content" id="switchgearSpecsContent">
+              <div style="font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.5; padding: 12px; background: var(--color-bg-light); border-radius: var(--radius-sm);">
+                <strong>Key Engineering Benefits:</strong>
+                <ul style="margin-left: 18px; margin-top: 6px;">
+                  <li>Instant manual isolation for safe maintenance and inspections</li>
+                  <li>Over-voltage, reverse polarity, and ground fault trip protection</li>
+                  <li>DISCOM net-metering compliant visible lockable rotary isolator</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="eq-card-footer">
+              <button type="button" class="eq-expand-btn" data-target="switchgearSpecsContent" aria-expanded="false">
+                <span>View Technical Details</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </button>
+            </div>
+          </article>
+
+          <!-- 6. Cables & Components -->
+          <article class="equipment-card">
+            <div class="eq-icon-wrap">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+            </div>
+            <div class="eq-category">Wiring &amp; Interconnects</div>
+            <h3 class="eq-title">UV Cables &amp; Hardware</h3>
+            <p class="eq-desc">Zero-compromise wiring using electron-beam cross-linked copper cables and genuine IP68 locking connectors.</p>
+
+            <ul class="eq-specs-list">
+              <li class="eq-spec-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span><strong>DC Cables:</strong> 4 / 6 sq. mm Tinned Copper, XLPO Insulated</span>
+              </li>
+              <li class="eq-spec-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span><strong>Connectors:</strong> Genuine Stäubli MC4 IP68 Rated</span>
+              </li>
+              <li class="eq-spec-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span><strong>Conduits:</strong> Heavy-duty UV-stabilized PVC / GI conduits</span>
+              </li>
+            </ul>
+
+            <div class="eq-expandable-content" id="cablesSpecsContent">
+              <div style="font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.5; padding: 12px; background: var(--color-bg-light); border-radius: var(--radius-sm);">
+                <strong>Key Engineering Benefits:</strong>
+                <ul style="margin-left: 18px; margin-top: 6px;">
+                  <li>Flame retardant, halogen-free, and UV-stabilized for 25+ years</li>
+                  <li>Strict sizing guarantees line voltage drop remains under 1.5%</li>
+                  <li>Click-lock IP68 connectors prevent moisture ingress and arching</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="eq-card-footer">
+              <button type="button" class="eq-expand-btn" data-target="cablesSpecsContent" aria-expanded="false">
+                <span>View Technical Details</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </button>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         5. OUR INSTALLATION PROCESS
+         ========================================================================= -->
+    <section class="section" id="process">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            7-STAGE ENGINEERING TIMELINE
+          </div>
+          <h2 class="section-title">Our Installation Process</h2>
+          <p class="section-subtitle">
+            From your very first bill consultation to grid net-meter synchronization and 30-year performance monitoring, we manage every step with certified technicians.
+          </p>
+        </div>
+
+        <div class="process-timeline">
+          <div class="process-grid">
+            
+            <div class="process-step-card">
+              <div class="process-number-circle">01</div>
+              <h4 class="process-step-title">Initial Consultation</h4>
+              <p class="process-step-desc">Discussion of your energy goals, backup needs, and current monthly electricity bills.</p>
+            </div>
+
+            <div class="process-step-card">
+              <div class="process-number-circle">02</div>
+              <h4 class="process-step-title">Consumption Analysis</h4>
+              <p class="process-step-desc">Audit of past 12-month DISCOM tariffs, connected load, and peak daytime energy profiles.</p>
+            </div>
+
+            <div class="process-step-card">
+              <div class="process-number-circle">03</div>
+              <h4 class="process-step-title">Site &amp; Shadow Audit</h4>
+              <p class="process-step-desc">Onsite 3D solar irradiance modeling, roof structural load test, and azimuth angle checks.</p>
+            </div>
+
+            <div class="process-step-card">
+              <div class="process-number-circle">04</div>
+              <h4 class="process-step-title">System CAD Design</h4>
+              <p class="process-step-desc">Custom electrical Single Line Diagram (SLD), string design, and DISCOM net-metering approvals.</p>
+            </div>
+
+            <div class="process-step-card">
+              <div class="process-number-circle">05</div>
+              <h4 class="process-step-title">Equipment Installation</h4>
+              <p class="process-step-desc">Galvanized structure mounting, panel alignment, 3-pit chemical earthing, and conduit cabling.</p>
+            </div>
+
+            <div class="process-step-card">
+              <div class="process-number-circle">06</div>
+              <h4 class="process-step-title">Testing &amp; Commissioning</h4>
+              <p class="process-step-desc">Megger insulation check, earth resistance verification (&lt;5Ω), DISCOM inspection, and net meter sync.</p>
+            </div>
+
+            <div class="process-step-card">
+              <div class="process-number-circle">07</div>
+              <h4 class="process-step-title">Handover &amp; Support</h4>
+              <p class="process-step-desc">Smartphone monitoring app activation, warranty documentation handover, and lifetime support.</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         6. OUR PROJECTS GALLERY & STATS
+         ========================================================================= -->
+    <section class="section section-light" id="projects">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+            PROVEN TRACK RECORD
+          </div>
+          <h2 class="section-title">Our Solar Projects</h2>
+          <p class="section-subtitle">
+            Explore a curated selection of residential and commercial rooftop solar installations commissioned across India.
+          </p>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="projects-filter-bar" role="tablist">
+          <button type="button" class="filter-btn active" data-filter="all">All Installations</button>
+          <button type="button" class="filter-btn" data-filter="residential">Residential</button>
+          <button type="button" class="filter-btn" data-filter="commercial">Commercial</button>
+          <button type="button" class="filter-btn" data-filter="rooftop">Rooftop Pergolas</button>
+          <button type="button" class="filter-btn" data-filter="other">Apartments / Societies</button>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="projects-grid" id="projectsGrid">
+          
+          <!-- Project 1 -->
+          <article class="project-card" data-id="proj-1" data-category="residential">
+            <div class="project-img-wrapper">
+              <img src="assets/images/project-villa.jpg" alt="5 kW On-Grid Elevated Rooftop Plant" loading="lazy">
+              <span class="project-badge">Residential Villa</span>
+              <span class="project-capacity-pill">5.4 kWp</span>
+            </div>
+            <div class="project-info-body">
+              <div class="project-location">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                Indiranagar, Bengaluru, Karnataka
+              </div>
+              <h3 class="project-title">5 kW On-Grid Elevated Rooftop Plant</h3>
+              <p class="project-desc-short">Installed on an elevated galvanized pergola structure, preserving 100% of the terrace garden while slashing 95% of electricity bills.</p>
+              <div class="project-card-footer">
+                <span class="project-savings-tag">₹60,000+ Annual Savings</span>
+                <span class="project-view-link">View Project Details &rarr;</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 2 -->
+          <article class="project-card" data-id="proj-2" data-category="residential">
+            <div class="project-img-wrapper">
+              <img src="assets/images/project-urban.jpg" alt="8 kW Hybrid Residential Solar System" loading="lazy">
+              <span class="project-badge">Independent Home</span>
+              <span class="project-capacity-pill">8.1 kWp</span>
+            </div>
+            <div class="project-info-body">
+              <div class="project-location">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                Banjara Hills, Hyderabad, Telangana
+              </div>
+              <h3 class="project-title">8 kW Hybrid Residential Solar System</h3>
+              <p class="project-desc-short">Custom hybrid rooftop solar installation with high-efficiency LiFePO4 battery backup for 24/7 continuous green power during outages.</p>
+              <div class="project-card-footer">
+                <span class="project-savings-tag">₹92,000+ Annual Savings</span>
+                <span class="project-view-link">View Project Details &rarr;</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 3 -->
+          <article class="project-card" data-id="proj-3" data-category="rooftop">
+            <div class="project-img-wrapper">
+              <img src="assets/images/hero.jpg" alt="3 kW Affordable Rooftop Solar Project" loading="lazy">
+              <span class="project-badge">Urban Rooftop</span>
+              <span class="project-capacity-pill">3.24 kWp</span>
+            </div>
+            <div class="project-info-body">
+              <div class="project-location">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                Kakkanad, Kochi, Kerala
+              </div>
+              <h3 class="project-title">3 kW Affordable Rooftop Solar Project</h3>
+              <p class="project-desc-short">Designed for optimal ROI under the PM Surya Ghar Muft Bijli Yojana with zero maintenance and an estimated 3.2-year payback period.</p>
+              <div class="project-card-footer">
+                <span class="project-savings-tag">₹34,000+ Annual Savings</span>
+                <span class="project-view-link">View Project Details &rarr;</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 4 -->
+          <article class="project-card" data-id="proj-4" data-category="commercial">
+            <div class="project-img-wrapper">
+              <img src="assets/images/project-commercial.jpg" alt="25 kW Commercial Campus Solar Plant" loading="lazy">
+              <span class="project-badge">Institutional Campus</span>
+              <span class="project-capacity-pill">25 kWp</span>
+            </div>
+            <div class="project-info-body">
+              <div class="project-location">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                Whitefield, Bengaluru, Karnataka
+              </div>
+              <h3 class="project-title">25 kW Commercial Campus Solar Plant</h3>
+              <p class="project-desc-short">Commercial institutional rooftop solar plant powering laboratories and facilities with high-voltage AC/DC protection.</p>
+              <div class="project-card-footer">
+                <span class="project-savings-tag">₹2,80,000+ Annual Savings</span>
+                <span class="project-view-link">View Project Details &rarr;</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 5 -->
+          <article class="project-card" data-id="proj-5" data-category="rooftop">
+            <div class="project-img-wrapper">
+              <img src="assets/images/project-villa.jpg" alt="10 kW Luxury Villa Solar Microgrid" loading="lazy">
+              <span class="project-badge">Luxury Estate</span>
+              <span class="project-capacity-pill">10.8 kWp</span>
+            </div>
+            <div class="project-info-body">
+              <div class="project-location">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                ECR, Chennai, Tamil Nadu
+              </div>
+              <h3 class="project-title">10 kW Luxury Villa Solar Microgrid</h3>
+              <p class="project-desc-short">Coastal corrosion-resistant solar installation featuring anodized aluminum fixtures and marine-grade SS316 fasteners.</p>
+              <div class="project-card-footer">
+                <span class="project-savings-tag">₹1,25,000+ Annual Savings</span>
+                <span class="project-view-link">View Project Details &rarr;</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 6 -->
+          <article class="project-card" data-id="proj-6" data-category="other">
+            <div class="project-img-wrapper">
+              <img src="assets/images/project-urban.jpg" alt="15 kW Multi-Dwelling Apartment Rooftop" loading="lazy">
+              <span class="project-badge">Apartment Society</span>
+              <span class="project-capacity-pill">15 kWp</span>
+            </div>
+            <div class="project-info-body">
+              <div class="project-location">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                Kothrud, Pune, Maharashtra
+              </div>
+              <h3 class="project-title">15 kW Apartment Common Area Solar</h3>
+              <p class="project-desc-short">Common-area solar supply powering lifts, water pumps, clubhouse, and society lighting, cutting maintenance dues by over 70%.</p>
+              <div class="project-card-footer">
+                <span class="project-savings-tag">₹1,90,000+ Annual Savings</span>
+                <span class="project-view-link">View Project Details &rarr;</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Prominent Statistic Section -->
+        <div class="stats-banner">
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-number" data-target="250" data-suffix="+">250+</div>
+              <div class="stat-label">Projects Completed</div>
+              <div class="stat-subtext">Residential &amp; Commercial Systems</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-number" data-target="2.8" data-decimal="true" data-suffix=" MW+">2.8 MW+</div>
+              <div class="stat-label">Total Solar Capacity Installed</div>
+              <div class="stat-subtext">Clean Renewable Energy Generated</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-number" data-target="350" data-suffix="+">350+</div>
+              <div class="stat-label">Homes &amp; Roofs Powered</div>
+              <div class="stat-subtext">Across Kerala &amp; South India</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-number" data-target="8" data-suffix="+ Years">8+ Years</div>
+              <div class="stat-label">Engineering Experience</div>
+              <div class="stat-subtext">Certified Installation Technicians</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         7. ABOUT SOORYAVAMSHI SOLAR PROJECTS LLP
+         ========================================================================= -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div>
+            <div class="section-tag">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              ABOUT SOORYAVAMSHI
+            </div>
+            <h2 class="section-title">Engineered Solar Solutions Built for Decades of Clean Power</h2>
+            <p class="lead">
+              Sooryavamshi Solar Projects LLP is a dedicated residential solar engineering and installation company committed to empowering Indian homeowners with clean, predictable electricity.
+            </p>
+            <p>
+              Unlike generic sales brokers or sub-contractors, we manage the entire lifecycle in-house—from initial shadow analysis and civil roof engineering to DISCOM liaisoning, testing, and 30-year performance monitoring.
+            </p>
+
+            <div class="about-features-list">
+              <div class="about-feature-box">
+                <div class="about-feature-title">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color: var(--color-secondary);"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+                  Residential Solar Expertise
+                </div>
+                <p class="about-feature-desc">Tailored rooftop solutions engineered specifically for Indian RCC terraces, tiled bungalows, and villas.</p>
+              </div>
+
+              <div class="about-feature-box">
+                <div class="about-feature-title">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color: var(--color-secondary);"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  End-to-End Installation
+                </div>
+                <p class="about-feature-desc">Single point of contact for DISCOM net metering, feasibility certificates, and subsidy filing.</p>
+              </div>
+
+              <div class="about-feature-box">
+                <div class="about-feature-title">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color: var(--color-secondary);"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                  Certified Tier-1 Equipment
+                </div>
+                <p class="about-feature-desc">Genuine Adani, Waaree, and Solis hardware backed by direct manufacturer linear warranties.</p>
+              </div>
+
+              <div class="about-feature-box">
+                <div class="about-feature-title">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color: var(--color-secondary);"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                  30-Year Generation Focus
+                </div>
+                <p class="about-feature-desc">Robust 3-pit earthing and heavy-gauge galvanizing engineered to protect your asset through extreme weather.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Brand Logo Feature Card -->
+          <div class="about-visual-card">
+            <div style="background: #FFFFFF; padding: 20px 24px; border-radius: var(--radius-lg); border: 1px solid rgba(255, 255, 255, 0.4); margin-bottom: 24px; text-align: center; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);">
+              <img src="assets/images/sooryavamshi-logo-clean.png" alt="Sooryavamshi Solar Projects LLP" style="max-height: 78px; width: auto; margin: 0 auto; display: block;">
+            </div>
+
+            <h3 style="font-size: 1.5rem; margin-bottom: 14px; color: #FFFFFF;">Our Engineering Commitment</h3>
+            <p style="font-size: 0.95rem; line-height: 1.6; color: #CBD5E1; margin-bottom: 20px;">
+              “We treat every rooftop as our own home. Solar is a 30-year infrastructure investment; that means zero compromise on lightning surge arresters, UV-rated cabling, and precision alignment.”
+            </p>
+
+            <div style="border-top: 1px solid rgba(255, 255, 255, 0.15); padding-top: 18px; display: flex; align-items: center; justify-content: space-between;">
+              <div>
+                <div style="font-family: var(--font-heading); font-weight: 700; color: var(--color-accent); font-size: 1rem;">Sooryavamshi Solar Projects LLP</div>
+                <div style="font-size: 0.8rem; color: #94A3B8;">Certified Solar EPC Engineers</div>
+              </div>
+              <a href="#contact" class="btn btn-primary" style="padding: 10px 18px; font-size: 0.85rem;">Get in Touch</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         8. CONTACT & SITE ASSESSMENT SECTION
+         ========================================================================= -->
+    <section class="section section-light" id="contact">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            GET IN TOUCH
+          </div>
+          <h2 class="section-title">Ready to Switch Your Home to Solar?</h2>
+          <p class="section-subtitle">
+            Calculate your requirement or contact our team for a personalized solar solution.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <!-- Contact Info & Quick Channels -->
+          <div class="contact-card-info">
+            <h3 style="font-size: 1.45rem; color: var(--color-primary); margin-bottom: 8px;">Direct Support &amp; Office</h3>
+            <p style="font-size: 0.95rem; color: var(--color-text-muted); margin-bottom: 24px;">
+              Reach out to our certified solar specialists for technical feasibility inquiries, government subsidy guidance, or onsite shadow assessments.
+            </p>
+
+            <div class="contact-direct-channels">
+              <a href="tel:9061626868" class="contact-channel-item" id="contactCallLink">
+                <div class="channel-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                </div>
+                <div>
+                  <div class="channel-label">Call Our Engineers</div>
+                  <div class="channel-val">+91 9061626868</div>
+                </div>
+              </a>
+
+              <a href="mailto:suryavamshisolarprojects@gmail.com" class="contact-channel-item" id="contactEmailLink">
+                <div class="channel-icon" style="background: var(--grad-navy);">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                </div>
+                <div>
+                  <div class="channel-label">Official Email</div>
+                  <div class="channel-val" style="font-size: 0.98rem; word-break: break-all;">suryavamshisolarprojects@gmail.com</div>
+                </div>
+              </a>
+
+              <div class="contact-channel-item" style="cursor: default;">
+                <div class="channel-icon" style="background: #218739;">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                </div>
+                <div>
+                  <div class="channel-label">Registered Office Location</div>
+                  <div style="font-size: 0.95rem; color: var(--color-text-body); font-weight: 600;">
+                    Sooryavamshi Solar Projects LLP<br>
+                    Cherthala, Alappuzha, Kerala
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Styled Location Map Frame -->
+            <div style="border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--color-border-medium); margin-top: 24px; position: relative;">
+              <div style="background: #073B6B; color: #FFFFFF; padding: 10px 16px; font-family: var(--font-heading); font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; justify-content: space-between;">
+                <span>📍 Operational Base: Cherthala, Alappuzha, Kerala</span>
+                <span style="color: var(--color-accent); font-size: 0.75rem;">Fast Onsite Visit</span>
+              </div>
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62923.63945415783!2d76.29177145892556!3d9.684126746816407!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b087c53d1000001%3A0x6479f64db2ef8e72!2sCherthala%2C%20Kerala!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+                width="100%" 
+                height="180" 
+                style="border:0; display: block;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Sooryavamshi Solar Service Location Map - Cherthala, Alappuzha, Kerala">
+              </iframe>
+            </div>
+          </div>
+
+          <!-- Contact / Site Assessment Form -->
+          <div class="contact-form-wrapper">
+            <h3 style="font-size: 1.45rem; color: var(--color-primary); margin-bottom: 6px;">Request Free Site Assessment</h3>
+            <p style="font-size: 0.9rem; color: var(--color-text-muted); margin-bottom: 24px;">
+              Fill in your details below. Our solar engineer will contact you to perform shadow analysis and custom system sizing.
+            </p>
+
+            <form id="consultationForm">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="contactName" class="form-label">Full Name *</label>
+                  <input type="text" id="contactName" class="form-control" placeholder="e.g. Ramesh Kumar" required>
+                </div>
+                <div class="form-group">
+                  <label for="contactPhone" class="form-label">Phone Number *</label>
+                  <input type="tel" id="contactPhone" class="form-control" placeholder="e.g. 9876543210" pattern="[0-9]{10}" title="Please enter a valid 10-digit mobile number" required>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="contactEmail" class="form-label">Email Address *</label>
+                  <input type="email" id="contactEmail" class="form-control" placeholder="e.g. ramesh@example.com" required>
+                </div>
+                <div class="form-group">
+                  <label for="contactPin" class="form-label">PIN Code</label>
+                  <input type="text" id="contactPin" class="form-control" placeholder="e.g. 688524" maxlength="6">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="contactLocation" class="form-label">City / Location *</label>
+                  <input type="text" id="contactLocation" class="form-control" placeholder="e.g. Cherthala, Alappuzha, Kochi" required>
+                </div>
+                <div class="form-group">
+                  <label for="contactUnits" class="form-label">Monthly Consumption (Units / kWh)</label>
+                  <input type="number" id="contactUnits" class="form-control" placeholder="e.g. 400 (or from calculator)">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="contactKsebNo" class="form-label">
+                  <span>KSEB 13-Digit Consumer Number (Optional)</span>
+                  <span style="font-size: 0.74rem; color: var(--color-primary); font-weight: 500;">For Direct KSEB DTR Sanction Verification</span>
+                </label>
+                <input type="text" id="contactKsebNo" class="form-control" placeholder="e.g. 1155482091234" maxlength="13">
+              </div>
+
+              <div class="form-group">
+                <label for="contactMessage" class="form-label">Message / Rooftop Details</label>
+                <textarea id="contactMessage" class="form-control" rows="4" placeholder="Tell us about your roof type (Flat RCC terrace, tiled, shed), sanctioned load, or preferred brand..."></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;" id="submitFormBtn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                <span>Request Consultation</span>
+              </button>
+            </form>
+
+            <div class="form-submit-success" id="formSuccessMessage">
+              <!-- Rendered via app.js on submit -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================================
+       9. FOOTER (DARK NAVY)
+       ========================================================================= -->
+  <footer class="footer-dark">
+    <div class="container">
+      <div class="footer-grid">
+        
+        <!-- Col 1: Brand & Bio -->
+        <div>
+          <img src="assets/images/sooryavamshi-logo-white-text.png" alt="Sooryavamshi Solar Projects LLP" class="footer-brand-logo">
+          <p class="footer-about-text">
+            Sooryavamshi Solar Projects LLP is an engineering-driven residential and commercial solar installer in India. We combine Tier-1 photovoltaic technology with precision lightning protection and certified grid net-metering.
+          </p>
+          <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, 0.08); padding: 6px 14px; border-radius: var(--radius-full); font-size: 0.8rem; color: var(--color-accent); border: 1px solid rgba(253, 186, 45, 0.25);">
+            <span>⚡ PM Surya Ghar Muft Bijli Yojana Approved Installer</span>
+          </div>
+        </div>
+
+        <!-- Col 2: Quick Links -->
+        <div>
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul class="footer-links-list">
+            <li><a href="#home" class="footer-link">Home</a></li>
+            <li><a href="#calculator" class="footer-link">Solar Calculator</a></li>
+            <li><a href="#equipment" class="footer-link">Products &amp; Equipment</a></li>
+            <li><a href="#process" class="footer-link">Installation Process</a></li>
+            <li><a href="#projects" class="footer-link">Our Solar Projects</a></li>
+            <li><a href="#about" class="footer-link">About Us</a></li>
+            <li><a href="#contact" class="footer-link">Contact &amp; Site Visit</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Products & Equipment -->
+        <div>
+          <h4 class="footer-heading">Solar Equipment</h4>
+          <ul class="footer-links-list">
+            <li><a href="#equipment" class="footer-link">Tier-1 Bifacial Solar Panels</a></li>
+            <li><a href="#equipment" class="footer-link">Adani, Waaree &amp; Vikram Solar</a></li>
+            <li><a href="#equipment" class="footer-link">Dual-MPPT Solar Inverters</a></li>
+            <li><a href="#equipment" class="footer-link">Lightning &amp; Surge Protection</a></li>
+            <li><a href="#equipment" class="footer-link">Hot-Dip Galvanized Structures</a></li>
+            <li><a href="#equipment" class="footer-link">DCDB / ACDB Distribution</a></li>
+            <li><a href="#equipment" class="footer-link">Chemical Earthing &amp; SPDs</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Contact & Social -->
+        <div>
+          <h4 class="footer-heading">Get in Touch</h4>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            <div>
+              <div style="font-size: 0.78rem; color: #94A3B8;">Phone Helpline</div>
+              <a href="tel:9061626868" style="font-family: var(--font-heading); font-weight: 700; color: #FFFFFF;">+91 9061626868</a>
+            </div>
+          </div>
+
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            <div>
+              <div style="font-size: 0.78rem; color: #94A3B8;">Email Inquiry</div>
+              <a href="mailto:suryavamshisolarprojects@gmail.com" style="color: #CBD5E1; word-break: break-all;">suryavamshisolarprojects@gmail.com</a>
+            </div>
+          </div>
+
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <div>
+              <div style="font-size: 0.78rem; color: #94A3B8;">Registered Office</div>
+              <span style="color: #CBD5E1;">Cherthala, Alappuzha, Kerala</span>
+            </div>
+          </div>
+
+          <!-- Social Links -->
+          <div class="footer-social-row">
+            <a href="https://wa.me/919061626868" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="WhatsApp" title="Chat on WhatsApp">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+            </a>
+            <a href="#contact" class="footer-social-btn" aria-label="LinkedIn" title="LinkedIn Profile">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            </a>
+            <a href="#contact" class="footer-social-btn" aria-label="Instagram" title="Instagram Profile">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
+            <a href="#contact" class="footer-social-btn" aria-label="Facebook" title="Facebook Page">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="footer-bottom-bar">
+        <div>
+          &copy; 2026 <strong>Sooryavamshi Solar Projects LLP</strong>. All rights reserved. Registered Indian LLP.
+        </div>
+        <div>
+          Designed for Clean Energy &bull; Built with Engineering Precision &bull; 30 Years Performance Assurance
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       10. STICKY MOBILE BOTTOM CTA BAR
+       ========================================================================= -->
+  <div class="mobile-sticky-bar" aria-label="Mobile Quick Conversion Bar">
+    <a href="#calculator" class="btn btn-primary" id="mobileStickyCalBtn">
+      ⚡ Calculate Solar
+    </a>
+    <a href="tel:9061626868" class="btn btn-navy" id="mobileStickyCallBtn">
+      📞 Call: 9061626868
+    </a>
+  </div>
+
+  <!-- =========================================================================
+       11. PROJECT DETAIL MODAL DIALOG
+       ========================================================================= -->
+  <div class="modal-overlay" id="projectModalOverlay" role="dialog" aria-modal="true" aria-labelledby="projectModalHeading">
+    <div class="modal-card">
+      <button type="button" class="modal-close-btn" id="projectModalCloseBtn" aria-label="Close modal dialog">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      <div id="projectModalContent">
+        <!-- Injected dynamically via projects.js -->
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Scripts -->
+  <script src="js/config.js"></script>
+  <script src="js/calculator.js"></script>
+  <script src="js/feasibility.js"></script>
+  <script src="js/equipment.js"></script>
+  <script src="js/projects.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>

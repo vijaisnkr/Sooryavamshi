@@ -1,0 +1,562 @@
+/* ==========================================================================
+   SOORYAVAMSHI SOLAR PROJECTS LLP - SOLAR CALCULATOR COMPONENT
+   ========================================================================== */
+
+.calculator-section {
+  position: relative;
+  padding: 96px 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(253, 186, 45, 0.18) 0%, rgba(244, 248, 251, 0.95) 75%);
+  border-top: 1px solid var(--color-border-light);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.calc-container-wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.calc-master-card {
+  background: #FFFFFF;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  border: 1.5px solid rgba(245, 130, 32, 0.25);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Card Header Ambient Glow Bar */
+.calc-master-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(90deg, #073B6B 0%, #F58220 50%, #FDBA2D 100%);
+}
+
+.calc-grid-layout {
+  display: grid;
+  grid-template-columns: 1.05fr 1.2fr;
+  min-height: 560px;
+}
+
+/* Left Pane: Inputs & Configurations */
+.calc-input-pane {
+  padding: 44px 38px;
+  border-right: 1px solid var(--color-border-light);
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+}
+
+.calc-pane-title {
+  font-size: 1.4rem;
+  color: var(--color-primary);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.calc-pane-title svg {
+  color: var(--color-secondary);
+}
+
+.calc-pane-sub {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  margin-bottom: 28px;
+}
+
+/* Input Type Tabs */
+.calc-input-tabs {
+  display: flex;
+  background: var(--color-bg-light);
+  padding: 4px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 24px;
+  border: 1px solid var(--color-border-light);
+}
+
+.calc-tab-btn {
+  flex: 1;
+  padding: 10px 14px;
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+  font-weight: 600;
+  border: none;
+  background: transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  border-radius: var(--radius-xs);
+  transition: all var(--transition-fast);
+  text-align: center;
+}
+
+.calc-tab-btn.active {
+  background: #FFFFFF;
+  color: var(--color-primary);
+  box-shadow: var(--shadow-xs);
+}
+
+/* Quick Consumption Presets */
+.preset-pills-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+  margin-bottom: 8px;
+}
+
+.preset-pills-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.preset-pill {
+  background: var(--color-bg-light);
+  border: 1px solid var(--color-border-medium);
+  color: var(--color-text-dark);
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.preset-pill:hover {
+  border-color: var(--color-secondary);
+  color: var(--color-secondary);
+}
+
+.preset-pill.active {
+  background: var(--grad-solar-soft);
+  border-color: var(--color-secondary);
+  color: var(--color-secondary);
+  font-weight: 700;
+}
+
+/* Range Slider & Number Input Sync */
+.calc-field-group {
+  margin-bottom: 24px;
+}
+
+.calc-field-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.calc-field-label {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-text-dark);
+}
+
+.calc-field-display {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--color-bg-light);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--color-border-medium);
+}
+
+.calc-field-display input {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  border: none;
+  background: transparent;
+  width: 90px;
+  text-align: right;
+  outline: none;
+}
+
+.calc-field-display .unit-tag {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-secondary);
+}
+
+/* Custom Styled Range Slider */
+.calc-slider-wrap {
+  position: relative;
+  margin: 12px 0 6px;
+}
+
+.calc-range-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  background: #E2EBF2;
+  outline: none;
+  cursor: pointer;
+}
+
+.calc-range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--grad-solar);
+  box-shadow: 0 2px 10px rgba(245, 130, 32, 0.5);
+  cursor: pointer;
+  border: 3px solid #FFFFFF;
+  transition: transform var(--transition-fast);
+}
+
+.calc-range-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.18);
+}
+
+.slider-ticks-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  margin-top: 6px;
+}
+
+/* Location Selection */
+.location-select-wrap {
+  margin-bottom: 28px;
+}
+
+.location-select-wrap select {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--color-border-medium);
+  background: #FFFFFF;
+  color: var(--color-text-dark);
+  font-weight: 500;
+  outline: none;
+  cursor: pointer;
+  transition: border-color var(--transition-fast);
+}
+
+.location-select-wrap select:focus {
+  border-color: var(--color-secondary);
+}
+
+.calc-submit-btn {
+  width: 100%;
+  padding: 16px;
+  font-size: 1.05rem;
+  margin-top: auto;
+}
+
+/* Right Pane: Live Calculated Results */
+.calc-results-pane {
+  padding: 44px 38px;
+  background: linear-gradient(180deg, #F8FAFD 0%, #EFF4F9 100%);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Hero Recommended Capacity Badge */
+.calc-hero-badge-wrap {
+  background: #FFFFFF;
+  border-radius: var(--radius-lg);
+  padding: 26px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border-light);
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.calc-hero-badge-wrap::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 160px;
+  height: 100%;
+  background: radial-gradient(circle at 100% 50%, rgba(253, 186, 45, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Gauge / Progress Ring */
+.calc-gauge-circle {
+  width: 100px;
+  height: 100px;
+  flex-shrink: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calc-gauge-svg {
+  transform: rotate(-90deg);
+  width: 100%;
+  height: 100%;
+}
+
+.calc-gauge-bg {
+  fill: none;
+  stroke: #E2EBF2;
+  stroke-width: 8;
+}
+
+.calc-gauge-fill {
+  fill: none;
+  stroke: url(#solarGradientGauge);
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-dasharray: 264;
+  stroke-dashoffset: 60;
+  transition: stroke-dashoffset 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.calc-gauge-icon {
+  position: absolute;
+  color: var(--color-secondary);
+}
+
+.calc-hero-info {
+  flex-grow: 1;
+}
+
+.calc-hero-tag {
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+}
+
+.calc-hero-val {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.2vw, 2.7rem);
+  font-weight: 800;
+  color: var(--color-primary);
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+
+.calc-hero-sub {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+/* 6-Card Metrics Grid */
+.calc-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.calc-metric-box {
+  background: #FFFFFF;
+  border-radius: var(--radius-md);
+  padding: 16px;
+  border: 1px solid var(--color-border-light);
+  box-shadow: var(--shadow-xs);
+  display: flex;
+  flex-direction: column;
+}
+
+.calc-metric-box:hover {
+  border-color: var(--color-secondary);
+}
+
+.calc-metric-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--color-bg-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+  margin-bottom: 10px;
+}
+
+.calc-metric-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.calc-metric-label {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  line-height: 1.25;
+  margin-bottom: 6px;
+}
+
+.calc-metric-val {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  margin-top: auto;
+}
+
+.calc-metric-val.green-text {
+  color: var(--color-success);
+}
+
+/* Dynamic Solar Panel Visualizer */
+.calc-panel-visualizer-box {
+  background: #FFFFFF;
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  border: 1px solid var(--color-border-light);
+  margin-bottom: 24px;
+}
+
+.visualizer-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.visualizer-title {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.visualizer-count-tag {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-secondary);
+  background: var(--grad-solar-soft);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+
+.solar-panel-icons-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-height: 85px;
+  overflow-y: auto;
+  padding: 4px 2px;
+}
+
+.mini-panel-icon {
+  width: 28px;
+  height: 40px;
+  background: #0B3A64;
+  border-radius: 3px;
+  border: 1px solid #38BDF8;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 2px;
+  transition: transform var(--transition-fast);
+}
+
+.mini-panel-icon:hover {
+  transform: scale(1.15);
+  background: #0284C7;
+}
+
+.mini-panel-cell {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 1px;
+}
+
+/* Formula Breakdown Collapsible */
+.calc-formula-accordion {
+  margin-bottom: 20px;
+}
+
+.calc-formula-toggle {
+  background: transparent;
+  border: none;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.calc-formula-toggle:hover {
+  color: var(--color-secondary);
+}
+
+.calc-formula-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 320ms ease;
+  background: #FFFFFF;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border-light);
+  margin-top: 8px;
+}
+
+.calc-formula-content.expanded {
+  max-height: 280px;
+  padding: 16px;
+}
+
+.formula-step-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  padding: 6px 0;
+  border-bottom: 1px dashed var(--color-border-light);
+}
+
+.formula-step-row:last-child {
+  border-bottom: none;
+}
+
+/* Disclaimer & Assessment CTA */
+.calc-disclaimer-box {
+  background: rgba(245, 130, 32, 0.08);
+  border-left: 3px solid var(--color-secondary);
+  padding: 12px 16px;
+  border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+  margin-bottom: 24px;
+}
+
+.calc-disclaimer-box p {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  line-height: 1.45;
+  margin: 0;
+}
+
+.calc-action-row {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
