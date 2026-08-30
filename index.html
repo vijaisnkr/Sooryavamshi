@@ -29,6 +29,9 @@
   <link rel="stylesheet" href="css/calculator.css">
   <link rel="stylesheet" href="css/feasibility.css">
   <link rel="stylesheet" href="css/responsive.css">
+  
+  <!-- Supabase JS Client Library -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
@@ -1361,62 +1364,67 @@
               Fill in your details below. Our solar engineer will contact you to perform shadow analysis and custom system sizing.
             </p>
 
-            <form id="consultationForm">
+            <form id="consultationForm" novalidate>
+              <!-- Anti-Spam Honeypot (Hidden from human visitors) -->
+              <div style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;" aria-hidden="true">
+                <label for="contactHoneypot">Leave this field blank</label>
+                <input type="text" name="b_consultation_hp" id="contactHoneypot" tabindex="-1" autocomplete="off">
+              </div>
+
               <div class="form-row">
                 <div class="form-group">
                   <label for="contactName" class="form-label">Full Name *</label>
-                  <input type="text" id="contactName" class="form-control" placeholder="e.g. Ramesh Kumar" required>
+                  <input type="text" id="contactName" class="form-control" placeholder="e.g. Ramesh Kumar" required autocomplete="name">
                 </div>
                 <div class="form-group">
                   <label for="contactPhone" class="form-label">Phone Number *</label>
-                  <input type="tel" id="contactPhone" class="form-control" placeholder="e.g. 9876543210" pattern="[0-9]{10}" title="Please enter a valid 10-digit mobile number" required>
+                  <input type="tel" id="contactPhone" class="form-control" placeholder="e.g. 9876543210" required autocomplete="tel">
                 </div>
               </div>
 
               <div class="form-row">
                 <div class="form-group">
-                  <label for="contactEmail" class="form-label">Email Address *</label>
-                  <input type="email" id="contactEmail" class="form-control" placeholder="e.g. ramesh@example.com" required>
+                  <label for="contactEmail" class="form-label">Email Address (Optional)</label>
+                  <input type="email" id="contactEmail" class="form-control" placeholder="e.g. ramesh@example.com" autocomplete="email">
                 </div>
                 <div class="form-group">
-                  <label for="contactPin" class="form-label">PIN Code</label>
-                  <input type="text" id="contactPin" class="form-control" placeholder="e.g. 688524" maxlength="6">
+                  <label for="contactPin" class="form-label">PIN Code (Optional)</label>
+                  <input type="text" id="contactPin" class="form-control" placeholder="e.g. 688527" maxlength="6" autocomplete="postal-code">
                 </div>
               </div>
 
               <div class="form-row">
                 <div class="form-group">
                   <label for="contactLocation" class="form-label">City / Location *</label>
-                  <input type="text" id="contactLocation" class="form-control" placeholder="e.g. Cherthala, Alappuzha, Kochi" required>
+                  <input type="text" id="contactLocation" class="form-control" placeholder="e.g. Cherthala, Kochi, Alappuzha" required>
                 </div>
                 <div class="form-group">
-                  <label for="contactUnits" class="form-label">Monthly Consumption (Units / kWh)</label>
-                  <input type="number" id="contactUnits" class="form-control" placeholder="e.g. 400 (or from calculator)">
+                  <label for="contactUnits" class="form-label">Monthly Consumption (Units / kWh) *</label>
+                  <input type="number" id="contactUnits" class="form-control" placeholder="e.g. 400" min="1" required>
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="contactKsebNo" class="form-label">
                   <span>KSEB 13-Digit Consumer Number (Optional)</span>
-                  <span style="font-size: 0.74rem; color: var(--color-primary); font-weight: 500;">For Direct KSEB DTR Sanction Verification</span>
+                  <span style="font-size: 0.74rem; color: var(--color-primary); font-weight: 500;">Direct KSEB DTR Sanction Verification</span>
                 </label>
                 <input type="text" id="contactKsebNo" class="form-control" placeholder="e.g. 1155482091234" maxlength="13">
               </div>
 
               <div class="form-group">
-                <label for="contactMessage" class="form-label">Message / Rooftop Details</label>
+                <label for="contactMessage" class="form-label">Message / Rooftop Details (Optional)</label>
                 <textarea id="contactMessage" class="form-control" rows="4" placeholder="Tell us about your roof type (Flat RCC terrace, tiled, shed), sanctioned load, or preferred brand..."></textarea>
               </div>
 
-              <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;" id="submitFormBtn">
+              <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; letter-spacing: 0.05em; font-weight: 700;" id="submitFormBtn">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-                <span>Request Consultation</span>
+                <span>REQUEST CONSULTATION</span>
               </button>
             </form>
 
-            <div class="form-submit-success" id="formSuccessMessage">
-              <!-- Rendered via app.js on submit -->
-            </div>
+            <div class="form-submit-success" id="formSuccessMessage" style="display: none;"></div>
+            <div class="form-submit-error" id="formErrorMessage" style="display: none;"></div>
           </div>
         </div>
       </div>
@@ -1558,10 +1566,13 @@
 
   <!-- Scripts -->
   <script src="js/config.js"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/supabase-client.js"></script>
   <script src="js/calculator.js"></script>
   <script src="js/feasibility.js"></script>
   <script src="js/equipment.js"></script>
   <script src="js/projects.js"></script>
+  <script src="js/contact-form.js"></script>
   <script src="js/app.js"></script>
 
 </body>

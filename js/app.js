@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', function() {
   initNavigation();
   initMobileDrawer();
   initStatsCounters();
-  initContactForm();
   initSmoothScroll();
 });
 
@@ -134,62 +133,7 @@ function initStatsCounters() {
   }
 }
 
-/**
- * 4. Contact & Consultation Form
- */
-function initContactForm() {
-  const form = document.getElementById('consultationForm');
-  const successBox = document.getElementById('formSuccessMessage');
 
-  if (!form || !successBox) return;
-
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    const submitBtn = form.querySelector('button[type="submit"]');
-    const originalText = submitBtn.innerHTML;
-
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = `
-      <svg class="spinner" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation: spin 1s linear infinite;">
-        <circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle>
-        <path d="M12 2a10 10 0 0 1 10 10"></path>
-      </svg>
-      Processing Request...
-    `;
-
-    // Simulate reliable CRM processing
-    setTimeout(() => {
-      const name = document.getElementById('contactName')?.value || 'Valued Customer';
-      const phone = document.getElementById('contactPhone')?.value || '';
-      const location = document.getElementById('contactLocation')?.value || '';
-      const pin = document.getElementById('contactPin')?.value || '';
-      const ksebNo = document.getElementById('contactKsebNo')?.value || '';
-      const units = document.getElementById('contactUnits')?.value || 'N/A';
-      const refId = `SS-${Math.floor(100000 + Math.random() * 900000)}`;
-
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = originalText;
-      form.reset();
-
-      const locSummary = [location, pin ? `PIN: ${pin}` : '', ksebNo ? `KSEB No: ${ksebNo}` : ''].filter(Boolean).join(' | ');
-
-      successBox.style.display = 'block';
-      successBox.innerHTML = `
-        <div style="font-size: 2.2rem; margin-bottom: 8px;">☀️</div>
-        <h4 style="color: var(--color-success); font-size: 1.25rem; margin-bottom: 6px;">Site Assessment Request Received!</h4>
-        <p style="font-size: 0.95rem; margin-bottom: 12px; color: var(--color-text-body);">
-          Thank you, <strong>${name}</strong>. Our residential solar engineer will review your power profile (${units} units/mo${locSummary ? ` for <em>${locSummary}</em>` : ''}) and coordinate KSEB section verification. We will call you at <strong>${phone}</strong> within <strong>4 working hours</strong>.
-        </p>
-        <div style="font-family: var(--font-heading); font-size: 0.85rem; background: #FFFFFF; display: inline-block; padding: 6px 14px; border-radius: var(--radius-full); border: 1px dashed var(--color-success); color: var(--color-primary); font-weight: 700;">
-          Reference Ticket: #${refId}
-        </div>
-      `;
-
-      successBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }, 1000);
-  });
-}
 
 /**
  * 5. Smooth Anchor Scrolling
