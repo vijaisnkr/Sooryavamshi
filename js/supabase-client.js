@@ -113,13 +113,25 @@ window.SooryavamshiSupabase = (function() {
    * @returns {Promise<{data: Array, error?: string}>}
    */
   /**
-   * Fetches enquiries using native fetch
+   * Fetches enquiries using native fetch (with user session token when logged in)
    * 
    * @param {Object} [options]
    * @returns {Promise<{data: Array, error?: string}>}
    */
   async function getEnquiries(options = {}) {
     const cfg = SOORYAVAMSHI_SUPABASE_CONFIG.getConfig();
+    let authHeader = `Bearer ${cfg.anonKey}`;
+
+    const client = getClient();
+    if (client && client.auth) {
+      try {
+        const { data: { session } } = await client.auth.getSession();
+        if (session && session.access_token) {
+          authHeader = `Bearer ${session.access_token}`;
+        }
+      } catch (e) {}
+    }
+
     try {
       const endpoint = `${cfg.url}/rest/v1/${cfg.tableName}?select=*&order=created_at.desc`;
       
@@ -127,7 +139,8 @@ window.SooryavamshiSupabase = (function() {
         method: "GET",
         headers: {
           "apikey": cfg.anonKey,
-          "Authorization": `Bearer ${cfg.anonKey}`
+          "Authorization": authHeader,
+          "Cache-Control": "no-cache"
         }
       });
 
@@ -153,13 +166,25 @@ window.SooryavamshiSupabase = (function() {
     }
 
     const cfg = SOORYAVAMSHI_SUPABASE_CONFIG.getConfig();
+    let authHeader = `Bearer ${cfg.anonKey}`;
+
+    const client = getClient();
+    if (client && client.auth) {
+      try {
+        const { data: { session } } = await client.auth.getSession();
+        if (session && session.access_token) {
+          authHeader = `Bearer ${session.access_token}`;
+        }
+      } catch (e) {}
+    }
+
     try {
       const endpoint = `${cfg.url}/rest/v1/${cfg.tableName}?id=eq.${encodeURIComponent(id)}`;
       const response = await fetch(endpoint, {
         method: "PATCH",
         headers: {
           "apikey": cfg.anonKey,
-          "Authorization": `Bearer ${cfg.anonKey}`,
+          "Authorization": authHeader,
           "Content-Type": "application/json"
         },
         body: JSON.stringify({ status: newStatus })
