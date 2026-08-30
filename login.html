@@ -466,45 +466,10 @@
       </form>
 
       <div class="login-footer-info">
-        <span>Protected Admin System</span>
-        <button type="button" class="config-trigger-btn" id="openConfigModalBtn">
-          <span class="material-symbols-outlined" style="font-size: 1rem;">settings</span>
-          <span>Supabase Setup</span>
-        </button>
+        <span>🔒 Protected Staff System &bull; Sooryavamshi Solar Projects</span>
       </div>
     </div>
   </main>
-
-  <!-- Supabase Credentials Setup Modal -->
-  <div class="config-modal-backdrop" id="configModal">
-    <div class="config-modal-card">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-        <h3 style="margin: 0; font-family: var(--font-heading); color: #073B6B; font-size: 1.2rem;">Supabase Connection Setup</h3>
-        <button type="button" id="closeConfigModalBtn" style="background: none; border: none; font-size: 1.4rem; cursor: pointer; color: #64748B;">&times;</button>
-      </div>
-
-      <p style="font-size: 0.88rem; color: #475569; line-height: 1.5; margin-bottom: 20px;">
-        Configure your Supabase Project URL and Anon (Public) Key to connect the admin portal to your live database.
-      </p>
-
-      <form id="configForm">
-        <div class="form-group">
-          <label class="form-label">Supabase Project URL</label>
-          <input type="url" id="modalSupabaseUrl" class="form-input" style="padding-left: 14px;" placeholder="https://xyzcompany.supabase.co" required>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Supabase Anon (Public) Key</label>
-          <input type="text" id="modalSupabaseKey" class="form-input" style="padding-left: 14px;" placeholder="eyJhbGciOiJIUzI1NiIsIn..." required>
-        </div>
-
-        <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 24px;">
-          <button type="button" class="back-to-site" id="cancelConfigBtn" style="background: #F1F5F9; color: #475569; border-color: #CBD5E1;">Cancel</button>
-          <button type="submit" class="btn-submit" style="width: auto; padding: 10px 20px;">Save &amp; Connect</button>
-        </div>
-      </form>
-    </div>
-  </div>
 
   <!-- Scripts -->
   <script src="js/supabase-config.js?v=2.2"></script>

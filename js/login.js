@@ -8,7 +8,6 @@
 
   async function initLogin() {
     setupPasswordToggle();
-    setupConfigModal();
     setupLoginForm();
     await checkExistingSession();
   }
@@ -139,42 +138,6 @@
     if (alertEl && alertText) {
       alertText.textContent = message;
       alertEl.style.display = "flex";
-    }
-  }
-
-  /**
-   * Supabase Connection Setup Modal Handlers
-   */
-  function setupConfigModal() {
-    const modal = document.getElementById("configModal");
-    const openBtn = document.getElementById("openConfigModalBtn");
-    const closeBtn = document.getElementById("closeConfigModalBtn");
-    const cancelBtn = document.getElementById("cancelConfigBtn");
-    const configForm = document.getElementById("configForm");
-
-    if (openBtn && modal) {
-      openBtn.addEventListener("click", () => {
-        const cfg = SOORYAVAMSHI_SUPABASE_CONFIG.getConfig();
-        document.getElementById("modalSupabaseUrl").value = cfg.url || "";
-        document.getElementById("modalSupabaseKey").value = cfg.anonKey || "";
-        modal.classList.add("active");
-      });
-    }
-
-    const hideModal = () => modal && modal.classList.remove("active");
-    if (closeBtn) closeBtn.addEventListener("click", hideModal);
-    if (cancelBtn) cancelBtn.addEventListener("click", hideModal);
-
-    if (configForm) {
-      configForm.addEventListener("submit", function(e) {
-        e.preventDefault();
-        const url = document.getElementById("modalSupabaseUrl").value.trim();
-        const key = document.getElementById("modalSupabaseKey").value.trim();
-        SOORYAVAMSHI_SUPABASE_CONFIG.setConfig(url, key);
-        SooryavamshiSupabase.resetClient();
-        hideModal();
-        alert("Supabase connection details saved successfully.");
-      });
     }
   }
 })();

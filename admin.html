@@ -15,6 +15,29 @@
 
   <!-- Supabase JS SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  
+  <!-- Immediate Auth Guard: Redirects to login.html if not authenticated -->
+  <script>
+    (function() {
+      try {
+        var session = localStorage.getItem("sooryavamshi_admin_session");
+        var hasSbToken = false;
+        for (var i = 0; i < localStorage.length; i++) {
+          var k = localStorage.key(i);
+          if (k && k.startsWith("sb-") && k.endsWith("-auth-token")) {
+            var val = localStorage.getItem(k);
+            if (val && val.includes("access_token")) {
+              hasSbToken = true;
+              break;
+            }
+          }
+        }
+        if (!session && !hasSbToken) {
+          window.location.replace("login.html");
+        }
+      } catch (e) {}
+    })();
+  </script>
 
   <!-- Base Styles -->
   <link rel="stylesheet" href="css/variables.css">
@@ -420,36 +443,13 @@
     </div>
   </header>
 
-  <!-- Auth Gate Section (Shown if not logged in) -->
-  <section class="admin-container" id="authGateSection">
-    <div class="auth-gate-box">
-      <div style="font-size: 2.5rem; margin-bottom: 10px;">🔐</div>
-      <h2 class="auth-gate-title">Staff Portal Login</h2>
-      <p class="auth-gate-desc">
-        Sign in with your authorized Sooryavamshi administrator credentials to view and manage customer site assessment requests.
-      </p>
-
-      <form id="adminLoginForm">
-        <div class="auth-form-group">
-          <label for="adminEmail" class="auth-form-label">Admin Email</label>
-          <input type="email" id="adminEmail" class="auth-form-input" placeholder="admin@suryavamshi.com" required>
-        </div>
-
-        <div class="auth-form-group">
-          <label for="adminPassword" class="auth-form-label">Password</label>
-          <input type="password" id="adminPassword" class="auth-form-input" placeholder="••••••••" required>
-        </div>
-
-        <div id="loginErrorMsg" style="display: none; color: #DC2626; font-size: 0.85rem; margin-bottom: 14px; text-align: left;"></div>
-
-        <button type="submit" class="admin-btn admin-btn-primary" style="width: 100%; justify-content: center; padding: 12px;" id="loginSubmitBtn">
-          <span>Sign In to Dashboard</span>
-        </button>
-      </form>
-
-      <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid #E2E8F0; font-size: 0.85rem; color: #64748B;">
-        Prefer the standalone login page? <a href="login.html" style="color: #073B6B; font-weight: 700; text-decoration: none;">Open Dedicated Login &rarr;</a>
-      </div>
+  <!-- Auth Gate Redirect Fallback (Redirects immediately to login.html) -->
+  <section class="admin-container" id="authGateSection" style="display: none; text-align: center; padding: 80px 20px;">
+    <div style="max-width: 400px; margin: 0 auto; background: #FFFFFF; border-radius: var(--radius-md); padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); border: 1px solid #E2E8F0;">
+      <div style="font-size: 2.2rem; margin-bottom: 12px;">🔒</div>
+      <h3 style="font-family: var(--font-heading); color: #073B6B; margin: 0 0 8px 0;">Authentication Required</h3>
+      <p style="font-size: 0.9rem; color: #64748B; margin-bottom: 20px;">Redirecting you to the Admin Login Page...</p>
+      <a href="login.html" class="admin-btn admin-btn-primary" style="display: inline-flex; text-decoration: none;">Go to Login Page &rarr;</a>
     </div>
   </section>
 

@@ -124,15 +124,9 @@
       }
     }
 
-    // Unauthenticated state handling
+    // Unauthenticated state handling: Strict redirect to login.html
     if (!activeUserEmail) {
-      if (authGate && dashboard) {
-        authGate.style.display = "block";
-        dashboard.style.display = "none";
-        if (userProfileWrap) userProfileWrap.style.display = "none";
-      } else {
-        window.location.href = "login.html";
-      }
+      window.location.replace("login.html");
       return;
     }
 
