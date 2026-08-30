@@ -3,7 +3,7 @@
  * Handles database operations for customer enquiries and admin portal interactions.
  */
 
-const SooryavamshiSupabase = (function() {
+window.SooryavamshiSupabase = (function() {
   let clientInstance = null;
 
   /**
@@ -92,21 +92,19 @@ const SooryavamshiSupabase = (function() {
       return { success: true, id: fallbackEntry.id };
     }
 
-    // 3. Insert into Supabase table
+    // 3. Insert into Supabase table (pure insert without .select to comply with anon INSERT-only RLS)
     try {
       const cfg = SOORYAVAMSHI_SUPABASE_CONFIG.getConfig();
-      const { data: insertedRows, error } = await client
+      const { error } = await client
         .from(cfg.tableName)
-        .insert([payload])
-        .select("id, created_at");
+        .insert([payload]);
 
       if (error) {
         console.error("Supabase insert error:", error.message);
         return { success: false, error: "Database error occurred." };
       }
 
-      const newId = insertedRows && insertedRows[0] ? insertedRows[0].id : null;
-      return { success: true, id: newId };
+      return { success: true };
     } catch (err) {
       console.error("Network or execution error during Supabase submission:", err);
       return { success: false, error: "Network communication failure." };
