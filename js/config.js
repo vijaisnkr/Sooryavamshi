@@ -61,104 +61,109 @@ const SOORYAVAMSHI_CONFIG = {
   // Products & Equipment data
   equipment: {
     panels: {
-      title: "Solar Panels (Tier-1 Modules)",
+      title: "550 Wp Mono PERC Bifacial DCR Solar Panels",
       category: "Photovoltaic Modules",
-      brands: ["Adani Solar", "Rayzon Solar", "Waaree", "Vikram Solar"],
-      techType: "Mono PERC / N-Type TOPCon Bifacial Glass-to-Glass",
-      wattageRange: "550 Wp – 590 Wp",
-      efficiency: "Up to 22.8% Cell Efficiency",
-      warranty: "12-15 Years Product Warranty | 30 Years Linear Power Output Warranty",
+      brands: ["Rayzon Solar", "Vikram Solar"],
+      techType: "550 Wp Mono PERC Bifacial DCR (Domestic Content Requirement)",
+      wattageRange: "550 Wp High Power Output",
+      efficiency: "Up to 21.5%+ Conversion Efficiency & 25% Rear Bifacial Gain",
+      warranty: "25 Years Performance Warranty (≥ 90% at 10 yrs, ≥ 80% at 25 yrs)",
       keyBenefits: [
-        "Superior low-light generation on cloudy/monsoon days",
-        "Bifacial gain generates up to 15-25% extra energy from rear roof reflections",
-        "PID (Potential Induced Degradation) resistant & anti-reflective tempered glass",
-        "Certified wind load up to 2400 Pa and snow load up to 5400 Pa"
+        "100% DCR (Domestic Content Requirement) certified for PM Surya Ghar subsidy eligibility",
+        "Bifacial glass-to-glass technology generates up to 25% additional energy from rear roof reflections",
+        "144 half-cut PERC cell design lowers internal resistive loss and heat generation",
+        "PID-free anti-reflective toughened glass certified for 2400 Pa wind & 5400 Pa snow load"
       ],
-      description: "We install exclusively Tier-1 BIS-certified solar panels from India's most reputed manufacturers. Each module undergoes rigorous EL flash testing to prevent micro-cracks and maximize generation over 30+ years."
+      description: "We install exclusively Tier-1 BIS-certified 550 Wp Mono PERC Bifacial DCR solar modules (Rayzon / Vikram make). Each panel is 100% EL flash tested to guarantee long-term peak performance over 25+ years."
     },
 
     inverters: {
-      title: "Solar Inverters (On-Grid & Hybrid)",
+      title: "3kW Single Phase On-Grid Solar Inverters",
       category: "Power Conversion",
-      brands: ["Solis", "Growatt", "Sungrow", "Enphase Microinverters"],
-      capacityRange: "3 kW to 25 kW (Single-Phase & Three-Phase)",
-      efficiency: "98.4% Maximum Conversion Efficiency",
-      warranty: "5 to 10 Years Manufacturer Warranty (Extendable to 15 Years)",
-      monitoring: "Integrated Wi-Fi / 4G Cloud Telemetry with Mobile App",
+      brands: ["Solinteg", "Polycab"],
+      capacityRange: "3kW Single Phase On-Grid Grid-Tied Inverter",
+      efficiency: ">98% Maximum Conversion Efficiency with Dual MPPT",
+      warranty: "Up to 8 Years Manufacturer Warranty (SolarEdge / Solinteg / Polycab)",
+      monitoring: "Integrated Wi-Fi Data Logger Cloud Telemetry with Mobile App",
       keyBenefits: [
-        "Dual MPPT (Maximum Power Point Tracking) for multi-angle roof orientations",
-        "IP65 / IP66 rated waterproof and dust-tight aluminum enclosure",
-        "Zero export & net metering compliance with local state DISCOMs",
-        "Instant smartphone alerts for daily generation, voltage, and grid status"
+        "Dual MPPT (Maximum Power Point Tracking) for maximum solar harvesting across roof angles",
+        "Die-cast aluminum IP65 outdoor waterproof and dust-tight enclosure",
+        "Full compliance with KSEBL grid interconnection codes and CEA safety standards",
+        "Instant real-time mobile app alerts for daily yield, AC/DC voltage, and grid telemetry"
       ],
-      description: "Our inverters represent the brain of your solar power plant. Designed with active cooling, surge tolerance, and high MPPT accuracy, they transform DC sun energy into clean, stabilized AC electricity for your home."
+      description: "Our 3kW Single Phase On-Grid inverters (Solinteg / Polycab make) convert raw DC energy into stabilized AC current for your home with continuous Wi-Fi cloud data monitoring."
     },
 
     lightningProtection: {
-      title: "Lightning & Surge Protection System",
-      category: "System Safety & Grounding",
-      type: "Early Streamer Emission (ESE) / Franklin Rod & Dual Type 1+2 SPDs",
+      title: "Excel Earthing Chemical Grounding & Lightning Rod",
+      category: "Grounding & Atmospheric Safety",
+      type: "Single Spike Air Termination Rod & Maintenance-Free Chemical Earthing",
+      brands: ["Excel Earthing"],
       components: [
-        "Copper-bonded Chemical Earthing Rods (minimum 3 separate earth pits)",
-        "Class B+C / Type 1+2 Surge Protection Devices (SPD) inside DCDB & ACDB",
-        "High-grade bentonite / chemical compound backfill for < 5 Ohm earth resistance",
-        "Solid copper grounding tape & insulated earth cables"
+        "2 Sets Maintenance-Free Chemical Earthing (250μ Copper Bonded Earth Rod, 14mm dia / 1.2m long)",
+        "1 Set Single Spike Air Termination Rod with insulated base & chemical earth kit",
+        "High-conductivity bentonite chemical compound backfill for < 5 Ohm low earth resistance",
+        "3-Pit segregated earthing network (LA Pit, Inverter Chassis Pit, Solar Array Frame Pit)"
       ],
       keyBenefits: [
-        "Protects expensive inverters and household appliances from indirect voltage surges",
-        "Safeguards home rooftop structure against direct cloud-to-ground lightning strikes",
-        "Dedicated segregated earthing for Inverter, Solar PV array, and Lightning arrester",
-        "Meets IEC 62305 & Indian Electricity Rules compliance standards"
+        "Safeguards household appliances and solar electronics against direct lightning strikes and grid surges",
+        "250-micron molecularly bonded copper rod resists tropical soil corrosion for 25+ years",
+        "Low-impedance chemical backfill compound maintains stable < 5 Ohm ground resistance year-round",
+        "Fully compliant with Electrical Inspectorate & KSEB safety standards"
       ],
-      description: "Solar plants sit elevated on roofs and are naturally vulnerable to lightning and power transients. Sooryavamshi engineers a comprehensive 3-pit grounding network with surge suppression devices to keep your entire home and equipment completely safe."
+      description: "Atmospheric lightning protection is engineered with Excel Earthing 250-micron copper bonded chemical rods and a rooftop Single Spike Air Termination rod to protect your entire home investment."
     },
 
     mountingStructure: {
-      title: "Engineered Mounting Structures",
+      title: "Epoxy Coated GP Roof Mounting Structure",
       category: "Mechanical Foundation",
-      material: "Hot-Dip Galvanized Iron (HDGI > 80 Microns) & Anodized Aluminum 6063-T6",
-      windResistance: "Engineered to withstand up to 150 km/h wind gusts",
-      roofCompatibility: "RCC Flat Terrace, Tiled Slanted Roofs, Elevated Terrace Pergolas, Metal Sheds",
+      brands: ["Apollo GP Tubes / Equivalent"],
+      material: "Epoxy Coated GP (Galvanized Pipe) Tubes & HDGI Steel for Flat Roof",
+      windResistance: "Engineered to withstand up to 150+ km/h wind gusts",
+      roofCompatibility: "Flat RCC Terrace & Slanted Roofs (10° – 12° South Tilt)",
       warranty: "25 Years Structural Durability & Anti-Corrosion Guarantee",
       keyBenefits: [
-        "Pre-engineered modular design with no welding on roof terrace to prevent rusting",
-        "EPDM chemical water-proofing and non-penetrative mounting options available",
-        "Optimized tilt angle (10° to 18°) tuned to your exact latitude for peak annual yield",
-        "Elevated pergola designs preserve usable rooftop terrace space for family use"
+        "Epoxy coated pre-galvanized GP tubes eliminate onsite welding and terrace rust",
+        "EPDM chemical gasket waterproof anchoring prevents roof terrace water leakage",
+        "Optimized 10° – 12° South tilt engineered specifically for Kerala latitude & irradiance",
+        "High-tensile Stainless Steel SS304/SS316 anti-corrosive fasteners"
       ],
-      description: "A solar system is only as strong as its foundation. We utilize heavy-gauge hot-dip galvanized steel and high-tensile SS304 fasteners built to endure decades of extreme tropical monsoon and sun exposure."
+      description: "Engineered with heavy-gauge Apollo GP epoxy coated tubes, our mounting structures deliver 150+ km/h wind resistance and optimal 10-12° South inclination on flat RCC roofs."
     },
 
     dcAcProtection: {
-      title: "DCDB & ACDB Protection Units",
+      title: "DCDB & ACDB Switchgear Protection Units",
       category: "Electrical Distribution",
-      specs: "IP65 Weatherproof Polycarbonate Enclosures",
+      brands: ["ABB", "Eaton", "Mersen", "Citel"],
+      specs: "IP65 Weatherproof Polycarbonate & IP54 PC/ABS/CRCA Enclosures",
       components: [
-        "DC Disconnect Isolators & DC Fuses (1000V DC rated)",
-        "AC Miniature Circuit Breakers (MCB) & Molded Case Circuit Breakers (MCCB)",
-        "Over-voltage & Under-voltage trip relays",
-        "Visible rotary lockable AC isolator for DISCOM net meter safety"
+        "DCDB: PV Fuses at input (Mersen), 1000V DC Isolator & Type 2 DC SPD (Mersen)",
+        "ACDB: AC MCB (ABB / Eaton make) & Type 2 AC SPD (Mersen / Citel make)",
+        "Over-voltage, reverse polarity, and AC short-circuit protective devices",
+        "Visible rotary lockable AC/DC disconnect isolator for KSEBL net-metering compliance"
       ],
       keyBenefits: [
-        "Instant mechanical isolation for periodic maintenance and safety",
-        "Protects against reverse polarity, short circuits, and ground faults",
-        "Compliant with CEA (Central Electricity Authority) technical standards"
+        "Instant manual mechanical isolation for periodic system maintenance and safety",
+        "Multi-stage Type 2 SPDs safely divert lightning and grid voltage transients to earthing",
+        "Weatherproof IP65 / IP54 UV-stabilized enclosures engineered for outdoor durability",
+        "Fully compliant with Electrical Inspectorate and DISCOM net-metering regulations"
       ],
-      description: "Dedicated distribution boxes house industrial-grade switchgear from brands like Schneider, Havells, and Hensel, providing fail-safe protection on both direct current and alternating current sides."
+      description: "Dedicated distribution boxes house industrial switchgear from ABB, Eaton, Mersen, and Citel to provide absolute electrical protection on both DC array and AC grid feeds."
     },
 
     cablesComponents: {
-      title: "UV Solar Cables & Precision Hardware",
-      category: "Wiring & Interconnects",
-      cableSpecs: "4 sq. mm / 6 sq. mm Tinned Electrolytic Copper, Electron-beam Cross-linked XLPO",
-      connectors: "Original Stäubli MC4 IP68 Connectors",
-      conduits: "Heavy-duty UV-stabilized PVC / GI Flexible Conduits with brass glands",
+      title: "UV Solar Cables, Hardware & Bi-Directional Net Meter",
+      category: "Wiring, Interconnects & Metering",
+      brands: ["Apar", "Seichem", "Polycab", "L&T (Larsen & Toubro)", "Stäubli"],
+      cableSpecs: "DC: UV Rated Solar Copper Cable with E-Beam XLPO Sheath (Apar / Seichem Make); AC: PVC/XLPE Aluminium Cable (Apar / Polycab Make)",
+      connectors: "Genuine Stäubli MC4 IP68 Rated Connectors",
+      meterSpecs: "L&T Bi-Directional Net Meter / Watt-Hour Meter (Class 1.0 KSEBL Approved)",
       keyBenefits: [
-        "Flame retardant, halogen-free, and ozone/UV weather-proof for 25+ years",
-        "Minimal resistance ensures voltage drop remains strictly under 1.5%",
-        "IP68 sealed click-lock connectors eliminate moisture ingress and arcing risks"
+        "Electron-Beam cross-linked XLPO insulation flame retardant, halogen-free, UV-resistant for 25+ yrs",
+        "Strict cable cross-section sizing guarantees total voltage drop remains strictly under 1.5%",
+        "Class 1.0 accuracy L&T bi-directional solar energy meter for precise KSEBL net-metering"
       ],
-      description: "We never compromise on wiring. Every single meter of cable is UV-resistant, fire-retardant, and routed through industrial conduits with proper cable ties and tagging."
+      description: "We use premium Apar/Seichem E-Beam tinned copper solar cables, Apar/Polycab AC cables, Stäubli IP68 MC4 connectors, and L&T bi-directional net meters for efficient energy transfer."
     }
   },
 
