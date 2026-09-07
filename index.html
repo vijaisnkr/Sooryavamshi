@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="light scroll-smooth" lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Sooryavamshi Solar Projects LLP | Premium Residential Solar Installation in India</title>
   <meta name="description" content="Sooryavamshi Solar Projects LLP provides engineering-grade residential rooftop solar solutions, Tier-1 panels, inverters, and dedicated lightning protection across India. Calculate your solar requirement today.">
   <link rel="icon" type="image/svg+xml" href="assets/icons/logo.svg">
@@ -13,1589 +13,1069 @@
   <meta property="og:url" content="https://suryavamshi.com/">
   <meta property="og:title" content="Sooryavamshi Solar Projects LLP | Premium Residential Solar in Kerala, India">
   <meta property="og:description" content="Engineering-grade residential rooftop solar installations, Tier-1 panels, KSEB grid feasibility sync, and PM Surya Ghar subsidy support.">
-  <meta property="og:image" content="https://suryavamshi.com/assets/images/sooryavamshi-logo-clean.png">
+  <meta property="og:image" content="assets/images/sooryavamshi-logo-clean.png">
 
   <!-- Twitter Meta -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://suryavamshi.com/">
   <meta name="twitter:title" content="Sooryavamshi Solar Projects LLP">
   <meta name="twitter:description" content="Engineering-grade residential rooftop solar installations across Kerala, India.">
-  <meta name="twitter:image" content="https://suryavamshi.com/assets/images/sooryavamshi-logo-clean.png">
+  <meta name="twitter:image" content="assets/images/sooryavamshi-logo-clean.png">
 
-  <!-- Design System & Stylesheets -->
-  <link rel="stylesheet" href="css/variables.css">
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/calculator.css">
-  <link rel="stylesheet" href="css/feasibility.css">
-  <link rel="stylesheet" href="css/responsive.css">
-  
-  <!-- Supabase JS Client Library -->
+  <!-- Fonts & Material Symbols -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "inverse-surface": "#283044",
+            "on-tertiary": "#ffffff",
+            "secondary": "#495f82",
+            "outline": "#897364",
+            "error": "#ba1a1a",
+            "on-primary-fixed-variant": "#713700",
+            "text-muted": "#64748B",
+            "on-tertiary-fixed-variant": "#004c6d",
+            "surface-container-high": "#e2e7ff",
+            "secondary-container": "#bfd5fe",
+            "surface-canvas": "#F8FAFC",
+            "primary-container": "#f48624",
+            "inverse-on-surface": "#eef0ff",
+            "outline-variant": "#dcc1b0",
+            "border-strong": "#CBD5E1",
+            "surface-variant": "#dae2fd",
+            "on-surface-variant": "#564336",
+            "on-tertiary-fixed": "#001e2e",
+            "surface-dim": "#d2d9f4",
+            "secondary-fixed": "#d5e3ff",
+            "on-primary-fixed": "#301400",
+            "surface-bright": "#faf8ff",
+            "on-primary": "#ffffff",
+            "on-primary-container": "#5c2c00",
+            "background": "#faf8ff",
+            "tertiary": "#00658f",
+            "surface-tint": "#944b00",
+            "surface-container-lowest": "#ffffff",
+            "on-background": "#131b2e",
+            "on-tertiary-container": "#003d59",
+            "secondary-fixed-dim": "#b1c7f0",
+            "surface-container-highest": "#dae2fd",
+            "primary-fixed": "#ffdcc5",
+            "on-secondary": "#ffffff",
+            "on-error-container": "#93000a",
+            "on-secondary-container": "#465c7f",
+            "on-secondary-fixed-variant": "#314769",
+            "error-container": "#ffdad6",
+            "tertiary-fixed": "#c8e6ff",
+            "primary": "#944b00",
+            "surface-container": "#eaedff",
+            "accent-glow": "rgba(244, 134, 36, 0.15)",
+            "on-surface": "#131b2e",
+            "primary-fixed-dim": "#ffb783",
+            "inverse-primary": "#ffb783",
+            "tertiary-container": "#00adf2",
+            "on-secondary-fixed": "#001c3b",
+            "on-error": "#ffffff",
+            "surface": "#faf8ff",
+            "surface-card": "#FFFFFF",
+            "border-subtle": "#E2E8F0",
+            "tertiary-fixed-dim": "#86cfff",
+            "surface-container-low": "#f2f3ff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xl": "2rem",
+            "screen-gutter-mobile": "1rem",
+            "space-sm": "0.75rem",
+            "space-xs": "0.5rem",
+            "screen-gutter-tablet": "1.5rem",
+            "space-xxs": "0.25rem",
+            "container-max-w": "72rem",
+            "space-2xl": "3rem",
+            "screen-gutter-desktop": "2rem",
+            "space-lg": "1.5rem",
+            "space-md": "1rem",
+            "space-3xl": "4rem"
+          },
+          "fontFamily": {
+            "headline-lg-mobile": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "label-md": ["Plus Jakarta Sans"],
+            "body-sm": ["Inter"],
+            "label-lg": ["Plus Jakarta Sans"],
+            "label-sm": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "body-md": ["Inter"],
+            "display-lg-mobile": ["Plus Jakarta Sans"],
+            "body-lg": ["Inter"],
+            "display-lg": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "headline-lg-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "700" }],
+            "headline-md": ["22px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "label-sm": ["10px", { "lineHeight": "12px", "letterSpacing": "0.04em", "fontWeight": "700" }],
+            "headline-lg": ["32px", { "lineHeight": "38px", "letterSpacing": "-0.015em", "fontWeight": "700" }],
+            "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "display-lg-mobile": ["34px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }]
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    @layer base {
+      html, body {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        min-height: 100%;
+      }
+      body {
+        overscroll-behavior-y: none;
+      }
+      .pb-safe {
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+      }
+      .pt-safe {
+        padding-top: env(safe-area-inset-top, 0px);
+      }
+    }
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+
+  <!-- Supabase Client -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
-<body>
+<body class="bg-surface text-on-surface flex flex-col min-h-screen relative">
 
-  <!-- =========================================================================
-       1. STICKY NAVIGATION BAR
-       ========================================================================= -->
-  <header class="header-nav" id="mainHeader">
-    <div class="container nav-container">
-      <!-- Brand Logo -->
-      <a href="#home" class="brand-logo-link" aria-label="Sooryavamshi Solar Projects Home">
-        <img src="assets/images/sooryavamshi-logo-clean.png" alt="Sooryavamshi Solar Projects LLP Logo" class="brand-logo-img" width="128" height="52">
-      </a>
+  <!-- HEADER -->
+  <header class="fixed top-0 w-full z-50 pt-safe bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
+    <div class="h-16 px-space-md max-w-7xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-space-xs">
+        <button aria-label="Open Navigation Menu" class="md:hidden w-11 h-11 flex items-center justify-center rounded-lg text-on-surface hover:bg-surface-container transition-colors" onclick="document.getElementById('mobile-drawer').classList.remove('-translate-x-full');document.getElementById('drawer-backdrop').classList.remove('opacity-0','pointer-events-none');" type="button">
+          <span class="material-symbols-outlined text-[24px]">menu</span>
+        </button>
+        <a href="#home" class="flex items-center gap-space-xs">
+          <img alt="Sooryavamshi Solar Projects LLP Logo" class="h-9 w-auto object-contain" src="assets/images/sooryavamshi-logo-clean.png">
+        </a>
+      </div>
 
       <!-- Desktop Navigation Menu -->
-      <nav aria-label="Primary Navigation" class="nav-center-wrapper">
-        <ul class="nav-links-desktop">
-          <li><a href="#home" class="nav-item-link active">Home</a></li>
-          <li><a href="#calculator" class="nav-item-link">Solar Calculator</a></li>
-          <li><a href="#contact" class="nav-item-link">Contact</a></li>
-          <li><a href="#feasibility" class="nav-item-link">Check Feasibility</a></li>
-          <li><a href="#equipment" class="nav-item-link">Products &amp; Equipment</a></li>
-          <li><a href="#projects" class="nav-item-link">Our Projects</a></li>
-          <li><a href="#about" class="nav-item-link">About Us</a></li>
-        </ul>
+      <nav class="hidden md:flex items-center gap-6">
+        <a href="#home" class="font-label-lg text-on-surface hover:text-primary transition-colors font-semibold">Home</a>
+        <a href="#solar-calculator-section" class="font-label-lg text-on-surface hover:text-primary transition-colors font-semibold">Solar Calculator</a>
+        <a href="#site-assessment-form" class="font-label-lg text-on-surface hover:text-primary transition-colors font-semibold">Contact</a>
+        <a href="#kseb-section" class="font-label-lg text-on-surface hover:text-primary transition-colors font-semibold">KSEB Feasibility</a>
+        <a href="#visualizer-section" class="font-label-lg text-on-surface hover:text-primary transition-colors font-semibold">Equipment</a>
+        <a href="#projects-section" class="font-label-lg text-on-surface hover:text-primary transition-colors font-semibold">Projects</a>
       </nav>
 
-      <!-- Desktop CTA Action -->
-      <div class="nav-actions">
-        <a href="#calculator" class="btn btn-primary" id="navCtaBtn">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-          <span>Calculate Solar Requirement</span>
+      <div class="flex items-center gap-space-xs">
+        <a aria-label="Call Helpline" class="h-11 px-4 flex items-center justify-center gap-2 rounded-lg bg-surface-container text-primary hover:bg-primary-fixed transition-colors font-label-md font-bold" href="tel:+919061626868">
+          <span class="material-symbols-outlined text-[20px]">call</span>
+          <span class="hidden sm:inline">+91 9061626868</span>
         </a>
-
-        <!-- Mobile Hamburger Button -->
-        <button class="mobile-nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
       </div>
     </div>
   </header>
 
-  <!-- Mobile Navigation Drawer & Backdrop -->
-  <div class="mobile-nav-backdrop"></div>
-  <aside class="mobile-nav-drawer" aria-label="Mobile Navigation Menu">
-    <div style="margin-bottom: 24px;">
-      <img src="assets/images/sooryavamshi-logo-clean.png" alt="Sooryavamshi Solar" style="height: 50px; width: auto; display: block;">
-    </div>
-    <ul class="mobile-nav-list">
-      <li><a href="#home" class="mobile-nav-link">Home <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></a></li>
-      <li><a href="#calculator" class="mobile-nav-link">Solar Calculator <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></a></li>
-      <li><a href="#contact" class="mobile-nav-link">Contact &amp; Site Visit <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></a></li>
-      <li><a href="#feasibility" class="mobile-nav-link">Check Feasibility <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></a></li>
-      <li><a href="#equipment" class="mobile-nav-link">Products &amp; Equipment <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></a></li>
-      <li><a href="#process" class="mobile-nav-link">Installation Process <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></a></li>
-      <li><a href="#projects" class="mobile-nav-link">Our Projects <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></a></li>
-      <li><a href="#about" class="mobile-nav-link">About Us <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></a></li>
-    </ul>
+  <!-- MOBILE DRAWER BACKDROP -->
+  <div class="fixed inset-0 z-50 bg-inverse-surface/40 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300" id="drawer-backdrop" onclick="document.getElementById('mobile-drawer').classList.add('-translate-x-full');this.classList.add('opacity-0','pointer-events-none');"></div>
 
-    <div style="margin-bottom: 24px;">
-      <a href="#calculator" class="btn btn-primary" style="width: 100%;">
-        ⚡ Calculate Solar Requirement
+  <!-- MOBILE DRAWER -->
+  <aside class="fixed top-0 bottom-0 left-0 z-50 w-5/6 max-w-xs bg-surface shadow-[0_20px_25px_-5px_rgba(11,37,69,0.12)] -translate-x-full transition-transform duration-300 ease-in-out flex flex-col pt-safe pb-safe" id="mobile-drawer">
+    <div class="h-16 px-space-md flex items-center justify-between bg-surface/95">
+      <div class="flex items-center gap-space-xs">
+        <img alt="Sooryavamshi Solar Projects Logo" class="h-7 w-auto object-contain" src="assets/images/sooryavamshi-logo-clean.png">
+        <span class="font-headline-sm text-headline-sm text-on-surface font-bold">Menu</span>
+      </div>
+      <button aria-label="Close Drawer" class="w-11 h-11 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container" onclick="document.getElementById('mobile-drawer').classList.add('-translate-x-full');document.getElementById('drawer-backdrop').classList.add('opacity-0','pointer-events-none');" type="button">
+        <span class="material-symbols-outlined text-[22px]">close</span>
+      </button>
+    </div>
+
+    <div class="px-space-md py-space-xs bg-primary-fixed/40 mx-space-md rounded-lg flex items-center gap-space-xs mb-space-xs">
+      <span class="material-symbols-outlined text-primary text-[20px]">verified</span>
+      <div class="flex flex-col">
+        <span class="font-label-sm text-label-sm text-on-primary-fixed uppercase">Official Partner</span>
+        <span class="font-body-sm text-body-sm text-on-surface font-semibold">PM Surya Ghar Muft Bijli</span>
+      </div>
+    </div>
+
+    <div class="flex-1 overflow-y-auto px-space-md py-space-xs space-y-1">
+      <a class="flex items-center gap-space-sm px-space-sm h-11 rounded-lg text-on-surface-variant hover:bg-surface-container font-label-lg text-label-lg transition-colors" href="#home" onclick="document.getElementById('mobile-drawer').classList.add('-translate-x-full');document.getElementById('drawer-backdrop').classList.add('opacity-0','pointer-events-none');">
+        <span class="material-symbols-outlined text-[20px]">home</span>
+        <span>Home</span>
+      </a>
+      <a class="flex items-center gap-space-sm px-space-sm h-11 rounded-lg text-on-surface-variant hover:bg-surface-container font-label-lg text-label-lg transition-colors" href="#solar-calculator-section" onclick="document.getElementById('mobile-drawer').classList.add('-translate-x-full');document.getElementById('drawer-backdrop').classList.add('opacity-0','pointer-events-none');">
+        <span class="material-symbols-outlined text-[20px]">calculate</span>
+        <span>Solar Calculator</span>
+      </a>
+      <a class="flex items-center gap-space-sm px-space-sm h-11 rounded-lg text-on-surface-variant hover:bg-surface-container font-label-lg text-label-lg transition-colors" href="#site-assessment-form" onclick="document.getElementById('mobile-drawer').classList.add('-translate-x-full');document.getElementById('drawer-backdrop').classList.add('opacity-0','pointer-events-none');">
+        <span class="material-symbols-outlined text-[20px]">assignment_turned_in</span>
+        <span>Contact &amp; Site Assessment</span>
+      </a>
+      <a class="flex items-center gap-space-sm px-space-sm h-11 rounded-lg text-on-surface-variant hover:bg-surface-container font-label-lg text-label-lg transition-colors" href="#kseb-section" onclick="document.getElementById('mobile-drawer').classList.add('-translate-x-full');document.getElementById('drawer-backdrop').classList.add('opacity-0','pointer-events-none');">
+        <span class="material-symbols-outlined text-[20px]">bolt</span>
+        <span>Check KSEB Feasibility</span>
+      </a>
+      <a class="flex items-center gap-space-sm px-space-sm h-11 rounded-lg text-on-surface-variant hover:bg-surface-container font-label-lg text-label-lg transition-colors" href="#visualizer-section" onclick="document.getElementById('mobile-drawer').classList.add('-translate-x-full');document.getElementById('drawer-backdrop').classList.add('opacity-0','pointer-events-none');">
+        <span class="material-symbols-outlined text-[20px]">memory</span>
+        <span>Equipment Specs</span>
+      </a>
+      <a class="flex items-center gap-space-sm px-space-sm h-11 rounded-lg text-on-surface-variant hover:bg-surface-container font-label-lg text-label-lg transition-colors" href="#projects-section" onclick="document.getElementById('mobile-drawer').classList.add('-translate-x-full');document.getElementById('drawer-backdrop').classList.add('opacity-0','pointer-events-none');">
+        <span class="material-symbols-outlined text-[20px]">solar_power</span>
+        <span>Our Projects</span>
+      </a>
+      <a class="flex items-center gap-space-sm px-space-sm h-11 rounded-lg text-on-surface-variant hover:bg-surface-container font-label-lg text-label-lg transition-colors" href="#why-section" onclick="document.getElementById('mobile-drawer').classList.add('-translate-x-full');document.getElementById('drawer-backdrop').classList.add('opacity-0','pointer-events-none');">
+        <span class="material-symbols-outlined text-[20px]">corporate_fare</span>
+        <span>About Us</span>
       </a>
     </div>
 
-    <div class="mobile-contact-info">
-      <div style="font-size: 0.8rem; color: var(--color-text-muted); margin-bottom: 4px;">Direct Helpline</div>
-      <a href="tel:9061626868" style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; color: var(--color-primary);">+91 9061626868</a>
-      <div style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 8px;">suryavamshisolarprojects@gmail.com</div>
-      <div style="font-size: 0.78rem; color: var(--color-text-muted); margin-top: 8px; line-height: 1.35;">
-        Door No.414, Chithira, Muttathiparamb P.O,<br>Cherthala, 688527
-      </div>
-      <div style="display: flex; gap: 10px; margin-top: 14px;">
-        <a href="https://wa.me/919061626868" target="_blank" rel="noopener noreferrer" style="color: #25D366; display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; background: rgba(37,211,102,0.12); border-radius: 8px;" aria-label="WhatsApp" title="WhatsApp">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-        </a>
-        <a href="https://www.instagram.com/suryavamshi_solarprojects?utm_source=qr&igsi=MThoNGNvNDd2d2s2cw==" target="_blank" rel="noopener noreferrer" style="color: #E1306C; display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; background: rgba(225,48,108,0.12); border-radius: 8px;" aria-label="Instagram" title="Instagram">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-        </a>
-        <a href="https://www.facebook.com/share/1YduBSschB/" target="_blank" rel="noopener noreferrer" style="color: #1877F2; display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; background: rgba(24,119,242,0.12); border-radius: 8px;" aria-label="Facebook" title="Facebook">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
-        </a>
-      </div>
+    <div class="p-space-md bg-surface-container-low flex flex-col gap-space-xs">
+      <a class="w-full h-11 bg-primary-container text-on-primary rounded-lg font-label-lg text-label-lg flex items-center justify-center gap-space-xs font-semibold shadow-sm" href="#site-assessment-form">
+        <span class="material-symbols-outlined text-[18px]">assignment_turned_in</span>
+        <span>Free Site Assessment</span>
+      </a>
+      <a class="w-full h-11 bg-surface-card text-on-surface rounded-lg font-label-lg text-label-lg flex items-center justify-center gap-space-xs shadow-sm" href="tel:+919061626868">
+        <span class="material-symbols-outlined text-primary text-[18px]">call</span>
+        <span>+91 9061626868</span>
+      </a>
     </div>
   </aside>
 
-  <main>
-    <!-- =========================================================================
-         2. HERO SECTION
-         ========================================================================= -->
-    <section class="hero-section" id="home">
-      <div class="container">
-        <div class="hero-grid">
-          <!-- Text Content -->
-          <div class="hero-content">
-            <div class="section-tag">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-              ENGINEERED RESIDENTIAL SOLAR FOR INDIA
+  <main class="flex-1 flex flex-col relative w-full pt-16 pb-28 bg-surface">
+    <div class="flex flex-col w-full max-w-7xl mx-auto">
+      
+      <!-- HERO SECTION -->
+      <section class="px-space-md pt-space-md pb-space-lg flex flex-col gap-space-md md:grid md:grid-cols-2 md:items-center md:py-16" id="home">
+        <!-- Main Headline & Subtitle -->
+        <div class="flex flex-col gap-space-xs">
+          <!-- Govt Trust Pill -->
+          <div class="inline-flex items-center gap-space-xs px-3 py-1.5 rounded-full bg-primary-fixed text-on-primary-fixed-variant self-start shadow-sm mb-2">
+            <span class="material-symbols-outlined text-[18px] text-primary" style="font-variation-settings: 'FILL' 1;">bolt</span>
+            <span class="font-label-sm text-label-sm font-bold tracking-tight">PM Surya Ghar Subsidy up to ₹78,000</span>
+          </div>
+
+          <h1 class="font-display-lg-mobile md:text-display-lg text-display-lg-mobile text-on-surface font-extrabold tracking-tight">
+            Power Your Home With Solar
+          </h1>
+          <p class="font-body-md md:text-body-lg text-body-md text-text-muted leading-relaxed">
+            Reliable residential rooftop solar engineered specifically for Kerala homes, tropical rainfall &amp; coastal winds.
+          </p>
+
+          <!-- Hero CTA Pair -->
+          <div class="flex flex-col sm:flex-row gap-space-xs pt-space-md">
+            <a class="w-full sm:w-auto px-6 h-12 bg-primary-container text-on-primary rounded-lg font-label-lg text-label-lg flex items-center justify-center gap-space-xs font-semibold shadow-md active:scale-[0.99] transition-transform" href="#solar-calculator-section">
+              <span class="material-symbols-outlined text-[20px]">calculate</span>
+              <span>Calculate Solar Requirement</span>
+            </a>
+            <a class="w-full sm:w-auto px-6 h-12 bg-surface-container text-on-surface rounded-lg font-label-lg text-label-lg flex items-center justify-center gap-space-xs font-semibold shadow-sm active:bg-surface-container-high transition-colors" href="#site-assessment-form">
+              <span class="material-symbols-outlined text-secondary text-[20px]">assignment_turned_in</span>
+              <span>Request Free Site Assessment</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Realistic Kerala Rooftop Hero Visual -->
+        <div class="relative w-full rounded-2xl overflow-hidden shadow-md bg-surface-container mt-4 md:mt-0">
+          <img alt="Residential rooftop solar installation in Kerala by Sooryavamshi Solar Projects" class="w-full aspect-[4/3] object-cover" src="assets/images/hero.jpg">
+          <div class="absolute bottom-3 left-3 right-3 p-2.5 rounded-xl bg-surface/90 backdrop-blur-md flex items-center justify-between shadow-sm">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+              <span class="font-label-sm text-label-sm text-on-surface font-bold">Cherthala 5kW Pergola Plant</span>
+            </div>
+            <span class="font-label-sm text-label-sm text-primary font-bold">₹60k+ Saved/Yr</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- QUICK VALUE PROPOSITION -->
+      <section class="px-space-md py-space-xs">
+        <div class="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar md:justify-center md:gap-6">
+          <div class="flex-shrink-0 flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-surface-container-low shadow-sm">
+            <span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings: 'FILL' 1;">solar_power</span>
+            <span class="font-label-sm text-label-sm text-on-surface font-semibold">Tier-1 Bifacial Panels</span>
+          </div>
+          <div class="flex-shrink-0 flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-surface-container-low shadow-sm">
+            <span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings: 'FILL' 1;">published_with_changes</span>
+            <span class="font-label-sm text-label-sm text-on-surface font-semibold">KSEB Net-Metering Handled</span>
+          </div>
+          <div class="flex-shrink-0 flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-surface-container-low shadow-sm">
+            <span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+            <span class="font-label-sm text-label-sm text-on-surface font-semibold">30-Yr Output Warranty</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- INTERACTIVE SOLAR SIZING CALCULATOR -->
+      <section class="px-space-md py-space-lg flex flex-col gap-space-md" id="solar-calculator-section">
+        <div class="flex flex-col gap-1 text-center md:text-left">
+          <span class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-bold">Interactive Sizing Engine</span>
+          <h2 class="font-headline-lg-mobile md:text-headline-lg text-headline-lg-mobile text-on-surface font-bold">
+            How Much Solar Does Your Home Need?
+          </h2>
+          <p class="font-body-sm md:text-body-md text-body-sm text-text-muted">
+            Adjust your monthly units to see instant engineering recommendations &amp; savings.
+          </p>
+        </div>
+
+        <!-- Calculator Card -->
+        <div class="p-4 md:p-6 rounded-xl bg-surface-card shadow-md flex flex-col gap-space-md">
+          <!-- Preset Chips -->
+          <div class="flex flex-col gap-1.5">
+            <span class="font-label-sm text-label-sm text-text-muted">Quick Household Presets:</span>
+            <div class="flex flex-wrap gap-1.5" id="calc-presets">
+              <button class="preset-chip px-3 py-2 rounded-lg bg-surface-container text-on-surface font-label-sm text-label-sm transition-all hover:bg-surface-container-high" data-units="150" type="button">150 U (1-2 BHK)</button>
+              <button class="preset-chip px-3 py-2 rounded-lg bg-surface-container text-on-surface font-label-sm text-label-sm transition-all hover:bg-surface-container-high" data-units="300" type="button">300 U (2-3 BHK)</button>
+              <button class="preset-chip px-3 py-2 rounded-lg bg-primary-container text-on-primary font-label-sm text-label-sm font-bold shadow-sm transition-all" data-units="400" type="button">400 U (Standard)</button>
+              <button class="preset-chip px-3 py-2 rounded-lg bg-surface-container text-on-surface font-label-sm text-label-sm transition-all hover:bg-surface-container-high" data-units="600" type="button">600 U (3+ ACs)</button>
+              <button class="preset-chip px-3 py-2 rounded-lg bg-surface-container text-on-surface font-label-sm text-label-sm transition-all hover:bg-surface-container-high" data-units="1000" type="button">1000 U (Villa)</button>
+            </div>
+          </div>
+
+          <!-- Slider Control -->
+          <div class="flex flex-col gap-2 pt-1">
+            <div class="flex items-center justify-between">
+              <span class="font-label-md text-label-md text-on-surface font-semibold">Monthly Consumption</span>
+              <div class="px-3 py-1.5 rounded-md bg-surface-container-high flex items-baseline gap-1">
+                <span class="font-headline-sm text-headline-sm text-primary font-bold" id="slider-val">400</span>
+                <span class="font-label-sm text-label-sm text-on-surface-variant">Units / kWh</span>
+              </div>
+            </div>
+            <input class="w-full h-3 bg-surface-container-high rounded-full appearance-none cursor-pointer accent-primary-container" id="calc-slider" max="1200" min="100" step="50" type="range" value="400">
+            <div class="flex justify-between font-label-sm text-label-sm text-text-muted">
+              <span>100 U</span>
+              <span>500 U</span>
+              <span>1200+ U</span>
+            </div>
+          </div>
+
+          <!-- Live Calculated Output Box -->
+          <div class="p-4 rounded-xl bg-inverse-surface text-inverse-on-surface flex flex-col gap-3 shadow-inner">
+            <div class="flex items-center justify-between">
+              <span class="font-label-sm text-label-sm text-secondary-fixed">Recommended System</span>
+              <span class="font-headline-lg-mobile md:text-headline-lg text-headline-lg-mobile text-primary-fixed font-black" id="live-kw">4.0 kW</span>
+            </div>
+            <div class="grid grid-cols-2 gap-3 pt-2 border-t-0">
+              <div class="p-3 rounded-lg bg-inverse-surface/60 flex flex-col gap-0.5">
+                <span class="font-label-sm text-label-sm text-secondary-fixed">Annual Savings</span>
+                <span class="font-headline-sm text-headline-sm text-on-primary font-bold" id="live-savings">₹45,550/yr</span>
+                <span class="font-body-sm text-body-sm text-text-muted text-[10px]">~90% KSEB offset</span>
+              </div>
+              <div class="p-3 rounded-lg bg-inverse-surface/60 flex flex-col gap-0.5">
+                <span class="font-label-sm text-label-sm text-secondary-fixed">Modules &amp; Space</span>
+                <span class="font-headline-sm text-headline-sm text-on-primary font-bold" id="live-panels">8 Bifacial</span>
+                <span class="font-body-sm text-body-sm text-text-muted text-[10px]" id="live-area">~340 sq.ft terrace</span>
+              </div>
             </div>
 
-            <h1 class="hero-headline">
-              Power Your Home With <span class="highlight">Solar Energy</span>
-            </h1>
+            <!-- Progressive Disclosure Accordion -->
+            <button class="flex items-center justify-between text-left pt-1 text-primary-fixed-dim hover:text-primary-fixed transition-colors" id="toggle-engineering" type="button">
+              <span class="font-label-sm text-label-sm font-semibold flex items-center gap-1">
+                <span class="material-symbols-outlined text-[16px]">tune</span>
+                View Engineering Calculation Formula
+              </span>
+              <span class="material-symbols-outlined text-[18px] transition-transform" id="eng-arrow">expand_more</span>
+            </button>
+            <div class="hidden flex flex-col gap-1.5 p-3 rounded-lg bg-inverse-surface text-[12px] font-body-sm text-inverse-on-surface/80" id="engineering-details">
+              <div class="flex justify-between">
+                <span>Daily Energy Requirement:</span>
+                <span class="font-semibold text-inverse-on-surface" id="eng-daily">13.3 kWh/day</span>
+              </div>
+              <div class="flex justify-between">
+                <span>Peak Sun Hours (Kerala Insolation):</span>
+                <span class="font-semibold text-inverse-on-surface">4.3 hrs/day</span>
+              </div>
+              <div class="flex justify-between">
+                <span>Derating &amp; Thermal Loss Factor:</span>
+                <span class="font-semibold text-inverse-on-surface">82% (0.82 PR)</span>
+              </div>
+              <p class="text-[10px] text-text-muted mt-1 leading-tight">
+                Formula: Sizing = Daily kWh / (Peak Sun Hours × 0.82 Performance Ratio)
+              </p>
+            </div>
+          </div>
 
-            <p class="hero-subtitle">
-              Sooryavamshi Solar Projects LLP provides complete residential solar solutions—from initial technical consultation and Tier-1 equipment selection to certified installation, net metering, and 30-year performance assurance.
+          <!-- Action CTAs -->
+          <div class="grid grid-cols-2 gap-3">
+            <a class="h-11 px-3 rounded-lg bg-surface-container text-on-surface font-label-sm text-label-sm font-semibold flex items-center justify-center gap-1 text-center shadow-sm hover:bg-surface-container-high transition-colors" href="#visualizer-section">
+              <span class="material-symbols-outlined text-primary text-[18px]">view_in_ar</span>
+              <span>Explore System</span>
+            </a>
+            <a class="h-11 px-3 rounded-lg bg-surface-container text-on-surface font-label-sm text-label-sm font-semibold flex items-center justify-center gap-1 text-center shadow-sm hover:bg-surface-container-high transition-colors" href="#savings-section">
+              <span class="material-symbols-outlined text-primary text-[18px]">savings</span>
+              <span>Calculate ROI</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT & FREE SITE ASSESSMENT SECTION -->
+      <section class="px-space-md py-space-lg" id="site-assessment-form">
+        <div class="p-4 md:p-8 rounded-2xl bg-surface-card shadow-md flex flex-col gap-space-md">
+          <div class="flex flex-col gap-1">
+            <div class="inline-flex items-center gap-1 text-primary font-label-sm text-label-sm font-bold">
+              <span class="material-symbols-outlined text-[16px]">location_on</span>
+              <span>Cherthala • Kochi • Alappuzha • Kottayam</span>
+            </div>
+            <h2 class="font-headline-lg-mobile md:text-headline-lg text-headline-lg-mobile text-on-surface font-extrabold">
+              Ready to Switch Your Home to Solar?
+            </h2>
+            <p class="font-body-sm md:text-body-md text-body-sm text-text-muted leading-relaxed">
+              Our certified engineers will visit your Kerala home for 3D shadow analysis, roof structural evaluation, and customized sizing.
             </p>
+          </div>
 
-            <div class="hero-cta-group">
-              <a href="#calculator" class="btn btn-primary btn-lg" id="heroPrimaryCta">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-                <span>Calculate My Solar Requirement</span>
-              </a>
-              <a href="#projects" class="btn btn-outline btn-lg" id="heroSecondaryCta">
-                <span>View Our Projects</span>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-              </a>
+          <form class="flex flex-col gap-3" id="assessment-form" onsubmit="event.preventDefault(); document.getElementById('form-success').classList.remove('hidden'); this.classList.add('hidden');">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <!-- Name -->
+              <div class="flex flex-col gap-1">
+                <label class="font-label-sm text-label-sm text-on-surface font-semibold" for="client-name">Full Name *</label>
+                <input class="h-11 px-3 rounded-lg bg-surface-container-low text-on-surface placeholder:text-text-muted font-body-md text-body-md focus:outline-none focus:bg-surface-container border border-border-subtle" id="client-name" placeholder="e.g. Ramesh Kumar" required type="text">
+              </div>
+              <!-- Phone -->
+              <div class="flex flex-col gap-1">
+                <label class="font-label-sm text-label-sm text-on-surface font-semibold" for="client-phone">Phone Number (+91) *</label>
+                <input class="h-11 px-3 rounded-lg bg-surface-container-low text-on-surface placeholder:text-text-muted font-body-md text-body-md focus:outline-none focus:bg-surface-container border border-border-subtle" id="client-phone" placeholder="90616 26868" required type="tel">
+              </div>
             </div>
 
-            <!-- Trust Indicators -->
-            <div class="trust-indicators-grid">
-              <div class="trust-item">
-                <div class="trust-icon-box">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                </div>
-                <div>
-                  <div class="trust-text-title">End-to-End Service</div>
-                  <div class="trust-text-desc">Consultation to Net Metering</div>
-                </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <!-- Location -->
+              <div class="flex flex-col gap-1">
+                <label class="font-label-sm text-label-sm text-on-surface font-semibold" for="client-location">Location / Town in Kerala *</label>
+                <input class="h-11 px-3 rounded-lg bg-surface-container-low text-on-surface placeholder:text-text-muted font-body-md text-body-md focus:outline-none focus:bg-surface-container border border-border-subtle" id="client-location" placeholder="e.g. Cherthala, Kochi, Alappuzha" required type="text">
               </div>
-
-              <div class="trust-item">
-                <div class="trust-icon-box">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
-                </div>
-                <div>
-                  <div class="trust-text-title">Quality Assurance</div>
-                  <div class="trust-text-desc">Tier-1 BIS &amp; IEC Certified</div>
-                </div>
-              </div>
-
-              <div class="trust-item">
-                <div class="trust-icon-box">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
-                </div>
-                <div>
-                  <div class="trust-text-title">Advanced Technology</div>
-                  <div class="trust-text-desc">Bifacial &amp; IoT Monitoring</div>
-                </div>
-              </div>
-
-              <div class="trust-item">
-                <div class="trust-icon-box">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                </div>
-                <div>
-                  <div class="trust-text-title">30 Years Warranty</div>
-                  <div class="trust-text-desc">Linear Output Guarantee</div>
-                </div>
+              <!-- Monthly Units -->
+              <div class="flex flex-col gap-1">
+                <label class="font-label-sm text-label-sm text-on-surface font-semibold" for="client-consumption">Average Monthly Units or Bill (₹)</label>
+                <input class="h-11 px-3 rounded-lg bg-surface-container-low text-on-surface placeholder:text-text-muted font-body-md text-body-md focus:outline-none focus:bg-surface-container border border-border-subtle" id="client-consumption" placeholder="e.g. 400 Units or ₹3,500/mo" type="text">
               </div>
             </div>
-          </div>
 
-          <!-- Hero Visual -->
-          <div class="hero-visual-col">
-            <div class="hero-image-wrapper">
-              <img src="assets/images/hero.jpg" alt="Residential Rooftop Solar Installation by Sooryavamshi Solar Projects" width="800" height="500">
-              
-              <!-- Floating Engineering Guarantee Badge -->
-              <div class="hero-floating-card">
-                <div class="card-icon">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                </div>
-                <div>
-                  <div class="card-title">Govt. PM Surya Ghar Eligible</div>
-                  <div class="card-desc">Save up to ₹78,000 via central subsidy + net metering</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+            <button class="w-full h-12 bg-primary-container text-on-primary rounded-lg font-label-lg text-label-lg flex items-center justify-center gap-space-xs font-bold shadow-md mt-2 active:scale-[0.99] transition-transform hover:bg-primary" type="submit">
+              <span class="material-symbols-outlined text-[20px]">assignment_turned_in</span>
+              <span>Request Free Site Assessment</span>
+            </button>
+          </form>
 
-    <!-- =========================================================================
-         3. MAIN FEATURE — SOLAR REQUIREMENT CALCULATOR
-         ========================================================================= -->
-    <section class="calculator-section" id="calculator">
-      <div class="container">
-        <!-- Section Header -->
-        <div class="section-header">
-          <div class="section-tag">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="16" y1="14" x2="16" y2="18"></line><path d="M16 10h.01"></path><path d="M12 10h.01"></path><path d="M8 10h.01"></path><path d="M12 14h.01"></path><path d="M8 14h.01"></path><path d="M12 18h.01"></path><path d="M8 18h.01"></path></svg>
-            INTERACTIVE SOLAR SIZING ENGINE
-          </div>
-          <h2 class="section-title">How Much Solar Power Does Your Home Need?</h2>
-          <p class="section-subtitle">
-            Enter your average monthly electricity consumption and find the recommended solar system size for your home.
-          </p>
-        </div>
-
-        <div class="calc-container-wrap">
-          <div class="calc-master-card">
-            <div class="calc-grid-layout">
-              
-              <!-- Left Column: Inputs -->
-              <div class="calc-input-pane">
-                <h3 class="calc-pane-title">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
-                  Your Home Energy Profile
-                </h3>
-                <p class="calc-pane-sub">Adjust consumption units or monthly bill amount to compute your custom rooftop sizing.</p>
-
-                <!-- Input Mode Tabs -->
-                <div class="calc-input-tabs" role="tablist">
-                  <button type="button" class="calc-tab-btn active" id="tabUnitsMode" role="tab" aria-selected="true">Monthly Units (kWh)</button>
-                  <button type="button" class="calc-tab-btn" id="tabBillMode" role="tab" aria-selected="false">Monthly Bill (₹)</button>
-                </div>
-
-                <!-- Presets -->
-                <div class="preset-pills-label">Quick Household Presets</div>
-                <div class="preset-pills-row">
-                  <button type="button" class="preset-pill" data-units="150">150 Units (1-2 BHK)</button>
-                  <button type="button" class="preset-pill" data-units="300">300 Units (2-3 BHK)</button>
-                  <button type="button" class="preset-pill active" data-units="400">400 Units (Standard)</button>
-                  <button type="button" class="preset-pill" data-units="600">600 Units (3+ ACs)</button>
-                  <button type="button" class="preset-pill" data-units="1000">1000 Units (Villa)</button>
-                </div>
-
-                <!-- Consumption Slider & Input Sync -->
-                <div class="calc-field-group">
-                  <div class="calc-field-head">
-                    <label for="calcUnitsInput" class="calc-field-label">Monthly Electricity Consumption</label>
-                    <div class="calc-field-display">
-                      <input type="number" id="calcUnitsInput" value="400" min="50" max="2500" step="10" aria-label="Monthly consumption value">
-                      <span class="unit-tag" id="calcUnitLabel">Units</span>
-                    </div>
-                  </div>
-
-                  <div class="calc-slider-wrap">
-                    <input type="range" id="calcUnitsSlider" class="calc-range-slider" min="50" max="1500" value="400" step="10" aria-label="Consumption slider">
-                    <div class="slider-ticks-row">
-                      <span>50 Units</span>
-                      <span>500 Units</span>
-                      <span>1000 Units</span>
-                      <span>1500+ Units</span>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- State / Location Selection -->
-                <div class="location-select-wrap">
-                  <label for="calcStateSelect" class="form-label" style="font-size: 0.92rem;">
-                    Installation State / Region (Solar Insolation)
-                  </label>
-                  <select id="calcStateSelect" class="form-control" aria-label="Select state for solar insolation">
-                    <!-- Populated via config.js -->
-                  </select>
-                </div>
-
-                <!-- Real-time Live Calculation Indicator -->
-                <div style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-muted); margin-top: 8px;">
-                  <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #22C55E; box-shadow: 0 0 6px rgba(34,197,94,0.6); flex-shrink: 0;"></span>
-                  <span>Live calculations update instantly as you adjust</span>
-                </div>
-              </div>
-
-              <!-- Right Column: Live Results -->
-              <div class="calc-results-pane">
-                
-                <!-- Hero Capacity Badge with Circular Gauge -->
-                <div class="calc-hero-badge-wrap">
-                  <div class="calc-gauge-circle">
-                    <svg class="calc-gauge-svg" viewBox="0 0 100 100">
-                      <defs>
-                        <linearGradient id="solarGradientGauge" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" stop-color="#FDBA2D"/>
-                          <stop offset="100%" stop-color="#F58220"/>
-                        </linearGradient>
-                      </defs>
-                      <circle class="calc-gauge-bg" cx="50" cy="50" r="42"></circle>
-                      <circle class="calc-gauge-fill" id="resultGaugeFill" cx="50" cy="50" r="42"></circle>
-                    </svg>
-                    <div class="calc-gauge-icon">
-                      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-                    </div>
-                  </div>
-
-                  <div class="calc-hero-info">
-                    <div class="calc-hero-tag">Recommended System Capacity</div>
-                    <div class="calc-hero-val" id="resultHeroKw">4.0 kW</div>
-                    <div class="calc-hero-sub" id="resultHeroSub">Powers 100% of ~400 units/month requirement</div>
-                  </div>
-                </div>
-
-                <!-- Comprehensive 6-Card Metrics Grid -->
-                <div class="calc-metrics-grid">
-                  <div class="calc-metric-box">
-                    <div class="calc-metric-icon">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
-                    </div>
-                    <div class="calc-metric-label">Estimated Daily Consumption</div>
-                    <div class="calc-metric-val" id="resultDailyUnits">13.3 kWh/day</div>
-                  </div>
-
-                  <div class="calc-metric-box">
-                    <div class="calc-metric-icon">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
-                    </div>
-                    <div class="calc-metric-label">Estimated Annual Generation</div>
-                    <div class="calc-metric-val" id="resultAnnualGen">5,840 kWh</div>
-                  </div>
-
-                  <div class="calc-metric-box">
-                    <div class="calc-metric-icon">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-                    </div>
-                    <div class="calc-metric-label">Approximate Panels Needed</div>
-                    <div class="calc-metric-val" id="resultPanelCount">8 Panels</div>
-                  </div>
-
-                  <div class="calc-metric-box">
-                    <div class="calc-metric-icon">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
-                    </div>
-                    <div class="calc-metric-label">Estimated Roof Space Needed</div>
-                    <div class="calc-metric-val" id="resultRoofSpace">340 sq.ft (32 m²)</div>
-                  </div>
-
-                  <div class="calc-metric-box">
-                    <div class="calc-metric-icon">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line></svg>
-                    </div>
-                    <div class="calc-metric-label">Recommended Inverter</div>
-                    <div class="calc-metric-val" id="resultInverterCap" style="font-size: 0.95rem;">5.0 kW Single/Three-Phase</div>
-                  </div>
-
-                  <div class="calc-metric-box">
-                    <div class="calc-metric-icon">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-                    </div>
-                    <div class="calc-metric-label">Estimated Annual Savings</div>
-                    <div class="calc-metric-val green-text" id="resultAnnualSavings">₹45,550/yr</div>
-                  </div>
-                </div>
-
-                <!-- Dynamic Solar Panel Array Visualizer -->
-                <div class="calc-panel-visualizer-box">
-                  <div class="visualizer-head">
-                    <div class="visualizer-title">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="3" y1="15" x2="21" y2="15"></line><line x1="9" y1="3" x2="9" y2="21"></line><line x1="15" y1="3" x2="15" y2="21"></line></svg>
-                      Modules
-                    </div>
-                    <span class="visualizer-count-tag" id="resultPanelCountTag">8 x 550W Modules</span>
-                  </div>
-                  <div class="solar-panel-icons-grid" id="resultPanelGrid">
-                    <!-- Populated dynamically via calculator.js -->
-                  </div>
-                </div>
-
-                <!-- Technical Calculation Explanation Accordion -->
-                <div class="calc-formula-accordion">
-                  <button type="button" class="calc-formula-toggle" id="calcFormulaToggle" aria-expanded="false">
-                    <span>View Engineering Calculation Formula</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                  </button>
-                  <div class="calc-formula-content" id="calcFormulaContent">
-                    <div class="formula-step-row">
-                      <span>Daily Energy Need:</span>
-                      <strong id="formulaDaily">13.3 kWh/day</strong>
-                    </div>
-                    <div class="formula-step-row">
-                      <span>Peak Sun Hours (Insolation):</span>
-                      <strong id="formulaSunHours">4.3 hrs/day</strong>
-                    </div>
-                    <div class="formula-step-row">
-                      <span>System Derating &amp; Thermal Loss Factor:</span>
-                      <strong id="formulaDerate">82%</strong>
-                    </div>
-                    <div class="formula-step-row">
-                      <span>Formula: Daily kWh ÷ (Sun Hours × 0.82 Performance Ratio):</span>
-                      <strong style="color: var(--color-primary);" id="formulaResult">4.0 kWp</strong>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Disclaimer -->
-                <div class="calc-disclaimer-box">
-                  <p>
-                    <strong>Disclaimer:</strong> This is an indicative calculation. Final system capacity may vary based on roof orientation, shading, location, equipment efficiency and actual site conditions.
-                  </p>
-                </div>
-
-                <!-- Action CTA -->
-                <div class="calc-action-row">
-                  <a href="#feasibility" class="btn btn-primary btn-lg" id="calcFeasibilityNextBtn" style="flex: 1.2;">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-                    <span>Check KSEB Grid Feasibility</span>
-                  </a>
-                  <a href="#contact" class="btn btn-outline" style="padding: 16px 18px;" id="calcAssessmentBtn" title="Request Site Assessment Directly">
-                    <span>Direct Quote</span>
-                  </a>
-                  <a href="tel:9061626868" class="btn btn-outline" style="padding: 16px 18px;" title="Call an Engineer Directly">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                  </a>
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- =========================================================================
-         CONTACT & SITE ASSESSMENT SECTION
-         ========================================================================= -->
-    <section class="section section-light" id="contact">
-      <div class="container">
-        <div class="section-header">
-          <div class="section-tag">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-            GET IN TOUCH
-          </div>
-          <h2 class="section-title">Ready to Switch Your Home to Solar?</h2>
-          <p class="section-subtitle">
-            Calculate your requirement or contact our team for a personalized solar solution.
-          </p>
-        </div>
-
-        <div class="contact-grid">
-          <!-- Contact Info & Quick Channels -->
-          <div class="contact-card-info">
-            <h3 style="font-size: 1.45rem; color: var(--color-primary); margin-bottom: 8px;">Direct Support &amp; Office</h3>
-            <p style="font-size: 0.95rem; color: var(--color-text-muted); margin-bottom: 24px;">
-              Reach out to our certified solar specialists for technical feasibility inquiries, government subsidy guidance, or onsite shadow assessments.
+          <!-- Success State -->
+          <div class="hidden p-6 rounded-xl bg-surface-container-high text-on-surface flex flex-col items-center text-center gap-2" id="form-success">
+            <span class="material-symbols-outlined text-primary text-[42px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+            <h4 class="font-headline-sm text-headline-sm font-bold">Assessment Request Received!</h4>
+            <p class="font-body-sm text-body-sm text-text-muted">
+              Our chief solar engineer will call you shortly to schedule your shadow assessment and KSEB feasibility audit.
             </p>
-
-            <div class="contact-direct-channels">
-              <a href="tel:9061626868" class="contact-channel-item" id="contactCallLink">
-                <div class="channel-icon">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                </div>
-                <div>
-                  <div class="channel-label">Call Our Engineers</div>
-                  <div class="channel-val">+91 9061626868</div>
-                </div>
-              </a>
-
-              <a href="mailto:suryavamshisolarprojects@gmail.com" class="contact-channel-item" id="contactEmailLink">
-                <div class="channel-icon" style="background: var(--grad-navy);">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                </div>
-                <div>
-                  <div class="channel-label">Official Email</div>
-                  <div class="channel-val" style="font-size: 0.98rem; word-break: break-all;">suryavamshisolarprojects@gmail.com</div>
-                </div>
-              </a>
-
-              <div class="contact-channel-item" style="cursor: default;">
-                <div class="channel-icon" style="background: #218739;">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                </div>
-                <div>
-                  <div class="channel-label">Registered Office Location</div>
-                  <div style="font-size: 0.95rem; color: var(--color-text-body); font-weight: 600; line-height: 1.5;">
-                    Suryavamshi Solar Projects<br>
-                    Door No.414, Chithira,<br>
-                    Muttathiparamb P.O,<br>
-                    Cherthala, 688527
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Styled Location Map Frame -->
-            <div style="border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--color-border-medium); margin-top: 24px; position: relative;">
-              <div style="background: #073B6B; color: #FFFFFF; padding: 10px 16px; font-family: var(--font-heading); font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; justify-content: space-between;">
-                <span>📍 Base: Muttathiparamb P.O, Cherthala, 688527</span>
-                <span style="color: var(--color-accent); font-size: 0.75rem;">Fast Onsite Visit</span>
-              </div>
-              <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62923.63945415783!2d76.29177145892556!3d9.684126746816407!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b087c53d1000001%3A0x6479f64db2ef8e72!2sCherthala%2C%20Kerala!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
-                width="100%" 
-                height="180" 
-                style="border:0; display: block;" 
-                allowfullscreen="" 
-                loading="lazy" 
-                referrerpolicy="no-referrer-when-downgrade"
-                title="Suryavamshi Solar Projects - Door No.414, Chithira, Muttathiparamb P.O, Cherthala, 688527">
-              </iframe>
-            </div>
           </div>
 
-          <!-- Contact / Site Assessment Form -->
-          <div class="contact-form-wrapper">
-            <h3 style="font-size: 1.45rem; color: var(--color-primary); margin-bottom: 6px;">Request Free Site Assessment</h3>
-            <p style="font-size: 0.9rem; color: var(--color-text-muted); margin-bottom: 24px;">
-              Fill in your details below. Our solar engineer will contact you to perform shadow analysis and custom system sizing.
-            </p>
-
-            <form id="consultationForm" novalidate>
-              <!-- Anti-Spam Honeypot (Hidden from human visitors) -->
-              <div style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;" aria-hidden="true">
-                <label for="contactHoneypot">Leave this field blank</label>
-                <input type="text" name="b_consultation_hp" id="contactHoneypot" tabindex="-1" autocomplete="off">
-              </div>
-
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="contactName" class="form-label">Full Name *</label>
-                  <input type="text" id="contactName" class="form-control" placeholder="e.g. Ramesh Kumar" required autocomplete="name">
-                </div>
-                <div class="form-group">
-                  <label for="contactPhone" class="form-label">Phone Number *</label>
-                  <input type="tel" id="contactPhone" class="form-control" placeholder="e.g. 9876543210" required autocomplete="tel">
-                </div>
-              </div>
-
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="contactEmail" class="form-label">Email Address (Optional)</label>
-                  <input type="email" id="contactEmail" class="form-control" placeholder="e.g. ramesh@example.com" autocomplete="email">
-                </div>
-                <div class="form-group">
-                  <label for="contactPin" class="form-label">PIN Code (Optional)</label>
-                  <input type="text" id="contactPin" class="form-control" placeholder="e.g. 688527" maxlength="6" autocomplete="postal-code">
-                </div>
-              </div>
-
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="contactLocation" class="form-label">City / Location *</label>
-                  <input type="text" id="contactLocation" class="form-control" placeholder="e.g. Cherthala, Kochi, Alappuzha" required>
-                </div>
-                <div class="form-group">
-                  <label for="contactUnits" class="form-label">Monthly Consumption (Units / kWh) *</label>
-                  <input type="number" id="contactUnits" class="form-control" placeholder="e.g. 400" min="1" required>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="contactKsebNo" class="form-label">
-                  <span>KSEB 13-Digit Consumer Number (Optional)</span>
-                  <span style="font-size: 0.74rem; color: var(--color-primary); font-weight: 500;">Direct KSEB DTR Sanction Verification</span>
-                </label>
-                <input type="text" id="contactKsebNo" class="form-control" placeholder="e.g. 1155482091234" maxlength="13">
-              </div>
-
-              <div class="form-group">
-                <label for="contactMessage" class="form-label">Message / Rooftop Details (Optional)</label>
-                <textarea id="contactMessage" class="form-control" rows="4" placeholder="Tell us about your roof type (Flat RCC terrace, tiled, shed), sanctioned load, or preferred brand..."></textarea>
-              </div>
-
-              <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; letter-spacing: 0.05em; font-weight: 700;" id="submitFormBtn">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-                <span>REQUEST CONSULTATION</span>
-              </button>
-            </form>
-
-            <div class="form-submit-success" id="formSuccessMessage" style="display: none;"></div>
-            <div class="form-submit-error" id="formErrorMessage" style="display: none;"></div>
+          <!-- Direct Call Link -->
+          <div class="pt-4 border-t border-border-subtle flex flex-col items-center text-center gap-1">
+            <span class="font-body-sm text-body-sm text-text-muted">Need urgent technical guidance?</span>
+            <a class="inline-flex items-center gap-1.5 font-label-md text-label-md text-primary font-bold hover:underline" href="tel:+919061626868">
+              <span class="material-symbols-outlined text-[18px]">phone_in_talk</span>
+              <span>Call Chief Engineer directly: +91 9061626868</span>
+            </a>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- =========================================================================
-         OFFICIAL KSEB GRID FEASIBILITY & RECAP PORTAL DIRECTORY
-         ========================================================================= -->
-    <section class="feasibility-section" id="feasibility">
-      <div class="container">
-        <!-- Section Header -->
-        <div class="section-header">
-          <div class="section-tag">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-            OFFICIAL KSEB GRID FEASIBILITY
+      <!-- OFFICIAL KSEB GRID FEASIBILITY SECTION -->
+      <section class="px-space-md py-space-lg flex flex-col gap-space-md" id="kseb-section">
+        <div class="p-4 md:p-6 rounded-xl bg-surface-container-low shadow-sm flex flex-col gap-space-md">
+          <div class="flex items-center gap-2">
+            <span class="w-10 h-10 rounded-lg bg-primary-fixed text-primary flex items-center justify-center">
+              <span class="material-symbols-outlined text-[22px]">bolt</span>
+            </span>
+            <div class="flex flex-col">
+              <span class="font-label-sm text-label-sm text-primary font-bold uppercase">Official KSEB Feasibility Guide</span>
+              <h3 class="font-headline-sm md:text-headline-md text-headline-sm text-on-surface font-bold">Check Transformer Solar Headroom</h3>
+            </div>
           </div>
-          <h2 class="section-title">Check Transformer Solar Headroom on the Official KSEB Portal</h2>
-          <p class="section-subtitle">
-            Under Kerala State Electricity Regulatory Commission (KSERC) regulations, rooftop solar injection is permitted up to 90% of your distribution transformer (DTR) rating. Follow the guide below to check real-time transformer headroom on KSEB's official portal.
+          <p class="font-body-sm text-body-sm text-text-muted leading-relaxed">
+            Under KSERC regulations, rooftop solar injection is permitted up to 90% of your distribution transformer (DTR) rating. Follow the guide to check real-time transformer headroom on KSEB's official portal.
+          </p>
+
+          <div class="p-4 rounded-xl bg-surface-card shadow-sm flex flex-col gap-3">
+            <div class="flex items-center justify-between">
+              <span class="font-label-sm text-label-sm font-bold text-on-surface">KSEB reCap Feasibility Portal</span>
+              <span class="px-2 py-0.5 rounded bg-primary-fixed text-on-primary-fixed-variant font-label-sm text-label-sm">wss.kseb.in</span>
+            </div>
+            <a class="w-full h-11 bg-primary text-on-primary rounded-lg font-label-md text-label-md flex items-center justify-center gap-2 font-bold shadow-sm hover:bg-primary-container transition-colors" href="https://wss.kseb.in/selfservices/reCap" target="_blank" rel="noopener noreferrer">
+              <span>Open KSEB Feasibility Portal (reCap)</span>
+              <span class="material-symbols-outlined text-[18px]">open_in_new</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- SOLAR SYSTEM VISUALIZER TEASER -->
+      <section class="px-space-md py-space-md flex flex-col gap-space-sm" id="visualizer-section">
+        <div class="p-4 md:p-6 rounded-xl bg-surface-card shadow-md flex flex-col gap-space-sm">
+          <div class="flex items-center gap-2">
+            <span class="w-8 h-8 rounded-lg bg-secondary-container text-secondary flex items-center justify-center">
+              <span class="material-symbols-outlined text-[20px]">account_tree</span>
+            </span>
+            <div class="flex flex-col">
+              <span class="font-label-sm text-label-sm text-primary font-bold">Complete Engineering Blueprint</span>
+              <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">See What Your System Includes</h3>
+            </div>
+          </div>
+          <p class="font-body-sm text-body-sm text-text-muted">
+            Explore how 550Wp Bifacial Panels, On-Grid Inverter, and 3-Pit Chemical Earthing connect seamlessly into your KSEB meter.
+          </p>
+
+          <!-- Architecture Step Pills -->
+          <div class="flex flex-col gap-1.5 py-1">
+            <div class="flex items-center gap-2 p-3 rounded-lg bg-surface-container-low text-on-surface">
+              <span class="material-symbols-outlined text-primary text-[20px]">solar_power</span>
+              <div class="flex-1 flex justify-between items-center">
+                <span class="font-label-sm text-label-sm font-semibold">Tier-1 550Wp Bifacial Panels</span>
+                <span class="font-label-sm text-label-sm text-text-muted">21.5% Eff.</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-center">
+              <span class="material-symbols-outlined text-text-muted text-[16px]">arrow_downward</span>
+            </div>
+            <div class="flex items-center gap-2 p-3 rounded-lg bg-surface-container-low text-on-surface">
+              <span class="material-symbols-outlined text-primary text-[20px]">memory</span>
+              <div class="flex-1 flex justify-between items-center">
+                <span class="font-label-sm text-label-sm font-semibold">Dual-MPPT Solar Inverter</span>
+                <span class="font-label-sm text-label-sm text-text-muted">&gt;98% Eff.</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-center">
+              <span class="material-symbols-outlined text-text-muted text-[16px]">arrow_downward</span>
+            </div>
+            <div class="flex items-center gap-2 p-3 rounded-lg bg-surface-container-low text-on-surface">
+              <span class="material-symbols-outlined text-primary text-[20px]">shield</span>
+              <div class="flex-1 flex justify-between items-center">
+                <span class="font-label-sm text-label-sm font-semibold">AC/DC Switchgear &amp; 3-Pit Earth</span>
+                <span class="font-label-sm text-label-sm text-text-muted">&lt;5Ω Ground</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-center">
+              <span class="material-symbols-outlined text-text-muted text-[16px]">arrow_downward</span>
+            </div>
+            <div class="flex items-center gap-2 p-3 rounded-lg bg-primary-fixed/50 text-on-primary-fixed-variant">
+              <span class="material-symbols-outlined text-primary text-[20px]">bolt</span>
+              <div class="flex-1 flex justify-between items-center">
+                <span class="font-label-sm text-label-sm font-bold">KSEB Bi-Directional Net-Meter</span>
+                <span class="font-label-sm text-label-sm font-semibold">Zero-Bill Power</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SOLAR SAVINGS & PM SURYA GHAR TEASER -->
+      <section class="px-space-md py-space-md flex flex-col gap-space-sm" id="savings-section">
+        <div class="p-4 md:p-6 rounded-xl bg-surface-container-low shadow-sm flex flex-col gap-space-sm">
+          <div class="flex items-center justify-between">
+            <span class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-bold">Government Subsidy</span>
+            <span class="px-2.5 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-bold">Direct DBT</span>
+          </div>
+          <h3 class="font-headline-lg-mobile md:text-headline-lg text-headline-lg-mobile text-on-surface font-bold">
+            Cut Your KSEB Bills By Up To 90%
+          </h3>
+          <p class="font-body-sm text-body-sm text-text-muted">
+            Under the PM Surya Ghar Muft Bijli Yojana, residential installations in Kerala receive direct bank transfer subsidies with rapid payback.
+          </p>
+          <div class="grid grid-cols-2 gap-3 pt-1">
+            <div class="p-3.5 rounded-lg bg-surface-card shadow-sm flex flex-col gap-0.5">
+              <span class="font-label-sm text-label-sm text-text-muted">Central Subsidy</span>
+              <span class="font-headline-sm text-headline-sm text-primary font-black">₹78,000</span>
+              <span class="font-body-sm text-body-sm text-text-muted text-[10px]">For 3kW+ Capacity</span>
+            </div>
+            <div class="p-3.5 rounded-lg bg-surface-card shadow-sm flex flex-col gap-0.5">
+              <span class="font-label-sm text-label-sm text-text-muted">Typical Payback</span>
+              <span class="font-headline-sm text-headline-sm text-on-surface font-black">3.2 - 4 Yrs</span>
+              <span class="font-body-sm text-body-sm text-text-muted text-[10px]">26+ yrs free power</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- INSTALLATION PROCESS -->
+      <section class="px-space-md py-space-lg flex flex-col gap-space-md">
+        <div class="flex flex-col gap-1 text-center md:text-left">
+          <span class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-bold">5-Stage Engineering Timeline</span>
+          <h2 class="font-headline-lg-mobile md:text-headline-lg text-headline-lg-mobile text-on-surface font-bold">
+            Our Installation Process
+          </h2>
+          <p class="font-body-sm md:text-body-md text-body-sm text-text-muted">
+            From first shadow audit to KSEB net-meter sync, we manage every step with certified in-house engineers.
           </p>
         </div>
 
-        <div class="feasibility-container-wrap">
-          <div class="feasibility-guide-card">
-            
-            <!-- Grid Layout: Left = Step-by-Step Instructions, Right = Official Portal Gateway & Our Site Actions -->
-            <div class="feasibility-guide-layout">
-
-              <!-- Left Column: Step-by-Step Instructions -->
-              <div class="feasibility-steps-pane">
-                <div class="feasibility-pane-badge">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                  Step-by-Step Instructions
-                </div>
-                <h3 class="feasibility-pane-title">How to Verify Feasibility &amp; What to Do on Our Site</h3>
-                <p class="feasibility-pane-sub">
-                  Before applying, ensure your local KSEB Distribution Transformer (DTR) has sufficient renewable energy headroom. Here is the exact process:
-                </p>
-
-                <!-- Steps Timeline -->
-                <div class="kseb-steps-timeline">
-                  
-                  <!-- Step 1 -->
-                  <div class="kseb-step-item">
-                    <div class="kseb-step-num">01</div>
-                    <div class="kseb-step-body">
-                      <h4 class="kseb-step-title">Find Your Consumer Number &amp; Section on Your Bill</h4>
-                      <p class="kseb-step-text">
-                        Keep a copy of your recent KSEB electricity bill ready. Note down your <strong>13-digit Consumer Number</strong> (e.g., <code>1155482091234</code>) and your <strong>Electrical Section</strong> name (e.g., <em>1155 - Cherthala South</em>), printed on the top-left section of the bill.
-                      </p>
-                    </div>
-                  </div>
-
-                  <!-- Step 2 -->
-                  <div class="kseb-step-item">
-                    <div class="kseb-step-num">02</div>
-                    <div class="kseb-step-body">
-                      <h4 class="kseb-step-title">Open the Official KSEB reCap Portal</h4>
-                      <p class="kseb-step-text">
-                        Click the <strong>Open KSEB Feasibility Portal (reCap)</strong> button on the right to open Kerala State Electricity Board Ltd's official self-service capacity tracker (<a href="https://wss.kseb.in/selfservices/reCap" target="_blank" rel="noopener noreferrer" class="kseb-inline-link">wss.kseb.in/selfservices/reCap</a>).
-                      </p>
-                    </div>
-                  </div>
-
-                  <!-- Step 3 -->
-                  <div class="kseb-step-item">
-                    <div class="kseb-step-num">03</div>
-                    <div class="kseb-step-body">
-                      <h4 class="kseb-step-title">Select Your Section &amp; Distribution Transformer (DTR)</h4>
-                      <p class="kseb-step-text">
-                        On the KSEB portal, select your <strong>Electrical Circle</strong>, <strong>Division</strong>, and <strong>Section Office</strong> (or input your Consumer Number / Transformer ID). This will display the list of all distribution transformers under your section.
-                      </p>
-                    </div>
-                  </div>
-
-                  <!-- Step 4 -->
-                  <div class="kseb-step-item">
-                    <div class="kseb-step-num">04</div>
-                    <div class="kseb-step-body">
-                      <h4 class="kseb-step-title">Check the Available Renewable Energy Headroom</h4>
-                      <p class="kseb-step-text">
-                        Review your transformer's <strong>Rated Capacity (kVA)</strong>, <strong>Already Energized Solar (kW)</strong>, and most importantly, the <strong>Balance Feasible Capacity (kW)</strong> available under the KSERC 90% injection cap.
-                      </p>
-                    </div>
-                  </div>
-
-                  <!-- Step 5 (What to do on our site) -->
-                  <div class="kseb-step-item highlight-step">
-                    <div class="kseb-step-num accent">05</div>
-                    <div class="kseb-step-body">
-                      <div class="step-tag-pill">What to Do Next on Our Site</div>
-                      <h4 class="kseb-step-title">Return to Sooryavamshi to Size &amp; Register Your Project</h4>
-                      <p class="kseb-step-text">
-                        Once you verify capacity on KSEB's portal, come right back to our site:
-                      </p>
-                      <ul class="kseb-site-action-list">
-                        <li>
-                          <span class="action-icon">🧮</span>
-                          <div><strong>Calculate Exact System Size:</strong> Use our <a href="#calculator" class="kseb-inline-link">Solar Calculator</a> to determine your ideal capacity (e.g. 3 kW – 10 kW), roof area requirement, and PM Surya Ghar central subsidy.</div>
-                        </li>
-                        <li>
-                          <span class="action-icon">📋</span>
-                          <div><strong>Hand Over the Paperwork to Us:</strong> Fill out our <a href="#contact" class="kseb-inline-link">Enquiry Form</a> with your Consumer Number. Sooryavamshi's authorized engineers handle the formal KSEB Soura registration, onsite shadow audit, electrical inspection, and net-metering sync!</div>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-
-              <!-- Right Column: Portal Gateway & Assistance Card -->
-              <div class="feasibility-action-pane">
-                
-                <!-- 1. Official Gateway Box -->
-                <div class="kseb-gateway-card">
-                  <div class="kseb-gateway-header">
-                    <div class="kseb-emblem-badge">
-                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-                    </div>
-                    <div>
-                      <div class="kseb-gateway-badge-text">Official Government Gateway</div>
-                      <div class="kseb-gateway-title">KSEB Renewable Energy Capacity Portal</div>
-                    </div>
-                  </div>
-
-                  <p class="kseb-gateway-desc">
-                    Direct access to the live distribution transformer (DTR) solar capacity database managed by Kerala State Electricity Board Ltd.
-                  </p>
-
-                  <div class="kseb-url-display">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-                    <span>https://wss.kseb.in/selfservices/reCap</span>
-                  </div>
-
-                  <a href="https://wss.kseb.in/selfservices/reCap" target="_blank" rel="noopener noreferrer" class="btn-kseb-portal-cta" id="btnOpenKsebPortal">
-                    <span>Open KSEB Feasibility Portal (reCap)</span>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                  </a>
-
-                  <div class="kseb-redirect-notice">
-                    <span>🔒 Safe external redirect to official KSEBL Self-Services portal</span>
-                  </div>
-                </div>
-
-                <!-- 2. Bill Sample Reference Box -->
-                <div class="kseb-bill-guide-box">
-                  <div class="bill-guide-header">
-                    <span class="bill-icon">📄</span>
-                    <div>
-                      <h5 class="bill-guide-title">How to Locate Details on Your Bill</h5>
-                      <span class="bill-guide-sub">Printed KSEB Low Tension (LT) Bill</span>
-                    </div>
-                  </div>
-                  <div class="kseb-bill-mini-mockup">
-                    <div class="bill-mockup-top">KERALA STATE ELECTRICITY BOARD LTD.</div>
-                    <div class="bill-mockup-row">
-                      <span class="bill-mockup-label">CONSUMER NO:</span>
-                      <span class="bill-mockup-val highlight">1155 4820 9123 4</span>
-                    </div>
-                    <div class="bill-mockup-row">
-                      <span class="bill-mockup-label">ELECTRICAL SECTION:</span>
-                      <span class="bill-mockup-val">1155 - CHERTHALA SOUTH</span>
-                    </div>
-                  </div>
-                  <p class="bill-guide-tip">
-                    <strong>Tip:</strong> The first 4 digits of your Consumer Number represent your Electrical Section code.
-                  </p>
-                </div>
-
-                <!-- 3. What to do if capacity is low or needing help -->
-                <div class="kseb-help-card">
-                  <div class="help-card-header">
-                    <span class="help-icon">💡</span>
-                    <div>
-                      <h5 class="help-card-title">Transformer Showing Low or Zero Headroom?</h5>
-                      <p class="help-card-desc">Don't worry! Sooryavamshi has solutions to get your solar installed:</p>
-                    </div>
-                  </div>
-                  <ul class="help-solutions-list">
-                    <li>✓ <strong>DTR Augmentation:</strong> We petition KSEB for transformer capacity upgrades.</li>
-                    <li>✓ <strong>Zero-Export Limitation:</strong> Install solar for 100% self-consumption without grid injection limits.</li>
-                    <li>✓ <strong>Feeder Transfer:</strong> Shift connection to an adjacent feeder with surplus capacity.</li>
-                  </ul>
-                  <div class="help-card-actions">
-                    <a href="#calculator" class="btn btn-outline btn-sm" style="flex: 1; text-align: center;">
-                      <span>Calculate Plant Size</span>
-                    </a>
-                    <a href="#contact" class="btn btn-primary btn-sm" style="flex: 1; text-align: center;">
-                      <span>Get Free Assistance</span>
-                    </a>
-                  </div>
-                </div>
-
-              </div>
-
+        <!-- 5 Steps List -->
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-space-sm relative">
+          <!-- Step 1 -->
+          <div class="p-3.5 rounded-xl bg-surface-card shadow-sm flex items-start gap-3">
+            <span class="w-8 h-8 rounded-full bg-primary-fixed text-primary flex items-center justify-center font-label-md text-label-md font-bold flex-shrink-0">
+              01
+            </span>
+            <div class="flex flex-col gap-0.5">
+              <span class="font-label-lg text-label-lg font-bold text-on-surface">Site &amp; Shadow Audit</span>
+              <p class="font-body-sm text-body-sm text-text-muted">
+                Onsite 3D solar irradiance modeling on your RCC terrace.
+              </p>
+            </div>
+          </div>
+          <!-- Step 2 -->
+          <div class="p-3.5 rounded-xl bg-surface-card shadow-sm flex items-start gap-3">
+            <span class="w-8 h-8 rounded-full bg-surface-container-high text-secondary flex items-center justify-center font-label-md text-label-md font-bold flex-shrink-0">
+              02
+            </span>
+            <div class="flex flex-col gap-0.5">
+              <span class="font-label-lg text-label-lg font-bold text-on-surface">System CAD Design</span>
+              <p class="font-body-sm text-body-sm text-text-muted">
+                Single Line Diagram (SLD) &amp; KSEB paperwork.
+              </p>
+            </div>
+          </div>
+          <!-- Step 3 -->
+          <div class="p-3.5 rounded-xl bg-surface-card shadow-sm flex items-start gap-3">
+            <span class="w-8 h-8 rounded-full bg-surface-container-high text-secondary flex items-center justify-center font-label-md text-label-md font-bold flex-shrink-0">
+              03
+            </span>
+            <div class="flex flex-col gap-0.5">
+              <span class="font-label-lg text-label-lg font-bold text-on-surface">Certified Installation</span>
+              <p class="font-body-sm text-body-sm text-text-muted">
+                Heavy-duty GP structure &amp; 10-12° South tilt.
+              </p>
+            </div>
+          </div>
+          <!-- Step 4 -->
+          <div class="p-3.5 rounded-xl bg-surface-card shadow-sm flex items-start gap-3">
+            <span class="w-8 h-8 rounded-full bg-surface-container-high text-secondary flex items-center justify-center font-label-md text-label-md font-bold flex-shrink-0">
+              04
+            </span>
+            <div class="flex flex-col gap-0.5">
+              <span class="font-label-lg text-label-lg font-bold text-on-surface">Testing &amp; Net Metering</span>
+              <p class="font-body-sm text-body-sm text-text-muted">
+                Megger test, earth check (&lt;5Ω), DISCOM sync.
+              </p>
+            </div>
+          </div>
+          <!-- Step 5 -->
+          <div class="p-3.5 rounded-xl bg-surface-card shadow-sm flex items-start gap-3">
+            <span class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-md text-label-md font-bold flex-shrink-0">
+              05
+            </span>
+            <div class="flex flex-col gap-0.5">
+              <span class="font-label-lg text-label-lg font-bold text-on-surface">Power Your Home &amp; App</span>
+              <p class="font-body-sm text-body-sm text-text-muted">
+                Real-time smartphone IoT analytics &amp; 30-yr support.
+              </p>
             </div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- =========================================================================
-         4. PRODUCTS & EQUIPMENT SECTION
-         ========================================================================= -->
-    <section class="section section-light" id="equipment">
-      <div class="container">
-        <div class="section-header">
-          <div class="section-tag">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-            PREMIUM ENGINEERING SPECIFICATIONS
+        <!-- Expandable Engineering Specifics -->
+        <details class="p-4 rounded-xl bg-surface-container-low text-on-surface">
+          <summary class="font-label-md text-label-md font-semibold cursor-pointer flex items-center justify-between">
+            <span class="flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-primary text-[18px]">verified_user</span>
+              <span>Learn More: Quality &amp; Safety Standards</span>
+            </span>
+            <span class="material-symbols-outlined text-[20px]">expand_more</span>
+          </summary>
+          <div class="pt-3 font-body-sm text-body-sm text-text-muted flex flex-col gap-2">
+            <p>• <strong>Zero Terrace Leakage:</strong> We anchor with EPDM chemical gaskets to safeguard concrete roofs.</p>
+            <p>• <strong>Wind Resistance:</strong> Kerala monsoons demand structural certification up to 150+ km/h wind speeds.</p>
+            <p>• <strong>Surge Protection:</strong> Type-2 SPDs in both AC and DC switchgear plus dedicated copper lightning arresters.</p>
           </div>
-          <h2 class="section-title">Quality Equipment. Reliable Solar Performance.</h2>
-          <p class="section-subtitle">
-            We partner exclusively with India’s leading Tier-1 manufacturers and adhere to rigorous electrical safety codes to deliver 30+ years of uncompromised generation.
-          </p>
-        </div>
+        </details>
+      </section>
 
-        <div class="equipment-grid">
-          
-          <!-- 1. Solar Panels -->
-          <article class="equipment-card">
-            <div class="eq-icon-wrap">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="3" y1="15" x2="21" y2="15"></line><line x1="9" y1="3" x2="9" y2="21"></line><line x1="15" y1="3" x2="15" y2="21"></line></svg>
-            </div>
-            <div class="eq-category">Photovoltaic Modules</div>
-            <h3 class="eq-title">550 Wp Mono PERC Bifacial DCR Panels</h3>
-            <p class="eq-desc">High-efficiency 550 Wp Mono PERC Bifacial DCR (Domestic Content Requirement) modules delivering maximum power output and MNRE subsidy compliance.</p>
-            
-            <div class="eq-brands-chips">
-              <span class="eq-chip">Rayzon Solar</span>
-              <span class="eq-chip">Vikram Solar</span>
-              <span class="eq-chip">550 Wp Mono PERC</span>
-              <span class="eq-chip">Bifacial DCR</span>
-            </div>
-
-            <ul class="eq-specs-list">
-              <li class="eq-spec-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span><strong>Specification &amp; Make:</strong> 550 Wp Mono PERC Bifacial DCR (Rayzon / Vikram Make)</span>
-              </li>
-              <li class="eq-spec-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span><strong>Efficiency &amp; Gain:</strong> ~21.5%+ Conversion Efficiency &amp; up to 25% Rear Bifacial Gain</span>
-              </li>
-              <li class="eq-spec-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span><strong>Warranty:</strong> 25-Yr Performance Warranty (≥ 90% @ 10 yrs, ≥ 80% @ 25 yrs)</span>
-              </li>
-            </ul>
-
-            <div class="eq-expandable-content" id="panelSpecsContent">
-              <div style="font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.5; padding: 12px; background: var(--color-bg-light); border-radius: var(--radius-sm);">
-                <strong>Key Engineering Benefits:</strong>
-                <ul style="margin-left: 18px; margin-top: 6px;">
-                  <li>100% DCR (Domestic Content Requirement) compliant for PM Surya Ghar subsidy</li>
-                  <li>Bifacial dual-glass / transparent design captures rear reflected sunlight for extra yield</li>
-                  <li>144 half-cut PERC cell configuration reduces internal resistive losses</li>
-                  <li>Anti-reflective PID-free glass certified for 2400 Pa wind &amp; 5400 Pa snow load</li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="eq-card-footer">
-              <button type="button" class="eq-expand-btn" data-target="panelSpecsContent" aria-expanded="false">
-                <span>View Technical Details</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-              </button>
-            </div>
-          </article>
-
-          <!-- 2. Solar Inverters -->
-          <article class="equipment-card">
-            <div class="eq-icon-wrap">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line></svg>
-            </div>
-            <div class="eq-category">Power Conversion</div>
-            <h3 class="eq-title">3kW On-Grid Solar Inverters</h3>
-            <p class="eq-desc">3kW Single Phase On-Grid string inverters equipped with dual MPPT tracking and integrated Wi-Fi cloud data telemetry for live generation tracking.</p>
-            
-            <div class="eq-brands-chips">
-              <span class="eq-chip">Solinteg</span>
-              <span class="eq-chip">Polycab</span>
-              <span class="eq-chip">Single Phase Grid-Tie</span>
-              <span class="eq-chip">Wi-Fi Monitoring</span>
-            </div>
-
-            <ul class="eq-specs-list">
-              <li class="eq-spec-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span><strong>Capacity &amp; Make:</strong> 3kW Single Phase On-Grid Inverter (Solinteg / Polycab Make)</span>
-              </li>
-              <li class="eq-spec-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span><strong>Efficiency &amp; Features:</strong> &gt;98% Peak Efficiency, Dual MPPT tracking</span>
-              </li>
-              <li class="eq-spec-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span><strong>Monitoring &amp; Warranty:</strong> Wi-Fi Data Logger Cloud App | Up to 8-Year Inverter Warranty</span>
-              </li>
-            </ul>
-
-            <div class="eq-expandable-content" id="inverterSpecsContent">
-              <div style="font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.5; padding: 12px; background: var(--color-bg-light); border-radius: var(--radius-sm);">
-                <strong>Key Engineering Benefits:</strong>
-                <ul style="margin-left: 18px; margin-top: 6px;">
-                  <li>Die-cast aluminum IP65 outdoor enclosure with natural convection cooling</li>
-                  <li>Real-time smartphone mobile app tracking for daily yield and grid status</li>
-                  <li>Full compliance with KSEBL / Central Electricity Authority (CEA) grid interconnection norms</li>
-                  <li>Integrated anti-islanding, DC surge protection, and ground fault interruption</li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="eq-card-footer">
-              <button type="button" class="eq-expand-btn" data-target="inverterSpecsContent" aria-expanded="false">
-                <span>View Technical Details</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-              </button>
-            </div>
-          </article>
-
-          <!-- 3. Dedicated Card: Lightning & Surge Protection -->
-          <article class="equipment-card featured-protection">
-            <div class="eq-icon-wrap" style="background: var(--grad-solar); color: #FFFFFF;">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-            </div>
-            <div class="eq-category" style="color: var(--color-secondary);">Dedicated Safety Systems</div>
-            <h3 class="eq-title">Chemical Earthing &amp; Lightning Arrester</h3>
-            <p class="eq-desc">
-              Engineered defense network featuring Excel Earthing chemical grounding pits and rooftop single spike air termination rods for complete atmospheric surge protection.
-            </p>
-
-            <ul class="eq-specs-list">
-              <li class="eq-spec-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span><strong>Chemical Earthing:</strong> 2 Sets Maintenance-Free Chemical Earthing, 250μ Copper Rod (14mm/1.2m) (Excel Earthing)</span>
-              </li>
-              <li class="eq-spec-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span><strong>Lightning Arrester:</strong> 1 Set Single Spike Air Termination Rod with Insulated Base &amp; Chemical Kit (Excel Earthing)</span>
-              </li>
-              <li class="eq-spec-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span><strong>Earth Resistance:</strong> Low impedance (&lt; 5Ω) chemical bentonite earth pits</span>
-              </li>
-            </ul>
-
-            <div class="eq-expandable-content" id="protectionSpecsContent">
-              <div style="font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.5; padding: 12px; background: #FFF9F2; border-radius: var(--radius-sm); border: 1px solid rgba(245,130,32,0.2);">
-                <strong>Role in Household &amp; System Safety:</strong>
-                <p style="margin: 6px 0 0; font-size: 0.82rem;">
-                  Prevents catastrophic lightning damage and grid transients through isolated conductive pathways:
-                </p>
-                <ul style="margin-left: 18px; margin-top: 4px;">
-                  <li>Dedicated Pit 1: Top-roof Single Spike Lightning Air Termination Rod</li>
-                  <li>Dedicated Pit 2 &amp; 3: Solar module frame structure &amp; inverter AC/DC electronics chassis</li>
-                  <li>250-micron molecular copper bonded rod guarantees 25+ years of corrosion resistance</li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="eq-card-footer">
-              <button type="button" class="eq-expand-btn" data-target="protectionSpecsContent" aria-expanded="false" style="color: var(--color-secondary);">
-                <span>View Protection Blueprint</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-              </button>
-            </div>
-          </article>
-
-          <!-- 4. Mounting Structure -->
-          <article class="equipment-card">
-            <div class="eq-icon-wrap">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
-            </div>
-            <div class="eq-category">Mechanical Foundation</div>
-            <h3 class="eq-title">Epoxy Coated GP Roof Structure</h3>
-            <p class="eq-desc">Heavy-duty Epoxy Coated GP (Galvanized Pipe) tubes and HDGI structures designed for 10-12° South tilt optimal solar yield on flat RCC roofs.</p>
-
-            <div class="eq-brands-chips">
-              <span class="eq-chip">Apollo GP Tubes / Equivalent</span>
-              <span class="eq-chip">Epoxy Coated</span>
-              <span class="eq-chip">10 - 12° South Tilt</span>
-              <span class="eq-chip">Flat Roof Mounting</span>
-            </div>
-
-            <ul class="eq-specs-list">
-              <li class="eq-spec-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span><strong>Material &amp; Make:</strong> Epoxy Coated GP Tubes for Flat Roof (Apollo / Equivalent Make)</span>
-              </li>
-              <li class="eq-spec-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span><strong>Tilt &amp; Orientation:</strong> 10° – 12° South Tilt for maximum annual solar generation</span>
-              </li>
-              <li class="eq-spec-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span><strong>Wind Rating:</strong> Certified to 150+ km/h wind resistance with SS304 fasteners</span>
-              </li>
-            </ul>
-
-            <div class="eq-expandable-content" id="structureSpecsContent">
-              <div style="font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.5; padding: 12px; background: var(--color-bg-light); border-radius: var(--radius-sm);">
-                <strong>Key Engineering Benefits:</strong>
-                <ul style="margin-left: 18px; margin-top: 6px;">
-                  <li>Pre-galvanized epoxy coated modular structure prevents onsite welding and rusting</li>
-                  <li>EPDM chemical gasket waterproof anchoring prevents terrace roof seepage</li>
-                  <li>Optimal 10-12° South inclination specifically engineered for Kerala solar radiation angles</li>
-                  <li>High-tensile Stainless Steel SS304/SS316 anti-corrosive hardware fasteners</li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="eq-card-footer">
-              <button type="button" class="eq-expand-btn" data-target="structureSpecsContent" aria-expanded="false">
-                <span>View Technical Details</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-              </button>
-            </div>
-          </article>
-
-          <!-- 5. DC/AC Protection Units -->
-          <article class="equipment-card">
-            <div class="eq-icon-wrap">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><circle cx="15.5" cy="8.5" r="1.5"></circle><polyline points="7 14 10 17 17 10"></polyline></svg>
-            </div>
-            <div class="eq-category">Electrical Distribution</div>
-            <h3 class="eq-title">DCDB &amp; ACDB Switchgear Panels</h3>
-            <p class="eq-desc">Industrial-grade DCDB &amp; ACDB switchgear panels equipped with ABB / Eaton MCBs, Mersen fuses, and Mersen/Citel Type 2 SPDs.</p>
-
-            <div class="eq-brands-chips">
-              <span class="eq-chip">ABB / Eaton MCBs</span>
-              <span class="eq-chip">Mersen Fuses &amp; SPD</span>
-              <span class="eq-chip">Citel SPD</span>
-              <span class="eq-chip">IP65 / IP54 Rated</span>
-            </div>
-
-            <ul class="eq-specs-list">
-              <li class="eq-spec-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span><strong>DCDB Unit:</strong> PV Fuses at input (Mersen), DC Isolator &amp; Type 2 DC SPD (Mersen) in IP65 enclosure</span>
-              </li>
-              <li class="eq-spec-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span><strong>ACDB Unit:</strong> MCB (ABB/Eaton) &amp; Type 2 AC SPD (Mersen/Citel) in PC/ABS/CRCA IP54 enclosure</span>
-              </li>
-              <li class="eq-spec-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span><strong>Safety Code:</strong> Full compliance with Electrical Inspectorate &amp; KSEB standards</span>
-              </li>
-            </ul>
-
-            <div class="eq-expandable-content" id="switchgearSpecsContent">
-              <div style="font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.5; padding: 12px; background: var(--color-bg-light); border-radius: var(--radius-sm);">
-                <strong>Key Engineering Benefits:</strong>
-                <ul style="margin-left: 18px; margin-top: 6px;">
-                  <li>Instant manual DC &amp; AC rotary isolation for safe system maintenance</li>
-                  <li>Over-current, 1000V DC reverse polarity, and grid surge trip protection</li>
-                  <li>Weatherproof IP65/IP54 UV-stabilized enclosures suitable for outdoor installation</li>
-                  <li>Lockable isolator mechanism for KSEBL net-metering line worker safety</li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="eq-card-footer">
-              <button type="button" class="eq-expand-btn" data-target="switchgearSpecsContent" aria-expanded="false">
-                <span>View Technical Details</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-              </button>
-            </div>
-          </article>
-
-          <!-- 6. Cables & Components -->
-          <article class="equipment-card">
-            <div class="eq-icon-wrap">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
-            </div>
-            <div class="eq-category">Wiring, Interconnects &amp; Metering</div>
-            <h3 class="eq-title">Solar Cables &amp; Bi-Directional Energy Meter</h3>
-            <p class="eq-desc">E-Beam cross-linked solar copper cables, PVC/XLPE aluminum AC cables, and L&T bi-directional net meters for reliable power delivery.</p>
-
-            <div class="eq-brands-chips">
-              <span class="eq-chip">Apar / Seichem (DC Cables)</span>
-              <span class="eq-chip">Apar / Polycab (AC Cables)</span>
-              <span class="eq-chip">L&amp;T Solar Meter</span>
-              <span class="eq-chip">E-Beam XLPO</span>
-            </div>
-
-            <ul class="eq-specs-list">
-              <li class="eq-spec-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span><strong>DC Cables:</strong> UV Rated Solar Copper Cable with E-Beam Cross Linked sheath (Apar / Seichem Make)</span>
-              </li>
-              <li class="eq-spec-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span><strong>AC Cables:</strong> Heavy-duty PVC / XLPE Aluminium Cables (Apar / Polycab Make)</span>
-              </li>
-              <li class="eq-spec-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span><strong>Solar Meter:</strong> Watt-Hour Bi-Directional Net Meter (L&amp;T Make, KSEB Compliant)</span>
-              </li>
-            </ul>
-
-            <div class="eq-expandable-content" id="cablesSpecsContent">
-              <div style="font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.5; padding: 12px; background: var(--color-bg-light); border-radius: var(--radius-sm);">
-                <strong>Key Engineering Benefits:</strong>
-                <ul style="margin-left: 18px; margin-top: 6px;">
-                  <li>Electron-Beam cross-linked XLPO sheath flame retardant, halogen-free, and UV-stabilized for 25+ yrs</li>
-                  <li>Strict wire gauge sizing guarantees total DC &amp; AC voltage drop remains strictly under 1.5%</li>
-                  <li>L&amp;T Class 1.0 accuracy bi-directional net meter tracks solar export-import for KSEBL billing</li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="eq-card-footer">
-              <button type="button" class="eq-expand-btn" data-target="cablesSpecsContent" aria-expanded="false">
-                <span>View Technical Details</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-              </button>
-            </div>
-          </article>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- =========================================================================
-         5. OUR INSTALLATION PROCESS
-         ========================================================================= -->
-    <section class="section" id="process">
-      <div class="container">
-        <div class="section-header">
-          <div class="section-tag">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-            7-STAGE ENGINEERING TIMELINE
+      <!-- FEATURED PROJECTS -->
+      <section class="py-space-md flex flex-col gap-space-md" id="projects-section">
+        <div class="px-space-md flex items-center justify-between">
+          <div class="flex flex-col">
+            <span class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-bold">Track Record</span>
+            <h2 class="font-headline-lg-mobile md:text-headline-lg text-headline-lg-mobile text-on-surface font-bold">Featured Projects</h2>
           </div>
-          <h2 class="section-title">Our Installation Process</h2>
-          <p class="section-subtitle">
-            From your very first bill consultation to grid net-meter synchronization and 30-year performance monitoring, we manage every step with certified technicians.
-          </p>
+          <span class="px-3 py-1 rounded-full bg-surface-container font-label-sm text-label-sm text-on-surface font-semibold">250+ Installed</span>
         </div>
 
-        <div class="process-timeline">
-          <div class="process-grid">
-            
-            <div class="process-step-card">
-              <div class="process-number-circle">01</div>
-              <h4 class="process-step-title">Initial Consultation</h4>
-              <p class="process-step-desc">Discussion of your energy goals, backup needs, and current monthly electricity bills.</p>
-            </div>
-
-            <div class="process-step-card">
-              <div class="process-number-circle">02</div>
-              <h4 class="process-step-title">Consumption Analysis</h4>
-              <p class="process-step-desc">Audit of past 12-month DISCOM tariffs, connected load, and peak daytime energy profiles.</p>
-            </div>
-
-            <div class="process-step-card">
-              <div class="process-number-circle">03</div>
-              <h4 class="process-step-title">Site &amp; Shadow Audit</h4>
-              <p class="process-step-desc">Onsite 3D solar irradiance modeling, roof structural load test, and azimuth angle checks.</p>
-            </div>
-
-            <div class="process-step-card">
-              <div class="process-number-circle">04</div>
-              <h4 class="process-step-title">System CAD Design</h4>
-              <p class="process-step-desc">Custom electrical Single Line Diagram (SLD), string design, and DISCOM net-metering approvals.</p>
-            </div>
-
-            <div class="process-step-card">
-              <div class="process-number-circle">05</div>
-              <h4 class="process-step-title">Equipment Installation</h4>
-              <p class="process-step-desc">Galvanized structure mounting, panel alignment, 3-pit chemical earthing, and conduit cabling.</p>
-            </div>
-
-            <div class="process-step-card">
-              <div class="process-number-circle">06</div>
-              <h4 class="process-step-title">Testing &amp; Commissioning</h4>
-              <p class="process-step-desc">Megger insulation check, earth resistance verification (&lt;5Ω), DISCOM inspection, and net meter sync.</p>
-            </div>
-
-            <div class="process-step-card">
-              <div class="process-number-circle">07</div>
-              <h4 class="process-step-title">Handover &amp; Support</h4>
-              <p class="process-step-desc">Smartphone monitoring app activation, warranty documentation handover, and lifetime support.</p>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- =========================================================================
-         6. OUR PROJECTS GALLERY & STATS
-         ========================================================================= -->
-    <section class="section section-light" id="projects">
-      <div class="container">
-        <div class="section-header">
-          <div class="section-tag">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
-            PROVEN TRACK RECORD
-          </div>
-          <h2 class="section-title">Our Solar Projects</h2>
-          <p class="section-subtitle">
-            Explore a curated selection of residential and commercial rooftop solar installations commissioned across India.
-          </p>
-        </div>
-
-        <!-- Filter Bar -->
-        <div class="projects-filter-bar" role="tablist">
-          <button type="button" class="filter-btn active" data-filter="all">All Installations</button>
-          <button type="button" class="filter-btn" data-filter="residential">Residential</button>
-          <button type="button" class="filter-btn" data-filter="commercial">Commercial</button>
-          <button type="button" class="filter-btn" data-filter="rooftop">Rooftop Pergolas</button>
-          <button type="button" class="filter-btn" data-filter="other">Apartments / Societies</button>
-        </div>
-
-        <!-- Projects Grid -->
-        <div class="projects-grid" id="projectsGrid">
-          
+        <!-- Horizontal Rail on Mobile, Grid on Desktop -->
+        <div class="flex gap-space-sm overflow-x-auto px-space-md pb-2 no-scrollbar md:grid md:grid-cols-3 md:overflow-visible">
           <!-- Project 1 -->
-          <article class="project-card" data-id="proj-1" data-category="residential">
-            <div class="project-img-wrapper">
-              <img src="assets/images/project-villa.jpg" alt="5 kW On-Grid Elevated Rooftop Plant" loading="lazy">
-              <span class="project-badge">Residential Villa</span>
-              <span class="project-capacity-pill">5.4 kWp</span>
-            </div>
-            <div class="project-info-body">
-              <div class="project-location">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                Indiranagar, Bengaluru, Karnataka
+          <div class="w-[82vw] md:w-auto flex-shrink-0 rounded-2xl bg-surface-card shadow-md overflow-hidden flex flex-col">
+            <div class="w-full h-48 bg-cover bg-center relative" style="background-image: url('assets/images/project-villa.jpg')">
+              <div class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-md bg-inverse-surface/85 backdrop-blur-sm text-inverse-on-surface font-label-sm text-label-sm font-semibold">
+                Cherthala, Kerala
               </div>
-              <h3 class="project-title">5 kW On-Grid Elevated Rooftop Plant</h3>
-              <p class="project-desc-short">Installed on an elevated galvanized pergola structure, preserving 100% of the terrace garden while slashing 95% of electricity bills.</p>
-              <div class="project-card-footer">
-                <span class="project-savings-tag">₹60,000+ Annual Savings</span>
-                <span class="project-view-link">View Project Details &rarr;</span>
+              <div class="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-md bg-primary-container text-on-primary font-label-sm text-label-sm font-bold">
+                5.0 kWp Plant
               </div>
             </div>
-          </article>
+            <div class="p-4 flex flex-col gap-2">
+              <h4 class="font-headline-sm text-headline-sm text-on-surface font-bold">Elevated Rooftop Pergola</h4>
+              <p class="font-body-sm text-body-sm text-text-muted">
+                Preserves 100% of usable RCC terrace space while providing shading and slashing monthly bills.
+              </p>
+              <div class="flex items-center justify-between pt-2 border-t border-border-subtle text-primary font-label-sm text-label-sm font-bold">
+                <span class="flex items-center gap-1">
+                  <span class="material-symbols-outlined text-[16px]">savings</span>
+                  ₹60,000+ Annual Savings
+                </span>
+                <span class="text-text-muted font-normal">RCC Terrace</span>
+              </div>
+            </div>
+          </div>
 
           <!-- Project 2 -->
-          <article class="project-card" data-id="proj-2" data-category="residential">
-            <div class="project-img-wrapper">
-              <img src="assets/images/project-urban.jpg" alt="8 kW Hybrid Residential Solar System" loading="lazy">
-              <span class="project-badge">Independent Home</span>
-              <span class="project-capacity-pill">8.1 kWp</span>
-            </div>
-            <div class="project-info-body">
-              <div class="project-location">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                Banjara Hills, Hyderabad, Telangana
+          <div class="w-[82vw] md:w-auto flex-shrink-0 rounded-2xl bg-surface-card shadow-md overflow-hidden flex flex-col">
+            <div class="w-full h-48 bg-cover bg-center relative" style="background-image: url('assets/images/project-urban.jpg')">
+              <div class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-md bg-inverse-surface/85 backdrop-blur-sm text-inverse-on-surface font-label-sm text-label-sm font-semibold">
+                Kakkanad, Kochi
               </div>
-              <h3 class="project-title">8 kW Hybrid Residential Solar System</h3>
-              <p class="project-desc-short">Custom hybrid rooftop solar installation with high-efficiency LiFePO4 battery backup for 24/7 continuous green power during outages.</p>
-              <div class="project-card-footer">
-                <span class="project-savings-tag">₹92,000+ Annual Savings</span>
-                <span class="project-view-link">View Project Details &rarr;</span>
+              <div class="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-md bg-primary-container text-on-primary font-label-sm text-label-sm font-bold">
+                3.2 kWp Surya Ghar
               </div>
             </div>
-          </article>
+            <div class="p-4 flex flex-col gap-2">
+              <h4 class="font-headline-sm text-headline-sm text-on-surface font-bold">PM Surya Ghar Installation</h4>
+              <p class="font-body-sm text-body-sm text-text-muted">
+                Optimized for fast ₹78,000 subsidy crediting, zero terrace water leakage, and 3.2-year payback.
+              </p>
+              <div class="flex items-center justify-between pt-2 border-t border-border-subtle text-primary font-label-sm text-label-sm font-bold">
+                <span class="flex items-center gap-1">
+                  <span class="material-symbols-outlined text-[16px]">savings</span>
+                  ₹34,000+ Annual Savings
+                </span>
+                <span class="text-text-muted font-normal">Zero Leakage</span>
+              </div>
+            </div>
+          </div>
 
           <!-- Project 3 -->
-          <article class="project-card" data-id="proj-3" data-category="rooftop">
-            <div class="project-img-wrapper">
-              <img src="assets/images/hero.jpg" alt="3 kW Affordable Rooftop Solar Project" loading="lazy">
-              <span class="project-badge">Urban Rooftop</span>
-              <span class="project-capacity-pill">3.24 kWp</span>
-            </div>
-            <div class="project-info-body">
-              <div class="project-location">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                Kakkanad, Kochi, Kerala
+          <div class="w-[82vw] md:w-auto flex-shrink-0 rounded-2xl bg-surface-card shadow-md overflow-hidden flex flex-col">
+            <div class="w-full h-48 bg-cover bg-center relative" style="background-image: url('assets/images/project-commercial.jpg')">
+              <div class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-md bg-inverse-surface/85 backdrop-blur-sm text-inverse-on-surface font-label-sm text-label-sm font-semibold">
+                Whitefield, Campus
               </div>
-              <h3 class="project-title">3 kW Affordable Rooftop Solar Project</h3>
-              <p class="project-desc-short">Designed for optimal ROI under the PM Surya Ghar Muft Bijli Yojana with zero maintenance and an estimated 3.2-year payback period.</p>
-              <div class="project-card-footer">
-                <span class="project-savings-tag">₹34,000+ Annual Savings</span>
-                <span class="project-view-link">View Project Details &rarr;</span>
+              <div class="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-md bg-primary-container text-on-primary font-label-sm text-label-sm font-bold">
+                25.0 kWp Commercial
               </div>
             </div>
-          </article>
-
-          <!-- Project 4 -->
-          <article class="project-card" data-id="proj-4" data-category="commercial">
-            <div class="project-img-wrapper">
-              <img src="assets/images/project-commercial.jpg" alt="25 kW Commercial Campus Solar Plant" loading="lazy">
-              <span class="project-badge">Institutional Campus</span>
-              <span class="project-capacity-pill">25 kWp</span>
-            </div>
-            <div class="project-info-body">
-              <div class="project-location">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                Whitefield, Bengaluru, Karnataka
+            <div class="p-4 flex flex-col gap-2">
+              <h4 class="font-headline-sm text-headline-sm text-on-surface font-bold">Commercial Solar Plant</h4>
+              <p class="font-body-sm text-body-sm text-text-muted">
+                Commercial institutional rooftop solar plant powering laboratories with AC/DC protection.
+              </p>
+              <div class="flex items-center justify-between pt-2 border-t border-border-subtle text-primary font-label-sm text-label-sm font-bold">
+                <span class="flex items-center gap-1">
+                  <span class="material-symbols-outlined text-[16px]">savings</span>
+                  ₹2,80,000+ Savings
+                </span>
+                <span class="text-text-muted font-normal">Institutional</span>
               </div>
-              <h3 class="project-title">25 kW Commercial Campus Solar Plant</h3>
-              <p class="project-desc-short">Commercial institutional rooftop solar plant powering laboratories and facilities with high-voltage AC/DC protection.</p>
-              <div class="project-card-footer">
-                <span class="project-savings-tag">₹2,80,000+ Annual Savings</span>
-                <span class="project-view-link">View Project Details &rarr;</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- Project 5 -->
-          <article class="project-card" data-id="proj-5" data-category="rooftop">
-            <div class="project-img-wrapper">
-              <img src="assets/images/project-villa.jpg" alt="10 kW Luxury Villa Solar Microgrid" loading="lazy">
-              <span class="project-badge">Luxury Estate</span>
-              <span class="project-capacity-pill">10.8 kWp</span>
-            </div>
-            <div class="project-info-body">
-              <div class="project-location">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                ECR, Chennai, Tamil Nadu
-              </div>
-              <h3 class="project-title">10 kW Luxury Villa Solar Microgrid</h3>
-              <p class="project-desc-short">Coastal corrosion-resistant solar installation featuring anodized aluminum fixtures and marine-grade SS316 fasteners.</p>
-              <div class="project-card-footer">
-                <span class="project-savings-tag">₹1,25,000+ Annual Savings</span>
-                <span class="project-view-link">View Project Details &rarr;</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- Project 6 -->
-          <article class="project-card" data-id="proj-6" data-category="other">
-            <div class="project-img-wrapper">
-              <img src="assets/images/project-urban.jpg" alt="15 kW Multi-Dwelling Apartment Rooftop" loading="lazy">
-              <span class="project-badge">Apartment Society</span>
-              <span class="project-capacity-pill">15 kWp</span>
-            </div>
-            <div class="project-info-body">
-              <div class="project-location">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                Kothrud, Pune, Maharashtra
-              </div>
-              <h3 class="project-title">15 kW Apartment Common Area Solar</h3>
-              <p class="project-desc-short">Common-area solar supply powering lifts, water pumps, clubhouse, and society lighting, cutting maintenance dues by over 70%.</p>
-              <div class="project-card-footer">
-                <span class="project-savings-tag">₹1,90,000+ Annual Savings</span>
-                <span class="project-view-link">View Project Details &rarr;</span>
-              </div>
-            </div>
-          </article>
-
-        </div>
-
-        <!-- Prominent Statistic Section -->
-        <div class="stats-banner">
-          <div class="stats-grid">
-            <div class="stat-card">
-              <div class="stat-number" data-target="250" data-suffix="+">250+</div>
-              <div class="stat-label">Projects Completed</div>
-              <div class="stat-subtext">Residential &amp; Commercial Systems</div>
-            </div>
-
-            <div class="stat-card">
-              <div class="stat-number" data-target="2.8" data-decimal="true" data-suffix=" MW+">2.8 MW+</div>
-              <div class="stat-label">Total Solar Capacity Installed</div>
-              <div class="stat-subtext">Clean Renewable Energy Generated</div>
-            </div>
-
-            <div class="stat-card">
-              <div class="stat-number" data-target="350" data-suffix="+">350+</div>
-              <div class="stat-label">Homes &amp; Roofs Powered</div>
-              <div class="stat-subtext">Across Kerala &amp; South India</div>
-            </div>
-
-            <div class="stat-card">
-              <div class="stat-number" data-target="8" data-suffix="+ Years">8+ Years</div>
-              <div class="stat-label">Engineering Experience</div>
-              <div class="stat-subtext">Certified Installation Technicians</div>
             </div>
           </div>
         </div>
+      </section>
 
+      <!-- WHY SOORYAVAMSHI -->
+      <section class="px-space-md py-space-lg flex flex-col gap-space-md" id="why-section">
+        <div class="flex flex-col gap-1 text-center md:text-left">
+          <span class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-bold">Engineering Quality</span>
+          <h2 class="font-headline-lg-mobile md:text-headline-lg text-headline-lg-mobile text-on-surface font-bold">
+            Why Sooryavamshi?
+          </h2>
+          <p class="font-body-sm md:text-body-md text-body-sm text-text-muted">
+            Solar is a 30-year structural investment. We engineer every roof without cutting corners.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-space-xs">
+          <!-- 1 -->
+          <div class="p-4 rounded-xl bg-surface-card shadow-sm flex items-start gap-3">
+            <div class="w-10 h-10 rounded-lg bg-primary-fixed flex items-center justify-center text-primary flex-shrink-0">
+              <span class="material-symbols-outlined text-[22px]">engineering</span>
+            </div>
+            <div class="flex flex-col gap-0.5">
+              <h4 class="font-label-lg text-label-lg font-bold text-on-surface">In-House Engineering</h4>
+              <p class="font-body-sm text-body-sm text-text-muted">
+                Directly employed solar technicians. No third-party sales brokers or sub-contractors.
+              </p>
+            </div>
+          </div>
+          <!-- 2 -->
+          <div class="p-4 rounded-xl bg-surface-card shadow-sm flex items-start gap-3">
+            <div class="w-10 h-10 rounded-lg bg-secondary-fixed flex items-center justify-center text-secondary flex-shrink-0">
+              <span class="material-symbols-outlined text-[22px]">flash_on</span>
+            </div>
+            <div class="flex flex-col gap-0.5">
+              <h4 class="font-label-lg text-label-lg font-bold text-on-surface">3-Pit Chemical Earthing &amp; LA</h4>
+              <p class="font-body-sm text-body-sm text-text-muted">
+                Dedicated bentonite pits (&lt;5Ω resistance) and copper lightning arresters for surge protection.
+              </p>
+            </div>
+          </div>
+          <!-- 3 -->
+          <div class="p-4 rounded-xl bg-surface-card shadow-sm flex items-start gap-3">
+            <div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-primary flex-shrink-0">
+              <span class="material-symbols-outlined text-[22px]">assignment_turned_in</span>
+            </div>
+            <div class="flex flex-col gap-0.5">
+              <h4 class="font-label-lg text-label-lg font-bold text-on-surface">KSEB Feasibility &amp; DTR Liaison</h4>
+              <p class="font-body-sm text-body-sm text-text-muted">
+                End-to-end management of transformer headroom permits, net-meter installation, and Soura portal sync.
+              </p>
+            </div>
+          </div>
+          <!-- 4 -->
+          <div class="p-4 rounded-xl bg-surface-card shadow-sm flex items-start gap-3">
+            <div class="w-10 h-10 rounded-lg bg-primary-fixed-dim flex items-center justify-center text-primary flex-shrink-0">
+              <span class="material-symbols-outlined text-[22px]">verified</span>
+            </div>
+            <div class="flex flex-col gap-0.5">
+              <h4 class="font-label-lg text-label-lg font-bold text-on-surface">30-Year Performance Guarantee</h4>
+              <p class="font-body-sm text-body-sm text-text-muted">
+                Tier-1 BIS &amp; IEC certified panels backed by linear degradation warranties and IoT analytics.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ ACCORDION -->
+      <section class="px-space-md py-space-md flex flex-col gap-space-md max-w-4xl mx-auto w-full">
+        <div class="flex flex-col gap-1 text-center">
+          <span class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-bold">Frequently Asked Questions</span>
+          <h2 class="font-headline-lg-mobile md:text-headline-lg text-headline-lg-mobile text-on-surface font-bold">
+            Got Questions? We Have Answers.
+          </h2>
+        </div>
+        <div class="flex flex-col gap-space-xs" id="faq-list">
+          <details class="p-4 rounded-xl bg-surface-card shadow-sm" open>
+            <summary class="font-label-md text-label-md font-bold text-on-surface cursor-pointer flex items-center justify-between">
+              <span>What size solar system do I need for my home?</span>
+              <span class="material-symbols-outlined text-primary text-[20px]">expand_more</span>
+            </summary>
+            <div class="pt-2.5 font-body-sm text-body-sm text-text-muted leading-relaxed">
+              For most typical Kerala households consuming 300 to 450 units a month, a 3kW to 4kW on-grid solar plant delivers approximately 90% bill reduction while maximizing the ₹78,000 PM Surya Ghar central subsidy.
+            </div>
+          </details>
+
+          <details class="p-4 rounded-xl bg-surface-card shadow-sm">
+            <summary class="font-label-md text-label-md font-bold text-on-surface cursor-pointer flex items-center justify-between">
+              <span>How much terrace space is required?</span>
+              <span class="material-symbols-outlined text-primary text-[20px]">expand_more</span>
+            </summary>
+            <div class="pt-2.5 font-body-sm text-body-sm text-text-muted leading-relaxed">
+              You need roughly 80 to 90 sq.ft of shadow-free rooftop space per kilowatt. A standard 3 kW system requires ~260 sq.ft, while a 4 kW plant needs around 340 sq.ft. Elevated pergola structures can also preserve 100% of usable floor space.
+            </div>
+          </details>
+
+          <details class="p-4 rounded-xl bg-surface-card shadow-sm">
+            <summary class="font-label-md text-label-md font-bold text-on-surface cursor-pointer flex items-center justify-between">
+              <span>How do I get the ₹78,000 PM Surya Ghar subsidy?</span>
+              <span class="material-symbols-outlined text-primary text-[20px]">expand_more</span>
+            </summary>
+            <div class="pt-2.5 font-body-sm text-body-sm text-text-muted leading-relaxed">
+              As an empannelled installer, Sooryavamshi submits all national portal documentation, coordinates KSEB physical inspection, and secures the Direct Bank Transfer (DBT) straight into your bank account within 30-45 days of commissioning.
+            </div>
+          </details>
+
+          <details class="p-4 rounded-xl bg-surface-card shadow-sm">
+            <summary class="font-label-md text-label-md font-bold text-on-surface cursor-pointer flex items-center justify-between">
+              <span>What if my KSEB transformer has zero headroom?</span>
+              <span class="material-symbols-outlined text-primary text-[20px]">expand_more</span>
+            </summary>
+            <div class="pt-2.5 font-body-sm text-body-sm text-text-muted leading-relaxed">
+              We provide three tested engineering solutions: (1) Filing for DTR transformer capacity augmentation with KSEB, (2) Zero-Export limitation for 100% daytime self-consumption, or (3) Feeder transfer to an adjacent line with surplus headroom.
+            </div>
+          </details>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- CALCULATOR INTERACTIVE LOGIC -->
+    <script>
+      (function() {
+        const slider = document.getElementById('calc-slider');
+        const sliderVal = document.getElementById('slider-val');
+        const liveKw = document.getElementById('live-kw');
+        const liveSavings = document.getElementById('live-savings');
+        const livePanels = document.getElementById('live-panels');
+        const liveArea = document.getElementById('live-area');
+        const engDaily = document.getElementById('eng-daily');
+        const presets = document.querySelectorAll('.preset-chip');
+        const toggleEng = document.getElementById('toggle-engineering');
+        const engDetails = document.getElementById('engineering-details');
+        const engArrow = document.getElementById('eng-arrow');
+
+        function updateCalculator(units) {
+          if (sliderVal) sliderVal.textContent = units;
+          if (slider) slider.value = units;
+
+          const dailyKwh = (units / 30).toFixed(1);
+          if (engDaily) engDaily.textContent = dailyKwh + ' kWh/day';
+
+          // Formula: kW = units / (30 days * 4.3 peak sun hours * 0.82 PR)
+          const exactKw = units / (30 * 4.3 * 0.82);
+          const roundedKw = Math.max(2.0, Math.round(exactKw * 2) / 2).toFixed(1);
+          if (liveKw) liveKw.textContent = roundedKw + ' kW';
+
+          // Est savings in Kerala tariff (~approx ₹9.5/unit saved including slab relief)
+          const annualSavings = Math.round(units * 12 * 9.5);
+          if (liveSavings) liveSavings.textContent = '₹' + annualSavings.toLocaleString('en-IN') + '/yr';
+
+          // Panels: 550Wp modules
+          const panelsCount = Math.ceil((roundedKw * 1000) / 550);
+          if (livePanels) livePanels.textContent = panelsCount + ' Bifacial';
+
+          // Area: ~85 sq.ft per kW
+          const area = Math.round(roundedKw * 85);
+          if (liveArea) liveArea.textContent = '~' + area + ' sq.ft terrace';
+
+          // Update active preset visual
+          presets.forEach(p => {
+            if (parseInt(p.dataset.units) === units) {
+              p.classList.remove('bg-surface-container', 'text-on-surface');
+              p.classList.add('bg-primary-container', 'text-on-primary', 'font-bold', 'shadow-sm');
+            } else {
+              p.classList.remove('bg-primary-container', 'text-on-primary', 'font-bold', 'shadow-sm');
+              p.classList.add('bg-surface-container', 'text-on-surface');
+            }
+          });
+        }
+
+        if (slider) {
+          slider.addEventListener('input', function(e) {
+            updateCalculator(parseInt(e.target.value));
+          });
+        }
+
+        presets.forEach(chip => {
+          chip.addEventListener('click', function() {
+            const u = parseInt(this.dataset.units);
+            updateCalculator(u);
+          });
+        });
+
+        if (toggleEng && engDetails && engArrow) {
+          toggleEng.addEventListener('click', function() {
+            const isHidden = engDetails.classList.contains('hidden');
+            if (isHidden) {
+              engDetails.classList.remove('hidden');
+              engArrow.textContent = 'expand_less';
+            } else {
+              engDetails.classList.add('hidden');
+              engArrow.textContent = 'expand_more';
+            }
+          });
+        }
+      })();
+    </script>
+
+    <!-- FOOTER -->
+    <footer class="w-full bg-surface-container-low px-space-md py-space-lg mt-space-lg flex flex-col gap-space-md">
+      <div class="max-w-7xl mx-auto w-full flex flex-col md:flex-row justify-between gap-6">
+        <div class="flex flex-col gap-2">
+          <div class="flex items-center gap-space-xs">
+            <span class="material-symbols-outlined text-primary text-[22px]">verified_user</span>
+            <div class="flex flex-col">
+              <span class="font-label-sm text-label-sm text-primary uppercase font-bold">Govt. Empanelled</span>
+              <span class="font-body-md text-body-md text-on-surface font-semibold">PM Surya Ghar Muft Bijli Yojana Approved</span>
+            </div>
+          </div>
+          <div class="flex flex-col gap-1 mt-2">
+            <span class="font-label-md text-label-md text-on-surface font-semibold">Sooryavamshi Solar Projects LLP</span>
+            <p class="font-body-sm text-body-sm text-text-muted leading-relaxed">Door No.414, Chithira, Muttathiparamb P.O, Cherthala, Kerala</p>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-space-xs font-body-sm text-body-sm">
+          <a class="text-on-surface flex items-center gap-space-xs font-semibold" href="tel:+919061626868">
+            <span class="material-symbols-outlined text-[18px] text-primary">phone</span>
+            <span>+91 9061626868</span>
+          </a>
+          <a class="text-on-surface flex items-center gap-space-xs" href="mailto:suryavamshisolarprojects@gmail.com">
+            <span class="material-symbols-outlined text-[18px] text-primary">mail</span>
+            <span>suryavamshisolarprojects@gmail.com</span>
+          </a>
+        </div>
+
+        <div class="flex flex-wrap gap-x-space-md gap-y-space-xs font-label-sm text-label-sm text-text-muted pt-space-xs">
+          <a class="hover:text-primary transition-colors" href="#solar-calculator-section">Calculator</a>
+          <a class="hover:text-primary transition-colors" href="#kseb-section">KSEB Grid Feasibility</a>
+          <a class="hover:text-primary transition-colors" href="#projects-section">Projects Gallery</a>
+          <a class="hover:text-primary transition-colors" href="#why-section">About</a>
+        </div>
       </div>
-    </section>
 
-    <!-- =========================================================================
-         7. ABOUT SOORYAVAMSHI SOLAR PROJECTS LLP
-         ========================================================================= -->
-    <section class="section" id="about">
-      <div class="container">
-        <div class="about-grid">
-          <div>
-            <div class="section-tag">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-              ABOUT SOORYAVAMSHI
-            </div>
-            <h2 class="section-title">Engineered Solar Solutions Built for Decades of Clean Power</h2>
-            <p class="lead">
-              Sooryavamshi Solar Projects LLP is a dedicated residential solar engineering and installation company committed to empowering Indian homeowners with clean, predictable electricity.
-            </p>
-            <p>
-              Unlike generic sales brokers or sub-contractors, we manage the entire lifecycle in-house—from initial shadow analysis and civil roof engineering to DISCOM liaisoning, testing, and 30-year performance monitoring.
-            </p>
-
-            <div class="about-features-list">
-              <div class="about-feature-box">
-                <div class="about-feature-title">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color: var(--color-secondary);"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
-                  Residential Solar Expertise
-                </div>
-                <p class="about-feature-desc">Tailored rooftop solutions engineered specifically for Indian RCC terraces, tiled bungalows, and villas.</p>
-              </div>
-
-              <div class="about-feature-box">
-                <div class="about-feature-title">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color: var(--color-secondary);"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  End-to-End Installation
-                </div>
-                <p class="about-feature-desc">Single point of contact for DISCOM net metering, feasibility certificates, and subsidy filing.</p>
-              </div>
-
-              <div class="about-feature-box">
-                <div class="about-feature-title">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color: var(--color-secondary);"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                  Certified Tier-1 Equipment
-                </div>
-                <p class="about-feature-desc">Genuine Adani, Waaree, and Solis hardware backed by direct manufacturer linear warranties.</p>
-              </div>
-
-              <div class="about-feature-box">
-                <div class="about-feature-title">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color: var(--color-secondary);"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                  30-Year Generation Focus
-                </div>
-                <p class="about-feature-desc">Robust 3-pit earthing and heavy-gauge galvanizing engineered to protect your asset through extreme weather.</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Brand Logo Feature Card -->
-          <div class="about-visual-card">
-            <div style="background: #FFFFFF; padding: 20px 24px; border-radius: var(--radius-lg); border: 1px solid rgba(255, 255, 255, 0.4); margin-bottom: 24px; text-align: center; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);">
-              <img src="assets/images/sooryavamshi-logo-clean.png" alt="Sooryavamshi Solar Projects LLP" style="max-height: 78px; width: auto; margin: 0 auto; display: block;">
-            </div>
-
-            <h3 style="font-size: 1.5rem; margin-bottom: 14px; color: #FFFFFF;">Our Engineering Commitment</h3>
-            <p style="font-size: 0.95rem; line-height: 1.6; color: #CBD5E1; margin-bottom: 20px;">
-              “We treat every rooftop as our own home. Solar is a 30-year infrastructure investment; that means zero compromise on lightning surge arresters, UV-rated cabling, and precision alignment.”
-            </p>
-
-            <div style="border-top: 1px solid rgba(255, 255, 255, 0.15); padding-top: 18px; display: flex; align-items: center; justify-content: space-between;">
-              <div>
-                <div style="font-family: var(--font-heading); font-weight: 700; color: var(--color-accent); font-size: 1rem;">Sooryavamshi Solar Projects LLP</div>
-                <div style="font-size: 0.8rem; color: #94A3B8;">Certified Solar EPC Engineers</div>
-              </div>
-              <a href="#contact" class="btn btn-primary" style="padding: 10px 18px; font-size: 0.85rem;">Get in Touch</a>
-            </div>
-          </div>
-        </div>
+      <div class="max-w-7xl mx-auto w-full pt-4 border-t border-border-subtle flex justify-between items-center text-[11px] text-text-muted">
+        <p>© 2026 Sooryavamshi Solar Projects LLP. All rights reserved.</p>
+        <p>Engineered for Clean Energy in India</p>
       </div>
-    </section>
+    </footer>
   </main>
 
-  <!-- =========================================================================
-       9. FOOTER (DARK NAVY)
-       ========================================================================= -->
-  <footer class="footer-dark">
-    <div class="container">
-      <div class="footer-grid">
-        
-        <!-- Col 1: Brand & Bio -->
-        <div>
-          <img src="assets/images/sooryavamshi-logo-white-text.png" alt="Sooryavamshi Solar Projects LLP" class="footer-brand-logo">
-          <p class="footer-about-text">
-            Sooryavamshi Solar Projects LLP is an engineering-driven residential and commercial solar installer in India. We combine Tier-1 photovoltaic technology with precision lightning protection and certified grid net-metering.
-          </p>
-          <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, 0.08); padding: 6px 14px; border-radius: var(--radius-full); font-size: 0.8rem; color: var(--color-accent); border: 1px solid rgba(253, 186, 45, 0.25);">
-            <span>⚡ PM Surya Ghar Muft Bijli Yojana Approved Installer</span>
-          </div>
-        </div>
-
-        <!-- Col 2: Quick Links -->
-        <div>
-          <h4 class="footer-heading">Quick Links</h4>
-          <ul class="footer-links-list">
-            <li><a href="#home" class="footer-link">Home</a></li>
-            <li><a href="#calculator" class="footer-link">Solar Calculator</a></li>
-            <li><a href="#contact" class="footer-link">Contact &amp; Site Visit</a></li>
-            <li><a href="#equipment" class="footer-link">Products &amp; Equipment</a></li>
-            <li><a href="#process" class="footer-link">Installation Process</a></li>
-            <li><a href="#projects" class="footer-link">Our Solar Projects</a></li>
-            <li><a href="#about" class="footer-link">About Us</a></li>
-          </ul>
-        </div>
-
-        <!-- Col 3: Products & Equipment -->
-        <div>
-          <h4 class="footer-heading">Solar Equipment</h4>
-          <ul class="footer-links-list">
-            <li><a href="#equipment" class="footer-link">Tier-1 Bifacial Solar Panels</a></li>
-            <li><a href="#equipment" class="footer-link">Adani, Waaree &amp; Vikram Solar</a></li>
-            <li><a href="#equipment" class="footer-link">Dual-MPPT Solar Inverters</a></li>
-            <li><a href="#equipment" class="footer-link">Lightning &amp; Surge Protection</a></li>
-            <li><a href="#equipment" class="footer-link">Hot-Dip Galvanized Structures</a></li>
-            <li><a href="#equipment" class="footer-link">DCDB / ACDB Distribution</a></li>
-            <li><a href="#equipment" class="footer-link">Chemical Earthing &amp; SPDs</a></li>
-          </ul>
-        </div>
-
-        <!-- Col 4: Contact & Social -->
-        <div>
-          <h4 class="footer-heading">Get in Touch</h4>
-          <div class="footer-contact-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-            <div>
-              <div style="font-size: 0.78rem; color: #94A3B8;">Phone Helpline</div>
-              <a href="tel:9061626868" style="font-family: var(--font-heading); font-weight: 700; color: #FFFFFF;">+91 9061626868</a>
-            </div>
-          </div>
-
-          <div class="footer-contact-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-            <div>
-              <div style="font-size: 0.78rem; color: #94A3B8;">Email Inquiry</div>
-              <a href="mailto:suryavamshisolarprojects@gmail.com" style="color: #CBD5E1; word-break: break-all;">suryavamshisolarprojects@gmail.com</a>
-            </div>
-          </div>
-
-          <div class="footer-contact-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-            <div>
-              <div style="font-size: 0.78rem; color: #94A3B8;">Registered Office</div>
-              <span style="color: #CBD5E1; line-height: 1.45; display: block;">
-                Suryavamshi Solar Projects<br>
-                Door No.414, Chithira,<br>
-                Muttathiparamb P.O,<br>
-                Cherthala, 688527
-              </span>
-            </div>
-          </div>
-
-          <!-- Social Links -->
-          <div class="footer-social-row">
-            <a href="https://wa.me/919061626868" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="WhatsApp" title="Chat on WhatsApp">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-            </a>
-            <a href="https://www.instagram.com/suryavamshi_solarprojects?utm_source=qr&igsi=MThoNGNvNDd2d2s2cw==" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="Instagram" title="Instagram Profile">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-            </a>
-            <a href="https://www.facebook.com/share/1YduBSschB/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="Facebook" title="Facebook Page">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
-            </a>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Bottom Bar -->
-      <div class="footer-bottom-bar">
-        <div>
-          &copy; 2026 <strong>Sooryavamshi Solar Projects LLP</strong>. All rights reserved. Registered Indian LLP.
-        </div>
-        <div>
-          Designed for Clean Energy &bull; Built with Engineering Precision &bull; 30 Years Performance Assurance
-        </div>
-      </div>
+  <!-- MOBILE BOTTOM NAV BAR -->
+  <nav class="md:hidden fixed bottom-0 w-full z-50 pb-safe bg-surface/95 backdrop-blur-xl shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
+    <div class="flex items-center justify-around h-16 px-space-xs">
+      <a class="flex flex-col items-center justify-center min-w-[56px] h-12 transition-colors text-primary font-semibold" href="#home">
+        <span class="material-symbols-outlined text-[20px]">home</span>
+        <span class="font-label-sm text-label-sm">Home</span>
+      </a>
+      <a class="flex flex-col items-center justify-center min-w-[56px] h-12 text-on-surface-variant transition-colors hover:text-primary" href="#solar-calculator-section">
+        <span class="material-symbols-outlined text-[20px]">calculate</span>
+        <span class="font-label-sm text-label-sm">Calculator</span>
+      </a>
+      <a class="flex flex-col items-center justify-center min-w-[70px] h-12 px-2 rounded-lg bg-primary text-on-primary shadow-sm active:scale-95 transition-transform" href="#site-assessment-form">
+        <span class="material-symbols-outlined text-[18px]">assignment</span>
+        <span class="font-label-sm text-label-sm text-center leading-none mt-0.5">Free Site Visit</span>
+      </a>
+      <a class="flex flex-col items-center justify-center min-w-[56px] h-12 text-on-surface-variant transition-colors hover:text-primary" href="#kseb-section">
+        <span class="material-symbols-outlined text-[20px]">bolt</span>
+        <span class="font-label-sm text-label-sm">KSEB</span>
+      </a>
+      <a class="flex flex-col items-center justify-center min-w-[56px] h-12 text-on-surface-variant transition-colors hover:text-primary" href="tel:+919061626868">
+        <span class="material-symbols-outlined text-[20px] text-primary">call</span>
+        <span class="font-label-sm text-label-sm">Call</span>
+      </a>
     </div>
-  </footer>
+  </nav>
 
-  <!-- =========================================================================
-       10. STICKY MOBILE BOTTOM CTA BAR
-       ========================================================================= -->
-  <div class="mobile-sticky-bar" aria-label="Mobile Quick Conversion Bar">
-    <a href="#calculator" class="btn btn-primary" id="mobileStickyCalBtn">
-      ⚡ Calculate Solar
-    </a>
-    <a href="tel:9061626868" class="btn btn-navy" id="mobileStickyCallBtn">
-      📞 Call: 9061626868
-    </a>
-  </div>
-
-  <!-- =========================================================================
-       11. PROJECT DETAIL MODAL DIALOG
-       ========================================================================= -->
-  <div class="modal-overlay" id="projectModalOverlay" role="dialog" aria-modal="true" aria-labelledby="projectModalHeading">
-    <div class="modal-card">
-      <button type="button" class="modal-close-btn" id="projectModalCloseBtn" aria-label="Close modal dialog">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-      </button>
-      <div id="projectModalContent">
-        <!-- Injected dynamically via projects.js -->
-      </div>
-    </div>
-  </div>
-
-
-  <!-- Scripts with Cache-Busting -->
-  <script src="js/config.js?v=2.1"></script>
-  <script src="js/supabase-config.js?v=2.1"></script>
-  <script src="js/supabase-client.js?v=2.1"></script>
-  <script src="js/calculator.js?v=2.1"></script>
-  <script src="js/feasibility.js?v=2.1"></script>
-  <script src="js/equipment.js?v=2.1"></script>
-  <script src="js/projects.js?v=2.1"></script>
-  <script src="js/contact-form.js?v=2.1"></script>
-  <script src="js/app.js?v=2.1"></script>
-
+  <!-- Legacy Scripts for Supabase form and compatibility -->
+  <script src="js/config.js?v=3.0"></script>
+  <script src="js/supabase-config.js?v=3.0"></script>
+  <script src="js/supabase-client.js?v=3.0"></script>
+  <script src="js/contact-form.js?v=3.0"></script>
 </body>
 </html>
