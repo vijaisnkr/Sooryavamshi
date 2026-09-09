@@ -3,7 +3,7 @@
  * Cleanly separated calculation engine and reactive DOM controller.
  */
 
-const SolarCalculator = (function() {
+window.SolarCalculator = (function() {
   // Internal state
   let currentUnits = 400; // Default units
   let currentStateIndex = 0; // Default Karnataka

@@ -28,6 +28,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
 
+  <!-- Design System & Calculator Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/calculator.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script id="tailwind-config">
@@ -334,104 +340,202 @@
       </section>
 
       <!-- INTERACTIVE SOLAR SIZING CALCULATOR -->
-      <section class="px-space-md py-space-lg flex flex-col gap-space-md" id="solar-calculator-section">
-        <div class="flex flex-col gap-1 text-center md:text-left">
-          <span class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-bold">Interactive Sizing Engine</span>
-          <h2 class="font-headline-lg-mobile md:text-headline-lg text-headline-lg-mobile text-on-surface font-bold">
-            How Much Solar Does Your Home Need?
-          </h2>
-          <p class="font-body-sm md:text-body-md text-body-sm text-text-muted">
-            Adjust your monthly units to see instant engineering recommendations &amp; savings.
-          </p>
-        </div>
-
-        <!-- Calculator Card -->
-        <div class="p-4 md:p-6 rounded-xl bg-surface-card shadow-md flex flex-col gap-space-md">
-          <!-- Preset Chips -->
-          <div class="flex flex-col gap-1.5">
-            <span class="font-label-sm text-label-sm text-text-muted">Quick Household Presets:</span>
-            <div class="flex flex-wrap gap-1.5" id="calc-presets">
-              <button class="preset-chip px-3 py-2 rounded-lg bg-surface-container text-on-surface font-label-sm text-label-sm transition-all hover:bg-surface-container-high" data-units="150" type="button">150 U (1-2 BHK)</button>
-              <button class="preset-chip px-3 py-2 rounded-lg bg-surface-container text-on-surface font-label-sm text-label-sm transition-all hover:bg-surface-container-high" data-units="300" type="button">300 U (2-3 BHK)</button>
-              <button class="preset-chip px-3 py-2 rounded-lg bg-primary-container text-on-primary font-label-sm text-label-sm font-bold shadow-sm transition-all" data-units="400" type="button">400 U (Standard)</button>
-              <button class="preset-chip px-3 py-2 rounded-lg bg-surface-container text-on-surface font-label-sm text-label-sm transition-all hover:bg-surface-container-high" data-units="600" type="button">600 U (3+ ACs)</button>
-              <button class="preset-chip px-3 py-2 rounded-lg bg-surface-container text-on-surface font-label-sm text-label-sm transition-all hover:bg-surface-container-high" data-units="1000" type="button">1000 U (Villa)</button>
+      <section class="calculator-section py-space-lg px-space-md" id="solar-calculator-section">
+        <div class="max-w-6xl mx-auto">
+          <!-- Section Header -->
+          <div class="flex flex-col gap-1 text-center mb-6">
+            <div class="inline-flex items-center justify-center gap-1.5 text-primary font-label-sm text-label-sm uppercase tracking-wider font-bold">
+              <span class="material-symbols-outlined text-[18px]">calculate</span>
+              <span>INTERACTIVE SOLAR SIZING ENGINE</span>
             </div>
+            <h2 class="font-headline-lg-mobile md:text-headline-lg text-headline-lg-mobile text-on-surface font-extrabold">
+              How Much Solar Power Does Your Home Need?
+            </h2>
+            <p class="font-body-sm md:text-body-md text-body-sm text-text-muted">
+              Enter your average monthly electricity consumption and find the recommended solar system size for your home.
+            </p>
           </div>
 
-          <!-- Slider Control -->
-          <div class="flex flex-col gap-2 pt-1">
-            <div class="flex items-center justify-between">
-              <span class="font-label-md text-label-md text-on-surface font-semibold">Monthly Consumption</span>
-              <div class="px-3 py-1.5 rounded-md bg-surface-container-high flex items-baseline gap-1">
-                <span class="font-headline-sm text-headline-sm text-primary font-bold" id="slider-val">400</span>
-                <span class="font-label-sm text-label-sm text-on-surface-variant">Units / kWh</span>
-              </div>
-            </div>
-            <input class="w-full h-3 bg-surface-container-high rounded-full appearance-none cursor-pointer accent-primary-container" id="calc-slider" max="1200" min="100" step="50" type="range" value="400">
-            <div class="flex justify-between font-label-sm text-label-sm text-text-muted">
-              <span>100 U</span>
-              <span>500 U</span>
-              <span>1200+ U</span>
-            </div>
-          </div>
+          <div class="calc-container-wrap">
+            <div class="calc-master-card shadow-xl rounded-2xl border border-border-subtle bg-surface-card overflow-hidden">
+              <div class="calc-grid-layout grid grid-cols-1 lg:grid-cols-12">
+                
+                <!-- Left Column: Inputs -->
+                <div class="calc-input-pane lg:col-span-6 p-6 md:p-8 flex flex-col gap-5 border-b lg:border-b-0 lg:border-r border-border-subtle bg-white">
+                  <div class="flex flex-col gap-1">
+                    <h3 class="calc-pane-title text-xl font-bold text-primary flex items-center gap-2">
+                      <span class="material-symbols-outlined text-secondary text-[24px]">bar_chart</span>
+                      <span>Your Home Energy Profile</span>
+                    </h3>
+                    <p class="calc-pane-sub text-xs text-text-muted">Adjust consumption units or monthly bill amount to compute your custom rooftop sizing.</p>
+                  </div>
 
-          <!-- Live Calculated Output Box -->
-          <div class="p-4 rounded-xl bg-inverse-surface text-inverse-on-surface flex flex-col gap-3 shadow-inner">
-            <div class="flex items-center justify-between">
-              <span class="font-label-sm text-label-sm text-secondary-fixed">Recommended System</span>
-              <span class="font-headline-lg-mobile md:text-headline-lg text-headline-lg-mobile text-primary-fixed font-black" id="live-kw">4.0 kW</span>
-            </div>
-            <div class="grid grid-cols-2 gap-3 pt-2 border-t-0">
-              <div class="p-3 rounded-lg bg-inverse-surface/60 flex flex-col gap-0.5">
-                <span class="font-label-sm text-label-sm text-secondary-fixed">Annual Savings</span>
-                <span class="font-headline-sm text-headline-sm text-on-primary font-bold" id="live-savings">₹45,550/yr</span>
-                <span class="font-body-sm text-body-sm text-text-muted text-[10px]">~90% KSEB offset</span>
-              </div>
-              <div class="p-3 rounded-lg bg-inverse-surface/60 flex flex-col gap-0.5">
-                <span class="font-label-sm text-label-sm text-secondary-fixed">Modules &amp; Space</span>
-                <span class="font-headline-sm text-headline-sm text-on-primary font-bold" id="live-panels">8 Bifacial</span>
-                <span class="font-body-sm text-body-sm text-text-muted text-[10px]" id="live-area">~340 sq.ft terrace</span>
-              </div>
-            </div>
+                  <!-- Input Mode Tabs -->
+                  <div class="calc-input-tabs flex p-1 bg-surface-container-low rounded-lg border border-border-subtle" role="tablist">
+                    <button type="button" class="calc-tab-btn flex-1 py-2 text-xs font-semibold rounded-md transition-all active" id="tabUnitsMode" role="tab" aria-selected="true">Monthly Units (kWh)</button>
+                    <button type="button" class="calc-tab-btn flex-1 py-2 text-xs font-semibold rounded-md transition-all" id="tabBillMode" role="tab" aria-selected="false">Monthly Bill (₹)</button>
+                  </div>
 
-            <!-- Progressive Disclosure Accordion -->
-            <button class="flex items-center justify-between text-left pt-1 text-primary-fixed-dim hover:text-primary-fixed transition-colors" id="toggle-engineering" type="button">
-              <span class="font-label-sm text-label-sm font-semibold flex items-center gap-1">
-                <span class="material-symbols-outlined text-[16px]">tune</span>
-                View Engineering Calculation Formula
-              </span>
-              <span class="material-symbols-outlined text-[18px] transition-transform" id="eng-arrow">expand_more</span>
-            </button>
-            <div class="hidden flex flex-col gap-1.5 p-3 rounded-lg bg-inverse-surface text-[12px] font-body-sm text-inverse-on-surface/80" id="engineering-details">
-              <div class="flex justify-between">
-                <span>Daily Energy Requirement:</span>
-                <span class="font-semibold text-inverse-on-surface" id="eng-daily">13.3 kWh/day</span>
-              </div>
-              <div class="flex justify-between">
-                <span>Peak Sun Hours (Kerala Insolation):</span>
-                <span class="font-semibold text-inverse-on-surface">4.3 hrs/day</span>
-              </div>
-              <div class="flex justify-between">
-                <span>Derating &amp; Thermal Loss Factor:</span>
-                <span class="font-semibold text-inverse-on-surface">82% (0.82 PR)</span>
-              </div>
-              <p class="text-[10px] text-text-muted mt-1 leading-tight">
-                Formula: Sizing = Daily kWh / (Peak Sun Hours × 0.82 Performance Ratio)
-              </p>
-            </div>
-          </div>
+                  <!-- Presets -->
+                  <div class="flex flex-col gap-2">
+                    <span class="preset-pills-label text-[11px] uppercase tracking-wider text-text-muted font-bold">Quick Household Presets</span>
+                    <div class="preset-pills-row flex flex-wrap gap-2">
+                      <button type="button" class="preset-pill px-3 py-1.5 text-xs rounded-full border border-border-subtle bg-surface-container-low text-on-surface hover:border-primary transition-all" data-units="150">150 Units (1-2 BHK)</button>
+                      <button type="button" class="preset-pill px-3 py-1.5 text-xs rounded-full border border-border-subtle bg-surface-container-low text-on-surface hover:border-primary transition-all" data-units="300">300 Units (2-3 BHK)</button>
+                      <button type="button" class="preset-pill px-3 py-1.5 text-xs rounded-full border-2 border-primary-container bg-primary-fixed/40 text-on-primary-fixed font-bold shadow-sm active transition-all" data-units="400">400 Units (Standard)</button>
+                      <button type="button" class="preset-pill px-3 py-1.5 text-xs rounded-full border border-border-subtle bg-surface-container-low text-on-surface hover:border-primary transition-all" data-units="600">600 Units (3+ ACs)</button>
+                      <button type="button" class="preset-pill px-3 py-1.5 text-xs rounded-full border border-border-subtle bg-surface-container-low text-on-surface hover:border-primary transition-all" data-units="1000">1000 Units (Villa)</button>
+                    </div>
+                  </div>
 
-          <!-- Action CTAs -->
-          <div class="grid grid-cols-2 gap-3">
-            <a class="h-11 px-3 rounded-lg bg-surface-container text-on-surface font-label-sm text-label-sm font-semibold flex items-center justify-center gap-1 text-center shadow-sm hover:bg-surface-container-high transition-colors" href="#visualizer-section">
-              <span class="material-symbols-outlined text-primary text-[18px]">view_in_ar</span>
-              <span>Explore System</span>
-            </a>
-            <a class="h-11 px-3 rounded-lg bg-surface-container text-on-surface font-label-sm text-label-sm font-semibold flex items-center justify-center gap-1 text-center shadow-sm hover:bg-surface-container-high transition-colors" href="#savings-section">
-              <span class="material-symbols-outlined text-primary text-[18px]">savings</span>
-              <span>Calculate ROI</span>
-            </a>
+                  <!-- Consumption Slider & Input Sync -->
+                  <div class="calc-field-group flex flex-col gap-3 pt-2">
+                    <div class="calc-field-head flex items-center justify-between">
+                      <label for="calcUnitsInput" class="calc-field-label text-xs font-semibold text-on-surface">Monthly Electricity Consumption</label>
+                      <div class="calc-field-display flex items-center gap-1 px-3 py-1 rounded-lg bg-surface-container border border-border-subtle">
+                        <input type="number" id="calcUnitsInput" value="400" min="50" max="2500" step="10" class="w-16 bg-transparent font-bold text-primary text-right focus:outline-none" aria-label="Monthly consumption value">
+                        <span class="unit-tag text-xs font-semibold text-text-muted" id="calcUnitLabel">Units</span>
+                      </div>
+                    </div>
+
+                    <div class="calc-slider-wrap flex flex-col gap-1">
+                      <input type="range" id="calcUnitsSlider" class="calc-range-slider w-full accent-primary-container cursor-pointer" min="50" max="1500" value="400" step="10" aria-label="Consumption slider">
+                      <div class="slider-ticks-row flex justify-between text-[10px] text-text-muted pt-1 font-semibold">
+                        <span>50 Units</span>
+                        <span>500 Units</span>
+                        <span>1000 Units</span>
+                        <span>1500+ Units</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- State / Location Selection -->
+                  <div class="location-select-wrap flex flex-col gap-1.5">
+                    <label for="calcStateSelect" class="form-label text-xs font-semibold text-on-surface">
+                      Installation State / Region (Solar Insolation)
+                    </label>
+                    <select id="calcStateSelect" class="form-control h-11 px-3 rounded-lg bg-surface-container-low text-on-surface border border-border-subtle text-xs focus:outline-none focus:border-primary" aria-label="Select state for solar insolation">
+                      <option value="0">Kerala (Avg. ₹7.2/unit)</option>
+                      <option value="1">Karnataka (Avg. ₹7.8/unit)</option>
+                      <option value="2">Tamil Nadu (Avg. ₹7.6/unit)</option>
+                      <option value="3">Maharashtra (Avg. ₹8.5/unit)</option>
+                      <option value="4">Telangana (Avg. ₹7.9/unit)</option>
+                      <option value="5">Andhra Pradesh (Avg. ₹7.7/unit)</option>
+                      <option value="6">Gujarat (Avg. ₹6.9/unit)</option>
+                      <option value="7">Rajasthan (Avg. ₹7.4/unit)</option>
+                      <option value="8">Delhi NCR (Avg. ₹8/unit)</option>
+                      <option value="9">Other States (Avg. ₹7.5/unit)</option>
+                    </select>
+                  </div>
+
+                  <div class="text-[11px] text-text-muted flex items-center gap-1 pt-1">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block"></span>
+                    <span>Live calculations update instantly as you adjust</span>
+                  </div>
+                </div>
+
+                <!-- Right Column: Live Results Pane -->
+                <div class="calc-results-pane lg:col-span-6 p-6 md:p-8 flex flex-col gap-5 bg-surface-canvas">
+                  
+                  <!-- Hero Capacity Badge with Circular Gauge -->
+                  <div class="calc-hero-badge-wrap p-5 rounded-2xl bg-white shadow-md border border-border-subtle flex items-center gap-5">
+                    <div class="calc-gauge-circle relative w-20 h-20 flex-shrink-0 flex items-center justify-center">
+                      <svg class="calc-gauge-svg w-20 h-20 -rotate-90" viewBox="0 0 100 100">
+                        <defs>
+                          <linearGradient id="solarGradientGauge" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#FDBA2D"></stop>
+                            <stop offset="100%" stop-color="#F58220"></stop>
+                          </linearGradient>
+                        </defs>
+                        <circle class="calc-gauge-bg stroke-surface-container" cx="50" cy="50" r="42" fill="none" stroke-width="8"></circle>
+                        <circle class="calc-gauge-fill stroke-[url(#solarGradientGauge)] transition-all duration-300" id="resultGaugeFill" cx="50" cy="50" r="42" fill="none" stroke-width="8" stroke-dasharray="264" style="stroke-dashoffset: 197.12;"></circle>
+                      </svg>
+                      <div class="calc-gauge-icon absolute inset-0 flex items-center justify-center text-primary-container">
+                        <span class="material-symbols-outlined text-[28px]">wb_sunny</span>
+                      </div>
+                    </div>
+
+                    <div class="calc-hero-info flex flex-col gap-0.5">
+                      <div class="calc-hero-tag text-[10px] font-bold uppercase tracking-wider text-primary-container">RECOMMENDED SYSTEM CAPACITY</div>
+                      <div class="calc-hero-val text-3xl font-extrabold text-primary" id="resultHeroKw">3.8 kW</div>
+                      <div class="calc-hero-sub text-xs text-text-muted" id="resultHeroSub">Powers 100% of ~400 units/month requirement</div>
+                    </div>
+                  </div>
+
+                  <!-- Comprehensive 6-Card Metrics Grid -->
+                  <div class="calc-metrics-grid grid grid-cols-2 sm:grid-cols-3 gap-3">
+                    <div class="calc-metric-box p-3 rounded-xl bg-white border border-border-subtle shadow-sm flex flex-col gap-1">
+                      <div class="calc-metric-icon w-8 h-8 rounded-lg bg-primary-fixed/40 text-primary flex items-center justify-center">
+                        <span class="material-symbols-outlined text-[18px]">bolt</span>
+                      </div>
+                      <div class="calc-metric-label text-[11px] text-text-muted leading-tight">Estimated Daily Consumption</div>
+                      <div class="calc-metric-val font-bold text-on-surface text-sm" id="resultDailyUnits">13.3 kWh/day</div>
+                    </div>
+
+                    <div class="calc-metric-box p-3 rounded-xl bg-white border border-border-subtle shadow-sm flex flex-col gap-1">
+                      <div class="calc-metric-icon w-8 h-8 rounded-lg bg-primary-fixed/40 text-primary flex items-center justify-center">
+                        <span class="material-symbols-outlined text-[18px]">schedule</span>
+                      </div>
+                      <div class="calc-metric-label text-[11px] text-text-muted leading-tight">Estimated Annual Generation</div>
+                      <div class="calc-metric-val font-bold text-on-surface text-sm" id="resultAnnualGen">4,891 kWh</div>
+                    </div>
+
+                    <div class="calc-metric-box p-3 rounded-xl bg-white border border-border-subtle shadow-sm flex flex-col gap-1">
+                      <div class="calc-metric-icon w-8 h-8 rounded-lg bg-primary-fixed/40 text-primary flex items-center justify-center">
+                        <span class="material-symbols-outlined text-[18px]">grid_view</span>
+                      </div>
+                      <div class="calc-metric-label text-[11px] text-text-muted leading-tight">Approximate Panels Needed</div>
+                      <div class="calc-metric-val font-bold text-on-surface text-sm" id="resultPanelCount">7 Panels</div>
+                    </div>
+
+                    <div class="calc-metric-box p-3 rounded-xl bg-white border border-border-subtle shadow-sm flex flex-col gap-1">
+                      <div class="calc-metric-icon w-8 h-8 rounded-lg bg-primary-fixed/40 text-primary flex items-center justify-center">
+                        <span class="material-symbols-outlined text-[18px]">home</span>
+                      </div>
+                      <div class="calc-metric-label text-[11px] text-text-muted leading-tight">Estimated Roof Space Needed</div>
+                      <div class="calc-metric-val font-bold text-on-surface text-sm" id="resultRoofSpace">323 sq.ft (30 m²)</div>
+                    </div>
+
+                    <div class="calc-metric-box p-3 rounded-xl bg-white border border-border-subtle shadow-sm flex flex-col gap-1">
+                      <div class="calc-metric-icon w-8 h-8 rounded-lg bg-primary-fixed/40 text-primary flex items-center justify-center">
+                        <span class="material-symbols-outlined text-[18px]">memory</span>
+                      </div>
+                      <div class="calc-metric-label text-[11px] text-text-muted leading-tight">Recommended Inverter</div>
+                      <div class="calc-metric-val font-bold text-on-surface text-xs" id="resultInverterCap">5.0 kW Single/Three-Phase</div>
+                    </div>
+
+                    <div class="calc-metric-box p-3 rounded-xl bg-white border border-border-subtle shadow-sm flex flex-col gap-1">
+                      <div class="calc-metric-icon w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-[18px]">attach_money</span>
+                      </div>
+                      <div class="calc-metric-label text-[11px] text-text-muted leading-tight">Estimated Annual Savings</div>
+                      <div class="calc-metric-val font-extrabold text-emerald-600 text-sm" id="resultAnnualSavings">₹35,215/yr</div>
+                    </div>
+                  </div>
+
+                  <!-- Dynamic Solar Panel Array Visualizer -->
+                  <div class="calc-panel-visualizer-box p-4 rounded-xl bg-white border border-border-subtle shadow-sm flex flex-col gap-2">
+                    <div class="visualizer-head flex items-center justify-between">
+                      <div class="visualizer-title text-xs font-bold text-primary flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-[18px]">grid_on</span>
+                        <span>Modules</span>
+                      </div>
+                      <span class="visualizer-count-tag px-2.5 py-0.5 rounded-full bg-primary-fixed/40 text-on-primary-fixed font-bold text-[11px]" id="resultPanelCountTag">7 x 550W Modules</span>
+                    </div>
+                    <div class="solar-panel-icons-grid flex flex-wrap gap-1.5 pt-1" id="resultPanelGrid"></div>
+                  </div>
+
+                  <!-- Action CTA -->
+                  <div class="calc-action-row flex flex-col sm:flex-row gap-3 pt-1">
+                    <a href="#site-assessment-form" class="btn btn-primary h-12 px-6 rounded-xl bg-primary-container text-on-primary font-bold text-sm flex items-center justify-center gap-2 shadow-md hover:bg-primary transition-all flex-1" id="calcAssessmentBtn">
+                      <span class="material-symbols-outlined text-[20px]">assignment_turned_in</span>
+                      <span>Request Free Site Assessment</span>
+                    </a>
+                  </div>
+
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -989,8 +1093,10 @@
     </div>
   </nav>
 
-  <!-- Legacy Scripts for Supabase form and compatibility -->
+  <!-- Scripts for Calculator and Supabase form compatibility -->
   <script src="js/config.js?v=5.0"></script>
+  <script src="js/calculator.js?v=5.0"></script>
+  <script src="js/app.js?v=5.0"></script>
   <script src="js/supabase-config.js?v=5.0"></script>
   <script src="js/supabase-client.js?v=5.0"></script>
   <script src="js/contact-form.js?v=5.0"></script>

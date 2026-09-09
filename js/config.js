@@ -772,3 +772,6 @@ const SOORYAVAMSHI_CONFIG = {
 
 // Freeze configuration to protect against accidental mutations
 Object.freeze(SOORYAVAMSHI_CONFIG);
+if (typeof window !== 'undefined') {
+  window.SOORYAVAMSHI_CONFIG = SOORYAVAMSHI_CONFIG;
+}
