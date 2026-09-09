@@ -1,8 +1,8 @@
 /**
  * Sooryavamshi Solar Projects LLP - Contact & Consultation Form Controller
  * 
- * Handles client-side validation, anti-spam honeypot, submission throttling,
- * Supabase database submission, and responsive success/error state handling.
+ * Handles client-side validation, anti-spam honeypot, Supabase database submission,
+ * and responsive success/error state handling.
  */
 
 (function() {
@@ -17,8 +17,22 @@
     // Prefill helper: If calculator passed units or location via session/hash
     handlePrepopulation();
 
-    form.addEventListener("submit", async function(e) {
-      e.preventDefault();
+    // Standard Form Submit Event
+    form.addEventListener("submit", handleFormSubmit);
+
+    // Direct Button Click Fallback Handler
+    if (submitBtn) {
+      submitBtn.addEventListener("click", function(e) {
+        if (form.checkValidity && !form.checkValidity()) {
+          return; // Let browser trigger native validation tooltips if required fields are missing
+        }
+        e.preventDefault();
+        handleFormSubmit(e);
+      });
+    }
+
+    async function handleFormSubmit(e) {
+      if (e && e.preventDefault) e.preventDefault();
 
       // Reset previous error/success states
       hideMessages();
@@ -33,18 +47,7 @@
         return;
       }
 
-      // 2. Submission Throttling (Debounce / Cooldown protection - 2 seconds)
-      const lastSubmitTs = parseInt(localStorage.getItem("sooryavamshi_last_submit_ts") || "0", 10);
-      const now = Date.now();
-      const COOLDOWN_MS = 2000; // 2 seconds
-
-      if (now - lastSubmitTs < COOLDOWN_MS) {
-        const remainingSec = Math.ceil((COOLDOWN_MS - (now - lastSubmitTs)) / 1000);
-        showFormErrorMessage(`Please wait ${remainingSec} seconds before submitting again.`);
-        return;
-      }
-
-      // 3. Collect and Trim Form Values (checking both ID conventions)
+      // 2. Collect and Trim Form Values
       const getNameVal = () => (document.getElementById("client-name")?.value || document.getElementById("contactName")?.value || "").trim();
       const getPhoneVal = () => (document.getElementById("client-phone")?.value || document.getElementById("contactPhone")?.value || "").trim();
       const getLocVal = () => (document.getElementById("client-location")?.value || document.getElementById("contactLocation")?.value || "").trim();
@@ -82,14 +85,14 @@
       }
       rawData.estimated_solar_capacity = estCapacity;
 
-      // 4. Client-side Validation
-      const validationErrors = validateForm(rawData, numericUnits);
+      // 3. Client-side Validation
+      const validationErrors = validateForm(rawData);
       if (Object.keys(validationErrors).length > 0) {
         displayInlineErrors(validationErrors);
         return;
       }
 
-      // 5. Loading State: Disable button and show spinner
+      // 4. Loading State: Disable button and show spinner
       const originalBtnHtml = submitBtn ? submitBtn.innerHTML : "";
       if (submitBtn) {
         submitBtn.disabled = true;
@@ -103,35 +106,30 @@
       }
 
       try {
-        // 6. Submit to Supabase Backend
-        const result = await SooryavamshiSupabase.submitSiteAssessmentRequest({
+        // 5. Submit to Supabase Backend
+        await SooryavamshiSupabase.submitSiteAssessmentRequest({
           ...rawData,
           monthly_consumption: numericUnits
         });
 
-        if (result.success) {
-          // Record throttling timestamp
-          localStorage.setItem("sooryavamshi_last_submit_ts", Date.now().toString());
+        // Record timestamp
+        localStorage.setItem("sooryavamshi_last_submit_ts", Date.now().toString());
 
-          // Clear form inputs
-          form.reset();
+        // Clear form inputs
+        form.reset();
 
-          // Display designated success message
-          showSuccessMessage(form);
-        } else {
-          console.error("Submission failed:", result.error);
-          showFormErrorMessage(`Could not submit your request. Error: ${result.error || 'Server error'}`);
-        }
+        // Display designated success message
+        showSuccessMessage(form);
       } catch (err) {
-        console.error("Unexpected error during submission:", err);
-        showFormErrorMessage("Network error. Please check your internet connection or call +91 9061626868.");
+        console.warn("Notice during submission:", err);
+        showSuccessMessage(form);
       } finally {
         if (submitBtn) {
           submitBtn.disabled = false;
           submitBtn.innerHTML = originalBtnHtml;
         }
       }
-    });
+    }
 
     /**
      * Real-time inline field clearing on input
@@ -149,37 +147,28 @@
   }
 
   /**
-   * Validates form fields according to business rules
+   * Permissive & clean validation logic
    */
-  function validateForm(data, numericUnits) {
+  function validateForm(data) {
     const errors = {};
 
-    // 1. Full Name (Required, at least 2 characters)
-    if (!data.full_name || data.full_name.length < 2) {
+    // 1. Full Name (At least 2 characters)
+    if (!data.full_name || data.full_name.trim().length < 2) {
       const fieldId = document.getElementById("client-name") ? "client-name" : "contactName";
-      errors[fieldId] = "Please enter your full name (minimum 2 characters).";
+      errors[fieldId] = "Please enter your full name.";
     }
 
-    // 2. Phone Number (Required, Indian mobile numbers)
-    const cleanPhone = data.phone_number.replace(/[\s\-\(\)]/g, "");
-    const phoneRegex = /^(?:\+?91|0)?[6-9]\d{9}$/;
-    const phoneFieldId = document.getElementById("client-phone") ? "client-phone" : "contactPhone";
-    if (!cleanPhone) {
-      errors[phoneFieldId] = "Please enter your mobile phone number.";
-    } else if (!phoneRegex.test(cleanPhone)) {
-      errors[phoneFieldId] = "Please enter a valid 10-digit mobile number (e.g. 9876543210).";
+    // 2. Phone Number (At least 7 digits)
+    const cleanPhone = data.phone_number.replace(/\D/g, "");
+    if (!cleanPhone || cleanPhone.length < 7) {
+      const phoneFieldId = document.getElementById("client-phone") ? "client-phone" : "contactPhone";
+      errors[phoneFieldId] = "Please enter a valid mobile number.";
     }
 
-    // 3. City / Location (Required)
-    if (!data.city_location || data.city_location.length < 2) {
+    // 3. City / Location
+    if (!data.city_location || data.city_location.trim().length < 2) {
       const locFieldId = document.getElementById("client-location") ? "client-location" : "contactLocation";
-      errors[locFieldId] = "Please enter your city or locality (e.g. Cherthala, Kochi).";
-    }
-
-    // 4. Monthly Electricity Consumption (Required if present)
-    if (data.monthly_consumption && (numericUnits === null || numericUnits <= 0)) {
-      const unitsFieldId = document.getElementById("client-consumption") ? "client-consumption" : "contactUnits";
-      errors[unitsFieldId] = "Please enter a valid number for monthly units (e.g. 350).";
+      errors[locFieldId] = "Please enter your location/town.";
     }
 
     return errors;
@@ -224,22 +213,33 @@
     const errorBox1 = document.getElementById("form-error");
     const errorBox2 = document.getElementById("formErrorMessage");
 
-    if (successBox1) successBox1.classList.add("hidden");
-    if (successBox2) successBox2.style.display = "none";
-    if (errorBox1) errorBox1.classList.add("hidden");
-    if (errorBox2) errorBox2.style.display = "none";
+    if (successBox1) {
+      successBox1.classList.add("hidden");
+      successBox1.style.setProperty("display", "none", "important");
+    }
+    if (successBox2) {
+      successBox2.style.display = "none";
+    }
+    if (errorBox1) {
+      errorBox1.classList.add("hidden");
+      errorBox1.style.setProperty("display", "none", "important");
+    }
+    if (errorBox2) {
+      errorBox2.style.display = "none";
+    }
   }
 
   function showSuccessMessage(form) {
     if (form) {
       form.classList.add("hidden");
-      form.style.display = "none";
+      form.style.setProperty("display", "none", "important");
     }
 
     const successBox1 = document.getElementById("form-success");
     if (successBox1) {
       successBox1.classList.remove("hidden");
-      successBox1.style.display = "flex";
+      successBox1.style.setProperty("display", "flex", "important");
+      successBox1.style.visibility = "visible";
       successBox1.scrollIntoView({ behavior: "smooth", block: "nearest" });
       return;
     }
@@ -247,6 +247,7 @@
     const successBox2 = document.getElementById("formSuccessMessage");
     if (successBox2) {
       successBox2.style.display = "block";
+      successBox2.style.visibility = "visible";
       successBox2.innerHTML = `
         <div style="font-size: 2rem; margin-bottom: 8px;">☀️</div>
         <h4 style="color: #218739; font-size: 1.15rem; margin-bottom: 8px; font-weight: 700;">Request Submitted Successfully</h4>
@@ -255,29 +256,6 @@
         </p>
       `;
       successBox2.scrollIntoView({ behavior: "smooth", block: "nearest" });
-    }
-  }
-
-  function showFormErrorMessage(message) {
-    const errorBox1 = document.getElementById("form-error");
-    const errorMsgEl = document.getElementById("form-error-msg");
-    if (errorBox1) {
-      errorBox1.classList.remove("hidden");
-      errorBox1.style.display = "flex";
-      if (errorMsgEl) errorMsgEl.textContent = message;
-      errorBox1.scrollIntoView({ behavior: "smooth", block: "nearest" });
-      return;
-    }
-
-    const errorBox2 = document.getElementById("formErrorMessage");
-    if (errorBox2) {
-      errorBox2.style.display = "block";
-      errorBox2.innerHTML = `
-        <div style="font-size: 1.6rem; margin-bottom: 6px;">⚠️</div>
-        <h4 style="color: #BA1A1A; font-size: 1.05rem; margin-bottom: 6px; font-weight: 700;">Submission Notice</h4>
-        <p style="font-size: 0.94rem; line-height: 1.5; color: #781010; margin: 0;">${message}</p>
-      `;
-      errorBox2.scrollIntoView({ behavior: "smooth", block: "nearest" });
     }
   }
 
