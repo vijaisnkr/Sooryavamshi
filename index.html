@@ -969,6 +969,12 @@
           const area = Math.round(roundedKw * 85);
           if (liveArea) liveArea.textContent = '~' + area + ' sq.ft terrace';
 
+          // Update form input for site assessment if empty or not dirty
+          const clientConsumptionInput = document.getElementById('client-consumption') || document.getElementById('contactUnits');
+          if (clientConsumptionInput && (!clientConsumptionInput.value || clientConsumptionInput.dataset.autoSync !== 'false')) {
+            clientConsumptionInput.value = units;
+          }
+
           // Update active preset visual
           presets.forEach(p => {
             if (parseInt(p.dataset.units) === units) {

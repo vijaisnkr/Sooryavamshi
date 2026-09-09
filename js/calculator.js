@@ -374,14 +374,14 @@ const SolarCalculator = (function() {
     const results = compute(currentUnits, stateObj);
 
     // Scroll to contact section
-    const contactSection = document.getElementById('contact');
+    const contactSection = document.getElementById('site-assessment-form') || document.getElementById('contact');
     if (contactSection) {
       contactSection.scrollIntoView({ behavior: 'smooth' });
     }
 
     // Prefill form inputs
-    const monthlyInput = document.getElementById('contactUnits');
-    const msgInput = document.getElementById('contactMessage');
+    const monthlyInput = document.getElementById('client-consumption') || document.getElementById('contactUnits');
+    const msgInput = document.getElementById('client-message') || document.getElementById('contactMessage');
 
     if (monthlyInput) {
       monthlyInput.value = results.monthlyUnits;
