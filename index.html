@@ -457,7 +457,7 @@
             </p>
           </div>
 
-          <form class="flex flex-col gap-3" id="assessment-form" onsubmit="event.preventDefault(); document.getElementById('form-success').classList.remove('hidden'); this.classList.add('hidden');">
+          <form class="flex flex-col gap-3" id="assessment-form">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
               <!-- Name -->
               <div class="flex flex-col gap-1">
@@ -484,7 +484,7 @@
               </div>
             </div>
 
-            <button class="w-full h-12 bg-primary-container text-on-primary rounded-lg font-label-lg text-label-lg flex items-center justify-center gap-space-xs font-bold shadow-md mt-2 active:scale-[0.99] transition-transform hover:bg-primary" type="submit">
+            <button class="w-full h-12 bg-primary-container text-on-primary rounded-lg font-label-lg text-label-lg flex items-center justify-center gap-space-xs font-bold shadow-md mt-2 active:scale-[0.99] transition-transform hover:bg-primary" id="submitFormBtn" type="submit">
               <span class="material-symbols-outlined text-[20px]">assignment_turned_in</span>
               <span>Request Free Site Assessment</span>
             </button>
@@ -497,6 +497,12 @@
             <p class="font-body-sm text-body-sm text-text-muted">
               Our chief solar engineer will call you shortly to schedule your shadow assessment and KSEB feasibility audit.
             </p>
+          </div>
+
+          <!-- Error State -->
+          <div class="hidden p-4 rounded-xl bg-red-100 text-red-800 border border-red-200 flex flex-col items-center text-center gap-1" id="form-error">
+            <h4 class="font-bold text-sm">Submission Error</h4>
+            <p class="text-xs" id="form-error-msg">Could not submit your request. Please try again or call +91 9061626868.</p>
           </div>
 
           <!-- Direct Call Link -->

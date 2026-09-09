@@ -67,6 +67,13 @@ window.SooryavamshiSupabase = (function() {
         data.kseb_consumer_number.trim() : null,
       rooftop_details: data.rooftop_details && data.rooftop_details.trim() ? 
         data.rooftop_details.trim() : null,
+      preferred_contact_time: data.preferred_contact_time && data.preferred_contact_time.trim() ? 
+        data.preferred_contact_time.trim() : null,
+      estimated_solar_capacity: typeof data.estimated_solar_capacity === "number" ? 
+        data.estimated_solar_capacity : 
+        (parseFloat(data.estimated_solar_capacity) || null),
+      rooftop_photo_path: data.rooftop_photo_path && data.rooftop_photo_path.trim() ? 
+        data.rooftop_photo_path.trim() : null,
       status: "New",
       source: "Website"
     };

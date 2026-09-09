@@ -109,3 +109,27 @@ When a customer submits an assessment enquiry, you can receive instant email not
    - Sign in with your admin credentials.
    - You will see the new lead in the table with one-click **Call** and **WhatsApp** buttons.
    - Change the status dropdown from `New` to `Contacted` or `Site Visit Scheduled`.
+
+---
+
+## 7. Enable Automatic Google Sheets Lead Sync
+
+Every site assessment request can automatically populate a Google Sheet in real time:
+
+1. **Run Database Migration**:
+   - Open **SQL Editor** in Supabase.
+   - Run [`supabase/migration_google_sheets_sync.sql`](./migration_google_sheets_sync.sql).
+2. **Deploy Google Apps Script**:
+   - Follow instructions in [`google-apps-script/README.md`](../google-apps-script/README.md).
+   - Set Script Property `WEBHOOK_SECRET` = `suryavamshi_sec_2026_x9k2m7`.
+   - Deploy as Web App (Execute as: Me, Access: Anyone).
+3. **Configure Database Webhook**:
+   - In Supabase Dashboard, go to **Database** → **Webhooks** → **Add Webhook**.
+   - **Name**: `Google Sheets Lead Sync`
+   - **Table**: `site_assessment_requests`
+   - **Events**: `INSERT`
+   - **Method**: `POST`
+   - **URL**: `https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec?secret=suryavamshi_sec_2026_x9k2m7`
+   - **HTTP Headers**: `Content-Type: application/json`
+4. Now every customer form submission is synced into Columns A through O in Google Sheet `Sooryavamshi Solar Site Assessment Leads` tab `Site Assessment Leads` automatically!
+
