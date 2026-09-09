@@ -60,16 +60,16 @@ window.SooryavamshiSupabase = (function() {
       email: data.email && data.email.trim() ? data.email.trim().toLowerCase() : null,
       pin_code: data.pin_code && data.pin_code.trim() ? data.pin_code.trim() : null,
       city_location: (data.city_location || "").trim(),
-      monthly_consumption: typeof data.monthly_consumption === "number" ? 
+      monthly_consumption: typeof data.monthly_consumption === "number" && !isNaN(data.monthly_consumption) ? 
         data.monthly_consumption : 
-        parseFloat(data.monthly_consumption) || null,
+        (parseFloat(data.monthly_consumption) || 0),
       kseb_consumer_number: data.kseb_consumer_number && data.kseb_consumer_number.trim() ? 
         data.kseb_consumer_number.trim() : null,
       rooftop_details: data.rooftop_details && data.rooftop_details.trim() ? 
         data.rooftop_details.trim() : null,
       preferred_contact_time: data.preferred_contact_time && data.preferred_contact_time.trim() ? 
         data.preferred_contact_time.trim() : null,
-      estimated_solar_capacity: typeof data.estimated_solar_capacity === "number" ? 
+      estimated_solar_capacity: typeof data.estimated_solar_capacity === "number" && !isNaN(data.estimated_solar_capacity) ? 
         data.estimated_solar_capacity : 
         (parseFloat(data.estimated_solar_capacity) || null),
       rooftop_photo_path: data.rooftop_photo_path && data.rooftop_photo_path.trim() ? 
@@ -78,9 +78,9 @@ window.SooryavamshiSupabase = (function() {
       source: "Website"
     };
 
-    // Basic assertion on required fields
-    if (!payload.full_name || !payload.phone_number || !payload.city_location || payload.monthly_consumption === null) {
-      return { success: false, error: "Validation failed: missing required fields." };
+    // Basic assertion on required fields (full_name, phone_number, city_location)
+    if (!payload.full_name || !payload.phone_number || !payload.city_location) {
+      return { success: false, error: "Validation failed: Please enter Full Name, Phone Number, and Location." };
     }
 
     const cfg = SOORYAVAMSHI_SUPABASE_CONFIG.getConfig();

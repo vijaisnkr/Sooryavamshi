@@ -33,14 +33,14 @@
         return;
       }
 
-      // 2. Submission Throttling (Debounce / Cooldown protection)
+      // 2. Submission Throttling (Debounce / Cooldown protection - 2 seconds)
       const lastSubmitTs = parseInt(localStorage.getItem("sooryavamshi_last_submit_ts") || "0", 10);
       const now = Date.now();
-      const COOLDOWN_MS = 30000; // 30 seconds
+      const COOLDOWN_MS = 2000; // 2 seconds
 
       if (now - lastSubmitTs < COOLDOWN_MS) {
         const remainingSec = Math.ceil((COOLDOWN_MS - (now - lastSubmitTs)) / 1000);
-        showFormErrorMessage(`Please wait ${remainingSec} seconds before submitting another request.`);
+        showFormErrorMessage(`Please wait ${remainingSec} seconds before submitting again.`);
         return;
       }
 
@@ -63,6 +63,10 @@
         rooftop_photo_path: (document.getElementById("contactPhotoPath")?.value || document.getElementById("client-photo-path")?.value || "").trim()
       };
 
+      // Clean monthly consumption value for number parsing
+      const cleanedUnitsStr = rawData.monthly_consumption.replace(/[^\d.]/g, "");
+      const numericUnits = parseFloat(cleanedUnitsStr) || 0;
+
       // Calculate estimated solar capacity dynamically if available
       let estCapacity = null;
       if (window.SolarCalculator && typeof window.SolarCalculator.getCurrentResults === "function") {
@@ -73,17 +77,10 @@
           }
         } catch (err) {}
       }
-      if (!estCapacity && rawData.monthly_consumption) {
-        const u = parseFloat(rawData.monthly_consumption.replace(/[^\d.]/g, ""));
-        if (!isNaN(u) && u > 0) {
-          estCapacity = Math.max(1.0, Math.round((u / (30 * 4.2 * 0.82)) * 10) / 10);
-        }
+      if (!estCapacity && numericUnits > 0) {
+        estCapacity = Math.max(1.0, Math.round((numericUnits / (30 * 4.2 * 0.82)) * 10) / 10);
       }
       rawData.estimated_solar_capacity = estCapacity;
-
-      // Clean monthly consumption value for number parsing
-      const cleanedUnitsStr = rawData.monthly_consumption.replace(/[^\d.]/g, "");
-      const numericUnits = parseFloat(cleanedUnitsStr) || null;
 
       // 4. Client-side Validation
       const validationErrors = validateForm(rawData, numericUnits);
