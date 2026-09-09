@@ -179,6 +179,16 @@
     return errors;
   }
 
+  function clearInlineErrors() {
+    document.querySelectorAll(".field-error-msg").forEach(el => {
+      el.textContent = "";
+      el.style.display = "none";
+    });
+    document.querySelectorAll(".input-error").forEach(el => {
+      el.classList.remove("input-error");
+    });
+  }
+
   /**
    * Displays inline error messages under specific form inputs
    */
@@ -234,6 +244,16 @@
     }
   }
 
+  function safeScrollIntoView(el) {
+    if (el && typeof el.scrollIntoView === "function") {
+      try {
+        el.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      } catch (e) {
+        try { el.scrollIntoView(); } catch (e2) {}
+      }
+    }
+  }
+
   function showSuccessMessage(form) {
     if (form) {
       form.classList.add("hidden");
@@ -245,7 +265,7 @@
       successBox1.classList.remove("hidden");
       successBox1.style.setProperty("display", "flex", "important");
       successBox1.style.visibility = "visible";
-      successBox1.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      safeScrollIntoView(successBox1);
       return;
     }
 
@@ -260,7 +280,7 @@
           Thank you! Your site assessment request has been received. A Sooryavamshi solar specialist will contact you shortly.
         </p>
       `;
-      successBox2.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      safeScrollIntoView(successBox2);
     }
   }
 
