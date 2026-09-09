@@ -85,7 +85,23 @@ window.SooryavamshiSupabase = (function() {
 
     const cfg = SOORYAVAMSHI_SUPABASE_CONFIG.getConfig();
 
-    // 2. Execute via direct native fetch to guarantee compatibility with all adblockers & browsers
+    // 2. Try official Supabase Client SDK first
+    const client = getClient();
+    if (client && client.from) {
+      try {
+        const { data, error } = await client.from(cfg.tableName).insert([payload]);
+        if (!error) {
+          console.log("Successfully inserted record via Supabase SDK:", payload.full_name);
+          return { success: true };
+        } else {
+          console.warn("Supabase SDK insert notice, attempting REST fallback:", error.message);
+        }
+      } catch (sdkErr) {
+        console.warn("Supabase SDK exception:", sdkErr);
+      }
+    }
+
+    // 3. Fallback to direct REST fetch
     try {
       const endpoint = `${cfg.url}/rest/v1/${cfg.tableName}`;
       const response = await fetch(endpoint, {
@@ -100,10 +116,11 @@ window.SooryavamshiSupabase = (function() {
       });
 
       if (response.ok || response.status === 201 || response.status === 200 || response.status === 204) {
+        console.log("Successfully inserted record via REST fetch:", payload.full_name);
         return { success: true };
       } else {
         const errorText = await response.text();
-        console.warn("Supabase REST insert notice:", response.status, errorText);
+        console.warn("Supabase REST insert response:", response.status, errorText);
         return { success: true };
       }
     } catch (err) {
