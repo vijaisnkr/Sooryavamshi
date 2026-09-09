@@ -6,7 +6,21 @@
  */
 
 (function() {
-  document.addEventListener("DOMContentLoaded", initContactForm);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initContactForm);
+  } else {
+    initContactForm();
+  }
+
+  // Global fail-safe hook directly invoked by HTML onsubmit / onclick
+  window.handleAssessmentSubmit = function(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    initContactForm();
+    const form = document.getElementById("assessment-form") || document.getElementById("consultationForm");
+    if (form && window._doSubmitForm) {
+      window._doSubmitForm(e);
+    }
+  };
 
   function initContactForm() {
     const form = document.getElementById("assessment-form") || document.getElementById("consultationForm");
@@ -19,6 +33,8 @@
 
     // Bind Form Submit Event
     form.addEventListener("submit", handleFormSubmit);
+
+    window._doSubmitForm = handleFormSubmit;
 
     async function handleFormSubmit(e) {
       if (e && e.preventDefault) e.preventDefault();
