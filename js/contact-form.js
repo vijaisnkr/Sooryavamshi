@@ -17,19 +17,8 @@
     // Prefill helper: If calculator passed units or location via session/hash
     handlePrepopulation();
 
-    // Standard Form Submit Event
+    // Bind Form Submit Event
     form.addEventListener("submit", handleFormSubmit);
-
-    // Direct Button Click Fallback Handler
-    if (submitBtn) {
-      submitBtn.addEventListener("click", function(e) {
-        if (form.checkValidity && !form.checkValidity()) {
-          return; // Let browser trigger native validation tooltips if required fields are missing
-        }
-        e.preventDefault();
-        handleFormSubmit(e);
-      });
-    }
 
     async function handleFormSubmit(e) {
       if (e && e.preventDefault) e.preventDefault();
