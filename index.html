@@ -196,7 +196,6 @@
         <a href="#site-assessment-form" class="font-label-lg text-on-surface hover:text-primary transition-colors font-semibold">Contact</a>
         <a href="#kseb-section" class="font-label-lg text-on-surface hover:text-primary transition-colors font-semibold">KSEB Feasibility</a>
         <a href="#visualizer-section" class="font-label-lg text-on-surface hover:text-primary transition-colors font-semibold">Equipment</a>
-        <a href="#projects-section" class="font-label-lg text-on-surface hover:text-primary transition-colors font-semibold">Projects</a>
       </nav>
 
       <div class="flex items-center gap-space-xs">
@@ -251,10 +250,6 @@
       <a class="flex items-center gap-space-sm px-space-sm h-11 rounded-lg text-on-surface-variant hover:bg-surface-container font-label-lg text-label-lg transition-colors" href="#visualizer-section" onclick="document.getElementById('mobile-drawer').classList.add('-translate-x-full');document.getElementById('drawer-backdrop').classList.add('opacity-0','pointer-events-none');">
         <span class="material-symbols-outlined text-[20px]">memory</span>
         <span>Equipment Specs</span>
-      </a>
-      <a class="flex items-center gap-space-sm px-space-sm h-11 rounded-lg text-on-surface-variant hover:bg-surface-container font-label-lg text-label-lg transition-colors" href="#projects-section" onclick="document.getElementById('mobile-drawer').classList.add('-translate-x-full');document.getElementById('drawer-backdrop').classList.add('opacity-0','pointer-events-none');">
-        <span class="material-symbols-outlined text-[20px]">solar_power</span>
-        <span>Our Projects</span>
       </a>
       <a class="flex items-center gap-space-sm px-space-sm h-11 rounded-lg text-on-surface-variant hover:bg-surface-container font-label-lg text-label-lg transition-colors" href="#why-section" onclick="document.getElementById('mobile-drawer').classList.add('-translate-x-full');document.getElementById('drawer-backdrop').classList.add('opacity-0','pointer-events-none');">
         <span class="material-symbols-outlined text-[20px]">corporate_fare</span>
@@ -725,95 +720,6 @@
         </details>
       </section>
 
-      <!-- FEATURED PROJECTS -->
-      <section class="py-space-md flex flex-col gap-space-md" id="projects-section">
-        <div class="px-space-md flex items-center justify-between">
-          <div class="flex flex-col">
-            <span class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-bold">Track Record</span>
-            <h2 class="font-headline-lg-mobile md:text-headline-lg text-headline-lg-mobile text-on-surface font-bold">Featured Projects</h2>
-          </div>
-          <span class="px-3 py-1 rounded-full bg-surface-container font-label-sm text-label-sm text-on-surface font-semibold">250+ Installed</span>
-        </div>
-
-        <!-- Horizontal Rail on Mobile, Grid on Desktop -->
-        <div class="flex gap-space-sm overflow-x-auto px-space-md pb-2 no-scrollbar md:grid md:grid-cols-3 md:overflow-visible">
-          <!-- Project 1 -->
-          <div class="w-[82vw] md:w-auto flex-shrink-0 rounded-2xl bg-surface-card shadow-md overflow-hidden flex flex-col">
-            <div class="w-full h-48 bg-cover bg-center relative" style="background-image: url('assets/images/project-villa.jpg')">
-              <div class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-md bg-inverse-surface/85 backdrop-blur-sm text-inverse-on-surface font-label-sm text-label-sm font-semibold">
-                Cherthala, Kerala
-              </div>
-              <div class="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-md bg-primary-container text-on-primary font-label-sm text-label-sm font-bold">
-                5.0 kWp Plant
-              </div>
-            </div>
-            <div class="p-4 flex flex-col gap-2">
-              <h4 class="font-headline-sm text-headline-sm text-on-surface font-bold">Elevated Rooftop Pergola</h4>
-              <p class="font-body-sm text-body-sm text-text-muted">
-                Preserves 100% of usable RCC terrace space while providing shading and slashing monthly bills.
-              </p>
-              <div class="flex items-center justify-between pt-2 border-t border-border-subtle text-primary font-label-sm text-label-sm font-bold">
-                <span class="flex items-center gap-1">
-                  <span class="material-symbols-outlined text-[16px]">savings</span>
-                  ₹60,000+ Annual Savings
-                </span>
-                <span class="text-text-muted font-normal">RCC Terrace</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project 2 -->
-          <div class="w-[82vw] md:w-auto flex-shrink-0 rounded-2xl bg-surface-card shadow-md overflow-hidden flex flex-col">
-            <div class="w-full h-48 bg-cover bg-center relative" style="background-image: url('assets/images/project-urban.jpg')">
-              <div class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-md bg-inverse-surface/85 backdrop-blur-sm text-inverse-on-surface font-label-sm text-label-sm font-semibold">
-                Kakkanad, Kochi
-              </div>
-              <div class="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-md bg-primary-container text-on-primary font-label-sm text-label-sm font-bold">
-                3.2 kWp Surya Ghar
-              </div>
-            </div>
-            <div class="p-4 flex flex-col gap-2">
-              <h4 class="font-headline-sm text-headline-sm text-on-surface font-bold">PM Surya Ghar Installation</h4>
-              <p class="font-body-sm text-body-sm text-text-muted">
-                Optimized for fast ₹78,000 subsidy crediting, zero terrace water leakage, and 3.2-year payback.
-              </p>
-              <div class="flex items-center justify-between pt-2 border-t border-border-subtle text-primary font-label-sm text-label-sm font-bold">
-                <span class="flex items-center gap-1">
-                  <span class="material-symbols-outlined text-[16px]">savings</span>
-                  ₹34,000+ Annual Savings
-                </span>
-                <span class="text-text-muted font-normal">Zero Leakage</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project 3 -->
-          <div class="w-[82vw] md:w-auto flex-shrink-0 rounded-2xl bg-surface-card shadow-md overflow-hidden flex flex-col">
-            <div class="w-full h-48 bg-cover bg-center relative" style="background-image: url('assets/images/project-commercial.jpg')">
-              <div class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-md bg-inverse-surface/85 backdrop-blur-sm text-inverse-on-surface font-label-sm text-label-sm font-semibold">
-                Whitefield, Campus
-              </div>
-              <div class="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-md bg-primary-container text-on-primary font-label-sm text-label-sm font-bold">
-                25.0 kWp Commercial
-              </div>
-            </div>
-            <div class="p-4 flex flex-col gap-2">
-              <h4 class="font-headline-sm text-headline-sm text-on-surface font-bold">Commercial Solar Plant</h4>
-              <p class="font-body-sm text-body-sm text-text-muted">
-                Commercial institutional rooftop solar plant powering laboratories with AC/DC protection.
-              </p>
-              <div class="flex items-center justify-between pt-2 border-t border-border-subtle text-primary font-label-sm text-label-sm font-bold">
-                <span class="flex items-center gap-1">
-                  <span class="material-symbols-outlined text-[16px]">savings</span>
-                  ₹2,80,000+ Savings
-                </span>
-                <span class="text-text-muted font-normal">Institutional</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <!-- WHY SOORYAVAMSHI -->
       <section class="px-space-md py-space-lg flex flex-col gap-space-md" id="why-section">
         <div class="flex flex-col gap-1 text-center md:text-left">
@@ -1046,7 +952,6 @@
         <div class="flex flex-wrap gap-x-space-md gap-y-space-xs font-label-sm text-label-sm text-text-muted pt-space-xs">
           <a class="hover:text-primary transition-colors" href="#solar-calculator-section">Calculator</a>
           <a class="hover:text-primary transition-colors" href="#kseb-section">KSEB Grid Feasibility</a>
-          <a class="hover:text-primary transition-colors" href="#projects-section">Projects Gallery</a>
           <a class="hover:text-primary transition-colors" href="#why-section">About</a>
         </div>
       </div>
