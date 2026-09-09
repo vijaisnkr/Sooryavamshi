@@ -15,8 +15,9 @@ ALTER TABLE public.site_assessment_requests
 ALTER TABLE public.site_assessment_requests ENABLE ROW LEVEL SECURITY;
 
 DROP POLICY IF EXISTS "site_assessment_requests_anon_insert" ON public.site_assessment_requests;
-CREATE POLICY "site_assessment_requests_anon_insert" 
-    ON public.site_assessment_requests FOR INSERT TO anon WITH CHECK (true);
+DROP POLICY IF EXISTS "Allow public insert for site_assessment_requests" ON public.site_assessment_requests;
+CREATE POLICY "Allow public insert for site_assessment_requests" 
+    ON public.site_assessment_requests FOR INSERT TO public WITH CHECK (true);
 
 -- 3. Enable Database Webhook schema & pg_net extension
 CREATE SCHEMA IF NOT EXISTS supabase_functions;
