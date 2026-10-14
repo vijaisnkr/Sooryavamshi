@@ -1,0 +1,28 @@
+/* Extra styles for the town and guide pages (load after daylight.css) */
+.prose { max-width: 760px; }
+.prose h2 { margin: 10px 0 18px; font-size: clamp(1.8rem, 3.8vw, 2.8rem); font-weight: 780; letter-spacing: -0.03em; }
+.prose h2 .serif { color: var(--accent-ink); font-size: 1.08em; }
+.prose p { color: var(--fg-muted); margin: 0 0 14px; line-height: 1.7; }
+.prose p strong { color: var(--fg); }
+.prose .steps-mini { margin-top: 18px; }
+.page-hero .hero-ctas { margin-top: 8px; }
+.page-hero .btn-line { color: #fff; border-color: rgba(255, 255, 255, .35); }
+.info-grid .card.info p a { white-space: normal; }
+.rel-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.rel-grid .rel { display: grid; gap: 6px; padding: 18px 20px; text-decoration: none; color: inherit; transition: transform .25s, border-color .25s; }
+.rel-grid .rel:hover { transform: translateY(-2px); border-color: var(--accent-ink); }
+.rel-grid .rel span { color: var(--fg-muted); font-size: .92rem; }
+@media (max-width: 860px) { .faq { grid-template-columns: 1fr; } }
+/* Footer gains a fourth "Areas & guides" column on these pages */
+@media (min-width: 981px) { .site-footer > .wrap:first-child { grid-template-columns: 1.3fr 1fr 1fr 1fr; } }
+/* Round 2: spec and comparison tables on the size and on-grid guides */
+.spec-table-wrap { overflow-x: auto; margin-top: 18px; border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--surface); }
+.spec-table { width: 100%; border-collapse: collapse; font-size: .98rem; }
+.spec-table th, .spec-table td { padding: 14px 18px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+.spec-table tr:last-child th, .spec-table tr:last-child td { border-bottom: 0; }
+.spec-table tbody th { font-weight: 700; color: var(--fg); width: 38%; }
+.spec-table td { color: var(--fg-muted); }
+.spec-table.compare { min-width: 640px; }
+.spec-table.compare thead th { background: var(--surface-2); font-family: var(--display); color: var(--fg); }
+.spec-table.compare tbody th { width: 18%; }
+.prose .fine, .wrap > .fine { color: var(--fg-muted); font-size: .88rem; margin-top: 12px; }

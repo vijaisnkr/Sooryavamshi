@@ -321,7 +321,7 @@ const SOORYAVAMSHI_CONFIG = {
     // State to DISCOM mapping with technical parameters
     discomsByState: {
       "Kerala": [
-        { id: "KSEBL", name: "KSEBL (Kerala State Electricity Board Ltd)", phaseRule: "1-Phase up to 5 kW, 3-Phase > 5 kW", dtLimit: "Up to 80% of DT capacity", portal: "PM Surya Ghar / e-Kiran", netMetering: "Bi-directional Net Metering eligible" }
+        { id: "KSEBL", name: "KSEBL (Kerala State Electricity Board Ltd)", phaseRule: "1-Phase up to 5 kW, 3-Phase > 5 kW", dtLimit: "Up to 90% of DT capacity", portal: "PM Surya Ghar / e-Kiran", netMetering: "Bi-directional Net Metering eligible" }
       ],
       "Karnataka": [
         { id: "BESCOM", name: "BESCOM (Bangalore Electricity Supply Company)", phaseRule: "1-Phase up to 5 kW, 3-Phase > 5 kW", dtLimit: "Up to 80% of DT capacity", portal: "PM Surya Ghar / BESCOM Solar", netMetering: "KERC Net Metering eligible" },

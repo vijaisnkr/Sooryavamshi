@@ -1,0 +1,31 @@
+# Suryavamshi Solar Projects LLP
+
+> Rooftop solar installer based in Cherthala, Kerala, India. Designs and installs on-grid and hybrid solar systems for homes, and handles the KSEB feasibility check, net-metering application and the PM Surya Ghar subsidy claim (up to ₹78,000) for customers. Serves Cherthala, Alappuzha, Kochi (Ernakulam) and Kottayam.
+
+- Phone and WhatsApp: +91 9061626868
+- Email: suryavamshisolarprojects@gmail.com
+- Address: Door No. 414, Chithira, Muttathiparamb P.O, Cherthala, Kerala 688527
+- Hours: Monday to Saturday, 9:00 AM to 7:30 PM
+- Free site assessment: https://suryavamshi.com/contact.html
+
+## Tools
+- [Solar calculator](https://suryavamshi.com/calculator.html): sizes a system from a monthly KSEB bill or units
+
+## Guides
+- [PM Surya Ghar subsidy in Kerala](https://suryavamshi.com/pm-surya-ghar-subsidy-kerala.html): amounts, eligibility and steps
+- [KSEB solar feasibility check](https://suryavamshi.com/kseb-solar-feasibility-check.html): transformer headroom and the reCap portal
+- [3 kW solar system for Kerala homes](https://suryavamshi.com/3kw-solar-system-kerala.html): 6 DCR panels, indicative ₹2,05,000 before the ₹78,000 subsidy
+- [5 kW solar system for Kerala homes](https://suryavamshi.com/5kw-solar-system-kerala.html): typical estimate ₹2.8 to ₹3.1 lakh before subsidy
+- [8 kW three-phase solar system](https://suryavamshi.com/8kw-solar-system-kerala.html): 13 Vikram TOPCon panels, Solinteg inverter, ₹4,00,000
+- [On-grid vs hybrid solar](https://suryavamshi.com/on-grid-vs-hybrid-solar-kerala.html)
+- [Solar panels in Kerala's monsoon](https://suryavamshi.com/solar-panels-monsoon-kerala.html)
+- [Equipment and warranty](https://suryavamshi.com/equipment.html)
+
+## Service areas
+- [Cherthala](https://suryavamshi.com/solar-panel-installation-cherthala.html)
+- [Alappuzha](https://suryavamshi.com/solar-panel-installation-alappuzha.html)
+- [Kochi](https://suryavamshi.com/solar-panel-installation-kochi.html)
+- [Kottayam](https://suryavamshi.com/solar-panel-installation-kottayam.html)
+
+## Other languages
+- [Malayalam](https://suryavamshi.com/malayalam.html)

@@ -1,12 +1,24 @@
 /**
  * Sooryavamshi Solar Projects LLP - Solar Requirement Calculator
  * Cleanly separated calculation engine and reactive DOM controller.
+ *
+ * v6: the typed value always drives the result (units or bill) and the
+ * typed bill can go up to Rs 2,00,000 a month.
+ * v7: the slider covers everyday bills only (up to Rs 10,000 a month, or the
+ * same amount in units) on a straight scale. A typed value above that is
+ * still used in full; the slider just rests at its right end.
  */
 
 window.SolarCalculator = (function() {
+  const MAX_BILL = 200000;   // Rs per month, top of the typed range
+  const SLIDER_MAX_BILL = 10000; // Rs per month, right end of the slider
+  const MIN_UNITS = 50;      // left end of the slider
+  const SLIDER_STEPS = 1000; // slider resolution (positions, not units)
+
   // Internal state
   let currentUnits = 400; // Default units
-  let currentStateIndex = 0; // Default Karnataka
+  let currentBill = null; // Exact bill typed in bill mode
+  let currentStateIndex = 0; // Default Kerala
   let isBillMode = false;
 
   // Cache DOM elements
@@ -17,14 +29,17 @@ window.SolarCalculator = (function() {
       slider: document.getElementById('calcUnitsSlider'),
       numberInput: document.getElementById('calcUnitsInput'),
       unitLabel: document.getElementById('calcUnitLabel'),
+      currency: document.getElementById('calcCurrency'),
+      hint: document.getElementById('calcInputHint'),
+      ticks: document.getElementById('calcTicks'),
+      modeSeg: document.getElementById('calcModeSeg'),
+      fieldLabel: document.querySelector('.calc-field-label'),
       stateSelect: document.getElementById('calcStateSelect'),
       tabUnits: document.getElementById('tabUnitsMode'),
       tabBill: document.getElementById('tabBillMode'),
       presetPills: document.querySelectorAll('.preset-pill'),
-      formulaToggle: document.getElementById('calcFormulaToggle'),
-      formulaContent: document.getElementById('calcFormulaContent'),
       assessmentBtn: document.getElementById('calcAssessmentBtn'),
-      
+
       // Results output elements
       heroKw: document.getElementById('resultHeroKw'),
       heroKwSub: document.getElementById('resultHeroSub'),
@@ -49,73 +64,140 @@ window.SolarCalculator = (function() {
 
     if (!elements.slider || !elements.numberInput) return;
 
+    elements.slider.min = 0;
+    elements.slider.max = SLIDER_STEPS;
+    elements.slider.step = 1;
+
     populateStates();
     bindEvents();
-    updateSliderProgress();
+    applyUrlParams();
+    syncInputs();
     renderCalculations();
+  }
+
+  // calculator.html?bill=4500 or ?units=400 (from the homepage quick estimate)
+  function applyUrlParams() {
+    let params;
+    try { params = new URLSearchParams(window.location.search); } catch (e) { return; }
+    const bill = parseFloat(params.get('bill'));
+    const units = parseFloat(params.get('units'));
+    if (bill > 0) {
+      setMode(true);
+      currentBill = Math.min(bill, MAX_BILL);
+      currentUnits = currentBill / getTariff();
+      if (bill > MAX_BILL) setHint(`The calculator goes up to ₹${fmt(MAX_BILL)} a month, so we've used ₹${fmt(MAX_BILL)}.`, true);
+    } else if (units > 0) {
+      currentUnits = Math.min(units, maxUnits());
+    } else {
+      // Monthly Bill is the default input
+      setMode(true);
+    }
+  }
+
+  /* ---------- Range helpers ---------- */
+
+  function getTariff() {
+    return getSelectedState().defaultTariff || SOORYAVAMSHI_CONFIG.calculator.averageTariffPerUnitInr;
+  }
+
+  // Highest monthly consumption the calculator covers: a Rs 2,00,000 bill
+  function maxUnits() {
+    return Math.round(MAX_BILL / getTariff());
+  }
+
+  // Right end of the slider in units: a Rs 10,000 bill at the selected tariff
+  function sliderMaxUnits() {
+    return Math.round(SLIDER_MAX_BILL / getTariff());
+  }
+
+  // Straight-line slider: position 0..SLIDER_STEPS <-> units MIN_UNITS..sliderMaxUnits()
+  function unitsFromPosition(pos) {
+    return MIN_UNITS + (sliderMaxUnits() - MIN_UNITS) * (pos / SLIDER_STEPS);
+  }
+
+  function positionFromUnits(units) {
+    const p = (units - MIN_UNITS) / (sliderMaxUnits() - MIN_UNITS);
+    return Math.round(Math.max(0, Math.min(1, p)) * SLIDER_STEPS);
+  }
+
+  // True when the typed value is beyond the slider's right end
+  function isAboveSlider() {
+    return isBillMode
+      ? (currentBill != null ? currentBill : currentUnits * getTariff()) > SLIDER_MAX_BILL
+      : currentUnits > sliderMaxUnits();
+  }
+
+  // Round slider values to steps people would actually type
+  function niceRound(n) {
+    if (n < 1000) return Math.round(n / 10) * 10;
+    if (n < 5000) return Math.round(n / 50) * 50;
+    if (n < 20000) return Math.round(n / 100) * 100;
+    return Math.round(n / 500) * 500;
+  }
+
+  function fmt(n) {
+    return Math.round(n).toLocaleString('en-IN');
+  }
+
+  function fmtShortInr(n) {
+    if (n >= 100000) return `₹${+(n / 100000).toFixed(1)}L`;
+    if (n >= 1000) return `₹${+(n / 1000).toFixed(n >= 10000 ? 0 : 1)}k`;
+    return `₹${fmt(n)}`;
   }
 
   function updateSliderProgress() {
     if (!elements.slider) return;
-    const min = parseFloat(elements.slider.min) || 50;
-    const max = parseFloat(elements.slider.max) || 1500;
-    const val = parseFloat(elements.slider.value) || 400;
-    const percent = Math.max(0, Math.min(100, ((val - min) / (max - min)) * 100));
-    elements.slider.style.setProperty('--slider-percent', `${percent}%`);
+    const percent = (parseFloat(elements.slider.value) / SLIDER_STEPS) * 100;
+    elements.slider.style.setProperty('--slider-percent', `${Math.max(0, Math.min(100, percent))}%`);
   }
 
-  function setupMobileTouchSupport(slider) {
-    if (!slider) return;
-    let isDragging = false;
-
-    function handleTouch(e) {
-      const touch = e.touches && e.touches.length > 0 ? e.touches[0] : (e.changedTouches ? e.changedTouches[0] : null);
-      if (!touch) return;
-      
-      const rect = slider.getBoundingClientRect();
-      if (rect.width <= 0) return;
-      
-      const touchX = touch.clientX;
-      const offsetX = Math.max(0, Math.min(rect.width, touchX - rect.left));
-      const ratio = offsetX / rect.width;
-      const min = parseFloat(slider.min) || 50;
-      const max = parseFloat(slider.max) || 1500;
-      const step = parseFloat(slider.step) || 10;
-      
-      const rawVal = min + ratio * (max - min);
-      const snapped = Math.max(min, Math.min(max, Math.round(rawVal / step) * step));
-      
-      if (parseInt(slider.value, 10) !== snapped) {
-        slider.value = snapped;
-        updateInputValue(snapped);
-        renderCalculations();
+  function updateTicks() {
+    if (!elements.ticks) return;
+    const tariff = getTariff();
+    const labels = [0, 1 / 3, 2 / 3, 1].map((t, i) => {
+      const u = unitsFromPosition(t * SLIDER_STEPS);
+      if (isBillMode) {
+        const bill = i === 3 ? SLIDER_MAX_BILL : niceRound(u * tariff);
+        return fmtShortInr(bill);
       }
+      const val = i === 3 ? sliderMaxUnits() : niceRound(u);
+      return i === 3 ? `${fmt(val)} Units` : fmt(val);
+    });
+    elements.ticks.innerHTML = labels.map(l => `<span>${l}</span>`).join('');
+  }
+
+  function setHint(text, warn) {
+    if (!elements.hint) return;
+    elements.hint.textContent = text;
+    elements.hint.classList.toggle('warn', !!warn);
+  }
+
+  function defaultHint() {
+    if (isAboveSlider()) {
+      return isBillMode
+        ? `Using your typed bill of ₹${fmt(currentBill != null ? currentBill : currentUnits * getTariff())}. The slider stops at ₹${fmt(SLIDER_MAX_BILL)}; type any bill up to ₹${fmt(MAX_BILL)}.`
+        : `Using your typed ${fmt(currentUnits)} units. The slider stops at ${fmt(sliderMaxUnits())} units; type up to ${fmt(maxUnits())}.`;
     }
+    return isBillMode
+      ? `Type any bill up to ₹${fmt(MAX_BILL)} a month, or drag the slider up to ₹${fmt(SLIDER_MAX_BILL)}.`
+      : `Type any amount up to ${fmt(maxUnits())} units a month, or drag the slider.`;
+  }
 
-    slider.addEventListener('touchstart', function(e) {
-      if (e.touches && e.touches.length === 1) {
-        isDragging = true;
-        handleTouch(e);
-      }
-    }, { passive: true });
-
-    slider.addEventListener('touchmove', function(e) {
-      if (isDragging && e.touches && e.touches.length === 1) {
-        // Prevent viewport vertical scroll from canceling horizontal slider drag
-        if (e.cancelable) e.preventDefault();
-        handleTouch(e);
-      }
-    }, { passive: false });
-
-    const stopDragging = function(e) {
-      if (isDragging) {
-        isDragging = false;
-        if (e && e.changedTouches) handleTouch(e);
-      }
-    };
-
-    slider.addEventListener('touchend', stopDragging, { passive: true });
-    slider.addEventListener('touchcancel', stopDragging, { passive: true });
+  // Push currentUnits / currentBill into the slider and the number box
+  function syncInputs(skipNumberBox) {
+    elements.slider.value = positionFromUnits(currentUnits);
+    elements.slider.classList.toggle('over', isAboveSlider());
+    updateSliderProgress();
+    if (!skipNumberBox) {
+      elements.numberInput.value = isBillMode
+        ? Math.round(currentBill != null ? currentBill : currentUnits * getTariff())
+        : Math.round(currentUnits);
+    }
+    elements.numberInput.max = isBillMode ? MAX_BILL : maxUnits();
+    elements.presetPills.forEach(p => {
+      p.classList.toggle('active', !isBillMode && parseInt(p.getAttribute('data-units'), 10) === Math.round(currentUnits));
+    });
+    updateTicks();
   }
 
   function populateStates() {
@@ -131,72 +213,86 @@ window.SolarCalculator = (function() {
   }
 
   function bindEvents() {
-    // Slider input and change events with live reactive rendering
+    // Slider: logarithmic position -> units
     const onSliderUpdate = function(e) {
-      const val = parseInt(e.target.value, 10);
-      updateInputValue(val);
+      const pos = parseInt(e.target.value, 10);
+      const units = niceRound(unitsFromPosition(pos));
+      currentUnits = Math.max(MIN_UNITS, Math.min(sliderMaxUnits(), units));
+      currentBill = isBillMode ? Math.min(SLIDER_MAX_BILL, niceRound(currentUnits * getTariff())) : null;
+      if (pos >= SLIDER_STEPS) {
+        // The right end is exactly Rs 10,000 (or its units)
+        if (isBillMode) { currentBill = SLIDER_MAX_BILL; currentUnits = SLIDER_MAX_BILL / getTariff(); }
+        else currentUnits = sliderMaxUnits();
+      } else if (isBillMode) {
+        currentUnits = currentBill / getTariff();
+      }
+      setHint(defaultHint());
+      syncInputs();
       renderCalculations();
     };
-
     elements.slider.addEventListener('input', onSliderUpdate);
     elements.slider.addEventListener('change', onSliderUpdate);
-    setupMobileTouchSupport(elements.slider);
 
-    // Number input manual typing
+    // Number box: whatever is typed drives the result, up to the cap
     elements.numberInput.addEventListener('input', function(e) {
-      let val = parseInt(e.target.value, 10);
-      if (isNaN(val) || val < 50) val = 50;
-      if (val > 2500) val = 2500;
-      
-      if (isBillMode) {
-        // Convert bill to units
-        const tariff = getSelectedState().defaultTariff;
-        currentUnits = Math.round(val / tariff);
-      } else {
-        currentUnits = val;
+      const raw = String(e.target.value).replace(/[^\d.]/g, '');
+      const val = parseFloat(raw);
+      if (isNaN(val) || val <= 0) {
+        setHint(isBillMode ? 'Enter your monthly bill in ₹.' : 'Enter your monthly units.', true);
+        return;
       }
-      elements.slider.value = currentUnits;
-      updateSliderProgress();
+      const cap = isBillMode ? MAX_BILL : maxUnits();
+      const used = Math.min(val, cap);
+      if (isBillMode) {
+        currentBill = used;
+        currentUnits = used / getTariff();
+      } else {
+        currentBill = null;
+        currentUnits = used;
+      }
+      if (val > cap) {
+        elements.slider.classList.add('over');
+        setHint(isBillMode
+          ? `The calculator goes up to ₹${fmt(MAX_BILL)} a month, so we've used ₹${fmt(MAX_BILL)}.`
+          : `The calculator goes up to ${fmt(cap)} units a month, so we've used ${fmt(cap)}.`, true);
+      } else {
+        setHint(defaultHint());
+      }
+      syncInputs(true);
       renderCalculations();
     });
 
-    // State change
+    // When the box loses focus, show the value actually used
+    elements.numberInput.addEventListener('change', function() {
+      syncInputs();
+    });
+
+    // State change: tariff and insolation change, the typed bill stays the same
     elements.stateSelect.addEventListener('change', function(e) {
       currentStateIndex = parseInt(e.target.value, 10);
+      if (isBillMode && currentBill != null) {
+        currentUnits = currentBill / getTariff();
+      }
+      currentUnits = Math.min(currentUnits, maxUnits());
+      setHint(defaultHint());
+      syncInputs();
       renderCalculations();
     });
 
     // Tab mode toggle (Units vs Bill)
-    elements.tabUnits.addEventListener('click', function() {
-      setMode(false);
-    });
+    elements.tabUnits.addEventListener('click', function() { setMode(false); });
+    elements.tabBill.addEventListener('click', function() { setMode(true); });
 
-    elements.tabBill.addEventListener('click', function() {
-      setMode(true);
-    });
-
-    // Preset pills
+    // Preset pills (always in units)
     elements.presetPills.forEach(pill => {
       pill.addEventListener('click', function() {
-        elements.presetPills.forEach(p => p.classList.remove('active'));
-        this.classList.add('active');
-        const presetVal = parseInt(this.getAttribute('data-units'), 10);
-        currentUnits = presetVal;
-        updateInputValue(presetVal);
+        currentUnits = parseInt(this.getAttribute('data-units'), 10);
+        currentBill = isBillMode ? Math.round(currentUnits * getTariff()) : null;
+        setHint(defaultHint());
+        syncInputs();
         renderCalculations();
       });
     });
-
-    // Formula Breakdown toggle
-    if (elements.formulaToggle && elements.formulaContent) {
-      elements.formulaToggle.addEventListener('click', function() {
-        const isOpen = elements.formulaContent.classList.contains('expanded');
-        elements.formulaContent.classList.toggle('expanded');
-        elements.formulaToggle.innerHTML = isOpen ? 
-          `<span>View Engineering Calculation Formula</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>` :
-          `<span>Hide Calculation Formula</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"></polyline></svg>`;
-      });
-    }
 
     // Get a Free Site Assessment button
     if (elements.assessmentBtn) {
@@ -211,30 +307,24 @@ window.SolarCalculator = (function() {
     isBillMode = billMode;
     elements.tabUnits.classList.toggle('active', !isBillMode);
     elements.tabBill.classList.toggle('active', isBillMode);
+    elements.tabUnits.setAttribute('aria-selected', String(!isBillMode));
+    elements.tabBill.setAttribute('aria-selected', String(isBillMode));
+    if (elements.modeSeg) elements.modeSeg.classList.toggle('bill', isBillMode);
+    if (elements.currency) elements.currency.hidden = !isBillMode;
 
-    const tariff = getSelectedState().defaultTariff;
     if (isBillMode) {
-      elements.unitLabel.textContent = "₹";
-      const billVal = Math.round(currentUnits * tariff);
-      elements.numberInput.value = billVal;
-      document.querySelector('.calc-field-label').textContent = "Average Monthly Electricity Bill";
+      currentBill = Math.round(currentUnits * getTariff());
+      elements.unitLabel.textContent = "/ month";
+      if (elements.fieldLabel) elements.fieldLabel.textContent = "Average Monthly Electricity Bill";
     } else {
+      currentBill = null;
+      currentUnits = Math.round(currentUnits);
       elements.unitLabel.textContent = "Units";
-      elements.numberInput.value = currentUnits;
-      document.querySelector('.calc-field-label').textContent = "Monthly Electricity Consumption";
+      if (elements.fieldLabel) elements.fieldLabel.textContent = "Monthly Electricity Consumption";
     }
-  }
-
-  function updateInputValue(units) {
-    currentUnits = units;
-    elements.slider.value = units;
-    updateSliderProgress();
-    const tariff = getSelectedState().defaultTariff;
-    if (isBillMode) {
-      elements.numberInput.value = Math.round(units * tariff);
-    } else {
-      elements.numberInput.value = units;
-    }
+    setHint(defaultHint());
+    syncInputs();
+    renderCalculations();
   }
 
   function getSelectedState() {
@@ -303,27 +393,27 @@ window.SolarCalculator = (function() {
 
   function renderCalculations(animate = false) {
     const stateObj = getSelectedState();
-    const results = compute(currentUnits, stateObj);
+    const results = compute(Math.round(currentUnits), stateObj);
 
     // Update Hero badge
     if (elements.heroKw) elements.heroKw.textContent = `${results.recommendedKw} kW`;
-    if (elements.heroKwSub) elements.heroKwSub.textContent = `Powers 100% of ~${results.monthlyUnits} units/month requirement`;
+    if (elements.heroKwSub) elements.heroKwSub.textContent = `Powers 100% of ~${fmt(results.monthlyUnits)} units/month requirement`;
 
-    // Circular gauge stroke animation (relative to a 15kW scale, min 20%, max 95%)
+    // Circular gauge (log scale, so 3 kW homes and 250 kW plants both read clearly)
     if (elements.gaugeFill) {
       const circumference = 264;
       const kwVal = parseFloat(results.recommendedKw);
-      const ratio = Math.min(1.0, Math.max(0.1, kwVal / 15));
+      const ratio = Math.min(1.0, Math.max(0.08, Math.log(1 + kwVal) / Math.log(1 + 300)));
       const offset = circumference - (circumference * ratio);
       elements.gaugeFill.style.strokeDashoffset = offset;
     }
 
     // Update metrics grid
-    if (elements.monthlyUnits) elements.monthlyUnits.textContent = `${results.monthlyUnits} kWh`;
+    if (elements.monthlyUnits) elements.monthlyUnits.textContent = `${fmt(results.monthlyUnits)} kWh`;
     if (elements.dailyUnits) elements.dailyUnits.textContent = `${results.dailyUnits} kWh/day`;
     if (elements.annualGen) elements.annualGen.textContent = `${results.annualGen} kWh`;
-    if (elements.panelCount) elements.panelCount.textContent = `${results.panelCount} Panels`;
-    if (elements.roofSpace) elements.roofSpace.textContent = `${results.roofSpaceSqFt} sq.ft (${results.roofSpaceSqM} m²)`;
+    if (elements.panelCount) elements.panelCount.textContent = `${fmt(results.panelCount)} Panels`;
+    if (elements.roofSpace) elements.roofSpace.textContent = `${fmt(results.roofSpaceSqFt)} sq.ft (${fmt(results.roofSpaceSqM)} m²)`;
     if (elements.inverterCap) elements.inverterCap.textContent = results.inverterCap;
     if (elements.annualSavings) elements.annualSavings.textContent = `${results.annualSavings}/yr`;
     if (elements.co2Offset) elements.co2Offset.textContent = results.co2Offset;
@@ -341,7 +431,7 @@ window.SolarCalculator = (function() {
   function renderPanelMatrix(count) {
     if (!elements.panelGrid) return;
     const wattage = (typeof SOORYAVAMSHI_CONFIG !== 'undefined' && SOORYAVAMSHI_CONFIG.calculator && SOORYAVAMSHI_CONFIG.calculator.standardPanelWattage) || 550;
-    if (elements.panelCountTag) elements.panelCountTag.textContent = `${count} x ${wattage}W Modules`;
+    if (elements.panelCountTag) elements.panelCountTag.textContent = `${fmt(count)} x ${wattage}W Modules`;
 
     elements.panelGrid.innerHTML = '';
     // Cap visual display at 36 panels for UI cleanliness
@@ -362,16 +452,16 @@ window.SolarCalculator = (function() {
       const moreTag = document.createElement('div');
       moreTag.style.alignSelf = 'center';
       moreTag.style.fontSize = '0.75rem';
-      moreTag.style.color = '#5C6E8C';
+      moreTag.style.color = 'rgba(245, 239, 230, 0.75)';
       moreTag.style.fontWeight = '600';
-      moreTag.textContent = `+${count - 36} more`;
+      moreTag.textContent = `+${fmt(count - 36)} more`;
       elements.panelGrid.appendChild(moreTag);
     }
   }
 
   function handleAssessmentPrefill() {
     const stateObj = getSelectedState();
-    const results = compute(currentUnits, stateObj);
+    const results = compute(Math.round(currentUnits), stateObj);
 
     // Scroll to contact section
     const contactSection = document.getElementById('site-assessment-form') || document.getElementById('contact');
@@ -388,7 +478,8 @@ window.SolarCalculator = (function() {
     }
 
     if (msgInput) {
-      msgInput.value = `Hello Sooryavamshi team, I calculated my home solar requirement as ${results.recommendedKw} kW (${results.panelCount} panels, ~${results.roofSpaceSqFt} sq.ft) for my monthly consumption of ${results.monthlyUnits} units in ${stateObj.name}. Please arrange a site assessment.`;
+      const billNote = isBillMode && currentBill != null ? ` (monthly bill about ₹${fmt(currentBill)})` : '';
+      msgInput.value = `Hello Sooryavamshi team, I calculated my home solar requirement as ${results.recommendedKw} kW (${results.panelCount} panels, ~${results.roofSpaceSqFt} sq.ft) for my monthly consumption of ${results.monthlyUnits} units${billNote} in ${stateObj.name}. Please arrange a site assessment.`;
       msgInput.focus();
     }
   }
@@ -397,7 +488,7 @@ window.SolarCalculator = (function() {
     init,
     compute,
     getCurrentResults: function() {
-      return compute(currentUnits, getSelectedState());
+      return compute(Math.round(currentUnits), getSelectedState());
     }
   };
 })();

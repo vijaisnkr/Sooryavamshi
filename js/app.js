@@ -139,23 +139,17 @@ function initStatsCounters() {
  * 5. Smooth Anchor Scrolling
  */
 function initSmoothScroll() {
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      const targetId = this.getAttribute('href');
-      if (targetId === '#' || targetId === '') return;
-      
-      const targetEl = document.querySelector(targetId);
-      if (targetEl) {
-        e.preventDefault();
-        const headerOffset = 80;
-        const elementPosition = targetEl.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-      }
-    });
+  // scrollIntoView (not window.scrollTo) so the jump also works when the site sits inside a taller frame,
+  // like the preview viewer; scroll-padding-top in the CSS keeps the section clear of the header.
+  document.addEventListener('click', function(e) {
+    const anchor = e.target.closest && e.target.closest('a[href*="#"]');
+    if (!anchor || anchor.target === '_blank' || e.metaKey || e.ctrlKey || e.shiftKey) return;
+    if (anchor.pathname !== location.pathname || anchor.host !== location.host) return;
+    const id = decodeURIComponent(anchor.hash.slice(1));
+    const targetEl = id && document.getElementById(id);
+    if (!targetEl) return;
+    e.preventDefault();
+    targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (history.pushState) history.pushState(null, '', anchor.hash);
   });
 }

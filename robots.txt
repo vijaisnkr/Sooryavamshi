@@ -1,17 +1,16 @@
 # https://suryavamshi.com/robots.txt
-# Sooryavamshi Solar Projects LLP
+# Suryavamshi Solar Projects LLP
 
 User-agent: *
 Allow: /
-Allow: /assets/
-Allow: /css/
-Allow: /js/
 
-# Disallow internal admin, login, and scratch paths
+# Keep staff and internal paths out of search
 Disallow: /admin.html
 Disallow: /login.html
 Disallow: /debug_insert.html
 Disallow: /scratch/
 Disallow: /Proposals/
+Disallow: /supabase/
+Disallow: /google-apps-script/
 
 Sitemap: https://suryavamshi.com/sitemap.xml
