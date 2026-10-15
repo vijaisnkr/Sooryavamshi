@@ -609,10 +609,14 @@ html.anim .work[data-reveal] { transition: opacity .9s var(--ease) calc(var(--d,
 .set-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .settings-body .set-row .muted { margin-top: 2px; font-size: .86rem; }
 .set-seg { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); padding: 4px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--line); }
-.set-seg button { min-height: 44px; padding: 0 8px; border: 0; border-radius: 999px; background: transparent; color: var(--fg-muted); font: 700 .9rem var(--sans); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; transition: background-color .25s ease, color .25s ease, box-shadow .25s ease; }
-.set-seg button:hover { color: var(--fg); }
-.set-seg button[aria-checked="true"] { background: var(--fg); color: var(--bg); box-shadow: 0 6px 16px -8px rgba(11, 35, 64, .5); }
-.set-seg button:focus-visible { outline: 2px solid var(--sun); outline-offset: 2px; }
+.set-seg > * { min-height: 44px; padding: 0 8px; border: 0; border-radius: 999px; background: transparent; color: var(--fg-muted); font: 700 .9rem var(--sans); text-decoration: none; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; transition: background-color .25s ease, color .25s ease, box-shadow .25s ease; }
+.set-seg > :hover { color: var(--fg); }
+.set-seg > [aria-checked="true"], .set-seg > [aria-current="true"] { background: var(--fg); color: var(--bg); box-shadow: 0 6px 16px -8px rgba(11, 35, 64, .5); }
+.set-seg > [aria-current="true"] { cursor: default; }
+.set-seg > :focus-visible { outline: 2px solid var(--sun); outline-offset: 2px; }
+.set-seg-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.set-seg [lang="ml"] { font-family: "Noto Sans Malayalam", var(--sans); }
+@media (max-width: 400px) { .set-seg > * { padding: 0 4px; gap: 4px; font-size: min(.9rem, 15px); } }
 .set-seg .aa { font: 800 15px/1 var(--display); }
 .set-seg .aa-2 { font-size: 18px; }
 .set-seg .aa-3 { font-size: 21px; }

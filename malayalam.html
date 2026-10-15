@@ -47,13 +47,43 @@
     })();
   </script>
 
-  <link rel="stylesheet" href="css/daylight.css?v=12.2">
+  <link rel="stylesheet" href="css/daylight.css?v=12.3">
   <link rel="stylesheet" href="css/seo-pages.css?v=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@500;600;700&family=Noto+Sans+Malayalam:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="alternate" hreflang="en-IN" href="https://suryavamshi.com/">
   <link rel="alternate" hreflang="ml-IN" href="https://suryavamshi.com/malayalam.html">
   <link rel="alternate" hreflang="x-default" href="https://suryavamshi.com/">
-  <style>main[lang="ml"] { font-family: "Noto Sans Malayalam", var(--sans); } main[lang="ml"] h1, main[lang="ml"] h2, main[lang="ml"] h3 { font-family: "Noto Sans Malayalam", sans-serif; letter-spacing: 0; line-height: 1.35; }</style>
+  <style>
+    /* Malayalam typography. Anek Malayalam for headings, labels and buttons; Noto Sans Malayalam for reading text.
+       Malayalam letters stack taller than Latin ones, so headings run smaller with more line height, and never use letter-spacing. */
+    main[lang="ml"] { --ml-head: "Anek Malayalam", "Noto Sans Malayalam", var(--sans); font-family: "Noto Sans Malayalam", var(--sans); }
+    main[lang="ml"] :is(h1, h2, h3, summary, strong, .btn, .eyebrow, .crumbs, .crumb-meta) { font-family: var(--ml-head); letter-spacing: 0; }
+    main[lang="ml"] :is(p, li, .faq-list details > div) { line-height: 1.8; }
+    main[lang="ml"] :is(h1, h2) { font-weight: 700; line-height: 1.22; }
+    main[lang="ml"] .serif { font-family: inherit; font-size: 1em; }
+    main[lang="ml"] .page-hero h1 { font-size: clamp(2.1rem, 4.6vw, 4rem); max-width: none; }
+    main[lang="ml"] .page-hero h1 .sun { display: block; }
+    main[lang="ml"] .page-hero .lede { font-size: clamp(1.02rem, 1.3vw, 1.15rem); max-width: 40em; }
+    main[lang="ml"] .crumbs { font-size: .9rem; }
+    main[lang="ml"] .crumb-meta { font-size: 1rem; font-weight: 600; }
+    main[lang="ml"] .eyebrow { font-size: .95rem; font-weight: 600; }
+    main[lang="ml"] .btn { font-weight: 600; font-size: 1.02rem; line-height: 1.3; }
+    main[lang="ml"] :is(.section-head, .ml-split .section-head) h2 { font-size: clamp(1.75rem, 3.1vw, 2.7rem); }
+    main[lang="ml"] h3 { font-size: 1.12rem; font-weight: 700; line-height: 1.45; }
+    main[lang="ml"] .faq-list summary { font-family: var(--ml-head); font-weight: 600; font-size: 1.08rem; line-height: 1.5; }
+    main[lang="ml"] .faq-list details > div { font-size: 1rem; }
+    /* How it works: heading on the left, numbered step cards on the right */
+    .ml-split { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(24px, 5vw, 80px); align-items: start; }
+    .ml-split .section-head { margin-bottom: 0; }
+    .ml-steps { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; counter-reset: k; }
+    .ml-steps li { counter-increment: k; display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 16px; align-items: start; padding: 18px 20px; border-radius: var(--r); background: var(--surface); border: 1px solid var(--line); color: var(--fg-muted); box-shadow: 0 14px 30px -24px rgba(11, 35, 64, .35); }
+    .ml-steps li::before { content: counter(k); width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; font: 700 1rem var(--mono); background: var(--sun); color: #1B1300; }
+    .ml-steps strong { display: block; color: var(--fg); font-size: 1.1rem; font-weight: 700; margin-bottom: 2px; }
+    main[lang="ml"] .rel-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    main[lang="ml"] .rel-grid .rel strong { font-size: 1.05rem; line-height: 1.45; }
+    @media (max-width: 980px) { .ml-split { grid-template-columns: minmax(0, 1fr); } main[lang="ml"] .rel-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 560px) { main[lang="ml"] .rel-grid { grid-template-columns: minmax(0, 1fr); } main[lang="ml"] .btn { font-size: .95rem; padding-inline: 20px; } .ml-steps li { grid-template-columns: 36px minmax(0, 1fr); gap: 12px; padding: 16px; } .ml-steps li::before { width: 36px; height: 36px; font-size: .9rem; } }
+  </style>
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -265,10 +295,12 @@
     </section>
 
     <section class="section alt">
-      <div class="wrap prose" data-reveal>
-        <span class="eyebrow">എങ്ങനെ</span>
-        <h2>ആദ്യ വിളി മുതൽ <span class="serif">സൗജന്യ വൈദ്യുതി വരെ.</span></h2>
-        <ol class="steps-mini">
+      <div class="wrap ml-split">
+        <div class="section-head" data-reveal="left">
+          <span class="eyebrow">എങ്ങനെ</span>
+          <h2>ആദ്യ വിളി മുതൽ <span class="serif">സൗജന്യ വൈദ്യുതി വരെ.</span></h2>
+        </div>
+        <ol class="ml-steps" data-reveal="right">
           <li><span><strong>സൗജന്യ സൈറ്റ് സന്ദർശനം.</strong> മേൽക്കൂര, നിഴൽ, KSEB കണക്ഷൻ എന്നിവ ഞങ്ങൾ പരിശോധിക്കും.</span></li>
           <li><span><strong>ഡിസൈനും ക്വട്ടേഷനും.</strong> പാനൽ, ഇൻവെർട്ടർ ബ്രാൻഡുകളും പ്രതീക്ഷിക്കുന്ന ലാഭവും വ്യക്തമാക്കുന്ന ക്വട്ടേഷൻ.</span></li>
           <li><span><strong>KSEB അപേക്ഷ.</strong> ട്രാൻസ്ഫോർമർ ശേഷി പരിശോധിച്ച് അപേക്ഷ ഞങ്ങൾ നൽകും.</span></li>
@@ -384,6 +416,14 @@
           <button class="theme-opt" type="button" role="radio" data-theme-choice="light" aria-checked="true"><span class="theme-prev"><span class="tp tp-light"><i></i><i></i><i></i></span></span>Light</button>
           <button class="theme-opt" type="button" role="radio" data-theme-choice="dark" aria-checked="false"><span class="theme-prev"><span class="tp tp-dark"><i></i><i></i><i></i></span></span>Dark</button>
           <button class="theme-opt" type="button" role="radio" data-theme-choice="system" aria-checked="false"><span class="theme-prev"><span class="tp tp-light"><i></i><i></i><i></i></span><span class="tp tp-dark tp-split"><i></i><i></i><i></i></span></span>System</button>
+        </div>
+        <div class="set-group">
+          <span class="lbl" id="langLbl">Language</span>
+          <p class="muted">English opens our English home page.</p>
+          <div class="set-seg set-seg-2" role="group" aria-labelledby="langLbl">
+            <a href="index.html" hreflang="en" lang="en">English</a>
+            <span aria-current="true" lang="ml">മലയാളം</span>
+          </div>
         </div>
         <div class="set-group">
           <span class="lbl" id="textSizeLbl">Text size</span>
