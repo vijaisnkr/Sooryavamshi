@@ -29,18 +29,25 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Theme: apply saved Light / Dark / System choice before first paint -->
+  <!-- Settings: apply saved theme, text size, animations and sun cursor choices before first paint -->
   <script>
     (function () {
-      var pref = 'light';
-      try { pref = localStorage.getItem('sv-theme') || 'light'; } catch (e) {}
-      var dark = pref === 'dark' || (pref === 'system' && window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches);
-      document.documentElement.setAttribute('data-sv-theme', dark ? 'dark' : 'light');
-      document.documentElement.setAttribute('data-sv-pref', pref);
+      var d = document.documentElement;
+      function get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+      function mq(q) { return !!(window.matchMedia && matchMedia(q).matches); }
+      var pref = get('sv-theme') || 'light';
+      var dark = pref === 'dark' || (pref === 'system' && mq('(prefers-color-scheme: dark)'));
+      d.setAttribute('data-sv-theme', dark ? 'dark' : 'light');
+      d.setAttribute('data-sv-pref', pref);
+      var text = get('sv-text');
+      d.setAttribute('data-sv-text', text === 'large' || text === 'larger' ? text : 'normal');
+      var motion = get('sv-motion');
+      d.setAttribute('data-sv-motion', motion === 'on' || motion === 'off' ? motion : (mq('(prefers-reduced-motion: reduce)') ? 'off' : 'on'));
+      d.setAttribute('data-sv-cursor', get('sv-sun-cursor') === 'off' ? 'off' : 'on');
     })();
   </script>
 
-  <link rel="stylesheet" href="css/daylight.css?v=12.1">
+  <link rel="stylesheet" href="css/daylight.css?v=12.2">
   <link rel="stylesheet" href="css/seo-pages.css?v=1.0">
   <script type="application/ld+json">
 {
@@ -414,7 +421,7 @@
     <a href="tel:+919061626868"><svg class="ic"><use href="#i-phone"/></svg>Call</a>
   </nav>
 
-  <!-- SETTINGS: THEME -->
+  <!-- SETTINGS -->
   <div class="settings-backdrop" id="settingsBackdrop">
     <div class="settings" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
       <div class="settings-head">
@@ -429,13 +436,38 @@
           <button class="theme-opt" type="button" role="radio" data-theme-choice="dark" aria-checked="false"><span class="theme-prev"><span class="tp tp-dark"><i></i><i></i><i></i></span></span>Dark</button>
           <button class="theme-opt" type="button" role="radio" data-theme-choice="system" aria-checked="false"><span class="theme-prev"><span class="tp tp-light"><i></i><i></i><i></i></span><span class="tp tp-dark tp-split"><i></i><i></i><i></i></span></span>System</button>
         </div>
+        <div class="set-group">
+          <span class="lbl" id="textSizeLbl">Text size</span>
+          <div class="set-seg" role="radiogroup" aria-labelledby="textSizeLbl">
+            <button type="button" role="radio" data-text-choice="normal" aria-checked="true"><b class="aa" aria-hidden="true">A</b>Normal</button>
+            <button type="button" role="radio" data-text-choice="large" aria-checked="false"><b class="aa aa-2" aria-hidden="true">A</b>Large</button>
+            <button type="button" role="radio" data-text-choice="larger" aria-checked="false"><b class="aa aa-3" aria-hidden="true">A</b>Larger</button>
+          </div>
+        </div>
+        <div class="set-row">
+          <div>
+            <span class="lbl" id="motionLbl">Animations</span>
+            <p class="muted" id="motionHint">Scroll effects, the moving sun and click bursts.</p>
+          </div>
+          <button class="switch" type="button" role="switch" id="motionSwitch" aria-checked="true" aria-labelledby="motionLbl" aria-describedby="motionHint"><span></span></button>
+        </div>
+        <div class="set-row set-cursor">
+          <div>
+            <span class="lbl" id="cursorLbl">Sun cursor</span>
+            <p class="muted" id="cursorHint">A glowing sun follows your mouse.</p>
+          </div>
+          <button class="switch" type="button" role="switch" id="cursorSwitch" aria-checked="true" aria-labelledby="cursorLbl" aria-describedby="cursorHint"><span></span></button>
+        </div>
       </div>
-      <p class="settings-foot">Your choice is saved on this device.</p>
+      <div class="settings-foot">
+        <span>Your choices are saved on this device.</span>
+        <button class="settings-reset" type="button" id="settingsReset">Reset to default</button>
+      </div>
     </div>
   </div>
 
   <!-- Scripts -->
-  <script src="js/app.js?v=12.1"></script>
-  <script src="js/premium.js?v=12.1"></script>
+  <script src="js/app.js?v=12.2"></script>
+  <script src="js/premium.js?v=12.2"></script>
 </body>
 </html>

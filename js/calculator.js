@@ -466,7 +466,7 @@ window.SolarCalculator = (function() {
     // Scroll to contact section
     const contactSection = document.getElementById('site-assessment-form') || document.getElementById('contact');
     if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
+      contactSection.scrollIntoView({ behavior: document.documentElement.getAttribute('data-sv-motion') === 'off' ? 'auto' : 'smooth' });
     }
 
     // Prefill form inputs

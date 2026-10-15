@@ -218,7 +218,7 @@
 
     if (firstErrorField) {
       firstErrorField.focus();
-      firstErrorField.scrollIntoView({ behavior: "smooth", block: "center" });
+      firstErrorField.scrollIntoView({ behavior: document.documentElement.getAttribute("data-sv-motion") === "off" ? "auto" : "smooth", block: "center" });
     }
   }
 
@@ -247,7 +247,7 @@
   function safeScrollIntoView(el) {
     if (el && typeof el.scrollIntoView === "function") {
       try {
-        el.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        el.scrollIntoView({ behavior: document.documentElement.getAttribute("data-sv-motion") === "off" ? "auto" : "smooth", block: "nearest" });
       } catch (e) {
         try { el.scrollIntoView(); } catch (e2) {}
       }

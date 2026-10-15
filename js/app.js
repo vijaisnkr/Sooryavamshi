@@ -149,7 +149,7 @@ function initSmoothScroll() {
     const targetEl = id && document.getElementById(id);
     if (!targetEl) return;
     e.preventDefault();
-    targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    targetEl.scrollIntoView({ behavior: document.documentElement.getAttribute('data-sv-motion') === 'off' ? 'auto' : 'smooth', block: 'start' });
     if (history.pushState) history.pushState(null, '', anchor.hash);
   });
 }
