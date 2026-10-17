@@ -47,7 +47,8 @@
     })();
   </script>
 
-  <link rel="stylesheet" href="css/daylight.css?v=12.5">
+  <link rel="stylesheet" href="css/daylight.css?v=12.6">
+  <link rel="stylesheet" href="css/sv-select.css?v=1.0">
 
   <!-- Supabase Client -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -325,9 +326,32 @@
             </div>
             <div class="grid-2">
               <div class="field"><label for="client-location">Location / Town in Kerala *</label><input id="client-location" placeholder="e.g. Cherthala, Kochi, Alappuzha" required type="text"></div>
-              <div class="field"><label for="client-consumption">Average Monthly Units or Bill (₹)</label><input id="client-consumption" placeholder="e.g. 400 Units or ₹3,500/mo" type="text"></div>
+              <div class="field"><label for="client-pin">PIN Code <span class="opt">(optional)</span></label><input id="client-pin" placeholder="e.g. 688524" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="7"></div>
             </div>
-            <div class="field"><label for="client-message">Anything else? (optional)</label><textarea id="client-message" placeholder="Roof type, shading, phase, best time to call…"></textarea></div>
+            <div class="grid-2">
+              <div class="field"><label for="client-kseb">KSEB Consumer Number *</label><input id="client-kseb" placeholder="13-digit number on your bill" required type="text" inputmode="numeric" autocomplete="off" maxlength="20"></div>
+              <div class="field"><label for="client-email">Email <span class="opt">(optional)</span></label><input id="client-email" placeholder="you@example.com" type="email" inputmode="email" autocomplete="email"></div>
+            </div>
+            <div class="field usage-field">
+              <div class="usage-top">
+                <label for="client-consumption" id="client-consumption-label">Average monthly bill (₹)</label>
+                <span class="usage-switch" role="radiogroup" aria-label="Enter your monthly bill or your units">
+                  <button type="button" role="radio" aria-checked="true" data-usage="bill">₹ Bill</button>
+                  <button type="button" role="radio" aria-checked="false" data-usage="units">Units</button>
+                </span>
+              </div>
+              <input id="client-consumption" placeholder="e.g. 3500" type="text" inputmode="decimal" data-usage="bill">
+            </div>
+            <div class="field">
+              <span class="lbl" id="client-time-label">Best time to call <span class="opt">(optional)</span></span>
+              <div class="time-chips" role="radiogroup" aria-labelledby="client-time-label">
+                <label class="time-chip"><input type="radio" name="client-time" value="Morning (9 am to 12 pm)"><span>Morning<small>9 am to 12</small></span></label>
+                <label class="time-chip"><input type="radio" name="client-time" value="Afternoon (12 to 4 pm)"><span>Afternoon<small>12 to 4 pm</small></span></label>
+                <label class="time-chip"><input type="radio" name="client-time" value="Evening (4 to 8 pm)"><span>Evening<small>4 to 8 pm</small></span></label>
+                <label class="time-chip"><input type="radio" name="client-time" value="Any time"><span>Any time<small>We'll call soon</small></span></label>
+              </div>
+            </div>
+            <div class="field"><label for="client-message">Anything else? <span class="opt">(optional)</span></label><textarea id="client-message" placeholder="Roof type, shading, single or three phase…"></textarea></div>
             <input type="text" id="contactHoneypot" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0">
             <button class="btn btn-sun btn-block" id="submitFormBtn" type="submit"><svg class="ic"><use href="#i-clip"/></svg><span>Request Free Site Assessment</span></button>
             <p class="fine">Prefer to talk? Call <a href="tel:+919061626868">+91 9061626868</a></p>
@@ -485,12 +509,13 @@
 
   <!-- Scripts -->
   <script src="js/config.js?v=12.1"></script>
-  <script src="js/calculator.js?v=12.2"></script>
+  <script src="js/calculator.js?v=12.3"></script>
   <script src="js/app.js?v=12.2"></script>
   <script src="js/premium.js?v=12.2"></script>
+  <script src="js/sv-select.js?v=1.0"></script>
   <script src="js/analytics.js?v=1.0"></script>
   <script src="js/supabase-config.js?v=12.0"></script>
-  <script src="js/supabase-client.js?v=12.1"></script>
-  <script src="js/contact-form.js?v=12.4"></script>
+  <script src="js/supabase-client.js?v=12.2"></script>
+  <script src="js/contact-form.js?v=12.5"></script>
 </body>
 </html>

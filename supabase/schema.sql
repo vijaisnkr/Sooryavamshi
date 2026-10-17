@@ -14,11 +14,14 @@ CREATE TABLE IF NOT EXISTS public.site_assessment_requests (
     pin_code TEXT NULL,
     city_location TEXT NOT NULL,
     monthly_consumption NUMERIC NOT NULL,
+    monthly_bill_inr NUMERIC NULL, -- monthly bill in rupees when the visitor gave a bill; monthly_consumption then holds the estimated units
     kseb_consumer_number TEXT NULL,
     rooftop_details TEXT NULL,
     preferred_contact_time TEXT NULL,
     estimated_solar_capacity NUMERIC NULL,
     rooftop_photo_path TEXT NULL,
+    admin_notes TEXT NULL, -- private staff notes (admin portal only)
+    follow_up_on DATE NULL, -- next follow-up date set in the admin portal
     status TEXT NOT NULL DEFAULT 'New' CHECK (
         status IN (
             'New',

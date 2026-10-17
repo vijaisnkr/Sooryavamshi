@@ -297,6 +297,24 @@ button { font: inherit; }
 .form-control:focus, .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--sun); box-shadow: 0 0 0 4px color-mix(in srgb, var(--sun) 22%, transparent); }
 .field input::placeholder, .field textarea::placeholder { color: color-mix(in srgb, var(--fg-muted) 75%, transparent); }
 .input-error { border-color: #D93D42 !important; }
+/* Enquiry form: monthly bill or units switch */
+.usage-top { display: flex; align-items: center; justify-content: space-between; gap: 8px 12px; flex-wrap: wrap; }
+.usage-switch { display: inline-flex; padding: 3px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--line); }
+.usage-switch button { min-height: 34px; padding: 0 14px; border: 0; border-radius: 999px; background: transparent; color: var(--fg-muted); font: 700 .82rem var(--sans); cursor: pointer; }
+.usage-switch button[aria-checked="true"] { background: var(--sun); color: #1B1300; }
+.usage-switch button:focus-visible { outline: 2px solid var(--sun); outline-offset: 2px; }
+.field .opt { font-weight: 500; color: var(--fg-muted); }
+/* Enquiry form: best time to call */
+.time-chips { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.time-chip { position: relative; display: block; cursor: pointer; }
+.time-chip input { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
+.time-chip span { display: grid; gap: 2px; align-content: center; min-height: 56px; padding: 8px 12px; border-radius: 14px; border: 1.5px solid var(--line-strong); background: var(--input-bg); color: var(--fg); font: 700 .92rem/1.2 var(--sans); transition: border-color .15s ease, background .15s ease, box-shadow .15s ease; }
+.time-chip small { font: 500 .76rem/1.2 var(--sans); color: var(--fg-muted); }
+.time-chip:hover span { border-color: var(--fg-muted); }
+.time-chip input:checked + span { border-color: var(--sun); background: color-mix(in srgb, var(--sun) 14%, var(--input-bg)); box-shadow: 0 0 0 3px color-mix(in srgb, var(--sun) 18%, transparent); }
+.time-chip input:checked + span small { color: var(--fg); }
+.time-chip input:focus-visible + span { outline: 2px solid var(--sun); outline-offset: 2px; }
+@media (max-width: 560px) { .time-chips { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .live { display: inline-flex; align-items: center; gap: 8px; font-size: .84rem; color: var(--fg-muted); }
 .live i { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 0 rgba(20, 138, 85, .6); animation: pulse 2s infinite; }
 @keyframes pulse { 70% { box-shadow: 0 0 0 8px rgba(20, 138, 85, 0); } 100% { box-shadow: 0 0 0 0 rgba(20, 138, 85, 0); } }

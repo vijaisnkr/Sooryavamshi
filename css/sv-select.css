@@ -1,0 +1,46 @@
+/* Suryavamshi Solar - styled dropdowns (js/sv-select.js)
+   The button takes the hidden <select>'s own classes, so it keeps that
+   field's size and shape; this file adds the chevron and the option menu.
+   Colours come from the page's tokens (website and staff portal). */
+
+.svs-native { position: absolute !important; width: 1px !important; height: 1px !important; min-height: 0 !important; padding: 0 !important; margin: 0 !important; border: 0 !important; opacity: 0 !important; overflow: hidden !important; clip: rect(0 0 0 0) !important; pointer-events: none !important; }
+
+.svs-btn { display: flex; align-items: center; gap: 8px; text-align: left; cursor: pointer; background-image: none !important; -webkit-appearance: none; appearance: none; }
+.svs-btn .svs-label { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.svs-btn[disabled] { cursor: default; opacity: .6; }
+.svs-chev { width: 16px; height: 16px; flex: none; color: var(--fg-muted, #66768A); transition: transform .18s ease; }
+.svs-btn[aria-expanded="true"] .svs-chev { transform: rotate(180deg); }
+.svs-btn[aria-expanded="true"] { border-color: var(--sun, #F2A900); box-shadow: 0 0 0 4px color-mix(in srgb, var(--sun, #F2A900) 20%, transparent); }
+.svs-dot { display: none; width: 8px; height: 8px; border-radius: 50%; background: var(--c, currentColor); flex: none; }
+
+.svs-list {
+  position: fixed; z-index: 1000; margin: 0; padding: 6px; list-style: none;
+  background: var(--surface, #fff); color: var(--fg, #0B2340);
+  border: 1px solid var(--line, #E1E8F0); border-radius: 16px;
+  box-shadow: 0 1px 2px rgba(11, 35, 64, .06), 0 28px 56px -20px rgba(11, 35, 64, .38);
+  overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin;
+  font: 600 .92rem/1.3 var(--sans, system-ui, sans-serif);
+  opacity: 0; transform: translateY(-6px) scale(.98); transform-origin: top center;
+  transition: opacity .14s ease, transform .16s cubic-bezier(.2, .8, .2, 1);
+}
+.svs-list.up { transform: translateY(6px) scale(.98); transform-origin: bottom center; }
+.svs-list.open { opacity: 1; transform: none; }
+.svs-list:focus { outline: none; }
+.svs-opt { display: flex; align-items: center; gap: 10px; min-height: 42px; padding: 8px 10px 8px 12px; border-radius: 11px; cursor: pointer; white-space: nowrap; color: var(--fg, #0B2340); transition: background .1s ease; }
+.svs-opt + .svs-opt { margin-top: 2px; }
+.svs-opt.active { background: var(--surface-2, #F6F8FB); }
+.svs-list.kbd .svs-opt.active { box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--sun, #F2A900) 60%, transparent); }
+.svs-opt[aria-selected="true"] { font-weight: 800; background: color-mix(in srgb, var(--sun, #F2A900) 14%, transparent); }
+.svs-opt[aria-selected="true"].active { background: color-mix(in srgb, var(--sun, #F2A900) 22%, transparent); }
+.svs-opt[aria-disabled="true"] { opacity: .45; cursor: default; }
+.svs-opt.has-dot .svs-dot { display: block; }
+.svs-text { flex: 1 1 auto; }
+.svs-tick { width: 16px; height: 16px; flex: none; margin-left: 12px; color: var(--sun-ink, var(--accent-ink, #9A6500)); visibility: hidden; }
+.svs-opt[aria-selected="true"] .svs-tick { visibility: visible; }
+
+:root[data-theme="dark"] .svs-list,
+:root[data-sv-theme="dark"] .svs-list { box-shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 28px 56px -18px rgba(0, 0, 0, .75); }
+
+@media (prefers-reduced-motion: reduce) {
+  .svs-list, .svs-chev, .svs-opt { transition: none; }
+}

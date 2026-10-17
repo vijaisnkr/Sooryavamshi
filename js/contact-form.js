@@ -35,6 +35,10 @@
     if (form.dataset.svBound) return;
     form.dataset.svBound = "1";
 
+    // Monthly usage can be typed as a bill (₹) or as units: wire up the switch first,
+    // so prefilled values land in the right mode
+    initUsageSwitch();
+
     // Prefill helper: If calculator passed units or location via session/hash
     handlePrepopulation();
 
@@ -75,26 +79,30 @@
         monthly_consumption: getUnitsVal(),
         kseb_consumer_number: (document.getElementById("contactKsebNo")?.value || document.getElementById("client-kseb")?.value || "").trim(),
         rooftop_details: (document.getElementById("contactMessage")?.value || document.getElementById("client-message")?.value || "").trim(),
-        preferred_contact_time: (document.getElementById("contactTime")?.value || document.getElementById("client-time")?.value || "").trim(),
+        preferred_contact_time: (document.querySelector('input[name="client-time"]:checked')?.value || document.getElementById("contactTime")?.value || document.getElementById("client-time")?.value || "").trim(),
         rooftop_photo_path: (document.getElementById("contactPhotoPath")?.value || document.getElementById("client-photo-path")?.value || "").trim()
       };
 
-      // Clean monthly consumption value for number parsing
-      const cleanedUnitsStr = rawData.monthly_consumption.replace(/[^\d.]/g, "");
-      const numericUnits = parseFloat(cleanedUnitsStr) || 0;
+      // Read the usage as a bill or as units ("Rs. 3500", "₹3,500/mo" and "400 units" all work)
+      const usage = readUsage(rawData.monthly_consumption);
+      rawData.usage_mode = usage.mode;
+      rawData.usage_value = usage.value;
+      rawData.kseb_consumer_number = rawData.kseb_consumer_number.replace(/\D/g, "");
+      rawData.pin_code = rawData.pin_code.replace(/\D/g, "");
 
-      // Calculate estimated solar capacity dynamically if available
+      // Units: what they typed, or estimated from the bill at the same tariff the calculator uses
+      const numericUnits = usage.mode === "bill" ? Math.round(usage.value / getTariff()) : usage.value;
+      const monthlyBill = usage.mode === "bill" && usage.value > 0 ? usage.value : null;
+
+      // Estimated system size from this visitor's own usage
       let estCapacity = null;
-      if (window.SolarCalculator && typeof window.SolarCalculator.getCurrentResults === "function") {
+      if (numericUnits > 0) {
         try {
-          const calcRes = window.SolarCalculator.getCurrentResults();
-          if (calcRes && calcRes.recommendedKw) {
-            estCapacity = parseFloat(calcRes.recommendedKw);
+          if (window.SolarCalculator && typeof window.SolarCalculator.compute === "function" && window.SOORYAVAMSHI_CONFIG) {
+            estCapacity = parseFloat(window.SolarCalculator.compute(numericUnits, window.SOORYAVAMSHI_CONFIG.calculator.states[0]).recommendedKw) || null;
           }
         } catch (err) {}
-      }
-      if (!estCapacity && numericUnits > 0) {
-        estCapacity = Math.max(1.0, Math.round((numericUnits / (30 * 4.2 * 0.82)) * 10) / 10);
+        if (!estCapacity) estCapacity = Math.max(1.0, Math.round((numericUnits / (30 * 4.2 * 0.82)) * 10) / 10);
       }
       rawData.estimated_solar_capacity = estCapacity;
 
@@ -123,7 +131,8 @@
         // 5. Submit to Supabase Backend
         const result = await SooryavamshiSupabase.submitSiteAssessmentRequest({
           ...rawData,
-          monthly_consumption: numericUnits
+          monthly_consumption: numericUnits,
+          monthly_bill_inr: monthlyBill
         });
         if (!result || !result.success) throw new Error((result && result.error) || "Save failed");
 
@@ -190,7 +199,92 @@
       errors[locFieldId] = "Please enter your location/town.";
     }
 
+    // 4. KSEB consumer number (13 digits, printed on the electricity bill)
+    const ksebFieldId = document.getElementById("client-kseb") ? "client-kseb" : (document.getElementById("contactKsebNo") ? "contactKsebNo" : null);
+    if (ksebFieldId) {
+      if (!data.kseb_consumer_number) {
+        errors[ksebFieldId] = "Please enter your KSEB consumer number. It's the 13-digit number on your bill.";
+      } else if (data.kseb_consumer_number.length !== 13) {
+        errors[ksebFieldId] = `KSEB consumer numbers have 13 digits (you typed ${data.kseb_consumer_number.length}). Please check your bill.`;
+      }
+    }
+
+    // 5. PIN code and email are optional, but must be complete when given
+    const pinFieldId = document.getElementById("client-pin") ? "client-pin" : (document.getElementById("contactPin") ? "contactPin" : null);
+    if (pinFieldId && data.pin_code && !/^[1-9]\d{5}$/.test(data.pin_code)) {
+      errors[pinFieldId] = "PIN codes have 6 digits, e.g. 688524. You can also leave this empty.";
+    }
+    const emailFieldId = document.getElementById("client-email") ? "client-email" : (document.getElementById("contactEmail") ? "contactEmail" : null);
+    if (emailFieldId && data.email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(data.email)) {
+      errors[emailFieldId] = "That email doesn't look complete, e.g. name@gmail.com. You can also leave this empty.";
+    }
+
+    // 6. Monthly usage is optional, but if typed it must contain a number
+    const usageFieldId = document.getElementById("client-consumption") ? "client-consumption" : "contactUnits";
+    if (data.monthly_consumption && !(data.usage_value > 0)) {
+      errors[usageFieldId] = data.usage_mode === "bill" ? "Please type your bill as a number, e.g. 3500." : "Please type your units as a number, e.g. 400.";
+    }
+
     return errors;
+  }
+
+  /**
+   * KSEB tariff used to turn a bill into units (same figure the solar calculator uses)
+   */
+  function getTariff() {
+    try {
+      const st = window.SOORYAVAMSHI_CONFIG.calculator.states[0];
+      return st.defaultTariff || window.SOORYAVAMSHI_CONFIG.calculator.averageTariffPerUnitInr || 7.2;
+    } catch (e) {
+      return 7.2;
+    }
+  }
+
+  /**
+   * Works out whether the visitor gave a bill or units, and the number they meant.
+   * Words in the text win over the switch: "Rs. 3500" is a bill, "400 units" is units.
+   */
+  const BILL_WORDS = /₹|\brs\b|inr|rupee|bill/;
+  const UNIT_WORDS = /unit|kwh/;
+  function readUsage(text) {
+    const input = document.getElementById("client-consumption") || document.getElementById("contactUnits");
+    let mode = (input && input.dataset.usage) || "bill";
+    const t = String(text || "").toLowerCase();
+    if (BILL_WORDS.test(t)) mode = "bill";
+    else if (UNIT_WORDS.test(t)) mode = "units";
+    // First number in the text, ignoring thousands commas ("3,500" -> 3500; "Rs. 3500" -> 3500, not .3500)
+    const m = t.replace(/,/g, "").match(/\d+(?:\.\d+)?/);
+    return { mode, value: m ? parseFloat(m[0]) : 0 };
+  }
+
+  /**
+   * Bill / Units switch next to the monthly usage box
+   */
+  function setUsageMode(mode) {
+    const input = document.getElementById("client-consumption");
+    if (!input || (mode !== "bill" && mode !== "units")) return;
+    input.dataset.usage = mode;
+    input.placeholder = mode === "bill" ? "e.g. 3500" : "e.g. 400";
+    const label = document.getElementById("client-consumption-label");
+    if (label) label.textContent = mode === "bill" ? "Average monthly bill (₹)" : "Average monthly units (kWh)";
+    document.querySelectorAll(".usage-switch [data-usage]").forEach(btn => {
+      btn.setAttribute("aria-checked", String(btn.dataset.usage === mode));
+    });
+  }
+  window.svSetUsageMode = setUsageMode;
+
+  function initUsageSwitch() {
+    const input = document.getElementById("client-consumption");
+    if (!input) return;
+    document.querySelectorAll(".usage-switch [data-usage]").forEach(btn => {
+      btn.addEventListener("click", () => { setUsageMode(btn.dataset.usage); input.focus(); });
+    });
+    // Typing "units" or "₹"/"Rs" flips the switch to match
+    input.addEventListener("input", () => {
+      const t = input.value.toLowerCase();
+      if (BILL_WORDS.test(t)) setUsageMode("bill");
+      else if (UNIT_WORDS.test(t)) setUsageMode("units");
+    });
   }
 
   function clearInlineErrors() {
@@ -312,7 +406,7 @@
       `Location: ${data.city_location}`
     ];
     if (data.pin_code) lines.push(`PIN code: ${data.pin_code}`);
-    if (data.monthly_consumption) lines.push(`Monthly units: ${data.monthly_consumption}`);
+    if (data.usage_value > 0) lines.push(data.usage_mode === "bill" ? `Monthly bill: ₹${data.usage_value}` : `Monthly units: ${data.usage_value}`);
     if (data.kseb_consumer_number) lines.push(`KSEB consumer no.: ${data.kseb_consumer_number}`);
     if (data.email) lines.push(`Email: ${data.email}`);
     if (data.preferred_contact_time) lines.push(`Best time to call: ${data.preferred_contact_time}`);
@@ -337,7 +431,8 @@
       const locInput = document.getElementById("client-location") || document.getElementById("contactLocation");
       const pinInput = document.getElementById("client-pin") || document.getElementById("contactPin");
 
-      if (params.has("units") && unitsInput) unitsInput.value = params.get("units");
+      if (params.has("units") && unitsInput) { setUsageMode("units"); unitsInput.value = params.get("units"); }
+      else if (params.has("bill") && unitsInput) { setUsageMode("bill"); unitsInput.value = params.get("bill"); }
       if (params.has("location") && locInput) locInput.value = params.get("location");
       if (params.has("pin") && pinInput) pinInput.value = params.get("pin");
     } catch (e) {}

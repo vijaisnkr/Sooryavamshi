@@ -43,7 +43,10 @@
       toggleBtn.addEventListener("click", function() {
         const isPassword = passwordInput.type === "password";
         passwordInput.type = isPassword ? "text" : "password";
-        icon.textContent = isPassword ? "visibility_off" : "visibility";
+        icon.setAttribute("href", isPassword ? "#i-eye-off" : "#i-eye");
+        const label = isPassword ? "Hide password" : "Show password";
+        toggleBtn.setAttribute("aria-label", label);
+        toggleBtn.title = label;
       });
     }
   }
@@ -70,10 +73,12 @@
     const submitBtn = document.getElementById("loginSubmitBtn");
     const btnSubmitText = document.getElementById("btnSubmitText");
 
+    let redirecting = false;
+
     // Reset alert state
     alertEl.style.display = "none";
     submitBtn.disabled = true;
-    btnSubmitText.textContent = "Authenticating...";
+    btnSubmitText.textContent = "Signing in…";
 
     try {
       // 1. Attempt Supabase Auth Sign In
@@ -87,7 +92,8 @@
           timestamp: Date.now()
         }));
 
-        btnSubmitText.textContent = "Success! Redirecting...";
+        redirecting = true;
+        btnSubmitText.textContent = "Opening dashboard…";
         setTimeout(() => {
           window.location.href = "admin.html";
         }, 500);
@@ -108,8 +114,10 @@
       console.error("Login process exception:", err);
       showError("Connection error. Please check your Supabase credentials or network connection.");
     } finally {
-      submitBtn.disabled = false;
-      btnSubmitText.textContent = "Sign In to Dashboard";
+      if (!redirecting) {
+        submitBtn.disabled = false;
+        btnSubmitText.textContent = "Sign in";
+      }
     }
   }
 

@@ -63,7 +63,8 @@ window.SooryavamshiSupabase = (function() {
       monthly_consumption: typeof data.monthly_consumption === "number" && !isNaN(data.monthly_consumption) ? 
         data.monthly_consumption : 
         (parseFloat(data.monthly_consumption) || 0),
-      kseb_consumer_number: data.kseb_consumer_number && data.kseb_consumer_number.trim() ? 
+      monthly_bill_inr: typeof data.monthly_bill_inr === "number" && data.monthly_bill_inr > 0 ? data.monthly_bill_inr : null,
+      kseb_consumer_number: data.kseb_consumer_number && data.kseb_consumer_number.trim() ?
         data.kseb_consumer_number.trim() : null,
       rooftop_details: data.rooftop_details && data.rooftop_details.trim() ? 
         data.rooftop_details.trim() : null,
@@ -175,18 +176,20 @@ window.SooryavamshiSupabase = (function() {
         return { data: data || [] };
       } else {
         console.error("Fetch enquiries failed:", response.status);
-        return { data: [] };
+        return { data: [], error: `Status ${response.status}` };
       }
     } catch (err) {
       console.error("Error fetching enquiries:", err);
-      return { data: [] };
+      return { data: [], error: "Could not reach the database" };
     }
   }
 
   /**
-   * Updates enquiry status using native fetch
+   * Updates fields on one enquiry (status, admin_notes, follow_up_on).
+   * Asks for the changed row back so a save that RLS silently skipped
+   * (expired sign-in) is reported as a failure instead of a success.
    */
-  async function updateEnquiryStatus(id, newStatus) {
+  async function updateEnquiry(id, fields) {
     if (typeof id === "string" && id.startsWith("local-")) {
       return { success: true };
     }
@@ -211,19 +214,30 @@ window.SooryavamshiSupabase = (function() {
         headers: {
           "apikey": cfg.anonKey,
           "Authorization": authHeader,
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "Prefer": "return=representation"
         },
-        body: JSON.stringify({ status: newStatus })
+        body: JSON.stringify(fields)
       });
 
-      if (response.ok || response.status === 204) {
-        return { success: true };
-      } else {
+      if (!response.ok) {
         return { success: false, error: `Status ${response.status}` };
       }
+      const rows = await response.json().catch(() => []);
+      if (!Array.isArray(rows) || rows.length === 0) {
+        return { success: false, error: "Not saved. Please sign in again." };
+      }
+      return { success: true, row: rows[0] };
     } catch (err) {
       return { success: false, error: err.message };
     }
+  }
+
+  /**
+   * Updates enquiry status
+   */
+  async function updateEnquiryStatus(id, newStatus) {
+    return updateEnquiry(id, { status: newStatus });
   }
 
   /**
@@ -281,6 +295,7 @@ window.SooryavamshiSupabase = (function() {
     resetClient,
     submitSiteAssessmentRequest,
     getEnquiries,
+    updateEnquiry,
     updateEnquiryStatus,
     deleteEnquiry,
     signInAdmin,

@@ -474,7 +474,10 @@ window.SolarCalculator = (function() {
     const msgInput = document.getElementById('client-message') || document.getElementById('contactMessage');
 
     if (monthlyInput) {
-      monthlyInput.value = results.monthlyUnits;
+      // Carry over whichever the visitor used: their bill, or their units
+      const useBill = isBillMode && currentBill != null;
+      if (window.svSetUsageMode) window.svSetUsageMode(useBill ? 'bill' : 'units');
+      monthlyInput.value = useBill ? currentBill : results.monthlyUnits;
     }
 
     if (msgInput) {

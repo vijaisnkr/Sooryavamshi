@@ -3,22 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Portal - Site Assessment Enquiries | Suryavamshi Solar Projects</title>
+  <title>Enquiries · Suryavamshi Staff</title>
   <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0B2340">
   <link rel="icon" type="image/svg+xml" href="assets/icons/logo.svg">
 
-  <!-- Google Fonts & Icons -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
-
-  <!-- Supabase JS SDK -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  
-  <!-- Immediate Auth Guard: Redirects to login.html if not authenticated -->
+  <!-- Theme first (no flash), then the sign-in guard: no Supabase session, straight to login -->
   <script>
     (function() {
+      try {
+        if (localStorage.getItem("sv-admin-theme") === "dark") document.documentElement.setAttribute("data-theme", "dark");
+      } catch (e) {}
       try {
         var hasSbToken = false;
         for (var i = 0; i < localStorage.length; i++) {
@@ -40,517 +35,198 @@
     })();
   </script>
 
-  <!-- Base Styles -->
-  <link rel="stylesheet" href="css/variables.css">
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/components.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/admin.css?v=1.0">
+  <link rel="stylesheet" href="css/sv-select.css?v=1.0">
 
-  <style>
-    body {
-      background: #F4F7FB;
-      color: #1E293B;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* Admin Navbar */
-    .admin-navbar {
-      background: #073B6B;
-      color: #FFFFFF;
-      padding: 14px 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 4px 12px rgba(7, 59, 107, 0.15);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    .admin-brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-      color: #FFFFFF;
-    }
-
-    .admin-brand-title {
-      font-family: var(--font-heading);
-      font-weight: 800;
-      font-size: 1.15rem;
-      letter-spacing: -0.01em;
-    }
-
-    .admin-brand-badge {
-      background: #FDBA2D;
-      color: #073B6B;
-      font-size: 0.72rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      padding: 3px 8px;
-      border-radius: 4px;
-      letter-spacing: 0.05em;
-    }
-
-    .admin-user-nav {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .admin-btn {
-      padding: 8px 14px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      border-radius: var(--radius-sm);
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: all var(--transition-fast);
-      border: 1px solid transparent;
-    }
-
-    .admin-btn-light {
-      background: rgba(255, 255, 255, 0.12);
-      color: #FFFFFF;
-      border-color: rgba(255, 255, 255, 0.2);
-    }
-    .admin-btn-light:hover {
-      background: rgba(255, 255, 255, 0.22);
-    }
-
-    .admin-btn-primary {
-      background: #F58220;
-      color: #FFFFFF;
-    }
-    .admin-btn-primary:hover {
-      background: #E07315;
-    }
-
-    /* Container */
-    .admin-container {
-      max-width: 1380px;
-      width: 100%;
-      margin: 0 auto;
-      padding: 28px 20px 60px;
-      box-sizing: border-box;
-      flex: 1;
-    }
-
-    /* Metrics Row */
-    .metrics-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-
-    .metric-card {
-      background: #FFFFFF;
-      border-radius: var(--radius-md);
-      padding: 18px 20px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-      border: 1px solid #E2E8F0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .metric-title {
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: #64748B;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 4px;
-    }
-
-    .metric-num {
-      font-family: var(--font-heading);
-      font-size: 1.8rem;
-      font-weight: 800;
-      color: #073B6B;
-      line-height: 1.1;
-    }
-
-    .metric-icon-wrap {
-      width: 44px;
-      height: 44px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-    }
-
-    /* Toolbar */
-    .toolbar-box {
-      background: #FFFFFF;
-      border: 1px solid #E2E8F0;
-      border-radius: var(--radius-md);
-      padding: 16px 20px;
-      margin-bottom: 20px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-    }
-
-    .toolbar-left {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      align-items: center;
-      flex: 1;
-      min-width: 280px;
-    }
-
-    .search-input-wrap {
-      position: relative;
-      flex: 1;
-      max-width: 380px;
-      min-width: 200px;
-    }
-
-    .search-input-wrap input {
-      width: 100%;
-      padding: 9px 14px 9px 36px;
-      border: 1.5px solid #CBD5E1;
-      border-radius: var(--radius-sm);
-      font-size: 0.9rem;
-      box-sizing: border-box;
-      outline: none;
-    }
-    .search-input-wrap input:focus {
-      border-color: #073B6B;
-    }
-
-    .search-icon {
-      position: absolute;
-      left: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #94A3B8;
-      pointer-events: none;
-      font-size: 1.1rem;
-    }
-
-    .filter-select {
-      padding: 9px 12px;
-      border: 1.5px solid #CBD5E1;
-      border-radius: var(--radius-sm);
-      font-size: 0.88rem;
-      font-weight: 600;
-      background: #FFFFFF;
-      color: #334155;
-      outline: none;
-    }
-
-    /* Table Styling */
-    .table-card {
-      background: #FFFFFF;
-      border-radius: var(--radius-md);
-      border: 1px solid #E2E8F0;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
-      overflow: hidden;
-    }
-
-    .table-responsive {
-      width: 100%;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    table.enquiries-table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: left;
-      font-size: 0.88rem;
-    }
-
-    table.enquiries-table th {
-      background: #F8FAFC;
-      color: #475569;
-      font-family: var(--font-heading);
-      font-weight: 700;
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      padding: 14px 16px;
-      border-bottom: 1px solid #E2E8F0;
-      white-space: nowrap;
-    }
-
-    table.enquiries-table td {
-      padding: 14px 16px;
-      border-bottom: 1px solid #F1F5F9;
-      vertical-align: middle;
-      color: #334155;
-    }
-
-    table.enquiries-table tr:hover td {
-      background: #F8FAFC;
-    }
-
-    /* Status Badges & Selects */
-    .status-select {
-      font-family: var(--font-heading);
-      font-size: 0.78rem;
-      font-weight: 700;
-      padding: 5px 10px;
-      border-radius: 20px;
-      border: 1.5px solid transparent;
-      outline: none;
-      cursor: pointer;
-      appearance: auto;
-    }
-
-    .status-new { background: #FEF3C7; color: #92400E; border-color: #FCD34D; }
-    .status-contacted { background: #DBEAFE; color: #1E40AF; border-color: #93C5FD; }
-    .status-visit-sched { background: #E0E7FF; color: #3730A3; border-color: #A5B4FC; }
-    .status-visit-done { background: #F3E8FF; color: #6B21A8; border-color: #D8B4FE; }
-    .status-proposal { background: #FFEDD5; color: #9A3412; border-color: #FDBA74; }
-    .status-converted { background: #DCFCE7; color: #166534; border-color: #86EFAC; }
-    .status-closed { background: #F1F5F9; color: #475569; border-color: #CBD5E1; }
-
-    /* Action Links */
-    .quick-action-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      color: #073B6B;
-      font-weight: 600;
-      text-decoration: none;
-      margin-right: 8px;
-    }
-    .quick-action-link:hover {
-      text-decoration: underline;
-    }
-
-    .whatsapp-btn {
-      color: #16A34A;
-      display: inline-flex;
-      align-items: center;
-      gap: 3px;
-      font-weight: 600;
-      text-decoration: none;
-    }
-
-    /* Auth Gate Container */
-    .auth-gate-box {
-      max-width: 440px;
-      margin: 60px auto;
-      background: #FFFFFF;
-      border-radius: var(--radius-lg);
-      padding: 40px 36px;
-      border: 1px solid #E2E8F0;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-      text-align: center;
-    }
-
-    .auth-gate-title {
-      font-family: var(--font-heading);
-      font-size: 1.4rem;
-      font-weight: 800;
-      color: #073B6B;
-      margin-bottom: 6px;
-    }
-
-    .auth-gate-desc {
-      font-size: 0.9rem;
-      color: #64748B;
-      margin-bottom: 24px;
-    }
-
-    .auth-form-group {
-      margin-bottom: 16px;
-      text-align: left;
-    }
-
-    .auth-form-label {
-      display: block;
-      font-size: 0.84rem;
-      font-weight: 600;
-      margin-bottom: 6px;
-      color: #334155;
-    }
-
-    .auth-form-input {
-      width: 100%;
-      padding: 12px 14px;
-      border: 1.5px solid #CBD5E1;
-      border-radius: var(--radius-sm);
-      font-size: 0.95rem;
-      box-sizing: border-box;
-    }
-    .auth-form-input:focus {
-      outline: none;
-      border-color: #073B6B;
-    }
-
-    /* Modal */
-    .config-modal-backdrop {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(15, 23, 42, 0.6);
-      z-index: 1000;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-    .config-modal-backdrop.active {
-      display: flex;
-    }
-
-    .config-modal-card {
-      background: #FFFFFF;
-      border-radius: var(--radius-md);
-      max-width: 520px;
-      width: 100%;
-      padding: 28px;
-      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.2);
-    }
-  </style>
+  <!-- Supabase JS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
-  <!-- Top Navbar -->
-  <header class="admin-navbar">
-    <a href="index.html" class="admin-brand" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
-      <div style="background: #FFFFFF; padding: 4px 10px; border-radius: 8px; display: inline-flex; align-items: center; box-shadow: 0 2px 6px rgba(0,0,0,0.15);">
-        <img src="suryavamshi_logo.png" alt="Suryavamshi Solar Projects LLP Logo" style="height: 34px; width: auto; object-fit: contain; display: block;">
-      </div>
-      <span class="admin-brand-badge">ADMIN PORTAL</span>
-    </a>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-phone" viewBox="0 0 24 24"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></symbol>
+    <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3 .78.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.25-.12-1.46-.72-1.69-.8-.23-.08-.39-.12-.55.12-.17.25-.64.8-.78.97-.14.16-.29.18-.53.06a6.7 6.7 0 0 1-3.32-2.9c-.25-.43.25-.4.72-1.33.08-.16.04-.3-.02-.42-.06-.12-.55-1.33-.76-1.82-.2-.48-.4-.41-.55-.42h-.47a.9.9 0 0 0-.66.31 2.77 2.77 0 0 0-.86 2.06c0 1.21.88 2.38 1 2.55.13.16 1.74 2.66 4.22 3.73 1.57.68 2.18.74 2.97.62.48-.07 1.46-.6 1.67-1.18.2-.58.2-1.07.14-1.18-.06-.1-.22-.17-.47-.29z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></g></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></g></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></g></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></g></symbol>
+    <symbol id="i-inbox" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13.5 5.5 5h13l2.5 8.5V19a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M3 13.5h5l1.5 2.5h5l1.5-2.5h5"/></g></symbol>
+    <symbol id="i-visit" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 11 12 3.5 21 11v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></g></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.2M12 19.8V22M2 12h2.2M19.8 12H22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"/></g></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></g></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 0 0-14.3-4.9L4 8"/><path d="M4 3.5V8h4.5"/><path d="M4 13a8 8 0 0 0 14.3 4.9L20 16"/><path d="M20 20.5V16h-4.5"/></g></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></g></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.5"/><path d="M15.5 8.5V5.5a2 2 0 0 0-2-2h-8a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h3"/></g></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.5l5 5 10-11"/></symbol>
+    <symbol id="i-award" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="m8.5 14-1.5 7 5-2.5 5 2.5-1.5-7"/></g></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9.5a6 6 0 0 1 12 0c0 6 2.5 7.5 2.5 7.5h-17S6 15.5 6 9.5z"/><path d="M10 20.5a2.2 2.2 0 0 0 4 0"/></g></symbol>
+    <symbol id="i-logout" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-4"/><path d="M10 16.5 5.5 12 10 7.5M5.5 12H15"/></g></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="m9 6 6 6-6 6"/></symbol>
+    <symbol id="i-ext" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5M12 16.5v.01"/></g></symbol>
+  </svg>
 
-    <div class="admin-user-nav">
-      <div id="userProfileWrap" style="display: none; align-items: center; gap: 10px;">
-        <span id="userEmailTag" style="font-size: 0.85rem; color: #E2E8F0;"></span>
-        <button type="button" class="admin-btn admin-btn-light" id="loginRedirectBtn" title="Go to Login Page">
-          <span class="material-symbols-outlined" style="font-size: 18px;">login</span>
-          <span>Login Page</span>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="index.html" class="brand" title="Open the website">
+        <img src="assets/images/suryavamshi-logo-reversed.png" alt="Suryavamshi Solar" width="82" height="34">
+        <span class="brand-tag">Staff portal</span>
+      </a>
+      <div class="topbar-right">
+        <button type="button" class="icon-btn" id="themeBtn" aria-label="Switch to dark mode" title="Dark mode">
+          <svg class="ic"><use href="#i-moon"/></svg>
         </button>
-        <button type="button" class="admin-btn admin-btn-light" id="signOutBtn">
-          <span class="material-symbols-outlined" style="font-size: 18px;">logout</span>
-          <span>Logout</span>
-        </button>
+        <div class="user-chip" id="userProfileWrap">
+          <span class="avatar" id="userAvatar" aria-hidden="true">S</span>
+          <span class="user-email" id="userEmailTag">Signing in…</span>
+          <button type="button" class="signout" id="signOutBtn">
+            <svg class="ic" style="width:15px;height:15px"><use href="#i-logout"/></svg>
+            <span>Sign out</span>
+          </button>
+        </div>
       </div>
     </div>
   </header>
 
-  <!-- Auth Gate Redirect Fallback (Redirects immediately to login.html) -->
-  <section class="admin-container" id="authGateSection" style="display: none; text-align: center; padding: 80px 20px;">
-    <div style="max-width: 400px; margin: 0 auto; background: #FFFFFF; border-radius: var(--radius-md); padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); border: 1px solid #E2E8F0;">
-      <div style="font-size: 2.2rem; margin-bottom: 12px;">🔒</div>
-      <h3 style="font-family: var(--font-heading); color: #073B6B; margin: 0 0 8px 0;">Authentication Required</h3>
-      <p style="font-size: 0.9rem; color: #64748B; margin-bottom: 20px;">Redirecting you to the Admin Login Page...</p>
-      <a href="login.html" class="admin-btn admin-btn-primary" style="display: inline-flex; text-decoration: none;">Go to Login Page &rarr;</a>
-    </div>
-  </section>
-
-  <!-- Dashboard Section (Shown when authenticated or preview mode) -->
-  <main class="admin-container" id="dashboardSection" style="display: none;">
-    
-    <!-- Metrics Row -->
-    <div class="metrics-row">
-      <div class="metric-card">
-        <div>
-          <div class="metric-title">Total Enquiries</div>
-          <div class="metric-num" id="metricTotal">0</div>
-        </div>
-        <div class="metric-icon-wrap" style="background: #EBF3FA; color: #073B6B;">📋</div>
+  <main class="page" id="dashboardSection">
+    <div class="page-head">
+      <div>
+        <span class="eyebrow">Site assessment enquiries</span>
+        <h1 id="greeting">Welcome back</h1>
+        <p id="summaryLine">Loading your enquiries…</p>
       </div>
-
-      <div class="metric-card">
-        <div>
-          <div class="metric-title">New Leads</div>
-          <div class="metric-num" id="metricNew" style="color: #D97706;">0</div>
-        </div>
-        <div class="metric-icon-wrap" style="background: #FEF3C7; color: #D97706;">✨</div>
-      </div>
-
-      <div class="metric-card">
-        <div>
-          <div class="metric-title">Site Visits Scheduled</div>
-          <div class="metric-num" id="metricSiteVisits" style="color: #4F46E5;">0</div>
-        </div>
-        <div class="metric-icon-wrap" style="background: #EEF2FF; color: #4F46E5;">📍</div>
-      </div>
-
-      <div class="metric-card">
-        <div>
-          <div class="metric-title">Converted Projects</div>
-          <div class="metric-num" id="metricConverted" style="color: #16A34A;">0</div>
-        </div>
-        <div class="metric-icon-wrap" style="background: #DCFCE7; color: #16A34A;">☀️</div>
-      </div>
-    </div>
-
-    <!-- Toolbar: Search & Filters -->
-    <div class="toolbar-box">
-      <div class="toolbar-left">
-        <div class="search-input-wrap">
-          <span class="material-symbols-outlined search-icon">search</span>
-          <input type="text" id="searchInput" placeholder="Search by name, phone, or location...">
-        </div>
-
-        <select id="statusFilter" class="filter-select">
-          <option value="All">All Statuses</option>
-          <option value="New">New</option>
-          <option value="Contacted">Contacted</option>
-          <option value="Site Visit Scheduled">Site Visit Scheduled</option>
-          <option value="Site Visit Completed">Site Visit Completed</option>
-          <option value="Proposal Sent">Proposal Sent</option>
-          <option value="Converted">Converted</option>
-          <option value="Closed">Closed</option>
-        </select>
-      </div>
-
-      <div style="display: flex; gap: 10px; align-items: center;">
-        <button type="button" class="admin-btn admin-btn-light" id="refreshBtn" style="color: #073B6B; border-color: #CBD5E1;">
-          <span class="material-symbols-outlined" style="font-size: 18px;">refresh</span>
-          <span>Refresh</span>
+      <div class="head-actions">
+        <span class="updated" id="updatedAt"><span class="live-dot" aria-hidden="true"></span><span id="updatedText">Connecting…</span></span>
+        <button type="button" class="btn" id="refreshBtn" title="Check for new enquiries">
+          <svg class="ic"><use href="#i-refresh"/></svg><span>Refresh</span>
+        </button>
+        <button type="button" class="btn btn-sun" id="exportBtn" title="Download the list you're looking at as a spreadsheet (opens in Excel or Google Sheets)">
+          <svg class="ic"><use href="#i-download"/></svg><span>Download Excel</span>
         </button>
       </div>
     </div>
 
-    <!-- Live Enquiries Table -->
-    <div class="table-card">
-      <div class="table-responsive">
-        <table class="enquiries-table" id="enquiriesTable">
-          <thead>
-            <tr>
-              <th>Date &amp; Time (IST)</th>
-              <th>Customer</th>
-              <th>Phone / Quick Dial</th>
-              <th>Location &amp; PIN</th>
-              <th>Monthly Usage</th>
-              <th>KSEB Consumer No.</th>
-              <th>Rooftop Details</th>
-              <th>Status Action</th>
-            </tr>
-          </thead>
-          <tbody id="enquiriesTableBody">
-            <tr>
-              <td colspan="8" style="text-align: center; padding: 40px; color: #64748B;">
-                Loading enquiries from Supabase...
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <section class="metrics" aria-label="Summary">
+      <button type="button" class="metric m-new" data-view="New">
+        <span class="metric-top"><span class="metric-label">New enquiries</span><span class="metric-ic"><svg class="ic"><use href="#i-inbox"/></svg></span></span>
+        <span class="metric-num" id="metricNew">0</span>
+        <span class="metric-sub" id="metricNewSub">Waiting for a first call</span>
+      </button>
+      <button type="button" class="metric m-due" data-view="due">
+        <span class="metric-top"><span class="metric-label">Follow-ups due</span><span class="metric-ic"><svg class="ic"><use href="#i-bell"/></svg></span></span>
+        <span class="metric-num" id="metricDue">0</span>
+        <span class="metric-sub" id="metricDueSub">Today or overdue</span>
+      </button>
+      <button type="button" class="metric m-visit" data-view="Site Visit Scheduled">
+        <span class="metric-top"><span class="metric-label">Site visits booked</span><span class="metric-ic"><svg class="ic"><use href="#i-visit"/></svg></span></span>
+        <span class="metric-num" id="metricSiteVisits">0</span>
+        <span class="metric-sub" id="metricVisitSub">0 visits done</span>
+      </button>
+      <button type="button" class="metric m-won" data-view="Converted">
+        <span class="metric-top"><span class="metric-label">Converted</span><span class="metric-ic"><svg class="ic"><use href="#i-award"/></svg></span></span>
+        <span class="metric-num" id="metricConverted">0</span>
+        <span class="metric-sub" id="metricWonSub">0% of all enquiries</span>
+      </button>
+    </section>
+
+    <section class="panel" aria-label="Enquiries">
+      <div class="toolbar">
+        <div class="tabs" id="statusTabs" role="tablist" aria-label="Filter by status"></div>
+        <div class="tools">
+          <label class="search">
+            <span class="sr-only">Search enquiries</span>
+            <svg class="ic"><use href="#i-search"/></svg>
+            <input type="search" id="searchInput" placeholder="Search name, phone, town, KSEB no." autocomplete="off">
+          </label>
+          <label>
+            <span class="sr-only">Sort</span>
+            <select class="select" id="sortSelect">
+              <option value="newest">Newest first</option>
+              <option value="oldest">Oldest first</option>
+              <option value="follow">Follow-up date</option>
+              <option value="bill">Biggest bill</option>
+            </select>
+          </label>
+        </div>
       </div>
-    </div>
+
+      <div class="list-head" aria-hidden="true">
+        <span>Customer</span>
+        <span class="col-when">Received</span>
+        <span>Contact</span>
+        <span>Monthly usage</span>
+        <span>KSEB no.</span>
+        <span class="col-follow">Follow-up</span>
+        <span>Status</span>
+        <span></span>
+      </div>
+      <div id="leadList" aria-live="polite">
+        <div class="skel"><i></i><i></i><i></i><i></i></div>
+        <div class="skel"><i></i><i></i><i></i><i></i></div>
+        <div class="skel"><i></i><i></i><i></i><i></i></div>
+      </div>
+      <div class="list-foot">
+        <span id="listCount"></span>
+        <span>Tip: press <b>/</b> to search. Click a customer to see everything and add notes.</span>
+      </div>
+    </section>
   </main>
 
-  <!-- Scripts with Cache-Busting -->
+  <!-- Lead details -->
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+  <aside class="drawer" id="leadDrawer" role="dialog" aria-modal="true" aria-labelledby="drawerName" aria-hidden="true">
+    <div class="drawer-head">
+      <div class="drawer-title">
+        <div>
+          <h2 id="drawerName">Customer</h2>
+          <p id="drawerSub"></p>
+        </div>
+        <button type="button" class="icon-btn" id="drawerClose" aria-label="Close"><svg class="ic"><use href="#i-x"/></svg></button>
+      </div>
+      <div class="quick" id="drawerQuick"></div>
+    </div>
+    <div class="drawer-body">
+      <div class="block">
+        <h3>Status</h3>
+        <div class="status-grid" id="drawerStatus"></div>
+      </div>
+      <p class="extras-note hidden" id="extrasNote">Notes and follow-up dates switch on after a one-time database update.</p>
+      <div class="block" id="followBlock">
+        <h3>Next follow-up</h3>
+        <div class="follow-row">
+          <label><span class="sr-only">Follow-up date</span><input type="date" class="field-input" id="followDate"></label>
+          <button type="button" class="btn btn-sm" data-follow="1">Tomorrow</button>
+          <button type="button" class="btn btn-sm" data-follow="3">In 3 days</button>
+          <button type="button" class="btn btn-sm" data-follow="7">Next week</button>
+          <button type="button" class="btn btn-sm btn-ghost" data-follow="clear">Clear</button>
+        </div>
+      </div>
+      <div class="block" id="notesBlock">
+        <h3>Notes <span style="text-transform:none;letter-spacing:0;font-weight:600">(only staff see these)</span></h3>
+        <label class="sr-only" for="notesInput">Notes</label>
+        <textarea class="field-input" id="notesInput" placeholder="e.g. Called on Monday. Concrete roof, about 400 sq ft free. Wants a quote for 3 kW."></textarea>
+        <div class="save-row">
+          <span class="save-state" id="notesState"></span>
+          <button type="button" class="btn btn-sm btn-sun" id="notesSave"><svg class="ic" style="width:15px;height:15px"><use href="#i-check"/></svg>Save notes</button>
+        </div>
+      </div>
+      <div class="block">
+        <h3>Details</h3>
+        <div class="facts" id="drawerFacts"></div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="toast-wrap" id="toastWrap" role="status" aria-live="polite"></div>
+
   <script src="js/supabase-config.js?v=3.0"></script>
-  <script src="js/supabase-client.js?v=3.1"></script>
-  <script src="js/admin.js?v=3.1"></script>
+  <script src="js/supabase-client.js?v=12.2"></script>
+  <script src="js/sv-select.js?v=1.0"></script>
+  <script src="js/admin.js?v=4.0"></script>
 </body>
 </html>
