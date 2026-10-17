@@ -1,5 +1,5 @@
 /**
- * Sooryavamshi Solar Projects LLP - Main Application Controller
+ * Suryavamshi Solar Projects LLP - Main Application Controller
  * Handles global interactions, navigation, mobile drawer, counters, and contact workflows.
  */
 

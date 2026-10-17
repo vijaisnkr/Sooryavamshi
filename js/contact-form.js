@@ -1,5 +1,5 @@
 /**
- * Sooryavamshi Solar Projects LLP - Contact & Consultation Form Controller
+ * Suryavamshi Solar Projects LLP - Contact & Consultation Form Controller
  * 
  * Handles client-side validation, anti-spam honeypot, Supabase database submission,
  * and responsive success/error state handling.
@@ -289,7 +289,7 @@
         <div style="font-size: 2rem; margin-bottom: 8px;">☀️</div>
         <h4 style="color: #218739; font-size: 1.15rem; margin-bottom: 8px; font-weight: 700;">Request Submitted Successfully</h4>
         <p style="font-size: 0.96rem; line-height: 1.5; color: #155724; margin: 0; font-weight: 500;">
-          Thank you! Your site assessment request has been received. A Sooryavamshi solar specialist will contact you shortly.
+          Thank you! Your site assessment request has been received. A Suryavamshi solar specialist will contact you shortly.
         </p>
       `;
       safeScrollIntoView(successBox2);

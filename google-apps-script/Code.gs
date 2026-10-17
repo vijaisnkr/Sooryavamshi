@@ -1,8 +1,8 @@
 /**
- * Sooryavamshi Solar Projects LLP - Google Apps Script Lead Sync Web App
+ * Suryavamshi Solar Projects LLP - Google Apps Script Lead Sync Web App
  * 
  * Automatically receives new site assessment requests from Supabase Database Webhook
- * and appends them to Google Sheet: "Sooryavamshi Solar Site Assessment Leads"
+ * and appends them to Google Sheet: "Suryavamshi Solar Site Assessment Leads"
  * Worksheet Tab: "Site Assessment Leads"
  * 
  * Secret Property: WEBHOOK_SECRET = suryavamshi_sec_2026_x9k2m7
@@ -75,7 +75,7 @@ function setupSheet() {
  * Handles HTTP GET requests (Web App deployment check)
  */
 function doGet(e) {
-  return createJsonResponse(true, "Sooryavamshi Solar Webhook Service is active", 200, {
+  return createJsonResponse(true, "Suryavamshi Solar Webhook Service is active", 200, {
     service: "Supabase to Google Sheets Lead Integration",
     status: "online",
     timestamp: new Date().toISOString()

@@ -1,5 +1,5 @@
 -- ============================================================================
--- Sooryavamshi Solar Projects LLP - Database Migration
+-- Suryavamshi Solar Projects LLP - Database Migration
 -- Task: Supabase to Google Sheets Lead Integration
 -- Description: Adds new columns to public.site_assessment_requests, configures
 -- RLS policies, and defines the pg_net database webhook trigger function.

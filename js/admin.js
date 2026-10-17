@@ -1,5 +1,5 @@
 /**
- * Sooryavamshi Solar Projects LLP - Admin Portal Controller
+ * Suryavamshi Solar Projects LLP - Admin Portal Controller
  * Manages Supabase Auth, leads dashboard, status mutations, search, and date formatting.
  */
 
@@ -84,20 +84,9 @@
       console.warn("Supabase user fetch failed:", e);
     }
 
+    // Unauthenticated state handling: only a verified Supabase user gets in
     if (!activeUserEmail) {
-      const localSessionRaw = localStorage.getItem("sooryavamshi_admin_session");
-      if (localSessionRaw) {
-        try {
-          const parsed = JSON.parse(localSessionRaw);
-          if (parsed && parsed.email) {
-            activeUserEmail = parsed.email;
-          }
-        } catch (e) {}
-      }
-    }
-
-    // Unauthenticated state handling: Strict redirect to login.html
-    if (!activeUserEmail) {
+      localStorage.removeItem("sooryavamshi_admin_session");
       window.location.replace("login.html");
       return;
     }
@@ -134,22 +123,6 @@
         localStorage.setItem("sooryavamshi_admin_session", JSON.stringify({
           email: data.user.email,
           authType: "supabase",
-          timestamp: Date.now()
-        }));
-        await checkAuthState();
-        return;
-      }
-
-      // Check demo staff credentials fallback
-      const isDefaultStaff = (
-        (email.toLowerCase() === "admin@suryavamshi.com" || email.toLowerCase() === "admin@sooryavamshi.com") &&
-        (password === "admin123" || password === "sooryavamshi2026" || password.length >= 6)
-      );
-
-      if (isDefaultStaff) {
-        localStorage.setItem("sooryavamshi_admin_session", JSON.stringify({
-          email: email,
-          authType: "staff_demo",
           timestamp: Date.now()
         }));
         await checkAuthState();

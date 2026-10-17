@@ -1,4 +1,4 @@
-# Google Apps Script Setup Guide – Sooryavamshi Solar Projects LLP
+# Google Apps Script Setup Guide – Suryavamshi Solar Projects LLP
 
 This guide walks you through deploying the automatic Google Sheets lead synchronization script.
 
@@ -8,7 +8,7 @@ This guide walks you through deploying the automatic Google Sheets lead synchron
 
 1. Go to [Google Sheets](https://sheets.google.com) and create a new spreadsheet.
 2. Rename the spreadsheet to:
-   `Sooryavamshi Solar Site Assessment Leads`
+   `Suryavamshi Solar Site Assessment Leads`
 3. Rename the active worksheet tab at the bottom to:
    `Site Assessment Leads`
 
@@ -49,7 +49,7 @@ This guide walks you through deploying the automatic Google Sheets lead synchron
 1. Click **Deploy** (top right) → **New deployment**.
 2. Click the gear icon next to "Select type" → choose **Web app**.
 3. Fill in configuration:
-   - **Description**: `Sooryavamshi Solar Supabase Lead Sync`
+   - **Description**: `Suryavamshi Solar Supabase Lead Sync`
    - **Execute as**: `Me (your-email@gmail.com)`
    - **Who has access**: `Anyone`
 4. Click **Deploy**.
@@ -65,7 +65,7 @@ Paste your Web App URL into your web browser. You should see a response like:
 {
   "success": true,
   "status": 200,
-  "message": "Sooryavamshi Solar Webhook Service is active",
+  "message": "Suryavamshi Solar Webhook Service is active",
   "timestamp": "2026-09-10T00:39:40.000Z",
   "data": {
     "service": "Supabase to Google Sheets Lead Integration",

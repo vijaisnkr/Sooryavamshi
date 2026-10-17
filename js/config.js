@@ -1,13 +1,13 @@
 /**
- * Sooryavamshi Solar Projects LLP - Central Configuration
+ * Suryavamshi Solar Projects LLP - Central Configuration
  * All company details, product catalogues, project showcases, and calculation constants
  * are structured here for clean maintenance and instant updates.
  */
 
 const SOORYAVAMSHI_CONFIG = {
   company: {
-    legalName: "Sooryavamshi Solar Projects LLP",
-    shortName: "Sooryavamshi Solar",
+    legalName: "Suryavamshi Solar Projects LLP",
+    shortName: "Suryavamshi Solar",
     tagline: "Power Your Home With Clean, Reliable Solar Energy",
     subTagline: "Trusted Residential & Commercial Solar Engineering in India",
     phone: "9061626868",

@@ -1,6 +1,6 @@
-# Sooryavamshi Solar Projects LLP - Official Website
+# Suryavamshi Solar Projects LLP - Official Website
 
-A modern, high-performance, responsive web application for **Sooryavamshi Solar Projects LLP**, an engineering-driven residential solar EPC installer based in Kerala, India.
+A modern, high-performance, responsive web application for **Suryavamshi Solar Projects LLP**, an engineering-driven residential solar EPC installer based in Kerala, India.
 
 ---
 
@@ -40,7 +40,7 @@ A modern, high-performance, responsive web application for **Sooryavamshi Solar 
 ## 📂 Project Structure
 
 ```
-Sooryavamshi/
+Suryavamshi/
 ├── index.html              # Main landing page & application entrypoint
 ├── css/
 │   ├── variables.css       # Design tokens (colors, gradients, typography, shadows)
@@ -91,7 +91,7 @@ npx serve .
 
 ## 📞 Company Contact Details
 
-- **Company**: Sooryavamshi Solar Projects LLP
+- **Company**: Suryavamshi Solar Projects LLP
 - **Phone**: +91 90616 26868 / +91 94477 96868
 - **Email**: suryavamshisolarprojects@gmail.com
 - **Operating Regions**: Cherthala, Alappuzha, Kochi, Ernakulam, and across Kerala, India

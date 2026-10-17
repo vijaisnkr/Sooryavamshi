@@ -1,5 +1,5 @@
 // ============================================================================
-// Sooryavamshi Solar Projects LLP - Supabase Edge Function
+// Suryavamshi Solar Projects LLP - Supabase Edge Function
 // Function: send-site-assessment-email
 // Description: Dispatches formatted email notification to suryavamshisolarprojects@gmail.com
 // ============================================================================
@@ -63,7 +63,7 @@ serve(async (req) => {
 
     const subject = `New Solar Site Assessment Request – ${customerName}`;
 
-    // Clean HTML email template styled with Sooryavamshi visual brand
+    // Clean HTML email template styled with Suryavamshi visual brand
     const htmlContent = `
     <!DOCTYPE html>
     <html>
@@ -91,7 +91,7 @@ serve(async (req) => {
     <body>
       <div class="container">
         <div class="header">
-          <h1>Sooryavamshi Solar Projects LLP</h1>
+          <h1>Suryavamshi Solar Projects LLP</h1>
           <p>Residential &amp; Commercial Solar Sizing Desk</p>
         </div>
         <div class="body">
@@ -145,7 +145,7 @@ serve(async (req) => {
           </div>
         </div>
         <div class="footer">
-          Sooryavamshi Solar Projects LLP &bull; Cherthala, Alappuzha, Kerala &bull; +91 9061626868
+          Suryavamshi Solar Projects LLP &bull; Cherthala, Alappuzha, Kerala &bull; +91 9061626868
         </div>
       </div>
     </body>
@@ -161,7 +161,7 @@ serve(async (req) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          from: "Sooryavamshi Solar <notifications@suryavamshi.com>",
+          from: "Suryavamshi Solar <notifications@suryavamshi.com>",
           to: [NOTIFICATION_EMAIL],
           reply_to: record.email || undefined,
           subject: subject,

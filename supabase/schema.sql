@@ -1,5 +1,5 @@
 -- ============================================================================
--- Sooryavamshi Solar Projects LLP - Supabase Database Schema
+-- Suryavamshi Solar Projects LLP - Supabase Database Schema
 -- Table: site_assessment_requests
 -- Description: Stores customer enquiries submitted via "Request Free Site Assessment"
 -- ============================================================================

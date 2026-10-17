@@ -1,5 +1,5 @@
 /**
- * Sooryavamshi Solar Projects LLP - Supabase Client Interface
+ * Suryavamshi Solar Projects LLP - Supabase Client Interface
  * Handles database operations for customer enquiries and admin portal interactions.
  */
 

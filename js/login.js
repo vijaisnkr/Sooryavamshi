@@ -1,5 +1,5 @@
 /**
- * Sooryavamshi Solar Projects LLP - Admin Login Controller
+ * Suryavamshi Solar Projects LLP - Admin Login Controller
  * Handles user authentication, password toggle, Supabase session checks, and redirects.
  */
 
@@ -19,11 +19,12 @@
   async function checkExistingSession() {
     try {
       const user = await SooryavamshiSupabase.getAdminUser();
-      const localSession = localStorage.getItem("sooryavamshi_admin_session");
 
-      if ((user && user.email) || localSession) {
+      if (user && user.email) {
         console.log("Active session detected. Redirecting to Admin Dashboard...");
         window.location.href = "admin.html";
+      } else {
+        localStorage.removeItem("sooryavamshi_admin_session");
       }
     } catch (e) {
       console.warn("Session check error:", e);
@@ -93,28 +94,8 @@
         return;
       }
 
-      // 2. Handle Supabase Auth Error or Fallback Demo Staff Access
+      // 2. Supabase Auth refused the sign-in
       console.warn("Supabase Auth sign-in result:", error ? error.message : "No user data returned");
-
-      // Demo fallback check (Allows access for local staff/testing if Supabase Auth isn't setup yet)
-      const isDefaultStaff = (
-        (email.toLowerCase() === "admin@suryavamshi.com" || email.toLowerCase() === "admin@sooryavamshi.com") &&
-        (password === "admin123" || password === "sooryavamshi2026" || password.length >= 6)
-      );
-
-      if (isDefaultStaff) {
-        localStorage.setItem("sooryavamshi_admin_session", JSON.stringify({
-          email: email,
-          authType: "staff_demo",
-          timestamp: Date.now()
-        }));
-
-        btnSubmitText.textContent = "Authenticated! Redirecting...";
-        setTimeout(() => {
-          window.location.href = "admin.html";
-        }, 500);
-        return;
-      }
 
       // Display specific failure message
       let errMsg = "Invalid email or password. Please verify your credentials.";

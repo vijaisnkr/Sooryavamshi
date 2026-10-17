@@ -1,5 +1,5 @@
 /**
- * Sooryavamshi Solar Projects LLP - Solar Requirement Calculator
+ * Suryavamshi Solar Projects LLP - Solar Requirement Calculator
  * Cleanly separated calculation engine and reactive DOM controller.
  *
  * v6: the typed value always drives the result (units or bill) and the
@@ -479,7 +479,7 @@ window.SolarCalculator = (function() {
 
     if (msgInput) {
       const billNote = isBillMode && currentBill != null ? ` (monthly bill about ₹${fmt(currentBill)})` : '';
-      msgInput.value = `Hello Sooryavamshi team, I calculated my home solar requirement as ${results.recommendedKw} kW (${results.panelCount} panels, ~${results.roofSpaceSqFt} sq.ft) for my monthly consumption of ${results.monthlyUnits} units${billNote} in ${stateObj.name}. Please arrange a site assessment.`;
+      msgInput.value = `Hello Suryavamshi team, I calculated my home solar requirement as ${results.recommendedKw} kW (${results.panelCount} panels, ~${results.roofSpaceSqFt} sq.ft) for my monthly consumption of ${results.monthlyUnits} units${billNote} in ${stateObj.name}. Please arrange a site assessment.`;
       msgInput.focus();
     }
   }

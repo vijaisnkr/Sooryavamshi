@@ -1,5 +1,5 @@
 /**
- * Sooryavamshi Solar Projects LLP - Supabase Configuration
+ * Suryavamshi Solar Projects LLP - Supabase Configuration
  * 
  * Provides configuration parameters for connecting to Supabase.
  * Credentials can be set here directly, or supplied at runtime via

@@ -20,7 +20,6 @@
   <script>
     (function() {
       try {
-        var session = localStorage.getItem("sooryavamshi_admin_session");
         var hasSbToken = false;
         for (var i = 0; i < localStorage.length; i++) {
           var k = localStorage.key(i);
@@ -32,7 +31,9 @@
             }
           }
         }
-        if (!session && !hasSbToken) {
+        // Only a real Supabase sign-in opens the dashboard
+        if (!hasSbToken) {
+          localStorage.removeItem("sooryavamshi_admin_session");
           window.location.replace("login.html");
         }
       } catch (e) {}
@@ -550,6 +551,6 @@
   <!-- Scripts with Cache-Busting -->
   <script src="js/supabase-config.js?v=3.0"></script>
   <script src="js/supabase-client.js?v=3.0"></script>
-  <script src="js/admin.js?v=3.0"></script>
+  <script src="js/admin.js?v=3.1"></script>
 </body>
 </html>

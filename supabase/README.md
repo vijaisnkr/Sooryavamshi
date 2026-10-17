@@ -1,4 +1,4 @@
-# Supabase Backend Setup Guide – Sooryavamshi Solar Projects LLP
+# Supabase Backend Setup Guide – Suryavamshi Solar Projects LLP
 
 This guide walks you through connecting your Supabase project to the **Request Free Site Assessment** form and the **Admin Portal** on `https://suryavamshi.com`.
 
@@ -9,7 +9,7 @@ This guide walks you through connecting your Supabase project to the **Request F
 1. Go to [https://supabase.com](https://supabase.com) and sign in.
 2. Click **New Project**.
 3. Set your project details:
-   - **Name**: `Sooryavamshi Solar`
+   - **Name**: `Suryavamshi Solar`
    - **Database Password**: Choose a secure password (save it safely).
    - **Region**: `South Asia (Mumbai)` or closest to India.
 4. Click **Create new project** and wait ~2 minutes for provisioning.
@@ -102,7 +102,7 @@ When a customer submits an assessment enquiry, you can receive instant email not
      - Monthly Consumption: `350`
    - Click **REQUEST CONSULTATION**.
    - You should see:
-     > *"Thank you! Your site assessment request has been received. A Sooryavamshi solar specialist will contact you shortly."*
+     > *"Thank you! Your site assessment request has been received. A Suryavamshi solar specialist will contact you shortly."*
 
 2. **Admin Portal**:
    - Open `https://suryavamshi.com/admin.html`
@@ -131,5 +131,5 @@ Every site assessment request can automatically populate a Google Sheet in real 
    - **Method**: `POST`
    - **URL**: `https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec?secret=suryavamshi_sec_2026_x9k2m7`
    - **HTTP Headers**: `Content-Type: application/json`
-4. Now every customer form submission is synced into Columns A through O in Google Sheet `Sooryavamshi Solar Site Assessment Leads` tab `Site Assessment Leads` automatically!
+4. Now every customer form submission is synced into Columns A through O in Google Sheet `Suryavamshi Solar Site Assessment Leads` tab `Site Assessment Leads` automatically!
 
