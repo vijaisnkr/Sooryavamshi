@@ -2,6 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <script>
+    // Staff invite and password-reset emails from Supabase land here: hand them to the set-password page
+    (function (h) { if (/[#&]error_code=/.test(h) || (/[#&]access_token=/.test(h) && /[#&]type=(invite|recovery)(&|$)/.test(h))) location.replace("set-password.html" + h); })(location.hash);
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Solar Panel Installation in Kerala | Suryavamshi Solar</title>
   <meta name="description" content="Rooftop solar for Kerala homes from a Cherthala-based team. Free site visit, KSEB net metering and the ₹78,000 PM Surya Ghar subsidy handled for you.">

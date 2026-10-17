@@ -7,6 +7,7 @@ Allow: /
 # Keep staff and internal paths out of search
 Disallow: /admin.html
 Disallow: /login.html
+Disallow: /set-password.html
 Disallow: /debug_insert.html
 Disallow: /scratch/
 Disallow: /Proposals/
