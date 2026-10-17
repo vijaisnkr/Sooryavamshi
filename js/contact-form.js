@@ -6,6 +6,10 @@
  */
 
 (function() {
+  // The form's inline onsubmit and its submit listener both run on one submit,
+  // so a second call is ignored while a submission is already being sent
+  let sending = false;
+
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initContactForm);
   } else {
@@ -27,6 +31,9 @@
     const submitBtn = document.getElementById("submitFormBtn") || (form ? form.querySelector('button[type="submit"]') : null);
 
     if (!form) return;
+    // handleAssessmentSubmit calls this again on every submit: bind only once
+    if (form.dataset.svBound) return;
+    form.dataset.svBound = "1";
 
     // Prefill helper: If calculator passed units or location via session/hash
     handlePrepopulation();
@@ -38,6 +45,7 @@
 
     async function handleFormSubmit(e) {
       if (e && e.preventDefault) e.preventDefault();
+      if (sending) return;
 
       // Reset previous error/success states
       hideMessages();
@@ -98,6 +106,7 @@
       }
 
       // 4. Loading State: Disable button and show spinner
+      sending = true;
       const originalBtnHtml = submitBtn ? submitBtn.innerHTML : "";
       if (submitBtn) {
         submitBtn.disabled = true;
@@ -119,6 +128,7 @@
 
         // Record timestamp
         localStorage.setItem("sooryavamshi_last_submit_ts", Date.now().toString());
+        if (window.svTrack) window.svTrack("generate_lead", { form_page: window.location.pathname });
 
         // Clear form inputs
         form.reset();
@@ -127,8 +137,10 @@
         showSuccessMessage(form);
       } catch (err) {
         console.warn("Notice during submission:", err);
+        if (window.svTrack) window.svTrack("lead_submit_failed", { form_page: window.location.pathname });
         showSuccessMessage(form);
       } finally {
+        sending = false;
         if (submitBtn) {
           submitBtn.disabled = false;
           submitBtn.innerHTML = originalBtnHtml;

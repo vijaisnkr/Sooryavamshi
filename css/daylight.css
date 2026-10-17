@@ -832,3 +832,20 @@ html[data-sv-motion="off"] .marquee-track { animation: none; }
   .big-input input, html[data-sv-text] .big-input input { font-size: 26px; }
   .big-input .unit-tag { font-size: 14px; }
 }
+
+/* Sample proposal download card (home, 3 kW and equipment pages) */
+.sample-card { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(22px, 3.4vw, 48px); align-items: center; padding: clamp(22px, 3vw, 40px); margin-top: clamp(28px, 4vw, 48px); }
+.sample-card.sample-first { margin: 0 0 clamp(24px, 3vw, 36px); }
+.sample-cover { display: block; width: clamp(128px, 13vw, 200px); border-radius: 10px; overflow: hidden; box-shadow: 0 2px 4px rgba(11, 35, 64, .14), 0 26px 44px -20px rgba(11, 35, 64, .55); transform: rotate(-3deg); transition: transform .45s var(--ease), box-shadow .45s var(--ease); }
+.sample-cover:hover { transform: rotate(0deg) translateY(-4px); box-shadow: 0 2px 4px rgba(11, 35, 64, .14), 0 34px 54px -22px rgba(11, 35, 64, .6); }
+.sample-cover img { display: block; width: 100%; height: auto; }
+.sample-card .sample-body { display: grid; gap: 12px; justify-items: start; }
+.sample-card .sample-body h3 { font-size: clamp(1.35rem, 2.1vw, 1.9rem); font-weight: 760; line-height: 1.15; color: var(--fg); margin: 0; }
+.sample-card .sample-body p { color: var(--fg-muted); max-width: 62ch; margin: 0; line-height: 1.65; }
+.sample-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; margin-top: 6px; }
+.sample-meta { font-size: .86rem; color: var(--fg-muted); }
+html[data-sv-motion="off"] .sample-cover { transition: none; }
+@media (max-width: 560px) {
+  .sample-card { grid-template-columns: 1fr; justify-items: start; }
+  .sample-cover { width: 136px; }
+}
