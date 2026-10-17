@@ -121,10 +121,11 @@
 
       try {
         // 5. Submit to Supabase Backend
-        await SooryavamshiSupabase.submitSiteAssessmentRequest({
+        const result = await SooryavamshiSupabase.submitSiteAssessmentRequest({
           ...rawData,
           monthly_consumption: numericUnits
         });
+        if (!result || !result.success) throw new Error((result && result.error) || "Save failed");
 
         // Record timestamp
         localStorage.setItem("sooryavamshi_last_submit_ts", Date.now().toString());
@@ -138,7 +139,8 @@
       } catch (err) {
         console.warn("Notice during submission:", err);
         if (window.svTrack) window.svTrack("lead_submit_failed", { form_page: window.location.pathname });
-        showSuccessMessage(form);
+        // Keep the form filled in and offer the same details on WhatsApp, so the enquiry isn't lost
+        showErrorMessage(rawData);
       } finally {
         sending = false;
         if (submitBtn) {
@@ -294,6 +296,35 @@
       `;
       safeScrollIntoView(successBox2);
     }
+  }
+
+  /**
+   * Shown when the request could not be saved: a WhatsApp link pre-filled with what the visitor typed
+   */
+  function showErrorMessage(data) {
+    const errorBox = document.getElementById("form-error");
+    if (!errorBox) return;
+
+    const lines = [
+      "Hello Suryavamshi team, I tried to request a free site assessment on your website but it didn't go through. My details:",
+      `Name: ${data.full_name}`,
+      `Phone: ${data.phone_number}`,
+      `Location: ${data.city_location}`
+    ];
+    if (data.pin_code) lines.push(`PIN code: ${data.pin_code}`);
+    if (data.monthly_consumption) lines.push(`Monthly units: ${data.monthly_consumption}`);
+    if (data.kseb_consumer_number) lines.push(`KSEB consumer no.: ${data.kseb_consumer_number}`);
+    if (data.email) lines.push(`Email: ${data.email}`);
+    if (data.preferred_contact_time) lines.push(`Best time to call: ${data.preferred_contact_time}`);
+    if (data.rooftop_details) lines.push(`About my roof: ${data.rooftop_details}`);
+
+    const waLink = document.getElementById("form-error-wa");
+    if (waLink) waLink.href = "https://wa.me/919061626868?text=" + encodeURIComponent(lines.join("\n"));
+
+    errorBox.classList.remove("hidden");
+    errorBox.style.setProperty("display", "flex", "important");
+    errorBox.style.visibility = "visible";
+    safeScrollIntoView(errorBox);
   }
 
   /**

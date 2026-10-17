@@ -121,11 +121,12 @@ window.SooryavamshiSupabase = (function() {
       } else {
         const errorText = await response.text();
         console.warn("Supabase REST insert response:", response.status, errorText);
-        return { success: true };
+        // Not saved (e.g. the project is paused): report it so the form can offer WhatsApp instead
+        return { success: false, error: `Save failed (${response.status})` };
       }
     } catch (err) {
       console.warn("Network notice during Supabase submission:", err);
-      return { success: true };
+      return { success: false, error: "Could not reach the database" };
     }
   }
 

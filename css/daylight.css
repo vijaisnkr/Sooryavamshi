@@ -351,6 +351,8 @@ button { font: inherit; }
 .state-box.ok { background: color-mix(in srgb, var(--green) 12%, transparent); }
 .state-box.ok .ic { width: 44px; height: 44px; color: var(--green); }
 .state-box.err { background: rgba(217, 61, 66, .12); color: #D93D42; }
+.state-box.err p { color: var(--fg); }
+.state-box .err-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 4px; }
 
 /* ---------- KSEB ---------- */
 .kseb { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(24px, 5vw, 80px); align-items: center; }

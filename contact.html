@@ -47,7 +47,7 @@
     })();
   </script>
 
-  <link rel="stylesheet" href="css/daylight.css?v=12.4">
+  <link rel="stylesheet" href="css/daylight.css?v=12.5">
 
   <!-- Supabase Client -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -233,9 +233,13 @@
             <p class="muted">Our chief solar engineer will call you shortly to schedule your shadow assessment and KSEB feasibility audit.</p>
             <a class="btn btn-line" href="https://wa.me/919061626868" target="_blank" rel="noopener"><svg class="ic"><use href="#i-wa"/></svg>Message us on WhatsApp</a>
           </div>
-          <div class="hidden state-box err" id="form-error">
-            <h3>Submission Error</h3>
-            <p id="form-error-msg">Could not submit your request. Please try again or call +91 9061626868.</p>
+          <div class="hidden state-box err" id="form-error" role="alert">
+            <h3>Your request didn't go through</h3>
+            <p id="form-error-msg">Our booking system didn't respond. Send the same details to us on WhatsApp in one tap, or give us a call.</p>
+            <div class="err-actions">
+              <a class="btn btn-sun" id="form-error-wa" href="https://wa.me/919061626868" target="_blank" rel="noopener"><svg class="ic"><use href="#i-wa"/></svg>Send on WhatsApp</a>
+              <a class="btn btn-line" href="tel:+919061626868"><svg class="ic"><use href="#i-phone"/></svg>+91 9061626868</a>
+            </div>
           </div>
         </div>
       </div>
@@ -389,7 +393,7 @@
   <script src="js/premium.js?v=12.2"></script>
   <script src="js/analytics.js?v=1.0"></script>
   <script src="js/supabase-config.js?v=12.0"></script>
-  <script src="js/supabase-client.js?v=12.0"></script>
-  <script src="js/contact-form.js?v=12.3"></script>
+  <script src="js/supabase-client.js?v=12.1"></script>
+  <script src="js/contact-form.js?v=12.4"></script>
 </body>
 </html>
