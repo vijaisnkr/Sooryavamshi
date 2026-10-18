@@ -52,7 +52,7 @@ $$;
 --   - Events: INSERT
 --   - Type: HTTP Request / Webhook
 --   - Method: POST
---   - URL: https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec?secret=suryavamshi_sec_2026_x9k2m7
+--   - URL: https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec?secret=YOUR_WEBHOOK_SECRET
 --   - HTTP Headers: Content-Type: application/json
 --
 -- Option B (Direct SQL Trigger):
@@ -63,7 +63,7 @@ $$;
 --   AFTER INSERT ON public.site_assessment_requests
 --   FOR EACH ROW
 --   EXECUTE FUNCTION supabase_functions.http_request(
---     'https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec?secret=suryavamshi_sec_2026_x9k2m7',
+--     'https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec?secret=YOUR_WEBHOOK_SECRET',
 --     'POST',
 --     '{"Content-Type": "application/json"}'
 --   );

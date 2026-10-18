@@ -5,7 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Solar Panel Installation in Alappuzha | Suryavamshi Solar</title>
   <meta name="description" content="Rooftop solar for homes across Alappuzha district. Coastal-grade mounting, KSEB net metering and ₹78,000 PM Surya Ghar subsidy support. Free site visit.">
-  <link rel="icon" type="image/svg+xml" href="assets/icons/logo.svg">
+  <link rel="icon" href="favicon.ico" sizes="48x48">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <meta name="theme-color" content="#FFFFFF">
   <link rel="canonical" href="https://suryavamshi.com/solar-panel-installation-alappuzha.html">
 
   <!-- Open Graph / Social Sharing Meta -->
@@ -25,9 +29,8 @@
   <meta name="twitter:image" content="https://suryavamshi.com/assets/images/og-share.jpg">
 
   <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="assets/images/hero.avif" type="image/avif" fetchpriority="high">
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/figtree-latin.woff2" crossorigin>
 
   <!-- Settings: apply saved theme, text size, animations and sun cursor choices before first paint -->
   <script>
@@ -47,8 +50,8 @@
     })();
   </script>
 
-  <link rel="stylesheet" href="css/daylight.css?v=12.6">
-  <link rel="stylesheet" href="css/seo-pages.css?v=1.0">
+  <link rel="stylesheet" href="css/daylight.css?v=13.0">
+  <link rel="stylesheet" href="css/seo-pages.css?v=1.2">
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -65,7 +68,9 @@
       "about": {
         "@id": "https://suryavamshi.com/#organization"
       },
-      "inLanguage": "en-IN"
+      "inLanguage": "en-IN",
+      "datePublished": "2026-10-13",
+      "dateModified": "2026-10-18"
     },
     {
       "@type": "Service",
@@ -229,8 +234,8 @@
   <header class="header-nav on-hero">
     <div class="wrap header-inner">
       <a href="index.html" class="brand" aria-label="Suryavamshi Solar Projects LLP, home">
-        <img class="logo-on-dark" src="assets/images/suryavamshi-logo-reversed.png" alt="Suryavamshi Solar Projects LLP" width="700" height="289">
-        <img class="logo-on-light" src="assets/images/suryavamshi-logo-light.png" alt="Suryavamshi Solar Projects LLP" width="700" height="289">
+        <img class="logo-on-dark" src="assets/images/suryavamshi-logo-reversed-320.png" alt="Suryavamshi Solar Projects LLP" width="320" height="132">
+        <img class="logo-on-light" src="assets/images/suryavamshi-logo-light-320.png" alt="Suryavamshi Solar Projects LLP" width="320" height="132">
       </a>
       <nav class="nav-main" aria-label="Main">
         <a href="index.html" class="nav-item-link">Home</a>
@@ -252,11 +257,11 @@
   <div class="mobile-nav-backdrop"></div>
   <aside class="mobile-nav-drawer" aria-label="Menu">
     <div class="drawer-head">
-      <img class="logo-on-dark" src="assets/images/suryavamshi-logo-reversed.png" alt="Suryavamshi Solar Projects LLP">
-      <img class="logo-on-light" src="assets/images/suryavamshi-logo-light.png" alt="Suryavamshi Solar Projects LLP">
+      <img class="logo-on-dark" src="assets/images/suryavamshi-logo-reversed-320.png" alt="Suryavamshi Solar Projects LLP" width="320" height="132">
+      <img class="logo-on-light" src="assets/images/suryavamshi-logo-light-320.png" alt="Suryavamshi Solar Projects LLP" width="320" height="132">
       <button class="icon-btn" type="button" id="drawerClose" aria-label="Close menu"><svg class="ic"><use href="#i-x"/></svg></button>
     </div>
-    <div class="drawer-badge"><svg class="ic" style="color:var(--accent-ink)"><use href="#i-award"/></svg><div><strong>Official Partner</strong>PM Surya Ghar Muft Bijli</div></div>
+    <div class="drawer-badge"><svg class="ic" style="color:var(--accent-ink)"><use href="#i-rupee"/></svg><div><strong>Up to ₹78,000 subsidy</strong>PM Surya Ghar paperwork handled for you</div></div>
     <nav class="drawer-links">
       <a class="mobile-nav-link" href="index.html"><svg class="ic"><use href="#i-home"/></svg>Home</a>
       <a class="mobile-nav-link" href="calculator.html"><svg class="ic"><use href="#i-calc"/></svg>Solar Calculator</a>
@@ -278,7 +283,7 @@
     </div>
   </aside>
 
-  <main>
+  <main class="sv-guide">
     <section class="page-hero">
       <div class="hero-sun" aria-hidden="true"></div>
       <div class="wrap">
@@ -287,13 +292,30 @@
         <p class="lede" data-reveal style="--d:1">Rooftop solar built for Alappuzha's coast and backwaters, from a team based in Cherthala in the same district. Free site visit, KSEB paperwork and subsidy filing included.</p>
         <p class="crumb-meta" data-reveal style="--d:2">Alappuzha town • Ambalappuzha • Mararikulam • Kuttanad • Haripad • Kayamkulam • Mavelikkara • Chengannur</p>
         <div class="hero-ctas" data-reveal style="--d:3">
-          <a class="btn btn-sun" href="contact.html">Book a free site assessment <svg class="ic"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-sun" href="contact.html?location=Alappuzha">Book a free site assessment <svg class="ic"><use href="#i-arrow"/></svg></a>
           <a class="btn btn-line" href="https://wa.me/919061626868?text=Hi%2C%20I%20want%20a%20solar%20quote%20for%20my%20home%20in%20Alappuzha" target="_blank" rel="noopener"><svg class="ic"><use href="#i-wa"/></svg>WhatsApp us</a>
         </div>
       </div>
     </section>
 
+    <div class="guide-body">
+
     <section class="section first">
+      <div class="wrap glance-slot">
+        <aside class="card glance" aria-labelledby="glance-title">
+          <h2 class="glance-title" id="glance-title">At a glance</h2>
+          <dl class="glance-facts">
+            <div><dt>Built for the coast</dt><dd><strong>Coastal-grade</strong> coated mounting and stainless fasteners</dd></div>
+            <div><dt>Flood-prone areas</dt><dd><strong>Above flood level</strong> inverter, boxes and meters</dd></div>
+            <div><dt>Subsidy</dt><dd><strong>Up to ₹78,000</strong> PM Surya Ghar, filed for you</dd></div>
+            <div><dt>Installation</dt><dd><strong>1 to 2 days</strong> on the roof</dd></div>
+          </dl>
+          <div class="glance-actions">
+            <a class="btn btn-sun" href="contact.html?location=Alappuzha">Book a free site assessment</a>
+            <a class="btn btn-line" href="https://wa.me/919061626868?text=Hi%2C%20I%20want%20a%20solar%20quote%20for%20my%20home%20in%20Alappuzha" target="_blank" rel="noopener"><svg class="ic"><use href="#i-wa"/></svg>WhatsApp us</a>
+          </div>
+        </aside>
+      </div>
       <div class="wrap prose" data-reveal>
         <span class="eyebrow">Alappuzha district</span>
         <h2>Solar designed for <span class="serif">coast and backwater homes.</span></h2>
@@ -329,6 +351,8 @@
       </div>
     </section>
 
+    </div>
+
     <section class="section" id="faq-section">
       <div class="wrap faq">
         <div class="section-head" data-reveal="left">
@@ -342,6 +366,22 @@
           <details><summary>Can you install solar in flood-prone areas like Kuttanad?<span class="pm"></span></summary><div>Yes. The panels sit on the roof, and we place the inverter, distribution boxes and meters above the known flood level so they stay safe when water rises.</div></details>
           <details><summary>How much subsidy can I get for rooftop solar?<span class="pm"></span></summary><div>Under PM Surya Ghar Muft Bijli Yojana, homes get ₹30,000 per kW for the first 2 kW and ₹18,000 for the third kW, so a 3 kW or larger system gets the maximum ₹78,000. We file the application and the amount is paid straight into your bank account. <a class="textlink" href="pm-surya-ghar-subsidy-kerala.html">Read the full subsidy guide</a>.</div></details>
           <details><summary>How long does installation take?<span class="pm"></span></summary><div>Fitting a 3 kW to 5 kW home system takes 1 to 2 days on the roof. The whole process, including KSEB feasibility, inspection and fitting the net meter, usually takes 15 to 25 days.</div></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta-sec">
+      <div class="wrap">
+        <div class="cta-band" data-reveal="zoom">
+          <div>
+            <span class="eyebrow">Free site visit</span>
+            <h2>Book a free site visit <span class="serif">in Alappuzha.</span></h2>
+            <p>We are based in Cherthala, in the same district. An engineer from our team checks your roof, shade and KSEB connection, and gives you a clear quote.</p>
+          </div>
+          <div class="cta-actions">
+            <a class="btn btn-sun" href="contact.html?location=Alappuzha"><svg class="ic"><use href="#i-clip"/></svg>Book a free site visit</a>
+            <a class="btn btn-line" href="https://wa.me/919061626868?text=Hi%2C%20I%20want%20to%20book%20a%20free%20solar%20site%20visit%20for%20my%20home%20in%20Alappuzha" target="_blank" rel="noopener"><svg class="ic"><use href="#i-wa"/></svg>WhatsApp us</a>
+          </div>
         </div>
       </div>
     </section>
@@ -479,8 +519,8 @@
   </div>
 
   <!-- Scripts -->
-  <script src="js/app.js?v=12.2"></script>
-  <script src="js/premium.js?v=12.2"></script>
-  <script src="js/analytics.js?v=1.0"></script>
+  <script src="js/app.js?v=12.3"></script>
+  <script src="js/premium.js?v=12.3"></script>
+  <script src="js/analytics.js?v=1.1"></script>
 </body>
 </html>

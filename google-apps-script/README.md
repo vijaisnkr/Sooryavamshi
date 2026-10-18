@@ -29,8 +29,18 @@ This guide walks you through deploying the automatic Google Sheets lead synchron
 2. Scroll down to **Script Properties**.
 3. Click **Edit script properties** → **Add script property**:
    - **Property**: `WEBHOOK_SECRET`
-   - **Value**: `suryavamshi_sec_2026_x9k2m7`
+   - **Value**: a long random secret of your own (never put it in this repository)
 4. Click **Save script properties**.
+
+### Changing the secret (or updating Code.gs)
+
+The script only accepts requests that carry the secret. To change it:
+
+1. Make a new long random secret.
+2. **Project Settings > Script Properties**: set `WEBHOOK_SECRET` to the new value.
+3. Paste the latest `Code.gs`, then **Deploy > Manage deployments > Edit (pencil) > Version: New version > Deploy**. This keeps the same `/exec` web address.
+4. In Supabase, change `?secret=` at the end of the webhook URL to the new value (see `supabase/README.md`, step 6).
+5. Send one test enquiry and check that the row appears in the Sheet. The script always answers with HTTP 200, so read the reply's JSON or the Apps Script **Executions** log if a row is missing.
 
 ---
 

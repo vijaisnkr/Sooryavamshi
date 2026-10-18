@@ -5,7 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>KSEB Solar Feasibility Check: reCap Guide | Suryavamshi</title>
   <meta name="description" content="Check if your KSEB transformer has room for rooftop solar before you buy. How to use the reCap portal, the 90% rule, and what to do if there is no headroom.">
-  <link rel="icon" type="image/svg+xml" href="assets/icons/logo.svg">
+  <link rel="icon" href="favicon.ico" sizes="48x48">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <meta name="theme-color" content="#FFFFFF">
   <link rel="canonical" href="https://suryavamshi.com/kseb-solar-feasibility-check.html">
 
   <!-- Open Graph / Social Sharing Meta -->
@@ -25,9 +29,8 @@
   <meta name="twitter:image" content="https://suryavamshi.com/assets/images/og-share.jpg">
 
   <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="assets/images/hero.avif" type="image/avif" fetchpriority="high">
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/figtree-latin.woff2" crossorigin>
 
   <!-- Settings: apply saved theme, text size, animations and sun cursor choices before first paint -->
   <script>
@@ -47,8 +50,8 @@
     })();
   </script>
 
-  <link rel="stylesheet" href="css/daylight.css?v=12.6">
-  <link rel="stylesheet" href="css/seo-pages.css?v=1.0">
+  <link rel="stylesheet" href="css/daylight.css?v=13.0">
+  <link rel="stylesheet" href="css/seo-pages.css?v=1.2">
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -65,7 +68,24 @@
       "about": {
         "@id": "https://suryavamshi.com/#organization"
       },
-      "inLanguage": "en-IN"
+      "inLanguage": "en-IN",
+      "datePublished": "2026-10-13",
+      "dateModified": "2026-10-18",
+      "publisher": {
+        "@id": "https://suryavamshi.com/#organization"
+      },
+      "citation": [
+        {
+          "@type": "CreativeWork",
+          "name": "KSERC (Renewable Energy and Related Matters) Regulations, 2025 (PDF)",
+          "url": "https://dev.erckerala.org/api/storage/final-regulations/BDm5OZBLIuAbHoyTX0xoploDz82DbFy1O6klxxfS.pdf"
+        },
+        {
+          "@type": "CreativeWork",
+          "name": "KSEB reCap feasibility portal",
+          "url": "https://wss.kseb.in/selfservices/reCap"
+        }
+      ]
     },
     {
       "@type": "BreadcrumbList",
@@ -173,8 +193,8 @@
   <header class="header-nav on-hero">
     <div class="wrap header-inner">
       <a href="index.html" class="brand" aria-label="Suryavamshi Solar Projects LLP, home">
-        <img class="logo-on-dark" src="assets/images/suryavamshi-logo-reversed.png" alt="Suryavamshi Solar Projects LLP" width="700" height="289">
-        <img class="logo-on-light" src="assets/images/suryavamshi-logo-light.png" alt="Suryavamshi Solar Projects LLP" width="700" height="289">
+        <img class="logo-on-dark" src="assets/images/suryavamshi-logo-reversed-320.png" alt="Suryavamshi Solar Projects LLP" width="320" height="132">
+        <img class="logo-on-light" src="assets/images/suryavamshi-logo-light-320.png" alt="Suryavamshi Solar Projects LLP" width="320" height="132">
       </a>
       <nav class="nav-main" aria-label="Main">
         <a href="index.html" class="nav-item-link">Home</a>
@@ -196,11 +216,11 @@
   <div class="mobile-nav-backdrop"></div>
   <aside class="mobile-nav-drawer" aria-label="Menu">
     <div class="drawer-head">
-      <img class="logo-on-dark" src="assets/images/suryavamshi-logo-reversed.png" alt="Suryavamshi Solar Projects LLP">
-      <img class="logo-on-light" src="assets/images/suryavamshi-logo-light.png" alt="Suryavamshi Solar Projects LLP">
+      <img class="logo-on-dark" src="assets/images/suryavamshi-logo-reversed-320.png" alt="Suryavamshi Solar Projects LLP" width="320" height="132">
+      <img class="logo-on-light" src="assets/images/suryavamshi-logo-light-320.png" alt="Suryavamshi Solar Projects LLP" width="320" height="132">
       <button class="icon-btn" type="button" id="drawerClose" aria-label="Close menu"><svg class="ic"><use href="#i-x"/></svg></button>
     </div>
-    <div class="drawer-badge"><svg class="ic" style="color:var(--accent-ink)"><use href="#i-award"/></svg><div><strong>Official Partner</strong>PM Surya Ghar Muft Bijli</div></div>
+    <div class="drawer-badge"><svg class="ic" style="color:var(--accent-ink)"><use href="#i-rupee"/></svg><div><strong>Up to ₹78,000 subsidy</strong>PM Surya Ghar paperwork handled for you</div></div>
     <nav class="drawer-links">
       <a class="mobile-nav-link" href="index.html"><svg class="ic"><use href="#i-home"/></svg>Home</a>
       <a class="mobile-nav-link" href="calculator.html"><svg class="ic"><use href="#i-calc"/></svg>Solar Calculator</a>
@@ -222,7 +242,7 @@
     </div>
   </aside>
 
-  <main>
+  <main class="sv-guide">
     <section class="page-hero">
       <div class="hero-sun" aria-hidden="true"></div>
       <div class="wrap">
@@ -237,11 +257,44 @@
       </div>
     </section>
 
+    <div class="guide-body">
+
     <section class="section first">
+      <div class="wrap glance-slot">
+        <aside class="card glance" aria-labelledby="glance-title">
+          <h2 class="glance-title" id="glance-title">At a glance</h2>
+          <dl class="glance-facts">
+            <div><dt>Limit for rooftop solar</dt><dd><strong>90%</strong> of the transformer's rating</dd></div>
+            <div><dt>Where to check</dt><dd><strong>KSEB reCap</strong> with the consumer number on your bill</dd></div>
+            <div><dt>If it is full</dt><dd><strong>3 options</strong> upgrade, zero-export or feeder transfer</dd></div>
+            <div><dt>Our check</dt><dd><strong>Before you pay</strong> on the free site assessment</dd></div>
+          </dl>
+          <div class="glance-actions">
+            <a class="btn btn-sun" href="contact.html">Book a free site assessment</a>
+            <a class="btn btn-line" href="https://wa.me/919061626868?text=Hi%2C%20please%20check%20KSEB%20solar%20feasibility%20for%20my%20connection" target="_blank" rel="noopener"><svg class="ic"><use href="#i-wa"/></svg>WhatsApp us</a>
+          </div>
+        </aside>
+      </div>
       <div class="wrap prose" data-reveal>
         <span class="eyebrow">Why it matters</span>
         <h2>The transformer decides <span class="serif">how much solar you can add.</span></h2>
           <p>Your home is fed by a KSEB distribution transformer (DTR) shared with your neighbours. Kerala's rules allow rooftop solar on a transformer up to <strong>90% of its rating</strong>. Once neighbours' systems fill that limit, new solar on the same transformer needs extra work before it can connect.</p>
+          <figure class="gfig dtr-fig">
+            <span class="gfig-k" aria-hidden="true">One distribution transformer, 0 to 100% of its rating</span>
+            <div class="dtr-chart" role="img" aria-label="Bar showing a transformer's rating from 0 to 100%. Rooftop solar can connect up to the 90% line. Part of that is already used by neighbours' systems, and the rest is the headroom that reCap shows. The last 10% is not available for solar.">
+              <div class="dtr-track">
+                <span class="z used"></span><span class="z free"></span><span class="z over"></span>
+                <span class="line90"><span>90% limit</span></span>
+              </div>
+              <div class="dtr-scale"><span>0%</span><span>100%</span></div>
+              <ul class="key">
+                <li><i class="k-used"></i>Solar already connected by neighbours</li>
+                <li><i class="k-free"></i>Headroom left for new solar (what reCap shows)</li>
+                <li><i class="k-over"></i>Above 90%: no new solar</li>
+              </ul>
+            </div>
+            <figcaption>An illustration: how much is used and how much is left is different for every transformer. The 90% limit is set by KSERC Regulation 16.2.</figcaption>
+          </figure>
           <p>Many buyers find this out only after paying an installer. We check it first, as part of every free site assessment.</p>
       </div>
     </section>
@@ -271,6 +324,8 @@
       </div>
     </section>
 
+    </div>
+
     <section class="section" id="faq-section">
       <div class="wrap faq">
         <div class="section-head" data-reveal="left">
@@ -283,6 +338,35 @@
           <details><summary>How do I check my KSEB transformer headroom?<span class="pm"></span></summary><div>Open the KSEB reCap portal at wss.kseb.in, enter your consumer number and electrical section from your bill, and it shows the solar capacity still available on your transformer.</div></details>
           <details><summary>What can I do if my transformer has zero headroom?<span class="pm"></span></summary><div>There are three options: ask KSEB to upgrade the transformer, install a zero-export system that only powers your home, or request a transfer to an adjacent feeder with spare capacity. We assess which one suits you.</div></details>
           <details><summary>Does Suryavamshi check feasibility before I pay?<span class="pm"></span></summary><div>Yes. We check transformer headroom during the free site assessment, before you commit to anything.</div></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section src-sec" aria-labelledby="src-title">
+      <div class="wrap">
+        <div class="src-box">
+          <p class="src-checked"><svg class="ic" aria-hidden="true"><use href="#i-checkc"/></svg><span>Checked against official sources on <time datetime="2026-10-18">18 October 2026</time></span></p>
+          <h2 class="src-title" id="src-title">Sources</h2>
+          <ul class="src-list">
+            <li><a href="https://dev.erckerala.org/api/storage/final-regulations/BDm5OZBLIuAbHoyTX0xoploDz82DbFy1O6klxxfS.pdf" target="_blank" rel="noopener noreferrer">KSERC (Renewable Energy and Related Matters) Regulations, 2025 (PDF)<span class="sr-only"> (opens in a new tab)</span><svg class="ic" aria-hidden="true"><use href="#i-ext"/></svg></a><span class="src-note">Regulation 16.2: rooftop solar on a distribution transformer is limited to 90% of its capacity</span></li>
+            <li><a href="https://wss.kseb.in/selfservices/reCap" target="_blank" rel="noopener noreferrer">KSEB reCap feasibility portal<span class="sr-only"> (opens in a new tab)</span><svg class="ic" aria-hidden="true"><use href="#i-ext"/></svg></a><span class="src-note">Where you check the solar headroom left on your transformer</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta-sec">
+      <div class="wrap">
+        <div class="cta-band" data-reveal="zoom">
+          <div>
+            <span class="eyebrow">Free feasibility check</span>
+            <h2>Not sure your transformer <span class="serif">has room?</span></h2>
+            <p>We check your transformer headroom on KSEB reCap during the free site assessment, before you pay anything. If it is full, we tell you which option suits you.</p>
+          </div>
+          <div class="cta-actions">
+            <a class="btn btn-sun" href="contact.html"><svg class="ic"><use href="#i-clip"/></svg>Book a free site assessment</a>
+            <a class="btn btn-line" href="https://wa.me/919061626868?text=Hi%2C%20please%20check%20KSEB%20solar%20feasibility%20for%20my%20connection" target="_blank" rel="noopener"><svg class="ic"><use href="#i-wa"/></svg>WhatsApp us</a>
+          </div>
         </div>
       </div>
     </section>
@@ -420,8 +504,8 @@
   </div>
 
   <!-- Scripts -->
-  <script src="js/app.js?v=12.2"></script>
-  <script src="js/premium.js?v=12.2"></script>
-  <script src="js/analytics.js?v=1.0"></script>
+  <script src="js/app.js?v=12.3"></script>
+  <script src="js/premium.js?v=12.3"></script>
+  <script src="js/analytics.js?v=1.1"></script>
 </body>
 </html>

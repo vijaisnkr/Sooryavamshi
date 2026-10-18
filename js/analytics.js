@@ -11,6 +11,8 @@
  *   proposal_download   the sample proposal PDF was opened or downloaded
  *   calculator_use      first time someone types a bill, moves the slider or picks a preset (calculator: full | home_quick)
  *   calculator_quote    the calculator's "Request Free Site Assessment" button was pressed
+ *   calculator_whatsapp the calculator's "Send this estimate on WhatsApp" button
+ *   no_bill_whatsapp    the form's "No bill handy? Send your details on WhatsApp" link
  *   generate_lead       the site assessment form was sent  (sent by contact-form.js)
  *   lead_submit_failed  the form could not reach the database (sent by contact-form.js)
  *
@@ -64,6 +66,8 @@
     if (el.closest('.contact-points')) return 'contact_card';
     if (el.closest('.page-hero, .hero')) return 'hero';
     if (el.closest('.closing')) return 'closing';
+    if (el.closest('#calc-result')) return 'calculator_result';
+    if (el.closest('#client-kseb-wa')) return 'form_no_bill';
     return 'page';
   }
 

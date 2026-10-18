@@ -7,6 +7,8 @@
 - Address: Door No. 414, Chithira, Muttathiparamb P.O, Cherthala, Kerala 688527
 - Hours: Monday to Saturday, 9:00 AM to 7:30 PM
 - Free site assessment: https://suryavamshi.com/contact.html
+- Warranty (from our sample 3 kW proposal): 25-year panel performance warranty (at least 90% output at 10 years and 80% at 25 years), 5-year system warranty from commissioning with free inspection visits during the warranty, inverter warranty from the maker (typically 5 to 10 years)
+- Roof space: about 100 sq ft of shade-free roof per kW, so about 300 sq ft for a 3 kW system
 
 ## Tools
 - [Solar calculator](https://suryavamshi.com/calculator.html): sizes a system from a monthly KSEB bill or units

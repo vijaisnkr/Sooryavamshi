@@ -5,10 +5,10 @@
  * and appends them to Google Sheet: "Suryavamshi Solar Site Assessment Leads"
  * Worksheet Tab: "Site Assessment Leads"
  * 
- * Secret Property: WEBHOOK_SECRET = suryavamshi_sec_2026_x9k2m7
+ * The webhook secret lives only in Script Properties (WEBHOOK_SECRET), never in
+ * this file, because this file is public. Requests without the right secret are refused.
  */
 
-var DEFAULT_SECRET = "suryavamshi_sec_2026_x9k2m7";
 var SHEET_NAME = "Site Assessment Leads";
 
 /**
@@ -97,7 +97,10 @@ function doPost(e) {
   try {
     // 1. Verify Secret Property
     var scriptProperties = PropertiesService.getScriptProperties();
-    var expectedSecret = scriptProperties.getProperty("WEBHOOK_SECRET") || DEFAULT_SECRET;
+    var expectedSecret = scriptProperties.getProperty("WEBHOOK_SECRET");
+    if (!expectedSecret) {
+      return createJsonResponse(false, "Not set up: add WEBHOOK_SECRET in Project Settings > Script Properties", 500);
+    }
     
     var incomingSecret = "";
     if (e && e.parameter && e.parameter.secret) {
@@ -122,8 +125,8 @@ function doPost(e) {
       incomingSecret = payload.secret;
     }
 
-    // Authentication verification (if secret is passed, enforce validation)
-    if (incomingSecret && incomingSecret !== expectedSecret) {
+    // Authentication: every request must carry the right secret
+    if (incomingSecret !== expectedSecret) {
       return createJsonResponse(false, "Unauthorized: Invalid Webhook Secret", 401);
     }
 

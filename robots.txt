@@ -8,10 +8,5 @@ Allow: /
 Disallow: /admin.html
 Disallow: /login.html
 Disallow: /set-password.html
-Disallow: /debug_insert.html
-Disallow: /scratch/
-Disallow: /Proposals/
-Disallow: /supabase/
-Disallow: /google-apps-script/
 
 Sitemap: https://suryavamshi.com/sitemap.xml

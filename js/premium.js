@@ -35,9 +35,14 @@
     document.querySelectorAll('[data-theme-choice]').forEach(function (b) {
       b.setAttribute('aria-checked', b.getAttribute('data-theme-choice') === pref ? 'true' : 'false');
     });
-    var meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', dark ? '#0A1A2E' : '#FFFFFF');
+    syncThemeColor();
   }
+  // The browser's toolbar colour (theme-color) follows the page background: white in Light, deep navy in Dark.
+  function syncThemeColor() {
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', root.getAttribute('data-sv-theme') === 'dark' ? '#0A1A2E' : '#FFFFFF');
+  }
+  syncThemeColor();
   function setPref(pref) {
     try { localStorage.setItem(THEME_KEY, pref); } catch (e) {}
     applyTheme(pref);
@@ -47,27 +52,67 @@
     mql.addEventListener ? mql.addEventListener('change', onSys) : mql.addListener(onSys);
   }
 
+  /* ---------------- Modal layers (Settings, phone menu) ----------------
+     While a layer is open, everything else on the page is inert: it can't take focus or clicks and
+     screen readers skip it. Layers can stack (Settings opened from the phone menu); each one only
+     undoes what it changed. js/app.js defines the same helper as window.svInert for the menu. */
+  var lockPage = window.svInert || function (keep) {
+    var changed = [];
+    Array.prototype.forEach.call(document.body.children, function (el) {
+      if (keep.indexOf(el) > -1 || el.tagName === 'SCRIPT' || el.hasAttribute('inert')) return;
+      el.setAttribute('inert', ''); changed.push(el);
+    });
+    return function () { changed.forEach(function (el) { el.removeAttribute('inert'); }); };
+  };
+  // Tab and Shift+Tab wrap around inside an open layer.
+  function trapTab(e, box) {
+    if (e.key !== 'Tab') return;
+    var f = Array.prototype.filter.call(box.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select, textarea, [tabindex]:not([tabindex="-1"])'), function (el) {
+      return el.offsetWidth || el.offsetHeight || el.getClientRects().length;
+    });
+    if (!f.length) return;
+    var first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && (document.activeElement === first || !box.contains(document.activeElement))) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && (document.activeElement === last || !box.contains(document.activeElement))) { e.preventDefault(); first.focus(); }
+  }
+
   function initSettings() {
     var backdrop = document.getElementById('settingsBackdrop');
     var openers = document.querySelectorAll('#settingsBtn, [data-open-settings]');
     var closeBtn = document.getElementById('settingsClose');
     if (!backdrop) return;
-    var lastFocus = null;
+    var dialog = backdrop.querySelector('[role="dialog"]') || backdrop;
+    var lastFocus = null, unlock = null;
+    // Closed: out of the Tab order and hidden from screen readers (CSS also hides it after the fade).
+    backdrop.setAttribute('inert', '');
+    backdrop.setAttribute('aria-hidden', 'true');
 
     function open() {
+      if (backdrop.classList.contains('open')) return;
       lastFocus = document.activeElement;
+      backdrop.removeAttribute('inert');
+      backdrop.removeAttribute('aria-hidden');
       backdrop.classList.add('open');
+      unlock = lockPage([backdrop]);
       var cur = backdrop.querySelector('[aria-checked="true"]') || closeBtn;
       setTimeout(function () { cur && cur.focus(); }, 50);
     }
     function close() {
+      if (!backdrop.classList.contains('open')) return;
       backdrop.classList.remove('open');
+      if (unlock) { unlock(); unlock = null; }
+      backdrop.setAttribute('inert', '');
+      backdrop.setAttribute('aria-hidden', 'true');
       if (lastFocus && lastFocus.focus) lastFocus.focus();
     }
     openers.forEach(function (b) { b.addEventListener('click', open); });
     closeBtn && closeBtn.addEventListener('click', close);
     backdrop.addEventListener('click', function (e) { if (e.target === backdrop) close(); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && backdrop.classList.contains('open')) close(); });
+    document.addEventListener('keydown', function (e) {
+      if (!backdrop.classList.contains('open')) return;
+      if (e.key === 'Escape') { e.preventDefault(); close(); return; }
+      trapTab(e, dialog);
+    });
 
     // Radio groups (theme, text size): click to choose, arrow keys move the choice.
     function radios(attr, onPick) {
@@ -103,7 +148,6 @@
       setTimeout(function () { reset.textContent = label; }, 1600);
     });
 
-    applyTheme(getPref());
     syncSettingsUI();
   }
 
@@ -289,7 +333,8 @@
       var capped = Math.min(bill, MAX);
       var kw = Math.max(1, Math.round(capped / PER_KW * 10) / 10);
       var panels = Math.ceil(kw / 0.55);
-      var sub = kw >= 3 ? 78000 : kw >= 2 ? 60000 : 30000;
+      // PM Surya Ghar: Rs 30,000 per kW for the first 2 kW, Rs 18,000 per kW for the next 1 kW, Rs 78,000 at most
+      var sub = Math.round(Math.min(78000, 30000 * Math.min(kw, 2) + 18000 * Math.max(0, Math.min(kw, 3) - 2)));
       out.innerHTML = 'Your home needs about <b>' + kw + ' kW</b> · ' + panels + ' panels · subsidy up to ₹' + inr(sub) +
         (bill > MAX ? ' <span>(bills above ₹2,00,000 are sized at ₹2,00,000)</span>' : '');
     }
@@ -302,14 +347,21 @@
     var sun = document.getElementById('arcSun'), fill = document.getElementById('arcFill'), now = document.getElementById('arcNow');
     if (!sun || !fill) return;
     var RISE = 6 * 60 + 14, SET = 18 * 60 + 9;
+    var sky = sun.parentNode, skyW = 0, skyH = 0, lastP = 0;
+    function measure() { skyW = sky.clientWidth; skyH = sky.clientHeight; }
     function pt(p) { var a = Math.PI * p; return [50 - 50 * Math.cos(a), 100 - 100 * Math.sin(a)]; }
+    // The sun moves with transform (measured in px from the sky box), so the browser never re-lays out the page while it travels.
     function draw(p) {
+      lastP = p;
       var d = 'M0 100';
       for (var i = 1, n = Math.max(1, Math.round(p * 80)); i <= n; i++) { var q = pt(p * i / n); d += ' L' + q[0].toFixed(2) + ' ' + q[1].toFixed(2); }
       fill.setAttribute('d', d);
       var c = pt(p);
-      sun.style.left = c[0] + '%'; sun.style.top = c[1] + '%';
+      sun.style.left = '0'; sun.style.top = '0';
+      sun.style.transform = 'translate(' + (c[0] / 100 * skyW).toFixed(1) + 'px,' + (c[1] / 100 * skyH).toFixed(1) + 'px)';
     }
+    measure();
+    window.addEventListener('resize', function () { measure(); draw(lastP); });
     function state() {
       var d = new Date(), ist = new Date(d.getTime() + (d.getTimezoneOffset() + 330) * 60000);
       var m = ist.getHours() * 60 + ist.getMinutes(), day = m > RISE && m < SET;
@@ -465,9 +517,54 @@
     window.addEventListener('load', function () { requestAnimationFrame(go); });
   }
 
+  /* ---------------- Skip link ----------------
+     "Skip to content" is the first thing a keyboard user reaches; it shows on focus and jumps to <main>. */
+  function initSkipLink() {
+    var main = document.querySelector('main');
+    if (!main || document.querySelector('.skip-link')) return;
+    if (!main.id) main.id = 'main';
+    if (!main.hasAttribute('tabindex')) main.setAttribute('tabindex', '-1');
+    var a = document.createElement('a');
+    a.className = 'skip-link';
+    a.href = '#' + main.id;
+    a.textContent = 'Skip to content';
+    if (root.lang && root.lang !== 'en') a.lang = 'en';
+    document.body.insertBefore(a, document.body.firstChild);
+  }
+
+  /* ---------------- Typing on a phone ----------------
+     While a text field has focus the bottom bar slides away (CSS: html.sv-typing, phones only),
+     so the bar never sits over the field the visitor is typing in. It comes back when they leave the field. */
+  function initTypingState() {
+    var TEXT = 'input:not([type]), input[type="text"], input[type="tel"], input[type="email"], input[type="number"], input[type="search"], input[type="url"], input[type="password"], textarea, [contenteditable="true"]';
+    function isText(el) { return !!(el && el.matches && el.matches(TEXT) && !el.readOnly); }
+    document.addEventListener('focusin', function (e) { if (isText(e.target)) root.classList.add('sv-typing'); });
+    document.addEventListener('focusout', function () {
+      setTimeout(function () { if (!isText(document.activeElement)) root.classList.remove('sv-typing'); }, 80);
+    });
+  }
+
+  /* ---------------- Endless animations rest when nobody can see them ----------------
+     The hero photo drift, the sun glow, the marquee, the rings on the gold band, the equipment spark and the
+     live dots pause while their part of the page is off screen, and everything pauses while the tab is hidden. */
+  function initMotionPause() {
+    function vis() { root.classList.toggle('sv-hidden', !!document.hidden); }
+    document.addEventListener('visibilitychange', vis);
+    vis();
+    if (!('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { en.target.classList.toggle('sv-paused', !en.isIntersecting); });
+    }, { rootMargin: '80px 0px' });
+    document.querySelectorAll('.hero, .marquee, .cta-band, .flow, .live, .gauge').forEach(function (el) { io.observe(el); });
+  }
+
   function init() {
+    applyTheme(getPref());
+    initSkipLink();
     initScrollStart();
     initSettings();
+    initTypingState();
+    initMotionPause();
     initDrawerClose();
     initReveal();
     initCounters();

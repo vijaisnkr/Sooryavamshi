@@ -5,7 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Solar Calculator Kerala: Size from KSEB Bill | Suryavamshi</title>
   <meta name="description" content="Enter your KSEB bill or monthly units to see the solar system size, panels, roof space, subsidy and savings for your Kerala home. Works up to ₹2,00,000 a month.">
-  <link rel="icon" type="image/svg+xml" href="assets/icons/logo.svg">
+  <link rel="icon" href="favicon.ico" sizes="48x48">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <meta name="theme-color" content="#FFFFFF">
   <link rel="canonical" href="https://suryavamshi.com/calculator.html">
 
   <!-- Open Graph / Social Sharing Meta -->
@@ -25,9 +29,8 @@
   <meta name="twitter:image" content="https://suryavamshi.com/assets/images/og-share.jpg">
 
   <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="assets/images/hero.avif" type="image/avif" fetchpriority="high">
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/figtree-latin.woff2" crossorigin>
 
   <!-- Settings: apply saved theme, text size, animations and sun cursor choices before first paint -->
   <script>
@@ -47,11 +50,9 @@
     })();
   </script>
 
-  <link rel="stylesheet" href="css/daylight.css?v=12.6">
+  <link rel="stylesheet" href="css/daylight.css?v=13.0">
   <link rel="stylesheet" href="css/sv-select.css?v=1.0">
 
-  <!-- Supabase Client -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -143,8 +144,8 @@
   <header class="header-nav on-hero">
     <div class="wrap header-inner">
       <a href="index.html" class="brand" aria-label="Suryavamshi Solar Projects LLP, home">
-        <img class="logo-on-dark" src="assets/images/suryavamshi-logo-reversed.png" alt="Suryavamshi Solar Projects LLP" width="700" height="289">
-        <img class="logo-on-light" src="assets/images/suryavamshi-logo-light.png" alt="Suryavamshi Solar Projects LLP" width="700" height="289">
+        <img class="logo-on-dark" src="assets/images/suryavamshi-logo-reversed-320.png" alt="Suryavamshi Solar Projects LLP" width="320" height="132">
+        <img class="logo-on-light" src="assets/images/suryavamshi-logo-light-320.png" alt="Suryavamshi Solar Projects LLP" width="320" height="132">
       </a>
       <nav class="nav-main" aria-label="Main">
         <a href="index.html" class="nav-item-link">Home</a>
@@ -166,11 +167,11 @@
   <div class="mobile-nav-backdrop"></div>
   <aside class="mobile-nav-drawer" aria-label="Menu">
     <div class="drawer-head">
-      <img class="logo-on-dark" src="assets/images/suryavamshi-logo-reversed.png" alt="Suryavamshi Solar Projects LLP">
-      <img class="logo-on-light" src="assets/images/suryavamshi-logo-light.png" alt="Suryavamshi Solar Projects LLP">
+      <img class="logo-on-dark" src="assets/images/suryavamshi-logo-reversed-320.png" alt="Suryavamshi Solar Projects LLP" width="320" height="132">
+      <img class="logo-on-light" src="assets/images/suryavamshi-logo-light-320.png" alt="Suryavamshi Solar Projects LLP" width="320" height="132">
       <button class="icon-btn" type="button" id="drawerClose" aria-label="Close menu"><svg class="ic"><use href="#i-x"/></svg></button>
     </div>
-    <div class="drawer-badge"><svg class="ic" style="color:var(--accent-ink)"><use href="#i-award"/></svg><div><strong>Official Partner</strong>PM Surya Ghar Muft Bijli</div></div>
+    <div class="drawer-badge"><svg class="ic" style="color:var(--accent-ink)"><use href="#i-rupee"/></svg><div><strong>Up to ₹78,000 subsidy</strong>PM Surya Ghar paperwork handled for you</div></div>
     <nav class="drawer-links">
       <a class="mobile-nav-link" href="index.html"><svg class="ic"><use href="#i-home"/></svg>Home</a>
       <a class="mobile-nav-link" href="calculator.html"><svg class="ic"><use href="#i-calc"/></svg>Solar Calculator</a>
@@ -207,26 +208,26 @@
     <section class="section first" id="solar-calculator-section">
       <div class="wrap">
 
-        <div class="card calc" data-reveal="zoom">
+        <div class="card calc" id="calc-card" data-reveal="zoom">
           <div class="calc-in">
             <div>
-              <h3><svg class="ic"><use href="#i-chart"/></svg>Your Home Energy Profile</h3>
-              <p class="muted" style="margin-top:6px">Adjust consumption units or monthly bill amount to compute your custom rooftop sizing.</p>
+              <h2><svg class="ic" aria-hidden="true"><use href="#i-chart"/></svg>Your Home Energy Profile</h2>
+              <p class="muted" style="margin-top:6px">Type your monthly bill or units, or drag the slider. Your result updates as you go.</p>
             </div>
 
-            <div class="seg bill" id="calcModeSeg" role="tablist" aria-label="Input mode">
-              <button type="button" class="calc-tab-btn active" id="tabBillMode" role="tab" aria-selected="true">Monthly Bill (₹)</button>
-              <button type="button" class="calc-tab-btn" id="tabUnitsMode" role="tab" aria-selected="false">Monthly Units (kWh)</button>
+            <div class="seg bill" id="calcModeSeg" role="radiogroup" aria-label="Enter your monthly">
+              <button type="button" class="calc-tab-btn active" id="tabBillMode" role="radio" aria-checked="true">Monthly Bill (₹)</button>
+              <button type="button" class="calc-tab-btn" id="tabUnitsMode" role="radio" aria-checked="false" tabindex="-1">Monthly Units (kWh)</button>
             </div>
 
             <div>
-              <span class="label-sm">Quick household presets</span>
-              <div class="presets">
-                <button type="button" class="preset-pill" data-units="150">150 Units (1-2 BHK)</button>
-                <button type="button" class="preset-pill" data-units="300">300 Units (2-3 BHK)</button>
-                <button type="button" class="preset-pill active" data-units="400">400 Units (Standard)</button>
-                <button type="button" class="preset-pill" data-units="600">600 Units (3+ ACs)</button>
-                <button type="button" class="preset-pill" data-units="1000">1000 Units (Villa)</button>
+              <span class="label-sm" id="calcPresetsLabel">Quick household presets</span>
+              <div class="presets" role="group" aria-labelledby="calcPresetsLabel">
+                <button type="button" class="preset-pill" data-units="150" aria-pressed="false">150 Units (1-2 BHK)</button>
+                <button type="button" class="preset-pill" data-units="300" aria-pressed="false">300 Units (2-3 BHK)</button>
+                <button type="button" class="preset-pill active" data-units="400" aria-pressed="true">400 Units (Standard)</button>
+                <button type="button" class="preset-pill" data-units="600" aria-pressed="false">600 Units (3+ ACs)</button>
+                <button type="button" class="preset-pill" data-units="1000" aria-pressed="false">1000 Units (Villa)</button>
               </div>
             </div>
 
@@ -240,21 +241,17 @@
                 </div>
               </div>
               <div class="input-hint" id="calcInputHint">Type any amount, or drag the slider.</div>
-              <input type="range" id="calcUnitsSlider" class="calc-range-slider" min="0" max="1000" value="330" step="1" aria-label="Consumption slider">
-              <div class="ticks" id="calcTicks"><span>₹360</span><span>₹3.5k</span><span>₹6.8k</span><span>₹10k</span></div>
+              <input type="range" id="calcUnitsSlider" class="calc-range-slider" min="0" max="1000" value="330" step="1" aria-label="Monthly bill">
+              <div class="ticks" id="calcTicks" aria-hidden="true"><span>₹360</span><span>₹3.5k</span><span>₹6.8k</span><span>₹10k</span></div>
             </div>
 
-            <div class="field">
-              <label for="calcStateSelect">Installation State / Region (Solar Insolation)</label>
-              <select id="calcStateSelect" class="form-control" aria-label="Select state for solar insolation">
-                <option value="0">Kerala (Avg. ₹7.2/unit)</option>
-              </select>
-            </div>
+            <p class="calc-region-note"><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg>Sized for Kerala homes on the KSEB tariff, at about ₹7.20 a unit.</p>
 
             <span class="live"><i></i>Live calculations update instantly as you adjust</span>
           </div>
 
-          <div class="calc-out" aria-live="polite">
+          <div class="calc-out" id="calc-result">
+            <p class="sr-only" id="calcSummary" aria-live="polite"></p>
             <div class="result-hero">
               <div class="gauge">
                 <svg viewBox="0 0 100 100" aria-hidden="true">
@@ -262,27 +259,28 @@
                   <circle class="bgc" cx="50" cy="50" r="42" fill="none" stroke-width="8"/>
                   <circle id="resultGaugeFill" cx="50" cy="50" r="42" fill="none" stroke="url(#solarGradientGauge)" stroke-width="8" stroke-linecap="round" stroke-dasharray="264" style="stroke-dashoffset:197"/>
                 </svg>
-                <div class="sunic"><svg class="ic"><use href="#i-sun"/></svg></div>
+                <div class="sunic"><svg class="ic" aria-hidden="true"><use href="#i-sun"/></svg></div>
               </div>
               <div>
-                <div class="result-tag">Recommended system capacity</div>
+                <h2 class="result-tag">Recommended system capacity</h2>
                 <div class="result-kw" id="resultHeroKw">3.8 kW</div>
-                <div class="result-sub" id="resultHeroSub">Powers 100% of ~400 units/month requirement</div>
+                <p class="result-sub" id="resultHeroSub">For your ₹2,880 monthly bill (about 400 units a month).</p>
               </div>
             </div>
 
             <div class="metrics">
-              <div class="metric"><span class="mi"><svg class="ic"><use href="#i-bolt"/></svg></span><span class="ml">Estimated Daily Consumption</span><span class="mv" id="resultDailyUnits">13.3 kWh/day</span></div>
-              <div class="metric"><span class="mi"><svg class="ic"><use href="#i-clock"/></svg></span><span class="ml">Estimated Annual Generation</span><span class="mv" id="resultAnnualGen">4,891 kWh</span></div>
-              <div class="metric"><span class="mi"><svg class="ic"><use href="#i-grid"/></svg></span><span class="ml">Approximate Panels Needed</span><span class="mv" id="resultPanelCount">7 Panels</span></div>
-              <div class="metric"><span class="mi"><svg class="ic"><use href="#i-home"/></svg></span><span class="ml">Estimated Roof Space Needed</span><span class="mv" id="resultRoofSpace">323 sq.ft (30 m²)</span></div>
-              <div class="metric"><span class="mi"><svg class="ic"><use href="#i-chip"/></svg></span><span class="ml">Recommended Inverter</span><span class="mv" id="resultInverterCap">5.0 kW Single/Three-Phase</span></div>
-              <div class="metric good"><span class="mi"><svg class="ic"><use href="#i-rupee"/></svg></span><span class="ml">Estimated Annual Savings</span><span class="mv" id="resultAnnualSavings">₹35,215/yr</span></div>
+              <div class="metric"><span class="mi" aria-hidden="true"><svg class="ic"><use href="#i-bolt"/></svg></span><span class="ml">Daily use</span><span class="mv" id="resultDailyUnits">13.3 kWh</span><span class="ms">a day</span></div>
+              <div class="metric"><span class="mi" aria-hidden="true"><svg class="ic"><use href="#i-clock"/></svg></span><span class="ml">Solar generation</span><span class="mv" id="resultAnnualGen">4,891 kWh</span><span class="ms">a year</span></div>
+              <div class="metric"><span class="mi" aria-hidden="true"><svg class="ic"><use href="#i-grid"/></svg></span><span class="ml">Panels</span><span class="mv" id="resultPanelCount">7 panels</span><span class="ms">550 W each</span></div>
+              <div class="metric"><span class="mi" aria-hidden="true"><svg class="ic"><use href="#i-home"/></svg></span><span class="ml">Roof space</span><span class="mv" id="resultRoofSpace">380 sq ft</span><span class="ms" id="resultRoofNote">about 35 m², free of shade</span></div>
+              <div class="metric"><span class="mi" aria-hidden="true"><svg class="ic"><use href="#i-chip"/></svg></span><span class="ml">Inverter</span><span class="mv" id="resultInverterCap">5 kW</span><span class="ms" id="resultInverterNote">single or three phase</span></div>
+              <div class="metric good"><span class="mi" aria-hidden="true"><svg class="ic"><use href="#i-rupee"/></svg></span><span class="ml">Yearly savings</span><span class="mv" id="resultAnnualSavings">₹31,100</span><span class="ms" id="resultSavingsNote">up to 90% of your ₹34,560 bill</span></div>
             </div>
+            <p class="calc-note">Solar cuts your KSEB bill by up to 90%. Fixed charges and meter rent stay on it.</p>
 
             <div class="modules">
               <div class="row"><span>Modules</span><span class="tagp" id="resultPanelCountTag">7 x 550W Modules</span></div>
-              <div class="solar-panel-icons-grid" id="resultPanelGrid"></div>
+              <div class="solar-panel-icons-grid" id="resultPanelGrid" aria-hidden="true"></div>
             </div>
 
             <details class="formula">
@@ -295,7 +293,10 @@
               </dl>
             </details>
 
-            <a href="#site-assessment-form" class="btn btn-sun btn-block" id="calcAssessmentBtn"><svg class="ic"><use href="#i-clip"/></svg>Request Free Site Assessment</a>
+            <div class="calc-actions">
+              <a href="contact.html" class="btn btn-sun btn-block" id="calcAssessmentBtn"><svg class="ic" aria-hidden="true"><use href="#i-clip"/></svg>Request Free Site Assessment</a>
+              <a href="https://wa.me/919061626868" class="btn btn-line btn-block calc-wa" id="calcWhatsAppBtn" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-wa"/></svg>Send this estimate on WhatsApp</a>
+            </div>
           </div>
         </div>
       </div>
@@ -303,23 +304,24 @@
 
     <!-- CONTACT & SITE ASSESSMENT -->
     <section class="section alt" id="site-assessment-form">
-      <div class="wrap contact-grid">
-        <div data-reveal="left">
-          <div class="section-head" style="margin-bottom:0">
-            <span class="eyebrow town-links"><a href="solar-panel-installation-cherthala.html">Cherthala</a> • <a href="solar-panel-installation-kochi.html">Kochi</a> • <a href="solar-panel-installation-alappuzha.html">Alappuzha</a> • <a href="solar-panel-installation-kottayam.html">Kottayam</a></span>
-            <h2>Ready to switch your home <span class="serif">to solar?</span></h2>
-            <p>Our certified engineers will visit your Kerala home for 3D shadow analysis, roof structural evaluation, and customized sizing.</p>
-          </div>
-          <div class="contact-points">
-            <a class="cpoint" href="tel:+919061626868"><span class="cic"><svg class="ic"><use href="#i-phone"/></svg></span><span><strong>+91 9061626868</strong><span>Need urgent technical guidance? Call now</span></span></a>
-            <a class="cpoint" href="https://wa.me/919061626868" target="_blank" rel="noopener"><span class="cic" style="color:#1FA463;background:rgba(37,211,102,.14)"><svg class="ic"><use href="#i-wa"/></svg></span><span><strong>WhatsApp us</strong><span>Send a photo of your bill or roof</span></span></a>
-            <a class="cpoint" href="mailto:suryavamshisolarprojects@gmail.com"><span class="cic"><svg class="ic"><use href="#i-mail"/></svg></span><span><strong>Email</strong><span>suryavamshisolarprojects@gmail.com</span></span></a>
-            <a class="cpoint" href="assets/docs/suryavamshi-sample-3kw-proposal.pdf?v=2" download="Suryavamshi-sample-3kW-proposal.pdf"><span class="cic"><svg class="ic"><use href="#i-down"/></svg></span><span><strong>Sample proposal (PDF)</strong><span>See what your quote will look like</span></span></a>
+      <div class="wrap contact-grid calc-book">
+        <div class="section-head cb-head" data-reveal="left">
+          <span class="eyebrow town-links"><a href="solar-panel-installation-cherthala.html">Cherthala</a> • <a href="solar-panel-installation-kochi.html">Kochi</a> • <a href="solar-panel-installation-alappuzha.html">Alappuzha</a> • <a href="solar-panel-installation-kottayam.html">Kottayam</a></span>
+          <h2>Book your free <span class="serif">site visit.</span></h2>
+          <p>Our certified engineers will visit your Kerala home for 3D shadow analysis, roof structural evaluation, and customized sizing.</p>
+          <div class="next-wrap">
+            <span class="label-sm" id="calcNextLabel">What happens next</span>
+            <ol class="next-steps" role="list" aria-labelledby="calcNextLabel">
+              <li>We call you to fix a time.</li>
+              <li>An engineer checks your roof, shade and KSEB feasibility.</li>
+              <li>You get a written quote.</li>
+            </ol>
           </div>
         </div>
 
         <div class="card form-card" data-reveal="right" data-clarity-mask="true">
           <form id="assessment-form" novalidate onsubmit="if(window.handleAssessmentSubmit){window.handleAssessmentSubmit(event);return false;}">
+            <p class="est-chip" id="form-estimate" hidden><svg class="ic" aria-hidden="true"><use href="#i-sun"/></svg><span class="est-text"></span></p>
             <div class="grid-2">
               <div class="field"><label for="client-name">Full Name *</label><input id="client-name" placeholder="e.g. Ramesh Kumar" required type="text" autocomplete="name"></div>
               <div class="field"><label for="client-phone">Phone Number (+91) *</label><input id="client-phone" placeholder="90616 26868" required type="text" inputmode="tel" autocomplete="tel"></div>
@@ -329,7 +331,12 @@
               <div class="field"><label for="client-pin">PIN Code <span class="opt">(optional)</span></label><input id="client-pin" placeholder="e.g. 688524" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="7"></div>
             </div>
             <div class="grid-2">
-              <div class="field"><label for="client-kseb">KSEB Consumer Number *</label><input id="client-kseb" placeholder="13-digit number on your bill" required type="text" inputmode="numeric" autocomplete="off" maxlength="20"></div>
+              <div class="field field-kseb">
+                <label for="client-kseb">KSEB Consumer Number <span class="opt">(optional)</span></label>
+                <input id="client-kseb" placeholder="13-digit number on your bill" type="text" inputmode="numeric" autocomplete="off" maxlength="20" aria-describedby="client-kseb-help">
+                <p class="field-help" id="client-kseb-help">Printed at the top of your KSEB bill, and in the KSEB app.</p>
+                <a class="field-wa" id="client-kseb-wa" href="https://wa.me/919061626868" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-wa"/></svg>No bill handy? Send your details on WhatsApp</a>
+              </div>
               <div class="field"><label for="client-email">Email <span class="opt">(optional)</span></label><input id="client-email" placeholder="you@example.com" type="email" inputmode="email" autocomplete="email"></div>
             </div>
             <div class="field usage-field">
@@ -353,24 +360,32 @@
             </div>
             <div class="field"><label for="client-message">Anything else? <span class="opt">(optional)</span></label><textarea id="client-message" placeholder="Roof type, shading, single or three phase…"></textarea></div>
             <input type="text" id="contactHoneypot" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0">
-            <button class="btn btn-sun btn-block" id="submitFormBtn" type="submit"><svg class="ic"><use href="#i-clip"/></svg><span>Request Free Site Assessment</span></button>
+            <p class="sr-only" id="form-status" role="status"></p>
+            <button class="btn btn-sun btn-block" id="submitFormBtn" type="submit"><svg class="ic" aria-hidden="true"><use href="#i-clip"/></svg><span>Request Free Site Assessment</span></button>
             <p class="fine">Prefer to talk? Call <a href="tel:+919061626868">+91 9061626868</a></p>
           </form>
 
-          <div class="hidden state-box ok" id="form-success">
-            <svg class="ic"><use href="#i-checkc"/></svg>
-            <h3>Assessment Request Received!</h3>
-            <p class="muted">Our chief solar engineer will call you shortly to schedule your shadow assessment and KSEB feasibility audit.</p>
-            <a class="btn btn-line" href="https://wa.me/919061626868" target="_blank" rel="noopener"><svg class="ic"><use href="#i-wa"/></svg>Message us on WhatsApp</a>
+          <div class="hidden state-box ok" id="form-success" role="status" tabindex="-1">
+            <svg class="ic" aria-hidden="true"><use href="#i-checkc"/></svg>
+            <h3>Request received. Thank you!</h3>
+            <p class="muted">We'll call you to fix a time for your free site visit. Keep your latest KSEB bill handy.</p>
+            <a class="btn btn-line" id="form-success-wa" href="https://wa.me/919061626868" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-wa"/></svg>Send your KSEB bill on WhatsApp</a>
           </div>
           <div class="hidden state-box err" id="form-error" role="alert">
             <h3>Your request didn't go through</h3>
             <p id="form-error-msg">Our booking system didn't respond. Send the same details to us on WhatsApp in one tap, or give us a call.</p>
             <div class="err-actions">
-              <a class="btn btn-sun" id="form-error-wa" href="https://wa.me/919061626868" target="_blank" rel="noopener"><svg class="ic"><use href="#i-wa"/></svg>Send on WhatsApp</a>
-              <a class="btn btn-line" href="tel:+919061626868"><svg class="ic"><use href="#i-phone"/></svg>+91 9061626868</a>
+              <a class="btn btn-sun" id="form-error-wa" href="https://wa.me/919061626868" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-wa"/></svg>Send on WhatsApp</a>
+              <a class="btn btn-line" href="tel:+919061626868"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg>+91 9061626868</a>
             </div>
           </div>
+        </div>
+
+        <div class="contact-points cb-points" data-reveal="left">
+          <a class="cpoint" href="tel:+919061626868"><span class="cic"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg></span><span><strong>+91 9061626868</strong><span>Need urgent technical guidance? Call now</span></span></a>
+          <a class="cpoint" href="https://wa.me/919061626868" target="_blank" rel="noopener"><span class="cic" style="color:#1FA463;background:rgba(37,211,102,.14)"><svg class="ic" aria-hidden="true"><use href="#i-wa"/></svg></span><span><strong>WhatsApp us</strong><span>Send a photo of your bill or roof</span></span></a>
+          <a class="cpoint" href="mailto:suryavamshisolarprojects@gmail.com"><span class="cic"><svg class="ic" aria-hidden="true"><use href="#i-mail"/></svg></span><span><strong>Email</strong><span>suryavamshisolarprojects@gmail.com</span></span></a>
+          <a class="cpoint" href="assets/docs/suryavamshi-sample-3kw-proposal.pdf?v=2" download="Suryavamshi-sample-3kW-proposal.pdf"><span class="cic"><svg class="ic" aria-hidden="true"><use href="#i-down"/></svg></span><span><strong>Sample proposal (PDF)</strong><span>See what your quote will look like</span></span></a>
         </div>
       </div>
     </section>
@@ -379,7 +394,7 @@
     <section class="closing" id="contact">
       <div class="closing-sun" aria-hidden="true"></div>
       <div class="wrap">
-        <img src="assets/images/suryavamshi-logo-reversed.png" alt="Suryavamshi Solar Projects LLP" data-reveal="zoom" loading="lazy">
+        <img src="assets/images/suryavamshi-logo-reversed.png" alt="Suryavamshi Solar Projects LLP" width="700" height="289" data-reveal="zoom" loading="lazy">
         <div class="rule" aria-hidden="true"></div>
         <h2 class="serif" data-reveal>Turning Kerala’s sunshine into reliable, affordable power.</h2>
         <div class="contact-line" data-reveal>
@@ -508,14 +523,14 @@
   </div>
 
   <!-- Scripts -->
-  <script src="js/config.js?v=12.1"></script>
-  <script src="js/calculator.js?v=12.3"></script>
-  <script src="js/app.js?v=12.2"></script>
-  <script src="js/premium.js?v=12.2"></script>
+  <script src="js/config.js?v=12.3"></script>
+  <script src="js/calculator.js?v=12.5"></script>
+  <script src="js/app.js?v=12.3"></script>
+  <script src="js/premium.js?v=12.3"></script>
   <script src="js/sv-select.js?v=1.0"></script>
-  <script src="js/analytics.js?v=1.0"></script>
+  <script src="js/analytics.js?v=1.1"></script>
   <script src="js/supabase-config.js?v=12.0"></script>
-  <script src="js/supabase-client.js?v=12.2"></script>
-  <script src="js/contact-form.js?v=12.5"></script>
+  <script src="js/supabase-client.js?v=12.3"></script>
+  <script src="js/contact-form.js?v=12.8"></script>
 </body>
 </html>

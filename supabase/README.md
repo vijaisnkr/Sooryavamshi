@@ -121,7 +121,7 @@ Every site assessment request can automatically populate a Google Sheet in real 
    - Run [`supabase/migration_google_sheets_sync.sql`](./migration_google_sheets_sync.sql).
 2. **Deploy Google Apps Script**:
    - Follow instructions in [`google-apps-script/README.md`](../google-apps-script/README.md).
-   - Set Script Property `WEBHOOK_SECRET` = `suryavamshi_sec_2026_x9k2m7`.
+   - Set Script Property `WEBHOOK_SECRET` to a long random secret of your own (never commit it).
    - Deploy as Web App (Execute as: Me, Access: Anyone).
 3. **Configure Database Webhook**:
    - In Supabase Dashboard, go to **Database** → **Webhooks** → **Add Webhook**.
@@ -129,7 +129,7 @@ Every site assessment request can automatically populate a Google Sheet in real 
    - **Table**: `site_assessment_requests`
    - **Events**: `INSERT`
    - **Method**: `POST`
-   - **URL**: `https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec?secret=suryavamshi_sec_2026_x9k2m7`
+   - **URL**: `https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec?secret=YOUR_WEBHOOK_SECRET`
    - **HTTP Headers**: `Content-Type: application/json`
 4. Now every customer form submission is synced into Columns A through O in Google Sheet `Suryavamshi Solar Site Assessment Leads` tab `Site Assessment Leads` automatically!
 

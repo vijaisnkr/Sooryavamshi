@@ -39,22 +39,14 @@ const SOORYAVAMSHI_CONFIG = {
     baseDailySunHours: 4.3, // Average Indian peak sun hours (kWh/m2/day)
     systemPerformanceRatio: 0.82, // Standard derating factor accounting for temperature & dust
     standardPanelWattage: 550, // Modern Tier-1 Mono PERC / Bi-facial panel wattage
-    spaceRequiredPerKwSqFt: 85, // Standard shadow-free rooftop requirement in sq.ft
+    spaceRequiredPerKwSqFt: 100, // Standard shadow-free rooftop requirement in sq.ft
     averageTariffPerUnitInr: 7.2, // KSEB residential slab average (Rs/kWh)
     co2OffsetPerKwhKg: 0.82, // Average grid carbon intensity reduction (kg CO2 per kWh)
     
-    // Regional insolation adjustment factors
+    // Regional insolation adjustment factors. We install in Kerala only,
+    // so the calculator's region menu lists Kerala only.
     states: [
-      { name: "Kerala", factor: 1.00, defaultTariff: 7.2 },
-      { name: "Karnataka", factor: 1.02, defaultTariff: 7.8 },
-      { name: "Tamil Nadu", factor: 1.04, defaultTariff: 7.6 },
-      { name: "Maharashtra", factor: 1.03, defaultTariff: 8.5 },
-      { name: "Telangana", factor: 1.03, defaultTariff: 7.9 },
-      { name: "Andhra Pradesh", factor: 1.04, defaultTariff: 7.7 },
-      { name: "Gujarat", factor: 1.08, defaultTariff: 6.9 },
-      { name: "Rajasthan", factor: 1.12, defaultTariff: 7.4 },
-      { name: "Delhi NCR", factor: 0.98, defaultTariff: 8.0 },
-      { name: "Other States", factor: 1.00, defaultTariff: 7.5 }
+      { name: "Kerala", factor: 1.00, defaultTariff: 7.2 }
     ]
   },
 

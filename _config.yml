@@ -1,0 +1,5 @@
+# GitHub Pages settings. Back-end setup files stay in the repository but are not published on suryavamshi.com.
+exclude:
+  - README.md
+  - supabase/
+  - google-apps-script/

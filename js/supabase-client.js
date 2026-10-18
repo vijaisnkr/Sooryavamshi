@@ -13,7 +13,7 @@ window.SooryavamshiSupabase = (function() {
     if (clientInstance) return clientInstance;
 
     if (typeof window.supabase === "undefined" || typeof window.supabase.createClient !== "function") {
-      console.warn("Supabase JS SDK (@supabase/supabase-js) is not loaded on this page.");
+      // Public form pages no longer load the SDK; their forms save through the REST fallback
       return null;
     }
 

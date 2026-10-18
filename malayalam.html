@@ -5,7 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>കേരളത്തിൽ സോളാർ പാനൽ ഇൻസ്റ്റലേഷൻ | സൂര്യവംശി സോളാർ</title>
   <meta name="description" content="കേരളത്തിലെ വീടുകൾക്ക് റൂഫ്ടോപ്പ് സോളാർ. സൗജന്യ സൈറ്റ് സന്ദർശനം, KSEB നെറ്റ് മീറ്ററിംഗ്, ₹78,000 വരെ PM സൂര്യ ഘർ സബ്സിഡി. വിളിക്കൂ +91 9061626868.">
-  <link rel="icon" type="image/svg+xml" href="assets/icons/logo.svg">
+  <link rel="icon" href="favicon.ico" sizes="48x48">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <meta name="theme-color" content="#FFFFFF">
   <link rel="canonical" href="https://suryavamshi.com/malayalam.html">
 
   <!-- Open Graph / Social Sharing Meta -->
@@ -16,6 +20,9 @@
   <meta property="og:title" content="കേരളത്തിൽ സോളാർ പാനൽ ഇൻസ്റ്റലേഷൻ | സൂര്യവംശി സോളാർ">
   <meta property="og:description" content="കേരളത്തിലെ വീടുകൾക്ക് റൂഫ്ടോപ്പ് സോളാർ. സൗജന്യ സൈറ്റ് സന്ദർശനം, KSEB നെറ്റ് മീറ്ററിംഗ്, ₹78,000 വരെ PM സൂര്യ ഘർ സബ്സിഡി. വിളിക്കൂ +91 9061626868.">
   <meta property="og:image" content="https://suryavamshi.com/assets/images/og-share.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Rooftop solar for Kerala homes from Suryavamshi Solar: KSEB net metering and the ₹78,000 subsidy handled.">
 
   <!-- Twitter Meta -->
   <meta name="twitter:card" content="summary_large_image">
@@ -23,11 +30,13 @@
   <meta name="twitter:title" content="കേരളത്തിൽ സോളാർ പാനൽ ഇൻസ്റ്റലേഷൻ | സൂര്യവംശി സോളാർ">
   <meta name="twitter:description" content="കേരളത്തിലെ വീടുകൾക്ക് റൂഫ്ടോപ്പ് സോളാർ. സൗജന്യ സൈറ്റ് സന്ദർശനം, KSEB നെറ്റ് മീറ്ററിംഗ്, ₹78,000 വരെ PM സൂര്യ ഘർ സബ്സിഡി. വിളിക്കൂ +91 9061626868.">
   <meta name="twitter:image" content="https://suryavamshi.com/assets/images/og-share.jpg">
+  <meta name="twitter:image:alt" content="Rooftop solar for Kerala homes from Suryavamshi Solar: KSEB net metering and the ₹78,000 subsidy handled.">
 
   <!-- Fonts -->
+  <link rel="preload" as="image" href="assets/images/hero.avif" type="image/avif" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/figtree-latin.woff2" crossorigin>
 
   <!-- Settings: apply saved theme, text size, animations and sun cursor choices before first paint -->
   <script>
@@ -47,8 +56,8 @@
     })();
   </script>
 
-  <link rel="stylesheet" href="css/daylight.css?v=12.6">
-  <link rel="stylesheet" href="css/seo-pages.css?v=1.0">
+  <link rel="stylesheet" href="css/daylight.css?v=13.0">
+  <link rel="stylesheet" href="css/seo-pages.css?v=1.2">
   <link href="https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@500;600;700&family=Noto+Sans+Malayalam:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="alternate" hreflang="en-IN" href="https://suryavamshi.com/">
   <link rel="alternate" hreflang="ml-IN" href="https://suryavamshi.com/malayalam.html">
@@ -79,10 +88,11 @@
     .ml-steps li { counter-increment: k; display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 16px; align-items: start; padding: 18px 20px; border-radius: var(--r); background: var(--surface); border: 1px solid var(--line); color: var(--fg-muted); box-shadow: 0 14px 30px -24px rgba(11, 35, 64, .35); }
     .ml-steps li::before { content: counter(k); width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; font: 700 1rem var(--mono); background: var(--sun); color: #1B1300; }
     .ml-steps strong { display: block; color: var(--fg); font-size: 1.1rem; font-weight: 700; margin-bottom: 2px; }
+    main[lang="ml"] .cta-band h2 { font-size: clamp(1.6rem, 3vw, 2.5rem); }
     main[lang="ml"] .rel-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
     main[lang="ml"] .rel-grid .rel strong { font-size: 1.05rem; line-height: 1.45; }
     @media (max-width: 980px) { .ml-split { grid-template-columns: minmax(0, 1fr); } main[lang="ml"] .rel-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-    @media (max-width: 560px) { main[lang="ml"] .rel-grid { grid-template-columns: minmax(0, 1fr); } main[lang="ml"] .btn { font-size: .95rem; padding-inline: 20px; } .ml-steps li { grid-template-columns: 36px minmax(0, 1fr); gap: 12px; padding: 16px; } .ml-steps li::before { width: 36px; height: 36px; font-size: .9rem; } }
+    @media (max-width: 560px) { main[lang="ml"] .cta-actions .btn { width: 100%; } main[lang="ml"] .rel-grid { grid-template-columns: minmax(0, 1fr); } main[lang="ml"] .btn { font-size: .95rem; padding-inline: 20px; } .ml-steps li { grid-template-columns: 36px minmax(0, 1fr); gap: 12px; padding: 16px; } .ml-steps li::before { width: 36px; height: 36px; font-size: .9rem; } }
   </style>
   <script type="application/ld+json">
 {
@@ -143,7 +153,7 @@
           "name": "എത്ര സ്ഥലം വേണം?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "ഒരു kW-ന് ഏകദേശം 80 മുതൽ 90 ചതുരശ്ര അടി നിഴലില്ലാത്ത മേൽക്കൂര വേണം. 3 kW സിസ്റ്റത്തിന് ഏകദേശം 260 ചതുരശ്ര അടി."
+            "text": "ഒരു kW-ന് ഏകദേശം 100 ചതുരശ്ര അടി നിഴലില്ലാത്ത മേൽക്കൂര വേണം. 3 kW സിസ്റ്റത്തിന് ഏകദേശം 300 ചതുരശ്ര അടി."
           }
         },
         {
@@ -213,11 +223,11 @@
   <div class="scroll-progress" aria-hidden="true"></div>
 
   <!-- HEADER -->
-  <header class="header-nav on-hero">
+  <header class="header-nav on-hero" lang="en">
     <div class="wrap header-inner">
       <a href="index.html" class="brand" aria-label="Suryavamshi Solar Projects LLP, home">
-        <img class="logo-on-dark" src="assets/images/suryavamshi-logo-reversed.png" alt="Suryavamshi Solar Projects LLP" width="700" height="289">
-        <img class="logo-on-light" src="assets/images/suryavamshi-logo-light.png" alt="Suryavamshi Solar Projects LLP" width="700" height="289">
+        <img class="logo-on-dark" src="assets/images/suryavamshi-logo-reversed-320.png" alt="Suryavamshi Solar Projects LLP" width="320" height="132">
+        <img class="logo-on-light" src="assets/images/suryavamshi-logo-light-320.png" alt="Suryavamshi Solar Projects LLP" width="320" height="132">
       </a>
       <nav class="nav-main" aria-label="Main">
         <a href="index.html" class="nav-item-link">Home</a>
@@ -237,13 +247,13 @@
 
   <!-- MOBILE DRAWER -->
   <div class="mobile-nav-backdrop"></div>
-  <aside class="mobile-nav-drawer" aria-label="Menu">
+  <aside class="mobile-nav-drawer" aria-label="Menu" lang="en">
     <div class="drawer-head">
-      <img class="logo-on-dark" src="assets/images/suryavamshi-logo-reversed.png" alt="Suryavamshi Solar Projects LLP">
-      <img class="logo-on-light" src="assets/images/suryavamshi-logo-light.png" alt="Suryavamshi Solar Projects LLP">
+      <img class="logo-on-dark" src="assets/images/suryavamshi-logo-reversed-320.png" alt="Suryavamshi Solar Projects LLP" width="320" height="132">
+      <img class="logo-on-light" src="assets/images/suryavamshi-logo-light-320.png" alt="Suryavamshi Solar Projects LLP" width="320" height="132">
       <button class="icon-btn" type="button" id="drawerClose" aria-label="Close menu"><svg class="ic"><use href="#i-x"/></svg></button>
     </div>
-    <div class="drawer-badge"><svg class="ic" style="color:var(--accent-ink)"><use href="#i-award"/></svg><div><strong>Official Partner</strong>PM Surya Ghar Muft Bijli</div></div>
+    <div class="drawer-badge"><svg class="ic" style="color:var(--accent-ink)"><use href="#i-rupee"/></svg><div><strong>Up to ₹78,000 subsidy</strong>PM Surya Ghar paperwork handled for you</div></div>
     <nav class="drawer-links">
       <a class="mobile-nav-link" href="index.html"><svg class="ic"><use href="#i-home"/></svg>Home</a>
       <a class="mobile-nav-link" href="calculator.html"><svg class="ic"><use href="#i-calc"/></svg>Solar Calculator</a>
@@ -274,8 +284,8 @@
         <p class="lede" data-reveal style="--d:1">ചേർത്തല ആസ്ഥാനമായ ഞങ്ങളുടെ സ്വന്തം എഞ്ചിനീയർമാർ നിങ്ങളുടെ വീട് സന്ദർശിച്ച്, സിസ്റ്റം രൂപകൽപ്പന ചെയ്ത്, സ്ഥാപിക്കുന്നു. KSEB നെറ്റ് മീറ്ററിംഗും ₹78,000 വരെയുള്ള PM സൂര്യ ഘർ സബ്സിഡിയും ഞങ്ങൾ കൈകാര്യം ചെയ്യും.</p>
         <p class="crumb-meta" data-reveal style="--d:2">ചേർത്തല • ആലപ്പുഴ • കൊച്ചി • കോട്ടയം</p>
         <div class="hero-ctas" data-reveal style="--d:3">
-          <a class="btn btn-sun" href="contact.html">സൗജന്യ സൈറ്റ് സന്ദർശനം ബുക്ക് ചെയ്യൂ <svg class="ic"><use href="#i-arrow"/></svg></a>
-          <a class="btn btn-line" href="https://wa.me/919061626868?text=%E0%B4%A8%E0%B4%AE%E0%B4%B8%E0%B5%8D%E0%B4%95%E0%B4%BE%E0%B4%B0%E0%B4%82%2C%20%E0%B4%8E%E0%B4%A8%E0%B5%8D%E0%B4%B1%E0%B5%86%20%E0%B4%B5%E0%B5%80%E0%B4%9F%E0%B4%BF%E0%B4%A8%E0%B5%8D%20%E0%B4%B8%E0%B5%8B%E0%B4%B3%E0%B4%BE%E0%B5%BC%20%E0%B4%95%E0%B5%8D%E0%B4%B5%E0%B4%9F%E0%B5%8D%E0%B4%9F%E0%B5%87%E0%B4%B7%E0%B5%BB%20%E0%B4%B5%E0%B5%87%E0%B4%A3%E0%B4%82" target="_blank" rel="noopener"><svg class="ic"><use href="#i-wa"/></svg>വാട്ട്സ്ആപ്പ്</a>
+          <a class="btn btn-sun" href="https://wa.me/919061626868?text=%E0%B4%A8%E0%B4%AE%E0%B4%B8%E0%B5%8D%E0%B4%95%E0%B4%BE%E0%B4%B0%E0%B4%82%2C%20%E0%B4%8E%E0%B4%A8%E0%B5%8D%E0%B4%B1%E0%B5%86%20%E0%B4%B5%E0%B5%80%E0%B4%9F%E0%B4%BF%E0%B4%A8%E0%B5%8D%20%E0%B4%B8%E0%B5%8B%E0%B4%B3%E0%B4%BE%E0%B5%BC%20%E0%B4%95%E0%B5%8D%E0%B4%B5%E0%B4%9F%E0%B5%8D%E0%B4%9F%E0%B5%87%E0%B4%B7%E0%B5%BB%20%E0%B4%B5%E0%B5%87%E0%B4%A3%E0%B4%82" target="_blank" rel="noopener"><svg class="ic"><use href="#i-wa"/></svg>വാട്ട്സ്ആപ്പിൽ ക്വട്ടേഷൻ ചോദിക്കൂ</a>
+          <a class="btn btn-line" href="contact.html">സൗജന്യ സൈറ്റ് സന്ദർശനം ബുക്ക് ചെയ്യൂ (ഇംഗ്ലീഷ് ഫോം) <svg class="ic"><use href="#i-arrow"/></svg></a>
         </div>
       </div>
     </section>
@@ -320,9 +330,25 @@
         <div class="faq-list" data-reveal="right">
           <details open><summary>എന്റെ വീടിന് എത്ര kW സോളാർ വേണം?<span class="pm"></span></summary><div>മാസം 300 മുതൽ 450 യൂണിറ്റ് വരെ ഉപയോഗിക്കുന്ന മിക്ക വീടുകൾക്കും 3 kW മുതൽ 4 kW വരെയുള്ള ഓൺ-ഗ്രിഡ് സിസ്റ്റം മതിയാകും. നിങ്ങളുടെ KSEB ബില്ലിൽ നിന്ന് കൃത്യമായ വലുപ്പം ഞങ്ങളുടെ <a class="textlink" href="calculator.html">സോളാർ കാൽക്കുലേറ്ററിൽ</a> കണ്ടെത്താം.</div></details>
           <details><summary>PM സൂര്യ ഘർ സബ്സിഡി എത്ര കിട്ടും?<span class="pm"></span></summary><div>ആദ്യത്തെ 2 kW-ന് ഓരോ kW-നും ₹30,000, മൂന്നാമത്തെ kW-ന് ₹18,000. അതായത് 3 kW-ഓ അതിൽ കൂടുതലോ ഉള്ള സിസ്റ്റത്തിന് പരമാവധി ₹78,000. നെറ്റ് മീറ്റർ സ്ഥാപിച്ചതിന് ശേഷം തുക നേരിട്ട് നിങ്ങളുടെ ബാങ്ക് അക്കൗണ്ടിൽ എത്തും.</div></details>
-          <details><summary>എത്ര സ്ഥലം വേണം?<span class="pm"></span></summary><div>ഒരു kW-ന് ഏകദേശം 80 മുതൽ 90 ചതുരശ്ര അടി നിഴലില്ലാത്ത മേൽക്കൂര വേണം. 3 kW സിസ്റ്റത്തിന് ഏകദേശം 260 ചതുരശ്ര അടി.</div></details>
+          <details><summary>എത്ര സ്ഥലം വേണം?<span class="pm"></span></summary><div>ഒരു kW-ന് ഏകദേശം 100 ചതുരശ്ര അടി നിഴലില്ലാത്ത മേൽക്കൂര വേണം. 3 kW സിസ്റ്റത്തിന് ഏകദേശം 300 ചതുരശ്ര അടി.</div></details>
           <details><summary>മഴക്കാലത്ത് സോളാർ പ്രവർത്തിക്കുമോ?<span class="pm"></span></summary><div>പ്രവർത്തിക്കും. മേഘാവൃതമായ ദിവസങ്ങളിൽ ഉത്പാദനം കുറയും, പക്ഷേ നിൽക്കില്ല. വർഷം മുഴുവനുമുള്ള ഉത്പാദനം കണക്കാക്കിയാണ് ഞങ്ങൾ സിസ്റ്റം രൂപകൽപ്പന ചെയ്യുന്നത്.</div></details>
           <details><summary>ഇൻസ്റ്റലേഷന് എത്ര ദിവസം എടുക്കും?<span class="pm"></span></summary><div>മേൽക്കൂരയിലെ ജോലി 1 മുതൽ 2 ദിവസം. KSEB അനുമതിയും നെറ്റ് മീറ്ററും ഉൾപ്പെടെ മുഴുവൻ പ്രക്രിയയ്ക്കും സാധാരണയായി 15 മുതൽ 25 ദിവസം.</div></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta-sec">
+      <div class="wrap">
+        <div class="cta-band" data-reveal="zoom">
+          <div>
+            <span class="eyebrow">സൗജന്യ സൈറ്റ് സന്ദർശനം</span>
+            <h2>സൗജന്യ സൈറ്റ് സന്ദർശനം <span class="serif">ബുക്ക് ചെയ്യൂ.</span></h2>
+            <p>ഞങ്ങളുടെ എഞ്ചിനീയർ നിങ്ങളുടെ മേൽക്കൂര, നിഴൽ, KSEB കണക്ഷൻ എന്നിവ പരിശോധിച്ച് വ്യക്തമായ ക്വട്ടേഷൻ നൽകും.</p>
+          </div>
+          <div class="cta-actions">
+            <a class="btn btn-sun" href="https://wa.me/919061626868?text=%E0%B4%A8%E0%B4%AE%E0%B4%B8%E0%B5%8D%E0%B4%95%E0%B4%BE%E0%B4%B0%E0%B4%82%2C%20%E0%B4%8E%E0%B4%A8%E0%B5%8D%E0%B4%B1%E0%B5%86%20%E0%B4%B5%E0%B5%80%E0%B4%9F%E0%B4%BF%E0%B4%A8%E0%B5%8D%20%E0%B4%B8%E0%B5%8B%E0%B4%B3%E0%B4%BE%E0%B5%BC%20%E0%B4%95%E0%B5%8D%E0%B4%B5%E0%B4%9F%E0%B5%8D%E0%B4%9F%E0%B5%87%E0%B4%B7%E0%B5%BB%20%E0%B4%B5%E0%B5%87%E0%B4%A3%E0%B4%82" target="_blank" rel="noopener"><svg class="ic"><use href="#i-wa"/></svg>വാട്ട്സ്ആപ്പിൽ ക്വട്ടേഷൻ ചോദിക്കൂ</a>
+            <a class="btn btn-line" href="contact.html"><svg class="ic"><use href="#i-clip"/></svg>സൈറ്റ് സന്ദർശനം ബുക്ക് ചെയ്യൂ (ഇംഗ്ലീഷ് ഫോം)</a>
+          </div>
         </div>
       </div>
     </section>
@@ -344,7 +370,7 @@
   </main>
 
   <!-- FOOTER -->
-  <footer class="site-footer">
+  <footer class="site-footer" lang="en">
     <div class="wrap">
       <div>
         <div class="foot-badge"><svg class="ic"><use href="#i-award"/></svg><span>Govt. Empanelled · PM Surya Ghar Muft Bijli Yojana Approved</span></div>
@@ -391,10 +417,10 @@
   </footer>
 
   <!-- FLOATING WHATSAPP -->
-  <a class="fab-wa" href="https://wa.me/919061626868?text=Hi%2C%20I%20want%20a%20solar%20quote%20for%20my%20home" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg class="ic"><use href="#i-wa"/></svg></a>
+  <a class="fab-wa" href="https://wa.me/919061626868?text=%E0%B4%A8%E0%B4%AE%E0%B4%B8%E0%B5%8D%E0%B4%95%E0%B4%BE%E0%B4%B0%E0%B4%82%2C%20%E0%B4%8E%E0%B4%A8%E0%B5%8D%E0%B4%B1%E0%B5%86%20%E0%B4%B5%E0%B5%80%E0%B4%9F%E0%B4%BF%E0%B4%A8%E0%B5%8D%20%E0%B4%B8%E0%B5%8B%E0%B4%B3%E0%B4%BE%E0%B5%BC%20%E0%B4%95%E0%B5%8D%E0%B4%B5%E0%B4%9F%E0%B5%8D%E0%B4%9F%E0%B5%87%E0%B4%B7%E0%B5%BB%20%E0%B4%B5%E0%B5%87%E0%B4%A3%E0%B4%82" target="_blank" rel="noopener" lang="ml" aria-label="വാട്ട്സ്ആപ്പിൽ ചാറ്റ് ചെയ്യൂ"><svg class="ic"><use href="#i-wa"/></svg></a>
 
   <!-- MOBILE BOTTOM NAV -->
-  <nav class="mobile-bar" aria-label="Quick actions">
+  <nav class="mobile-bar" aria-label="Quick actions" lang="en">
     <a href="index.html"><svg class="ic"><use href="#i-home"/></svg>Home</a>
     <a href="calculator.html"><svg class="ic"><use href="#i-calc"/></svg>Calculator</a>
     <a class="primary" href="contact.html"><svg class="ic"><use href="#i-clip"/></svg>Free Site Visit</a>
@@ -403,7 +429,7 @@
   </nav>
 
   <!-- SETTINGS -->
-  <div class="settings-backdrop" id="settingsBackdrop">
+  <div class="settings-backdrop" id="settingsBackdrop" lang="en">
     <div class="settings" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
       <div class="settings-head">
         <h2 id="settingsTitle">Settings</h2>
@@ -456,8 +482,8 @@
   </div>
 
   <!-- Scripts -->
-  <script src="js/app.js?v=12.2"></script>
-  <script src="js/premium.js?v=12.2"></script>
-  <script src="js/analytics.js?v=1.0"></script>
+  <script src="js/app.js?v=12.3"></script>
+  <script src="js/premium.js?v=12.3"></script>
+  <script src="js/analytics.js?v=1.1"></script>
 </body>
 </html>
