@@ -526,7 +526,7 @@
   }
 
   // Shows "Your estimate: 4.6 kW · 9 panels · ₹3,500 bill" (calculator), or the size picked on a guide page.
-  // A size picked on a guide has no panel count here: the guides use different panels (9 × 550 W for 5 kW, 13 × 635 W for 8 kW)
+  // A size picked on a guide has no panel count here: the guides use different panels (8 × 625 W for 5 kW, 13 × 635 W for 8 kW)
   function showEstimate(est) {
     const chip = document.getElementById("form-estimate");
     const kw = est ? parseKw(est.kw) : null;
