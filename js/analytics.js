@@ -16,7 +16,13 @@
  *   generate_lead       the site assessment form was sent  (sent by contact-form.js)
  *   lead_submit_failed  the form could not reach the database (sent by contact-form.js)
  *
- * Not loaded on admin.html or login.html, and form fields are masked in Clarity recordings (data-clarity-mask).
+ * Not loaded on admin.html, login.html or set-password.html, and form fields are masked in Clarity recordings (data-clarity-mask).
+ *
+ * Opt-out: the switch on privacy.html stores sv-analytics = "off" in this browser. Then nothing here loads,
+ * and window.svAnalytics.setOn(false) stops a running Clarity on this page, blocks it restarting on Back/Forward
+ * or in other open tabs, and deletes its _clck/_clsk cookies and _cltk tab ID.
+ * Clarity is told not to share data with Microsoft Advertising (consentv2 ad_Storage "denied").
+ * privacy.html describes all of this, so update it if this file changes what is collected.
  */
 (function () {
   'use strict';
@@ -24,7 +30,37 @@
   var CLARITY_ID = 'yy9ld9rhex';   // e.g. 'abcd1234ef'  (clarity.microsoft.com > Settings > Overview > Project ID)
   var GA4_ID = '';       // e.g. 'G-ABC123XYZ9' (analytics.google.com > Admin > Data streams > Measurement ID)
 
-  var on = !!(CLARITY_ID || GA4_ID);
+  var OPT_OUT_KEY = 'sv-analytics';   // "off" = this visitor turned analytics off on the privacy page
+  var configured = !!(CLARITY_ID || GA4_ID);
+
+  function optedOut() {
+    try { return localStorage.getItem(OPT_OUT_KEY) === 'off'; } catch (e) { return false; }
+  }
+  var on = configured && !optedOut();
+
+  // Clarity's own first-party cookies (set on the main domain, e.g. .suryavamshi.com) and its tab ID in session storage
+  function dropClarityCookies() {
+    ['_clck', '_clsk'].forEach(function (name) {
+      var host = location.hostname, parts = host.split('.');
+      var domains = ['', host];
+      if (parts.length > 1) domains.push('.' + parts.slice(-2).join('.'));
+      domains.forEach(function (d) { document.cookie = name + '=; Max-Age=0; path=/' + (d ? '; domain=' + d : ''); });
+    });
+    try { sessionStorage.removeItem('_cltk'); } catch (e) {}
+  }
+
+  // Turn Clarity off on this page. window.clarity.v is set only while Clarity is running.
+  function stopClarity() {
+    var c = window.clarity;
+    try {
+      // Running: just stop it. (consentv2 "denied" would make Clarity restart itself without cookies
+      // 250 ms later and send one more upload before a queued "stop" ends it.)
+      if (c && c.v) c('stop');
+      // Still loading, or paused after 5 idle minutes: queue a denial so it deletes its cookies and stops as soon as it starts
+      else if (c) { c('consentv2', { ad_Storage: 'denied', analytics_Storage: 'denied' }); c('stop'); }
+    } catch (e) {}
+    dropClarityCookies();
+  }
 
   function track(name, params) {
     if (!on) return;
@@ -34,6 +70,22 @@
     } catch (e) {}
   }
   window.svTrack = track;
+
+  // Used by the switch on privacy.html. setOn returns false when the browser won't save the choice.
+  window.svAnalytics = {
+    configured: configured,
+    isOn: function () { return configured && !optedOut(); },
+    setOn: function (yes) {
+      var saved = true;
+      try {
+        if (yes) localStorage.removeItem(OPT_OUT_KEY);
+        else localStorage.setItem(OPT_OUT_KEY, 'off');
+      } catch (e) { saved = false; }
+      // Stop Clarity on this page even if the browser won't save the choice for later pages
+      if (!yes) { on = false; stopClarity(); }
+      return saved;
+    }
+  };
   if (!on) return;
 
   function load(src) {
@@ -45,7 +97,21 @@
 
   if (CLARITY_ID) {
     window.clarity = window.clarity || function () { (window.clarity.q = window.clarity.q || []).push(arguments); };
+    // Nothing is shared with Microsoft Advertising (the privacy page says so). analytics_Storage is left out on purpose,
+    // so Clarity keeps its own default (the project's cookie setting; no cookies for EEA/UK/CH visitors) and we never
+    // tell Microsoft a visitor agreed to something they weren't asked. Microsoft's docs list both keys as required;
+    // a missing key keeps its current value (checked in clarity-js 0.8.72).
+    window.clarity('consentv2', { ad_Storage: 'denied' });
     load('https://www.clarity.ms/tag/' + encodeURIComponent(CLARITY_ID));
+    // Back/Forward can restore this page from the browser's memory, and Clarity then restarts itself.
+    // If analytics was turned off since (on the privacy page or in another tab), block that restart.
+    window.addEventListener('pageshow', function (e) {
+      if (e.persisted && optedOut()) { on = false; e.stopImmediatePropagation(); stopClarity(); }
+    }, true);
+    // Turned off in another tab: stop here too
+    window.addEventListener('storage', function (e) {
+      if (e.key === OPT_OUT_KEY && e.newValue === 'off') { on = false; stopClarity(); }
+    });
   }
   if (GA4_ID) {
     window.dataLayer = window.dataLayer || [];

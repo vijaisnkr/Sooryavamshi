@@ -60,20 +60,8 @@ CREATE POLICY "site_assessment_requests_anon_insert"
     TO anon 
     WITH CHECK (true);
 
--- Allow reading enquiries in admin portal
-CREATE POLICY "site_assessment_requests_anon_select" 
-    ON public.site_assessment_requests 
-    FOR SELECT 
-    TO anon 
-    USING (true);
-
--- Allow updating status in admin portal
-CREATE POLICY "site_assessment_requests_anon_update" 
-    ON public.site_assessment_requests 
-    FOR UPDATE 
-    TO anon 
-    USING (true) 
-    WITH CHECK (true);
+-- Visitors can only add enquiries. There is deliberately no anon SELECT or UPDATE policy:
+-- reading and updating need a staff login (the old anon policies were dropped from the live database on 2026-10-17).
 
 -- 5. RLS Policy: Authenticated Admin / Staff
 CREATE POLICY "site_assessment_requests_auth_select" 

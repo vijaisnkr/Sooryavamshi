@@ -255,3 +255,44 @@ body:has(> main.sv-guide) { overflow-x: clip; }
 .sv-guide .cta-sec .cta-band .btn-line .ic { color: #3FD07A; }
 @media (max-width: 560px) { .sv-guide .cta-sec .cta-actions .btn { width: 100%; } }
 @media (max-width: 360px) { .sv-guide .gfig { padding: 14px; } .sv-guide .ef-item { padding-inline: 2px; } }
+
+/* ==========================================================================
+   Privacy notice (privacy.html): lists, two tables that turn into cards on
+   phones, the analytics switch and the contact card. Scoped to .sv-privacy.
+   ========================================================================== */
+.sv-privacy .prose ul { margin: 0 0 16px; padding-left: 1.25em; display: grid; gap: 10px; color: var(--fg-muted); line-height: 1.6; }
+.sv-privacy .prose li::marker { color: var(--accent-ink); }
+.sv-privacy .prose li strong { color: var(--fg); }
+.sv-privacy .prose h3 { margin: 26px 0 10px; font: 760 1.25rem/1.25 var(--display); letter-spacing: -0.01em; color: var(--fg); }
+.sv-privacy .prose a:not(.btn), .sv-privacy .pv-table a { color: var(--accent-ink); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; overflow-wrap: anywhere; }
+.sv-privacy .prose code { font: 500 .88em var(--mono); color: var(--fg); background: var(--surface-2); padding: 1px 5px; border-radius: 5px; }
+.sv-privacy .pv-table { min-width: 0; }
+.sv-privacy .pv-table thead th { background: var(--surface-2); font: 600 .78rem/1.3 var(--mono); letter-spacing: .02em; color: var(--fg); }
+.sv-privacy .pv-table tbody th { width: 24%; }
+.sv-privacy .pv-table.pv-who tbody th { width: 18%; }
+.sv-privacy .pv-table td strong { color: var(--fg); }
+.sv-privacy .prose > .spec-table-wrap + p:not(.fine) { margin-top: 18px; }
+/* Phones and small tablets: each row becomes a small card with its column names shown */
+@media (max-width: 760px) {
+  .sv-guide.sv-privacy .pv-table, .sv-guide.sv-privacy .pv-table tbody, .sv-guide.sv-privacy .pv-table tr, .sv-guide.sv-privacy .pv-table th, .sv-guide.sv-privacy .pv-table td { display: block; width: auto; }
+  .sv-guide.sv-privacy .pv-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .sv-guide.sv-privacy .pv-table tr { padding: 6px 0 10px; border-bottom: 1px solid var(--line); }
+  .sv-guide.sv-privacy .pv-table tr:last-child { border-bottom: 0; }
+  .sv-guide.sv-privacy .pv-table tbody th, .sv-guide.sv-privacy .pv-table.pv-who tbody th { width: auto; padding: 12px 16px 4px; border: 0; font: 760 1.08rem/1.3 var(--display); }
+  .sv-guide.sv-privacy .pv-table td { padding: 4px 16px; border: 0; }
+  .sv-guide.sv-privacy .pv-table td[data-label]::before { content: attr(data-label); display: block; margin-bottom: 2px; font: 600 .72rem/1.3 var(--mono); color: var(--fg-muted); }
+}
+.sv-privacy .pv-switch { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin: 20px 0 18px; padding: 18px 20px; }
+.sv-privacy .pv-switch .lbl { display: block; font-weight: 700; color: var(--fg); }
+.sv-privacy .pv-switch p { margin: 4px 0 0; font-size: .92rem; line-height: 1.5; }
+/* The switch's state in words, so it doesn't rely on the knob position or colour alone */
+.sv-privacy .pv-ctl { display: flex; align-items: center; gap: 10px; flex: none; }
+.sv-privacy .pv-state { min-width: 2.2em; text-align: right; font-weight: 700; color: var(--fg); }
+.sv-privacy .pv-msg { margin: -8px 0 18px; font-size: .92rem; font-weight: 600; color: var(--accent-ink); }
+.sv-privacy .pv-msg:empty { display: none; }
+.sv-privacy .pv-contact { margin: 18px 0 16px; padding: clamp(18px, 2.2vw, 24px); display: grid; gap: 12px; }
+.sv-privacy .pv-contact dl { margin: 0; display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 10px 18px; }
+.sv-privacy .pv-contact dt { font: 600 .76rem/1.5 var(--mono); color: var(--fg-muted); padding-top: 2px; }
+.sv-privacy .pv-contact dd { margin: 0; color: var(--fg); overflow-wrap: anywhere; }
+.sv-privacy .pv-contact dd a { color: var(--accent-ink); font-weight: 700; text-decoration: none; }
+@media (max-width: 420px) { .sv-privacy .pv-contact dl { grid-template-columns: minmax(0, 1fr); gap: 2px; } .sv-privacy .pv-contact dd { margin-bottom: 8px; } }

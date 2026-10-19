@@ -4,7 +4,7 @@
  * Handles client-side validation, anti-spam honeypot, Supabase database submission,
  * and responsive success/error state handling.
  * Errors are tied to their fields (aria-invalid, aria-describedby) and the result of a
- * submit is announced. WhatsApp links carry what the visitor typed.
+ * submit is announced. WhatsApp buttons open a chat pre-filled with what the visitor typed.
  */
 
 (function() {
@@ -15,6 +15,9 @@
   let sending = false;
   // The estimate shown at the top of the form ({kw, panels, bill, units}), if any
   let shownEstimate = null;
+  // What the WhatsApp buttons after a send (success or failed save) fill in
+  let successWaText = "";
+  let errorWaText = "";
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initContactForm);
@@ -39,6 +42,20 @@
   function val(id) {
     const el = document.getElementById(id);
     return el && typeof el.value === "string" ? el.value.trim() : "";
+  }
+
+  // Pre-fill a WhatsApp link with getText() only at the moment it is clicked, then put the plain address back.
+  // Clarity records the address of every clicked link (even inside data-clarity-mask), reading it in a listener
+  // that runs before this one, so it only ever sees the plain wa.me address: the privacy page says Clarity
+  // never gets what was typed in the form. The browser still opens the pre-filled chat as a normal link.
+  function waOnClick(link, getText) {
+    if (!link || link.dataset.svWa) return;
+    link.dataset.svWa = "1";
+    const plain = link.getAttribute("href");
+    link.addEventListener("click", function() {
+      link.href = WA + encodeURIComponent(getText());
+      setTimeout(() => { link.setAttribute("href", plain); }, 1000);
+    });
   }
 
   function initContactForm() {
@@ -171,8 +188,6 @@
         });
         if (!result || !result.success) throw new Error((result && result.error) || "Save failed");
 
-        // Record timestamp
-        try { localStorage.setItem("sooryavamshi_last_submit_ts", Date.now().toString()); } catch (err) {}
         if (window.svTrack) window.svTrack("generate_lead", { form_page: window.location.pathname });
 
         // Clear form inputs
@@ -454,7 +469,7 @@
       const name = data && data.full_name ? data.full_name : "";
       const waText = "Hi, I just booked a free site visit on suryavamshi.com." + (name ? ` My name is ${name}.` : "") + " Here is a photo of my KSEB bill.";
       const wa = document.getElementById("form-success-wa") || successBox1.querySelector('a[href*="wa.me"]');
-      if (wa) wa.href = WA + encodeURIComponent(waText);
+      if (wa) { successWaText = waText; waOnClick(wa, () => successWaText); }
 
       successBox1.classList.remove("hidden");
       successBox1.style.setProperty("display", "flex", "important");
@@ -502,7 +517,7 @@
     if (data.rooftop_details) lines.push(`About my roof: ${data.rooftop_details}`);
 
     const waLink = document.getElementById("form-error-wa");
-    if (waLink) waLink.href = WA + encodeURIComponent(lines.join("\n"));
+    if (waLink) { errorWaText = lines.join("\n"); waOnClick(waLink, () => errorWaText); }
 
     errorBox.classList.remove("hidden");
     errorBox.style.setProperty("display", "flex", "important");
@@ -577,14 +592,9 @@
   function initNoBillLink() {
     const link = document.getElementById("client-kseb-wa");
     if (!link) return;
-    const update = () => { link.href = WA + encodeURIComponent(noBillText()); };
-    update();
-    const form = link.closest("form");
-    if (form) form.addEventListener("input", update);
-    // The calculator fills the form without input events, so refresh before a long-press or middle-click too
-    ["pointerdown", "focus", "contextmenu"].forEach(ev => link.addEventListener(ev, update));
+    // The text is read at the moment of the click, so it includes what the calculator filled in too
+    waOnClick(link, noBillText);
     link.addEventListener("click", () => {
-      update();
       if (window.svTrack) window.svTrack("no_bill_whatsapp", { form_page: window.location.pathname });
     });
   }

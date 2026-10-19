@@ -593,22 +593,19 @@ window.SolarCalculator = (function() {
 
   /* ---------- Booking links and WhatsApp ---------- */
 
-  function fieldValue(id) {
-    const el = document.getElementById(id);
-    return el && el.value ? el.value.trim() : '';
-  }
-
   function urlParam(name) {
     try { return new URLSearchParams(window.location.search).get(name) || ''; } catch (e) { return ''; }
   }
 
-  // contact.html?bill=3500&kw=4.6 (or ?units=486&kw=4.6), plus the town and PIN when known
+  // contact.html?bill=3500&kw=4.6 (or ?units=486&kw=4.6), plus the town and PIN if this page was opened with them.
+  // Never copy what was typed into the form here: these links sit outside the masked form, and Clarity
+  // records link addresses (the privacy page says it doesn't see what visitors type into the form).
   function bookingHref(est) {
     const p = new URLSearchParams();
     if (est.mode === 'bill') p.set('bill', est.bill); else p.set('units', est.units);
     p.set('kw', est.kw);
-    const loc = fieldValue('client-location') || urlParam('location');
-    const pin = fieldValue('client-pin').replace(/\D/g, '') || urlParam('pin');
+    const loc = urlParam('location');
+    const pin = urlParam('pin').replace(/\D/g, '');
     if (loc) p.set('location', loc);
     if (pin) p.set('pin', pin);
     return 'contact.html?' + p.toString();

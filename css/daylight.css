@@ -700,6 +700,8 @@ html.anim .work[data-reveal] { transition: opacity .9s var(--ease) calc(var(--d,
 .foot-badge .ic { color: var(--sun-2); }
 .foot-bottom { border-top: 1px solid rgba(255, 255, 255, .08); }
 .foot-bottom .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; padding-block: 18px; font-size: .82rem; }
+/* Privacy notice link: underlined so it reads as a link, with a taller tap area */
+.foot-bottom a { display: inline-block; padding-block: 6px; margin-block: -6px; color: #fff; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 
 /* ---------- Mobile bottom bar ---------- */
 .mobile-bar { display: none; }
