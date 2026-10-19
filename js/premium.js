@@ -466,15 +466,19 @@
   }
 
   /* ---------------- Click effects: sun burst + button ripple ---------------- */
+  // The sun burst is for mouse clicks only. On phones and tablets a tap just gets the button ripple,
+  // so no sun rings are left on the screen while scrolling or tapping (Matrix, 2026-10-19).
   function initClickFx() {
     document.addEventListener('pointerdown', function (e) {
       if (e.button !== 0 || still()) return;
-      var burst = document.createElement('div');
-      burst.className = 'click-burst';
-      burst.style.transform = 'translate(' + e.clientX + 'px,' + e.clientY + 'px)';
-      for (var i = 0; i < 8; i++) { var ray = document.createElement('i'); ray.style.setProperty('--a', (i * 45) + 'deg'); burst.appendChild(ray); }
-      document.body.appendChild(burst);
-      setTimeout(function () { burst.remove(); }, 700);
+      if (e.pointerType === 'mouse') {
+        var burst = document.createElement('div');
+        burst.className = 'click-burst';
+        burst.style.transform = 'translate(' + e.clientX + 'px,' + e.clientY + 'px)';
+        for (var i = 0; i < 8; i++) { var ray = document.createElement('i'); ray.style.setProperty('--a', (i * 45) + 'deg'); burst.appendChild(ray); }
+        document.body.appendChild(burst);
+        setTimeout(function () { burst.remove(); }, 700);
+      }
 
       var b = e.target.closest && e.target.closest('.btn, .icon-btn');
       if (!b) return;

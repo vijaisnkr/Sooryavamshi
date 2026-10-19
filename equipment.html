@@ -54,7 +54,7 @@
     })();
   </script>
 
-  <link rel="stylesheet" href="css/daylight.css?v=13.0">
+  <link rel="stylesheet" href="css/daylight.css?v=13.1">
 
   <script type="application/ld+json">
 {
@@ -205,19 +205,34 @@
 
         <div class="flow" id="eqFlow">
           <div class="flow-line" aria-hidden="true"><i></i></div>
-          <div class="flow-node"><span class="fic"><svg class="ic"><use href="#i-panel"/></svg></span><strong>550 Wp Bifacial Panels</strong><span>21.5% efficiency</span></div>
+          <div class="flow-node"><span class="fic"><svg class="ic"><use href="#i-panel"/></svg></span><strong>Bifacial Solar Panels</strong><span>Mono PERC or TOPCon</span></div>
           <div class="flow-node"><span class="fic"><svg class="ic"><use href="#i-chip"/></svg></span><strong>On-Grid Inverter</strong><span>&gt;98% efficiency</span></div>
           <div class="flow-node"><span class="fic"><svg class="ic"><use href="#i-shield"/></svg></span><strong>DCDB · ACDB · Earthing</strong><span>&lt;5Ω ground</span></div>
           <div class="flow-node"><span class="fic"><svg class="ic"><use href="#i-meter"/></svg></span><strong>KSEB Net Meter</strong><span>Bill cut by up to 90%</span></div>
         </div>
 
         <div class="eq-grid">
-          <article class="card eq" data-reveal style="--d:0">
+          <article class="card eq eq-panels" data-reveal style="--d:0">
             <div class="eq-top"><span class="eic"><svg class="ic"><use href="#i-panel"/></svg></span><div><div class="eq-cat">Photovoltaic modules</div><h3>Solar Panels</h3></div><span class="eq-qty">6 nos.</span></div>
-            <p>550 Wp Mono PERC / Bifacial DCR modules, BIS-certified and 100% EL flash tested. DCR panels keep you eligible for the PM Surya Ghar subsidy.</p>
-            <dl class="spec"><dt>Specification</dt><dd>550 Wp Mono PERC / Bifacial, DCR</dd><dt>Efficiency</dt><dd>Up to 21.5%+, up to 25% rear bifacial gain</dd><dt>Warranty</dt><dd>25-yr performance: ≥ 90% at 10 yrs, ≥ 80% at 25 yrs</dd></dl>
-            <div class="makes"><span>Adani</span><span>Waaree</span><span>Vikram</span></div>
-            <details><summary>Key benefits <svg class="ic"><use href="#i-chev"/></svg></summary><ul><li>100% DCR (Domestic Content Requirement) certified for PM Surya Ghar subsidy eligibility</li><li>Bifacial glass-to-glass technology generates extra energy from rear roof reflections</li><li>144 half-cut PERC cells lower resistive loss and heat</li><li>PID-free anti-reflective toughened glass, certified for 2400 Pa wind and 5400 Pa load</li></ul></details>
+            <div class="ref-tabs eq-tabs" role="tablist" aria-label="Panel type">
+              <button type="button" role="tab" id="panelTabPerc" aria-controls="panelPerc" aria-selected="true">Mono PERC</button>
+              <button type="button" role="tab" id="panelTabTopcon" aria-controls="panelTopcon" aria-selected="false" tabindex="-1">TOPCon</button>
+            </div>
+            <div class="ref-panels">
+              <div class="ref-panel" role="tabpanel" id="panelPerc" aria-labelledby="panelTabPerc" data-qty="6 nos.">
+                <p>550 Wp Mono PERC / Bifacial DCR modules, BIS-certified and 100% EL flash tested. DCR panels keep you eligible for the PM Surya Ghar subsidy.</p>
+                <dl class="spec"><dt>Specification</dt><dd>550 Wp Mono PERC / Bifacial, DCR</dd><dt>Efficiency</dt><dd>Up to 21.5%+, up to 25% rear bifacial gain</dd><dt>Warranty</dt><dd>25-yr performance: ≥ 90% at 10 yrs, ≥ 80% at 25 yrs</dd></dl>
+                <div class="makes"><span>Adani</span><span>Waaree</span><span>Vikram</span></div>
+                <details><summary>Key benefits <svg class="ic"><use href="#i-chev"/></svg></summary><ul><li>100% DCR (Domestic Content Requirement) certified for PM Surya Ghar subsidy eligibility</li><li>Bifacial glass-to-glass technology generates extra energy from rear roof reflections</li><li>144 half-cut PERC cells lower resistive loss and heat</li><li>PID-free anti-reflective toughened glass, certified for 2400 Pa wind and 5400 Pa load</li></ul></details>
+              </div>
+              <div class="ref-panel" role="tabpanel" id="panelTopcon" aria-labelledby="panelTabTopcon" aria-hidden="true" data-qty="5–6 nos.">
+                <p>N-type TOPCon bifacial modules, the newer high-efficiency cell type. Each panel makes more power and loses less in the heat, so fewer panels cover the same need. Choose a DCR TOPCon model to keep the PM Surya Ghar subsidy.</p>
+                <dl class="spec"><dt>Specification</dt><dd>N-type TOPCon bifacial, about 580–635 Wp, DCR or non-DCR</dd><dt>Efficiency</dt><dd>About 22.5–23.5%, around 80% bifaciality</dd><dt>Heat loss</dt><dd>About −0.30% per °C (PERC about −0.35%)</dd><dt>Warranty</dt><dd>Manufacturer's power warranty, usually 25–30 years</dd></dl>
+                <p class="eq-note">Typical datasheet figures. Your quote names the exact model and its warranty.</p>
+                <div class="makes"><span>Vikram</span><span>Waaree</span><span>Adani</span></div>
+                <details><summary>Key benefits <svg class="ic"><use href="#i-chev"/></svg></summary><ul><li>More power from each panel: our 8 kW design uses 13 × 635 Wp Vikram TOPCon panels</li><li>Loses less output on hot Kerala roofs (about −0.30% per °C, against about −0.35% for PERC)</li><li>N-type cells have almost no light-induced degradation, so output drops more slowly over the years</li><li>Higher bifaciality (around 80%) collects more of the light reflected under the panels</li><li>DCR TOPCon qualifies for the PM Surya Ghar home subsidy; non-DCR gives the most watts per panel but does not</li></ul></details>
+              </div>
+            </div>
           </article>
 
           <article class="card eq" data-reveal style="--d:1">
@@ -519,29 +534,34 @@
   <script src="js/config.js?v=12.3"></script>
   <script src="js/calculator.js?v=12.5"></script>
   <script src="js/app.js?v=12.3"></script>
-  <script src="js/premium.js?v=12.3"></script>
+  <script src="js/premium.js?v=12.4"></script>
   <script src="js/analytics.js?v=1.1"></script>
   <script>
     (function () {
-      var tabs = [].slice.call(document.querySelectorAll('.ref-tabs [role="tab"]'));
-      function pick(tab, focus) {
-        tabs.forEach(function (t) {
-          var on = t === tab, panel = document.getElementById(t.getAttribute('aria-controls'));
-          t.setAttribute('aria-selected', on ? 'true' : 'false');
-          t.tabIndex = on ? 0 : -1;
-          panel.setAttribute('aria-hidden', on ? 'false' : 'true');
-          panel.classList.toggle('on', on);
+      // Each switch works on its own: the panel type (Mono PERC / TOPCon) and the reference system size.
+      [].slice.call(document.querySelectorAll('.ref-tabs')).forEach(function (list) {
+        var tabs = [].slice.call(list.querySelectorAll('[role="tab"]'));
+        var qty = list.closest('.eq') && list.closest('.eq').querySelector('.eq-qty');
+        function pick(tab, focus) {
+          tabs.forEach(function (t) {
+            var on = t === tab, panel = document.getElementById(t.getAttribute('aria-controls'));
+            t.setAttribute('aria-selected', on ? 'true' : 'false');
+            t.tabIndex = on ? 0 : -1;
+            panel.setAttribute('aria-hidden', on ? 'false' : 'true');
+            panel.classList.toggle('on', on);
+            if (on && qty && panel.getAttribute('data-qty')) qty.textContent = panel.getAttribute('data-qty');
+          });
+          if (focus) tab.focus();
+        }
+        tabs.forEach(function (t, i) {
+          t.addEventListener('click', function () { pick(t); });
+          t.addEventListener('keydown', function (e) {
+            var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+            if (d) { e.preventDefault(); pick(tabs[(i + d + tabs.length) % tabs.length], true); }
+          });
         });
-        if (focus) tab.focus();
-      }
-      tabs.forEach(function (t, i) {
-        t.addEventListener('click', function () { pick(t); });
-        t.addEventListener('keydown', function (e) {
-          var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
-          if (d) { e.preventDefault(); pick(tabs[(i + d + tabs.length) % tabs.length], true); }
-        });
+        if (tabs.length) pick(tabs[0]);
       });
-      if (tabs.length) pick(tabs[0]);
     })();
   </script>
 </body>
