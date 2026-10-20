@@ -1140,3 +1140,64 @@ html[data-sv-motion="off"] .sample-cover { transition: none; }
 @media (max-width: 980px) { .rel-grid.nf-links { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .rel-grid.nf-links { grid-template-columns: minmax(0, 1fr); } .nf-ctas .btn { flex: 1 1 100%; } }
 /* === end home-pages === */
+/* === Cookie banner (js/analytics.js adds it until the visitor taps Accept or Reject) ===
+   Not a pop-up: the page stays usable behind it. Both buttons look the same, so neither answer is pushed.
+   Its height is capped so some of the page always shows under the header; when the text doesn't fit,
+   only the text scrolls (fading at the bottom) and the buttons stay in view. */
+.sv-consent { position: fixed; z-index: 960; left: 22px; bottom: 22px; width: min(470px, calc(100vw - 44px)); max-height: calc(100svh - var(--header-h) - 44px - 64px); overflow: hidden; box-sizing: border-box; display: grid; grid-template-rows: minmax(0, 1fr) auto; gap: 14px; padding: 18px 20px; background: var(--surface); color: var(--fg); border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: 0 30px 80px -28px rgba(4, 14, 28, .5); opacity: 0; transform: translateY(16px); transition: opacity .35s ease, transform .45s var(--ease); }
+.sv-consent.in { opacity: 1; transform: none; }
+.sv-consent-text { min-height: 0; overflow-y: auto; overscroll-behavior: contain; font-size: .93rem; line-height: 1.55; color: var(--fg-muted); }
+.sv-consent.is-scroll .sv-consent-text { padding-bottom: 14px; -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 26px), transparent); mask-image: linear-gradient(to bottom, #000 calc(100% - 26px), transparent); }
+.sv-consent.is-scroll.at-end .sv-consent-text { -webkit-mask-image: none; mask-image: none; }
+/* Room for the link's focus ring, and a focused link scrolls far enough that the fade lifts */
+.sv-consent-text { padding-inline: 4px; margin-inline: -4px; padding-bottom: 3px; scroll-padding-bottom: 6px; }
+.sv-consent.is-scroll .sv-consent-text { scroll-padding-bottom: 30px; }
+.sv-consent-title { display: block; margin-bottom: 4px; font: 700 1.05rem/1.3 var(--display); letter-spacing: -0.01em; color: var(--fg); }
+.sv-consent-link { color: var(--fg); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
+.sv-consent-link:hover { color: var(--accent-ink); }
+.sv-consent-link:focus-visible { outline: 3px solid var(--focus); outline-offset: -1px; border-radius: 4px; }
+.sv-consent-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.sv-consent .btn { min-height: 46px; padding: 0 16px; }
+.sv-consent .btn:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+/* Malayalam page: the English display font has no Malayalam letters */
+.sv-consent[lang="ml"] .sv-consent-text { font-family: "Noto Sans Malayalam", var(--sans); line-height: 1.75; }
+.sv-consent[lang="ml"] .sv-consent-title, .sv-consent[lang="ml"] .btn { font-family: "Anek Malayalam", "Noto Sans Malayalam", var(--sans); letter-spacing: 0; }
+.sv-consent[lang="ml"] .sv-consent-link { white-space: normal; }
+.set-clarity[lang="ml"] .muted { font-family: "Noto Sans Malayalam", var(--sans); line-height: 1.7; }
+.settings-body .set-row .sv-save-msg:empty { margin-top: 0; }
+/* While it is open, the page gets room underneath (js/analytics.js sets --sv-consent-space to the banner's height
+   plus its offset), so the last footer links can be reached, and focused links and buttons scroll clear of it
+   (--sv-consent-scroll is the same, capped so a strip of page always stays between the header and the banner) */
+html.sv-consent-open { scroll-padding-bottom: var(--sv-consent-scroll, 0px); }
+html.sv-consent-open body { padding-bottom: var(--sv-consent-space, 0px); }
+@media (min-width: 761px) {
+  /* Wide screens: the room goes inside the footer, so its navy carries on under the banner */
+  html.sv-consent-open body { padding-bottom: 0; }
+  html.sv-consent-open .site-footer::after { content: ""; display: block; height: var(--sv-consent-space, 0px); }
+}
+/* Short screens (landscape phones): step aside while typing, and give the page its usual focus room back */
+@media (max-height: 500px) {
+  html.sv-typing .sv-consent { visibility: hidden; }
+  html.sv-consent-open.sv-typing { scroll-padding-bottom: 0px; }
+}
+@media (max-width: 760px) {
+  /* Phones: just above the bottom bar, full width. The floating WhatsApp button waits until the visitor answers. */
+  .sv-consent { left: 10px; right: 10px; width: auto; bottom: calc(74px + env(safe-area-inset-bottom, 0px)); padding: 14px 16px; gap: 12px; max-height: calc(100svh - var(--header-h) - 74px - 76px); }
+  html[data-sv-text="large"] .sv-consent, html[data-sv-text="larger"] .sv-consent { bottom: calc(90px + env(safe-area-inset-bottom, 0px)); max-height: calc(100svh - var(--header-h) - 90px - 76px); }
+  .sv-consent-text { font-size: .9rem; }
+  html.sv-consent-open .fab-wa { visibility: hidden; }
+  /* Like the bottom bar, it steps aside while a field has focus, so it never covers what is being typed */
+  html.sv-typing .sv-consent { visibility: hidden; }
+  html.sv-consent-open.sv-typing { scroll-padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px)); }
+}
+/* Landscape phones: buttons beside the text instead of under it, so more of the text shows */
+@media (max-height: 500px) and (min-width: 560px) {
+  .sv-consent { width: min(760px, calc(100vw - 22px - var(--fab-clear))); grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: minmax(0, 1fr); column-gap: 16px; align-items: center; }
+  .sv-consent-text { max-height: 100%; }
+  .sv-consent-title { font-size: 1rem; margin-bottom: 2px; }
+  .sv-consent-btns { grid-template-columns: repeat(2, minmax(96px, 1fr)); }
+}
+@media (max-height: 500px) and (min-width: 560px) and (max-width: 760px) {
+  .sv-consent { width: auto; }
+}
+/* === end cookie banner === */

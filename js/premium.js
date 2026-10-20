@@ -139,6 +139,8 @@
     var reset = document.getElementById('settingsReset');
     reset && reset.addEventListener('click', function () {
       store(THEME_KEY, null); store(TEXT_KEY, null); store(MOTION_KEY, null); store(CURSOR_KEY, null);
+      // The Microsoft Clarity answer goes back to "not asked" too (js/analytics.js stops it and shows the banner again)
+      if (window.svAnalytics && window.svAnalytics.reset) window.svAnalytics.reset();
       applyTheme('light');
       applyText('normal');
       applyMotion(sysReduce ? 'off' : 'on');
@@ -543,8 +545,25 @@
     var TEXT = 'input:not([type]), input[type="text"], input[type="tel"], input[type="email"], input[type="number"], input[type="search"], input[type="url"], input[type="password"], textarea, [contenteditable="true"]';
     function isText(el) { return !!(el && el.matches && el.matches(TEXT) && !el.readOnly); }
     document.addEventListener('focusin', function (e) { if (isText(e.target)) root.classList.add('sv-typing'); });
+    // A mouse button or finger still down: wait, so nothing moves or reappears under the click
+    var down = false;
+    document.addEventListener('pointerdown', function () { down = true; }, true);
+    document.addEventListener('pointerup', function () { down = false; }, true);
+    document.addEventListener('pointercancel', function () { down = false; }, true);
+    document.addEventListener('contextmenu', function () { down = false; }, true);
+    window.addEventListener('blur', function () { down = false; });
+    function byKeyboard(el) { try { return el.matches(':focus-visible'); } catch (e) { return true; } }
     document.addEventListener('focusout', function () {
-      setTimeout(function () { if (!isText(document.activeElement)) root.classList.remove('sv-typing'); }, 80);
+      setTimeout(function settle() {
+        if (down) { setTimeout(settle, 50); return; }
+        var a = document.activeElement;
+        if (isText(a)) return;
+        var wasTyping = root.classList.contains('sv-typing');
+        root.classList.remove('sv-typing');
+        // The cookie banner comes back now; if the visitor tabbed from a field to a control under it, bring that
+        // into view (the whole label for the hidden radios inside the 'Best time to call' chips)
+        if (wasTyping && root.classList.contains('sv-consent-open') && a && a !== document.body && a.scrollIntoView && byKeyboard(a)) (a.closest('label') || a).scrollIntoView({ block: 'nearest' });
+      }, 80);
     });
   }
 
