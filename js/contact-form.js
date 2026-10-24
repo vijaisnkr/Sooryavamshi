@@ -189,6 +189,11 @@
         if (!result || !result.success) throw new Error((result && result.error) || "Save failed");
 
         if (window.svTrack) window.svTrack("generate_lead", { form_page: window.location.pathname });
+        // PostHog: only after the database accepted the row. No name, phone or email on the event.
+        if (window.svCapture) window.svCapture("enquiry_submitted", {
+          form: form.id || "site_assessment",
+          page: window.location.pathname
+        });
 
         // Clear form inputs
         form.reset();

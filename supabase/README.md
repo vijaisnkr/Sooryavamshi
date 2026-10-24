@@ -31,6 +31,10 @@ This guide walks you through connecting your Supabase project to the **Request F
   - **`authenticated` (Staff)**: Allowed to **SELECT**, **UPDATE**, and **DELETE** customer records when logged into the Admin Portal.
   - **Customer Data Privacy**: Customer phone numbers and details can never be queried publicly.
 
+### Existing projects
+
+`schema.sql` does not add columns to a table that already exists. To store which advert or partner link an enquiry came from, run [`migration_enquiry_attribution.sql`](./migration_enquiry_attribution.sql) once in the SQL Editor. Until that column exists, the website still saves the enquiry and keeps the same details in PostHog.
+
 ---
 
 ## 3. Connect Credentials to Your Website

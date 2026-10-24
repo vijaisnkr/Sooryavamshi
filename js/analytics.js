@@ -2,13 +2,13 @@
  * Visitor tracking for suryavamshi.com
  *
  * Paste a Microsoft Clarity project ID and/or a Google Analytics 4 measurement ID below to switch tracking on.
- * With both left empty, nothing loads and nothing is tracked.
- * Before setting GA4_ID: the cookie banner and privacy.html name only Microsoft Clarity, and stop() only stops Clarity.
+ * PostHog is on whenever POSTHOG_KEY is set. With Clarity, GA4 and PostHog all empty, nothing loads.
+ * Before setting GA4_ID: the cookie banner and privacy.html name Microsoft Clarity and PostHog, and stop() only stops Clarity.
  * Add Google Analytics to the banner TEXT (English and Malayalam), to the Settings switch text in addSettingsSwitch(),
  * and to privacy.html (including its switch label), and make stop() turn it off
  * (window['ga-disable-' + GA4_ID] = true, delete the _ga cookies), or GA4 would run under a consent that doesn't name it.
  *
- * Events sent (same names in both tools):
+ * Clarity / GA4 events (only after Accept; svTrack):
  *   call_click          a phone number was tapped        (link_location: where on the page)
  *   whatsapp_click      a WhatsApp link was tapped       (link_location)
  *   email_click         the email address was tapped     (link_location)
@@ -20,12 +20,24 @@
  *   generate_lead       the site assessment form was sent  (sent by contact-form.js)
  *   lead_submit_failed  the form could not reach the database (sent by contact-form.js)
  *
+ * PostHog events (svCapture). Sent on every visit until the visitor taps Reject. No name, phone or email.
+ *   $pageview           a page opened, including UTM parameters on the address
+ *   enquiry_submitted   the site assessment form was saved (contact-form.js, only after a real success)
+ *   whatsapp_click      a WhatsApp link was tapped       (link_location)
+ *   call_click          a phone link was tapped          (link_location)
+ *   calculator_used     first calculator use on this page (calculator: full | home_quick)
+ * Every one of those also carries first-touch and last-touch utm_source / utm_medium / utm_campaign / utm_content
+ * and ref (from ?ref=CODE). See attributionProps().
+ *
  * Not loaded on admin.html, login.html or set-password.html. Form cards are masked in Clarity recordings (data-clarity-mask),
  * and each typed form field has data-sv-clarity="hidden": an attribute value containing "hidden" makes Clarity treat the
  * field as excluded, so it also drops the short code (checksum) it otherwise sends for every changed value of 5+ characters.
- * Keep that attribute on any new form field.
+ * Keep that attribute on any new form field. PostHog session replay masks every input and those same form regions.
  *
- * Consent: nothing loads until the visitor taps Accept on the cookie banner this file adds to every page.
+ * Consent:
+ *   No answer yet — PostHog counts pages and enquiry taps for this tab only (sessionStorage, no cookie, no recording).
+ *   Accept — Clarity starts; PostHog keeps a cookie, remembers the first advert for about a year, and may record the visit.
+ *   Reject — Clarity stops and PostHog sends nothing further. Its cookie and the saved first advert are deleted.
  * The answer is kept in this browser as sv-analytics = "on" or "off"; with no answer the banner shows on each page.
  * The same answer can be changed at any time with the switch this file adds to the Settings dialog, and with the
  * switch on privacy.html (through window.svAnalytics). Both re-render on the "sv-consent" event.
@@ -40,9 +52,12 @@
 
   var CLARITY_ID = 'yy9ld9rhex';   // e.g. 'abcd1234ef'  (clarity.microsoft.com > Settings > Overview > Project ID)
   var GA4_ID = '';       // e.g. 'G-ABC123XYZ9' (analytics.google.com > Admin > Data streams > Measurement ID)
+  // Public project key (safe in client JS). Empty string switches PostHog off.
+  var POSTHOG_KEY = 'phc_zBTKEiVKqoJEWmRDnu3oCS3uHy4ViYCCsscX7TB5ah7d';
+  var POSTHOG_HOST = 'https://us.i.posthog.com';
 
   var KEY = 'sv-analytics';   // "on" = Accept, "off" = Reject; missing = not asked yet
-  var configured = !!(CLARITY_ID || GA4_ID);
+  var configured = !!(CLARITY_ID || GA4_ID || POSTHOG_KEY);
   var memo = null;            // the answer on this page, for browsers that won't save it
 
   function answer() {
@@ -114,6 +129,346 @@
   }
   window.svTrack = track;
 
+  /* ---------- Campaign attribution (posters, ads, referral partners) ----------
+   * This visit (any consent state, until the tab closes): sessionStorage sv-attr-visit.
+   * First advert, only after Accept, for about 400 days: localStorage sv-attr-first.
+   * Neither is a cookie. Last-touch updates when a later page in this tab has new utm_* or ?ref=.
+   * First-touch is whatever this tab landed with, unless Accept has an older saved first advert.
+   */
+  var VISIT_KEY = 'sv-attr-visit';
+  var FIRST_KEY = 'sv-attr-first';
+  var FIRST_DAYS = 400;
+  var UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'];
+
+  function clip(value, max) {
+    if (value == null) return null;
+    var s = String(value).replace(/[\u0000-\u001F\u007F]/g, '').trim();
+    if (!s) return null;
+    return s.length > max ? s.slice(0, max) : s;
+  }
+  function readStore(store, key) {
+    try {
+      var raw = store.getItem(key);
+      return raw ? JSON.parse(raw) : null;
+    } catch (e) { return null; }
+  }
+  function writeStore(store, key, value) {
+    try { store.setItem(key, JSON.stringify(value)); } catch (e) {}
+  }
+  function campaignFromUrl() {
+    var q;
+    try { q = new URLSearchParams(location.search); } catch (e) { return null; }
+    var touch = {};
+    var any = false;
+    UTM_KEYS.forEach(function (k) {
+      touch[k] = clip(q.get(k), 80);
+      if (touch[k]) any = true;
+    });
+    touch.ref = clip(q.get('ref'), 64);
+    if (touch.ref) any = true;
+    return any ? touch : null;
+  }
+  function landingOfThisPage() {
+    var path = location.pathname + location.search;
+    return clip(path, 300);
+  }
+  function referrerOfThisPage() {
+    if (!document.referrer) return null;
+    try {
+      var u = new URL(document.referrer);
+      if (u.origin === location.origin) return null;
+    } catch (e) { return null; }
+    return clip(document.referrer, 300);
+  }
+  function blankTouch() {
+    return { utm_source: null, utm_medium: null, utm_campaign: null, utm_content: null, ref: null, landing_page: null, referrer: null };
+  }
+  function rememberVisit() {
+    var visit = readStore(sessionStorage, VISIT_KEY);
+    var incoming = campaignFromUrl();
+    if (!visit || !visit.first) {
+      var first = blankTouch();
+      if (incoming) UTM_KEYS.concat(['ref']).forEach(function (k) { first[k] = incoming[k]; });
+      first.landing_page = landingOfThisPage();
+      first.referrer = referrerOfThisPage();
+      visit = { first: first, last: incoming };
+    } else if (incoming) {
+      visit.last = incoming;
+    }
+    writeStore(sessionStorage, VISIT_KEY, visit);
+    return visit;
+  }
+  function readLastingFirst() {
+    var saved = readStore(localStorage, FIRST_KEY);
+    if (!saved || !saved.saved_at) return null;
+    if (Date.now() - saved.saved_at > FIRST_DAYS * 24 * 60 * 60 * 1000) {
+      try { localStorage.removeItem(FIRST_KEY); } catch (e) {}
+      return null;
+    }
+    return saved;
+  }
+  function saveLastingFirst() {
+    if (readLastingFirst()) return;
+    var visit = readStore(sessionStorage, VISIT_KEY) || rememberVisit();
+    var first = visit && visit.first ? visit.first : blankTouch();
+    first.saved_at = Date.now();
+    writeStore(localStorage, FIRST_KEY, first);
+  }
+  function clearLastingFirst() {
+    try { localStorage.removeItem(FIRST_KEY); } catch (e) {}
+  }
+  function attributionProps() {
+    var visit = readStore(sessionStorage, VISIT_KEY) || rememberVisit();
+    var lasting = answer() === 'on' ? readLastingFirst() : null;
+    var first = lasting || (visit && visit.first) || blankTouch();
+    var last = (visit && visit.last) || {};
+    function pick(obj, key) { return obj && obj[key] ? obj[key] : null; }
+    return {
+      first_touch_utm_source: pick(first, 'utm_source'),
+      first_touch_utm_medium: pick(first, 'utm_medium'),
+      first_touch_utm_campaign: pick(first, 'utm_campaign'),
+      first_touch_utm_content: pick(first, 'utm_content'),
+      first_touch_ref: pick(first, 'ref'),
+      first_touch_landing_page: pick(first, 'landing_page'),
+      first_touch_referrer: pick(first, 'referrer'),
+      last_touch_utm_source: pick(last, 'utm_source'),
+      last_touch_utm_medium: pick(last, 'utm_medium'),
+      last_touch_utm_campaign: pick(last, 'utm_campaign'),
+      last_touch_utm_content: pick(last, 'utm_content'),
+      last_touch_ref: pick(last, 'ref'),
+      attribution_window: lasting ? 'first_touch_saved' : 'this_visit',
+      page: location.pathname
+    };
+  }
+  window.svAttribution = {
+    properties: attributionProps
+  };
+
+  /* ---------- PostHog ----------
+   * Loaded async. Until Accept: sessionStorage only, so one tab is one visit and no cookie is set.
+   * After Accept: localStorage+cookie, session replay and click heatmaps, inputs masked.
+   * After Reject: opted out, cookie deleted, nothing else is sent.
+   */
+  var phFull = false;
+  function isDebugHost() {
+    return location.hostname === 'localhost' || location.hostname === '127.0.0.1' ||
+      /(?:\?|&)__posthog_debug=true(?:&|$)/.test(location.search);
+  }
+  function posthogCookieName() { return 'ph_' + POSTHOG_KEY + '_posthog'; }
+  function clearDurablePosthog() {
+    var name = posthogCookieName();
+    try {
+      var keys = [];
+      for (var i = 0; i < localStorage.length; i++) keys.push(localStorage.key(i));
+      keys.forEach(function (k) {
+        if (!k) return;
+        if (k === name || k.indexOf('ph_' + POSTHOG_KEY) !== -1 || k.indexOf('__ph_opt_in_out') === 0 || k === 'ph_debug') {
+          localStorage.removeItem(k);
+        }
+      });
+    } catch (e) {}
+    var host = location.hostname, parts = host.split('.');
+    var domains = ['', host];
+    if (parts.length > 1) domains.push('.' + parts.slice(-2).join('.'));
+    domains.forEach(function (d) {
+      document.cookie = name + '=; Max-Age=0; path=/' + (d ? '; domain=' + d : '');
+    });
+  }
+  function clearSessionPosthog() {
+    try { sessionStorage.removeItem(posthogCookieName()); } catch (e) {}
+  }
+  var KEEP_PHONE = /^(first_touch_|last_touch_|utm_|\$initial_|ref$|\$current_url$|\$referrer$|\$referring_domain$|\$pathname$|\$host$|page$)/;
+  function redactValue(key, value) {
+    if (typeof value === 'string') {
+      var out = value.replace(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi, '[redacted]');
+      if (!KEEP_PHONE.test(key)) out = out.replace(/(?:\+?\d[\d\s().-]{8,}\d)/g, '[redacted]');
+      return out;
+    }
+    if (!value || typeof value !== 'object') return value;
+    if (Object.prototype.toString.call(value) === '[object Array]') {
+      return value.map(function (v) { return redactValue(key, v); });
+    }
+    var copy = {};
+    for (var k in value) if (Object.prototype.hasOwnProperty.call(value, k)) copy[k] = redactValue(k, value[k]);
+    return copy;
+  }
+  function beforeSend(event) {
+    try {
+      if (!event) return event;
+      if (answer() === 'off' || window.__svPhReject) return null;
+      if (event.properties) event.properties = redactValue('', event.properties);
+      if (isDebugHost()) {
+        window.__svPhEvents = window.__svPhEvents || [];
+        window.__svPhEvents.push(event.event || 'unknown');
+        if (window.__svPhEvents.length > 50) window.__svPhEvents.shift();
+      }
+      return event;
+    } catch (e) { return event; }
+  }
+  function installPosthogStub() {
+    if (window.posthog && window.posthog.__SV) return;
+    // Official async loader. array.js is fetched from PostHog's asset host and does not block the page.
+    (function (t, e) {
+      var o, n, p, r;
+      if (e.__SV) return;
+      window.posthog = e;
+      e._i = [];
+      e.init = function (i, s, a) {
+        function g(tt, ee) {
+          var oo = ee.split('.');
+          if (oo.length === 2) { tt = tt[oo[0]]; ee = oo[1]; }
+          tt[ee] = function () { tt.push([ee].concat(Array.prototype.slice.call(arguments, 0))); };
+        }
+        p = t.createElement('script');
+        p.type = 'text/javascript';
+        p.crossOrigin = 'anonymous';
+        p.async = true;
+        p.src = s.api_host.replace('.i.posthog.com', '-assets.i.posthog.com') + '/static/array.js';
+        r = t.getElementsByTagName('script')[0];
+        r.parentNode.insertBefore(p, r);
+        var u = e;
+        if (a !== undefined) u = e[a] = [];
+        else a = 'posthog';
+        u.people = u.people || [];
+        u.toString = function (x) {
+          var name = 'posthog';
+          if (a !== 'posthog') name += '.' + a;
+          if (!x) name += ' (stub)';
+          return name;
+        };
+        u.people.toString = function () { return u.toString(1) + '.people (stub)'; };
+        o = 'init capture register register_once unregister get_distinct_id get_session_id set_config startSessionRecording stopSessionRecording sessionRecordingStarted opt_in_capturing opt_out_capturing has_opted_out_capturing clear_opt_in_out_capturing debug'.split(' ');
+        for (n = 0; n < o.length; n++) g(u, o[n]);
+        e._i.push([i, s, a]);
+      };
+      e.__SV = 1;
+    })(document, window.posthog || []);
+  }
+  function posthogOptions(full) {
+    return {
+      api_host: POSTHOG_HOST,
+      ui_host: 'https://us.posthog.com',
+      capture_pageview: false,
+      capture_pageleave: true,
+      persistence: full ? 'localStorage+cookie' : 'sessionStorage',
+      disable_session_recording: !full,
+      autocapture: !!full,
+      capture_heatmaps: !!full,
+      capture_exceptions: false,
+      disable_surveys: true,
+      enable_recording_console_log: false,
+      person_profiles: 'identified_only',
+      custom_campaign_params: ['ref'],
+      save_campaign_params: true,
+      advanced_disable_feature_flags: true,
+      cookie_expiration: 365,
+      session_recording: {
+        maskAllInputs: true,
+        maskTextSelector: '[data-clarity-mask], [data-ph-mask], [data-sv-clarity="hidden"]'
+      },
+      debug: isDebugHost(),
+      loaded: function (ph) {
+        if (answer() === 'off' || window.__svPhReject) {
+          try { ph.opt_out_capturing(); ph.stopSessionRecording(); } catch (err) {}
+          return;
+        }
+        try { ph.register(attributionProps()); } catch (err) {}
+        if (full || answer() === 'on') {
+          try { ph.startSessionRecording(true); } catch (err) {}
+          saveLastingFirst();
+        }
+        try { ph.capture('$pageview', attributionProps()); } catch (err) {}
+      },
+      before_send: beforeSend
+    };
+  }
+  function syncAttribution() {
+    try {
+      if (window.posthog && window.posthog.register && answer() !== 'off') window.posthog.register(attributionProps());
+    } catch (e) {}
+  }
+  function capture(name, params) {
+    if (!POSTHOG_KEY || answer() === 'off' || window.__svPhReject) return;
+    var props = attributionProps();
+    if (params) {
+      for (var k in params) if (Object.prototype.hasOwnProperty.call(params, k)) props[k] = params[k];
+    }
+    try {
+      if (window.posthog && window.posthog.capture) {
+        window.posthog.register(attributionProps());
+        window.posthog.capture(name, props);
+      }
+    } catch (e) {}
+  }
+  window.svCapture = capture;
+
+  function ensurePosthog(full) {
+    if (!POSTHOG_KEY) return;
+    installPosthogStub();
+    if (!window.__svPhInited) {
+      window.__svPhInited = true;
+      phFull = !!full;
+      window.posthog.init(POSTHOG_KEY, posthogOptions(phFull));
+      return;
+    }
+    var ph = window.posthog;
+    try {
+      if (ph.has_opted_out_capturing && ph.has_opted_out_capturing()) ph.opt_in_capturing();
+    } catch (e) {}
+    if (full && !phFull) {
+      try {
+        ph.set_config({
+          persistence: 'localStorage+cookie',
+          disable_session_recording: false,
+          autocapture: true,
+          capture_heatmaps: true
+        });
+        ph.startSessionRecording(true);
+      } catch (e) {}
+      saveLastingFirst();
+      phFull = true;
+    } else if (!full && phFull) {
+      try { ph.stopSessionRecording(); } catch (e) {}
+      try {
+        ph.set_config({
+          persistence: 'sessionStorage',
+          disable_session_recording: true,
+          autocapture: false,
+          capture_heatmaps: false
+        });
+      } catch (e) {}
+      clearDurablePosthog();
+      clearLastingFirst();
+      phFull = false;
+    }
+    syncAttribution();
+  }
+  // Match the cookie-banner answer. Called on load, Accept, Reject, Reset, and when another tab changes it.
+  function applyPosthogConsent() {
+    if (!POSTHOG_KEY) return;
+    rememberVisit();
+    if (answer() === 'off') {
+      window.__svPhReject = true;
+      if (window.__svPhInited && window.posthog) {
+        try { window.posthog.stopSessionRecording(); } catch (e) {}
+      }
+      // Drop the cookie and the saved advert first, then record the opt-out.
+      // Opt-out is stored apart from the tracking cookie; doing it after the wipe
+      // keeps it from being deleted with that cookie.
+      clearDurablePosthog();
+      clearSessionPosthog();
+      clearLastingFirst();
+      if (window.__svPhInited && window.posthog) {
+        try { window.posthog.opt_out_capturing(); } catch (e) {}
+      }
+      phFull = false;
+      return;
+    }
+    window.__svPhReject = false;
+    if (answer() === 'on') saveLastingFirst();
+    ensurePosthog(answer() === 'on');
+  }
+
   function load(src) {
     var s = document.createElement('script');
     s.async = true;
@@ -182,14 +537,14 @@
   var TEXT = ML ? {
     label: 'കുക്കി സമ്മതം',
     title: 'ഞങ്ങളുടെ സൈറ്റിലെ കുക്കികൾ',
-    body: 'നിങ്ങൾ \u201Cസമ്മതം\u201D അമർത്തിയാൽ മാത്രം, Microsoft Clarity കുക്കികൾ ഉപയോഗിച്ച് നിങ്ങളുടെ സന്ദർശനങ്ങൾ (ടാപ്പുകൾ, മൗസ് നീക്കങ്ങൾ, സ്ക്രോളിങ്, തുറക്കുന്ന പേജുകൾ), ഉപകരണം, ഏകദേശ സ്ഥലം എന്നിവ രേഖപ്പെടുത്തും. സൈറ്റ് മെച്ചപ്പെടുത്താനാണിത്. ഈ വിവരങ്ങൾ Microsoft-നും ലഭിക്കും. ഞങ്ങളുടെ അന്വേഷണ ഫോമിൽ നിങ്ങൾ ടൈപ്പ് ചെയ്യുന്നത് Clarity കാണില്ല. ഈ തീരുമാനം എപ്പോൾ വേണമെങ്കിലും Settings-ൽ മാറ്റാം.',
+    body: 'നിങ്ങൾ തീരുമാനിക്കുന്നതിന് മുമ്പ്, ഏത് പേജ് തുറന്നു, ഏത് പരസ്യമോ പങ്കാളി ലിങ്കോ വഴി വന്നു എന്ന് ഞങ്ങൾ PostHog-നോട് പറയും. ഇതിന് കുക്കി വേണ്ട, ഈ ടാബ് അടച്ചാൽ അവസാനിക്കും. \u201Cസമ്മതം\u201D അമർത്തിയാൽ Microsoft Clarityയും PostHog-ഉം ഒരു കുക്കി സൂക്ഷിച്ച് നിങ്ങളുടെ സന്ദർശനം (ടാപ്പുകൾ, സ്ക്രോൾ, പേജുകൾ) രേഖപ്പെടുത്തും. ഫോമിൽ ടൈപ്പ് ചെയ്യുന്ന ഫോൺ നമ്പറോ ഇമെയിലോ അവ കാണില്ല. \u201Cവേണ്ട\u201D അമർത്തിയാൽ ഈ എണ്ണലും റെക്കോർഡിംഗും നിർത്തും. Settings-ൽ എപ്പോൾ വേണമെങ്കിലും മാറ്റാം.',
     link: 'സ്വകാര്യതാ അറിയിപ്പ് (ഇംഗ്ലീഷിൽ)',
     yes: 'സമ്മതം',
     no: 'വേണ്ട'
   } : {
     label: 'Cookie choice',
     title: 'Cookies on our site',
-    body: 'If you tap Accept, Microsoft Clarity will use cookies to make recordings of your visits (your taps, mouse movements, scrolling and the pages you open), with your device and rough location, so we can improve our site. Microsoft also gets this data. It can\u2019t see what you type into our enquiry form. You can change your answer any time in Settings.',
+    body: 'Before you choose, we tell PostHog which page you opened and which advert or partner link brought you here. That uses no cookie and ends when you close this tab. If you tap Accept, Microsoft Clarity and PostHog also store a cookie and record how you move around the site (taps, scrolling and pages), with your device and rough location. They can\u2019t see phone numbers or emails you type into our form. Reject stops this counting and those recordings. You can change your answer any time in Settings.',
     link: 'Privacy notice',
     yes: 'Accept',
     no: 'Reject'
@@ -279,6 +634,7 @@
   function choose(yes) {
     var saved = save(yes ? 'on' : 'off');
     if (yes) start(); else stop();
+    applyPosthogConsent();
     hideBanner();
     changed();
     return saved;
@@ -286,11 +642,11 @@
 
   // A switch in the Settings dialog on every page, so changing the answer is as easy as giving it
   var SET = ML ? {
-    hint: 'സൈറ്റ് മെച്ചപ്പെടുത്താൻ, നിങ്ങളുടെ സന്ദർശനങ്ങൾ (ടാപ്പുകൾ, സ്ക്രോളിങ്, തുറക്കുന്ന പേജുകൾ) രേഖപ്പെടുത്തുന്നു. ഈ വിവരങ്ങൾ Microsoft-നും ലഭിക്കും. കുക്കി ബാനറിലെ നിങ്ങളുടെ മറുപടി തന്നെയാണിത്.',
+    hint: 'ഇത് ഓണാണെങ്കിൽ Microsoft Clarityയും PostHog-ഉം ടാപ്പുകൾ, സ്ക്രോൾ, പേജുകൾ രേഖപ്പെടുത്തുകയും ഒരു കുക്കി അടുത്ത തവണ നിങ്ങളെ തിരിച്ചറിയുകയും ചെയ്യും. മറുപടി നൽകിയിട്ടില്ലെങ്കിൽ ഈ ടാബിലെ പേജുകൾ മാത്രം എണ്ണും, കുക്കി ഇല്ല. കുക്കി ബാനറിലെ മറുപടി തന്നെ.',
     onOnly: 'ഈ പേജിൽ മാത്രം ഓൺ: നിങ്ങളുടെ ബ്രൗസർ ഈ തീരുമാനം സേവ് ചെയ്യാൻ അനുവദിച്ചില്ല.',
     offOnly: 'ഈ പേജിൽ ഓഫ്, പക്ഷേ നിങ്ങളുടെ ബ്രൗസർ ഈ തീരുമാനം സേവ് ചെയ്യാൻ അനുവദിച്ചില്ല.'
   } : {
-    hint: 'Records your taps, scrolling and the pages you open, so we can improve our site. Microsoft also gets this data. Same as your answer on our cookie banner.',
+    hint: 'When this is on, Microsoft Clarity and PostHog record taps, scrolling and pages, and a cookie recognises you next time. If you have not answered, we only count pages for this tab, with no cookie. Same as your answer on our cookie banner.',
     onOnly: 'On for this page only: your browser didn\u2019t let us save your choice.',
     offOnly: 'Off on this page, but your browser didn\u2019t let us save your choice.'
   };
@@ -301,7 +657,7 @@
     row.className = 'set-row set-clarity';
     if (ML) row.setAttribute('lang', 'ml');
     row.innerHTML =
-      '<div><span class="lbl" id="clarityLbl" lang="en">Microsoft Clarity</span>' +
+      '<div><span class="lbl" id="clarityLbl" lang="en">Clarity & PostHog</span>' +
       '<p class="muted" id="clarityHint"></p><p class="muted sv-save-msg" id="claritySaveMsg" role="status"></p></div>' +
       '<button class="switch" type="button" role="switch" id="claritySwitch" aria-checked="false" aria-labelledby="clarityLbl" aria-describedby="clarityHint"><span></span></button>';
     var hint = row.querySelector('#clarityHint');
@@ -332,6 +688,7 @@
       memo = null;
       try { localStorage.removeItem(KEY); } catch (e) {}
       if (on) stop();
+      applyPosthogConsent();
       if (had !== null) showBanner();
       changed();
     }
@@ -341,8 +698,10 @@
   if (answer() === 'on') start();
   else {
     dropClarityCookies();
+    clearDurablePosthog();
     if (answer() === null) showBanner();
   }
+  applyPosthogConsent();
   addSettingsSwitch();
 
   // Back/Forward can restore this page from the browser's memory, and Clarity then restarts itself.
@@ -353,6 +712,7 @@
     if (a !== 'on') { if (on || started) { on = false; e.stopImmediatePropagation(); stopClarity(); } }
     else if (!on) start();
     if (a !== null) hideBanner(); else showBanner();
+    applyPosthogConsent();
     changed();
   }, true);
   // Answered in another tab: do the same here
@@ -361,6 +721,7 @@
     if (e.newValue === 'on') { if (!on) start(); hideBanner(); }
     else if (e.newValue === 'off') { if (on) stop(); hideBanner(); }
     else if (e.newValue === null) { if (on) stop(); memo = null; showBanner(); }   // reset in another tab
+    applyPosthogConsent();
     changed();
   });
 
@@ -385,6 +746,7 @@
     if (used[kind]) return;
     used[kind] = true;
     track('calculator_use', { calculator: kind });
+    capture('calculator_used', { calculator: kind });
   }
 
   document.addEventListener('click', function (e) {
@@ -395,8 +757,13 @@
     var a = t.closest('a[href]');
     if (!a) return;
     var href = a.getAttribute('href') || '';
-    if (/^tel:/i.test(href)) track('call_click', { link_location: where(a) });
-    else if (/wa\.me\/|whatsapp\.com/i.test(href)) track('whatsapp_click', { link_location: where(a) });
+    if (/^tel:/i.test(href)) {
+      track('call_click', { link_location: where(a) });
+      capture('call_click', { link_location: where(a) });
+    } else if (/wa\.me\/|whatsapp\.com/i.test(href)) {
+      track('whatsapp_click', { link_location: where(a) });
+      capture('whatsapp_click', { link_location: where(a) });
+    }
     else if (/^mailto:/i.test(href)) track('email_click', { link_location: where(a) });
     else if (/sample-3kw-proposal\.pdf/i.test(href)) track('proposal_download', { link_location: where(a) });
   }, true);
