@@ -79,6 +79,11 @@ window.SooryavamshiSupabase = (function() {
       source: "Website"
     };
 
+    // Campaign / referral attribution. Omitted entirely when the browser has none.
+    // If the live table has no `attribution` column yet, the insert below retries without it.
+    const attribution = readAttribution();
+    if (attribution) payload.attribution = attribution;
+
     // Basic assertion on required fields (full_name, phone_number, city_location)
     if (!payload.full_name || !payload.phone_number || !payload.city_location) {
       return { success: false, error: "Validation failed: Please enter Full Name, Phone Number, and Location." };
@@ -90,10 +95,18 @@ window.SooryavamshiSupabase = (function() {
     const client = getClient();
     if (client && client.from) {
       try {
-        const { data, error } = await client.from(cfg.tableName).insert([payload]);
+        const { error } = await client.from(cfg.tableName).insert([payload]);
         if (!error) {
           console.log("Successfully inserted record via Supabase SDK:", payload.full_name);
           return { success: true };
+        }
+        if (payload.attribution && isMissingAttributionColumn([error.message, error.details, error.hint, error.code].join(" "))) {
+          const slim = withoutAttribution(payload);
+          const retry = await client.from(cfg.tableName).insert([slim]);
+          if (!retry.error) {
+            console.log("Successfully inserted record via Supabase SDK:", payload.full_name);
+            return { success: true };
+          }
         } else {
           console.warn("Supabase SDK insert notice, attempting REST fallback:", error.message);
         }
@@ -104,31 +117,75 @@ window.SooryavamshiSupabase = (function() {
 
     // 3. Fallback to direct REST fetch
     try {
-      const endpoint = `${cfg.url}/rest/v1/${cfg.tableName}`;
-      const response = await fetch(endpoint, {
-        method: "POST",
-        headers: {
-          "apikey": cfg.anonKey,
-          "Authorization": `Bearer ${cfg.anonKey}`,
-          "Content-Type": "application/json",
-          "Prefer": "return=minimal"
-        },
-        body: JSON.stringify(payload)
-      });
-
-      if (response.ok || response.status === 201 || response.status === 200 || response.status === 204) {
+      let response = await postEnquiry(cfg, payload);
+      if (saved(response)) {
         console.log("Successfully inserted record via REST fetch:", payload.full_name);
         return { success: true };
-      } else {
-        const errorText = await response.text();
-        console.warn("Supabase REST insert response:", response.status, errorText);
-        // Not saved (e.g. the project is paused): report it so the form can offer WhatsApp instead
+      }
+      const errorText = await response.text();
+      if (payload.attribution && isMissingAttributionColumn(errorText)) {
+        response = await postEnquiry(cfg, withoutAttribution(payload));
+        if (saved(response)) {
+          console.log("Successfully inserted record via REST fetch:", payload.full_name);
+          return { success: true };
+        }
+        console.warn("Supabase REST insert response:", response.status, await response.text());
         return { success: false, error: `Save failed (${response.status})` };
       }
+      console.warn("Supabase REST insert response:", response.status, errorText);
+      // Not saved (e.g. the project is paused): report it so the form can offer WhatsApp instead
+      return { success: false, error: `Save failed (${response.status})` };
     } catch (err) {
       console.warn("Network notice during Supabase submission:", err);
       return { success: false, error: "Could not reach the database" };
     }
+  }
+
+  // First-touch / last-touch campaign fields from js/analytics.js. No name, phone or email.
+  function readAttribution() {
+    try {
+      if (!window.svAttribution || typeof window.svAttribution.properties !== "function") return null;
+      const props = window.svAttribution.properties();
+      if (!props || typeof props !== "object") return null;
+      const out = {};
+      Object.keys(props).forEach(function (key) {
+        const value = props[key];
+        if (value == null || value === "") return;
+        out[key] = typeof value === "string" ? value.slice(0, 300) : value;
+      });
+      return Object.keys(out).length ? out : null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function withoutAttribution(payload) {
+    const slim = Object.assign({}, payload);
+    delete slim.attribution;
+    return slim;
+  }
+
+  // PostgREST when the column has not been added yet (PGRST204 / undefined column).
+  function isMissingAttributionColumn(errorText) {
+    const text = typeof errorText === "string" ? errorText : JSON.stringify(errorText || "");
+    return /attribution/i.test(text) && /(PGRST204|42703|schema cache|column)/i.test(text);
+  }
+
+  function saved(response) {
+    return response && (response.ok || response.status === 201 || response.status === 200 || response.status === 204);
+  }
+
+  function postEnquiry(cfg, payload) {
+    return fetch(`${cfg.url}/rest/v1/${cfg.tableName}`, {
+      method: "POST",
+      headers: {
+        "apikey": cfg.anonKey,
+        "Authorization": `Bearer ${cfg.anonKey}`,
+        "Content-Type": "application/json",
+        "Prefer": "return=minimal"
+      },
+      body: JSON.stringify(payload)
+    });
   }
 
   /**

@@ -612,7 +612,7 @@
       ["Suggested system", kw ? `About ${kw.toLocaleString("en-IN", { maximumFractionDigits: 1 })} kW` : ""],
       ["Best time to call", item.preferred_contact_time],
       ["Came from", item.source]
-    ];
+    ].concat(attributionFacts(item));
     let html = facts.map(([label, value, cls]) =>
       `<div class="fact"><span>${esc(label)}</span><b${cls ? ` class="${cls}"` : ""}>${value ? esc(value) : '<span class="muted-dash">Not given</span>'}</b></div>`
     ).join("");
@@ -621,6 +621,36 @@
   }
 
   /* ---------- helpers ---------- */
+
+  function readAttribution(item) {
+    let a = item && item.attribution;
+    if (!a) return null;
+    if (typeof a === "string") {
+      try { a = JSON.parse(a); } catch (e) { return null; }
+    }
+    return a && typeof a === "object" ? a : null;
+  }
+
+  function campaignLine(item, prefix) {
+    const a = readAttribution(item);
+    if (!a) return "";
+    const bits = ["utm_source", "utm_medium", "utm_campaign", "utm_content"]
+      .map(key => a[prefix + "_" + key])
+      .filter(Boolean);
+    const ref = a[prefix + "_ref"];
+    let text = bits.join(" · ");
+    if (ref) text = text ? `${text} · ref ${ref}` : `ref ${ref}`;
+    return text;
+  }
+
+  function attributionFacts(item) {
+    const first = campaignLine(item, "first_touch");
+    const last = campaignLine(item, "last_touch");
+    const facts = [];
+    if (last) facts.push(["Latest campaign", last]);
+    if (first) facts.push(["First campaign", first]);
+    return facts;
+  }
 
   function firstName(full) {
     const w = String(full || "").trim().split(/\s+/)[0] || "";
@@ -712,7 +742,13 @@
     ["Next follow-up", 17, "date", r => r.follow_up_on],
     ["Notes", 42, "wrap", r => r.admin_notes],
     ["About the roof", 36, "wrap", r => r.rooftop_details],
-    ["Came from", 11, "text", r => r.source]
+    ["Came from", 11, "text", r => r.source],
+    ["First campaign", 36, "text", r => campaignLine(r, "first_touch")],
+    ["Latest campaign", 36, "text", r => campaignLine(r, "last_touch")],
+    ["Referral code", 18, "text", r => {
+      const a = readAttribution(r);
+      return (a && (a.last_touch_ref || a.first_touch_ref)) || "";
+    }]
   ];
 
   function exportCsv() {

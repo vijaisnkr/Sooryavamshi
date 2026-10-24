@@ -37,10 +37,20 @@ function setupSheet() {
     "Preferred Contact Time",
     "Status",
     "Source",
-    "Rooftop Photo Path"
+    "Rooftop Photo Path",
+    "First source",
+    "First medium",
+    "First campaign",
+    "First content",
+    "First referral code",
+    "Latest source",
+    "Latest medium",
+    "Latest campaign",
+    "Latest content",
+    "Latest referral code"
   ];
   
-  // Set headers in Row 1 (Cols A to O)
+  // Set headers in Row 1 (Cols A to Y). P–Y are campaign attribution.
   var headerRange = sheet.getRange(1, 1, 1, headers.length);
   headerRange.setValues([headers]);
   headerRange.setFontWeight("bold");
@@ -67,6 +77,7 @@ function setupSheet() {
   sheet.setColumnWidth(13, 120); // Status
   sheet.setColumnWidth(14, 110); // Source
   sheet.setColumnWidth(15, 200); // Rooftop Photo Path
+  for (var c = 16; c <= headers.length; c++) sheet.setColumnWidth(c, 160);
 
   Logger.log("Worksheet tab '" + SHEET_NAME + "' setup completed successfully.");
 }
@@ -178,6 +189,12 @@ function doPost(e) {
     var status = record.status || "New";
     var source = record.source || "Website";
     var rooftopPhotoPath = record.rooftop_photo_path || "";
+    var attr = record.attribution;
+    if (typeof attr === "string") {
+      try { attr = JSON.parse(attr); } catch (parseAttr) { attr = null; }
+    }
+    if (!attr || typeof attr !== "object") attr = {};
+    function attrField(key) { return attr[key] ? String(attr[key]) : ""; }
 
     // 6. Construct Row Array (Col A to Col O)
     var newRow = [
@@ -195,7 +212,17 @@ function doPost(e) {
       preferredContactTime,   // Col L: Preferred Contact Time
       status,                 // Col M: Status
       source,                 // Col N: Source
-      rooftopPhotoPath        // Col O: Rooftop Photo Path
+      rooftopPhotoPath,       // Col O: Rooftop Photo Path
+      attrField("first_touch_utm_source"),
+      attrField("first_touch_utm_medium"),
+      attrField("first_touch_utm_campaign"),
+      attrField("first_touch_utm_content"),
+      attrField("first_touch_ref"),
+      attrField("last_touch_utm_source"),
+      attrField("last_touch_utm_medium"),
+      attrField("last_touch_utm_campaign"),
+      attrField("last_touch_utm_content"),
+      attrField("last_touch_ref")
     ];
 
     sheet.appendRow(newRow);

@@ -33,7 +33,10 @@ CREATE TABLE IF NOT EXISTS public.site_assessment_requests (
             'Closed'
         )
     ),
-    source TEXT NOT NULL DEFAULT 'Website'
+    source TEXT NOT NULL DEFAULT 'Website',
+    -- First-touch and last-touch advert / partner link. No name, phone or email.
+    -- See supabase/migration_enquiry_attribution.sql for existing databases.
+    attribution JSONB NULL
 );
 
 -- 2. Performance & Search Indexes
